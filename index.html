@@ -4,12 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yassine W. Medjati | AI & Data Science</title>
+    <meta name="description" content="Personal portfolio of Yassine W. Medjati, an AI & Data Science professional focusing on digital innovation and data-driven aerospace solutions.">
+    <meta name="keywords" content="Yassine Medjati, AI, Data Science, Airbus, Aerospace, Digital Transformation, Generative AI, Portfolio">
+    <meta name="author" content="Yassine W. Medjati">
+    <link rel="canonical" href="https://your-domain.com/">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://iili.io/F8972un.png" type="image/png">
+
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Font Imports -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Syne:wght@700;800&family=Whisper&family=VT323&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
 
     <style>
         /* Font Family Definitions */
@@ -20,6 +31,7 @@
             --font-tech: 'VT323', monospace;
         }
 
+
         /* Base styles */
         html {
             scroll-behavior: smooth;
@@ -29,9 +41,97 @@
             color: #FFFFFF;
             font-family: var(--font-body);
             overflow-x: hidden; /* Prevents horizontal scroll */
-            cursor: none; /* Hide the default cursor */
         }
         
+        body:not(.loaded) {
+            cursor: wait;
+        }
+        
+        body.loaded {
+            cursor: none;
+        }
+
+
+        /* Loader Styles */
+        #loader {
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        #loader-greeting {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+
+        /* Hide main content until loaded */
+        main {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        main.loaded {
+            opacity: 1;
+        }
+        
+        /* New Loader Animation Styles */
+        .hole {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+
+        .hole i {
+            display: block;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 140px;
+            opacity: 0;
+            animation-name: scale;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+
+        .hole i:nth-child(1) { animation-delay: 0.3s; }
+        .hole i:nth-child(2) { animation-delay: 0.6s; }
+        .hole i:nth-child(3) { animation-delay: 0.9s; }
+        .hole i:nth-child(4) { animation-delay: 1.2s; }
+        .hole i:nth-child(5) { animation-delay: 1.5s; }
+        .hole i:nth-child(6) { animation-delay: 1.8s; }
+        .hole i:nth-child(7) { animation-delay: 2.1s; }
+        .hole i:nth-child(8) { animation-delay: 2.4s; }
+        .hole i:nth-child(9) { animation-delay: 2.7s; }
+        .hole i:nth-child(10) { animation-delay: 3s; }
+
+
+        @keyframes scale {
+            0% {
+                transform: scale(2);
+                opacity: 0;
+                box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                transform: scale(1) translate(0px, -5px);
+                opacity: 1;
+                box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                transform: scale(0.1) translate(0px, 5px);
+                opacity: 0;
+                box-shadow: 0px 10px 20px rgba(255, 255, 255, 0);
+            }
+        }
+
+
+
+
         /* Custom Scrollbar Styles */
         ::-webkit-scrollbar {
             width: 8px;
@@ -48,10 +148,12 @@
             background: #6a6a6a;
         }
 
+
         /* OPTIMIZATION: Lenis smooth scroll styles */
         html.lenis { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-stopped { overflow: hidden; }
+
 
         /* Three.js Canvas for background */
         #three-canvas {
@@ -64,12 +166,14 @@
             transition: opacity 0.5s ease-in-out;
         }
 
+
         /* Apply custom fonts */
         h1, h2, h3, h4, h5, h6, .font-heading {
             font-family: var(--font-heading);
             font-weight: 700;
         }
         .font-signature { font-family: var(--font-signature); }
+
 
         /* Custom Cursor Animation Styles */
         .cursor-follower {
@@ -98,6 +202,7 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
+
         /* Enhanced animation for elements fading in on scroll */
         .animate-on-scroll {
             opacity: 0;
@@ -111,6 +216,7 @@
             opacity: 1;
             transform: translateY(0) translateX(0);
         }
+
 
         /* Text gradient for emphasis with animation */
         @keyframes animate-gradient {
@@ -126,6 +232,7 @@
             -webkit-text-fill-color: transparent;
             animation: animate-gradient 5s ease-in-out infinite;
         }
+
 
         /* Project card glow effect */
         .project-card { will-change: transform; }
@@ -145,6 +252,7 @@
             pointer-events: none;
         }
         .project-card:hover::before { opacity: 1; }
+
 
         /* Marquee Animation Styling */
         @keyframes marquee {
@@ -196,6 +304,7 @@
         @keyframes glitch-anim-1 { 0% { clip-path: inset(85% 0 5% 0); } 10% { clip-path: inset(45% 0 50% 0); } 20% { clip-path: inset(20% 0 75% 0); } 30% { clip-path: inset(90% 0 8% 0); } 40% { clip-path: inset(60% 0 35% 0); } 50% { clip-path: inset(10% 0 88% 0); } 60% { clip-path: inset(75% 0 20% 0); } 70% { clip-path: inset(55% 0 40% 0); } 80% { clip-path: inset(5% 0 92% 0); } 90% { clip-path: inset(30% 0 65% 0); } 100% { clip-path: inset(85% 0 5% 0); } }
         @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 85% 0); } 10% { clip-path: inset(65% 0 30% 0); } 20% { clip-path: inset(5% 0 90% 0); } 30% { clip-path: inset(50% 0 45% 0); } 40% { clip-path: inset(80% 0 15% 0); } 50% { clip-path: inset(25% 0 70% 0); } 60% { clip-path: inset(95% 0 2% 0); } 70% { clip-path: inset(40% 0 58% 0); } 80% { clip-path: inset(15% 0 80% 0); } 90% { clip-path: inset(70% 0 28% 0); } 100% { clip-path: inset(10% 0 85% 0); } }
 
+
         /* Philosophy Item Glow and Dim Effect */
         .philosophy-item {
             transition: text-shadow 0.3s ease, opacity 0.3s ease;
@@ -216,6 +325,7 @@
             -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
+
 
         /* Header/Menu Bar Styles */
         #main-header {
@@ -250,6 +360,7 @@
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
         .nav-link.active { color: #FFFFFF; }
 
+
         /* Mobile Menu Styles */
         #mobile-menu {
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -258,6 +369,7 @@
             opacity: 0;
             visibility: hidden;
         }
+
 
         /* Back to Top Button Styles */
         #back-to-top {
@@ -287,6 +399,7 @@
             transform: translateY(0);
         }
         #back-to-top:hover { background-color: rgba(255, 255, 255, 0.2); }
+
 
         /* Story Card Styles */
         #story-container { height: 450px; cursor: none; }
@@ -321,6 +434,7 @@
             width: 0%;
         }
 
+
         /* Restored original button and other custom component styles */
         .call-btn .phone-number {
             display: inline-block;
@@ -331,6 +445,7 @@
         }
         .call-btn:hover .phone-number { max-width: 200px; }
         .call-btn .call-text { vertical-align: middle; }
+
 
         .available-pill {
             display: inline-flex;
@@ -363,6 +478,7 @@
             box-shadow: 0 0 10px #22c55e;
         }
 
+
         .new-badge {
             position: absolute;
             top: 1rem;
@@ -384,6 +500,7 @@
             100% { transform: scale(1) rotate(15deg); box-shadow: 0 0 15px rgba(255, 0, 193, 0.5); }
         }
 
+
         .value-pill {
             opacity: 0;
             transform: translateY(20px);
@@ -393,6 +510,7 @@
             opacity: 1;
             transform: translateY(0);
         }
+
 
         .bio-text .highlight-text {
             transition: text-shadow 0.3s ease, color 0.3s ease;
@@ -404,6 +522,7 @@
                          0 0 50px rgba(255, 82, 82, 0.6);
         }
 
+
         #animated-greeting {
             transition: opacity 0.2s ease-in-out;
         }
@@ -411,11 +530,13 @@
             opacity: 0;
         }
 
+
         .cover-clock {
             font-family: var(--font-tech);
             font-size: 1rem;
             color: #9CA3AF; /* gray-400 */
         }
+
 
         /* Footer clock animation */
         @keyframes pulse-clock {
@@ -428,6 +549,7 @@
             text-shadow: 0 0 5px #00FF41;
         }
 
+
         /* Keyboard key style */
         kbd {
             font-family: var(--font-body);
@@ -436,24 +558,6 @@
             border-radius: 0.25rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
             font-size: 0.7rem;
-        }
-
-        /* Matrix Effect Canvas Style */
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            pointer-events: none; /* Make sure it doesn't block clicks */
-            z-index: -1;
-        }
-        #matrix-canvas.visible {
-            display: block !important;
-            opacity: 1;
-            z-index: 9997; /* Below cursor, above everything else */
         }
         
         /* NEW Music Pill Styles */
@@ -531,6 +635,7 @@
             text-overflow: ellipsis; 
         }
 
+
     </style>
     
     <!-- Scripts -->
@@ -545,6 +650,7 @@
       Cal("init", "15min", {origin:"https://app.cal.com"});
       Cal.ns["15min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
     </script>
+
 
     <!-- Main application script -->
     <script defer>
@@ -563,8 +669,11 @@
             animationFrameId: null,
             threeClock: new THREE.Clock(),
 
+
             // Elements
             elements: {
+                loader: document.getElementById('loader'),
+                mainContent: document.querySelector('main'),
                 cursorFollower: document.querySelector('.cursor-follower'),
                 threeCanvas: document.getElementById('three-canvas'),
                 header: document.getElementById('main-header'),
@@ -575,8 +684,10 @@
                 closeMenuBtn: document.getElementById('close-menu-btn'),
             },
 
+
             // Main initialization
             init() {
+                this.initLoader();
                 this.initSmoothScroll();
                 this.initThreeJS();
                 this.initCustomCursor();
@@ -591,13 +702,75 @@
                 this.initMagneticLinks();
                 this.initVisitorCounter();
                 this.initMobileMenu();
+                this.initNavLinksSmoothScroll();
                 this.initKeyboardShortcuts();
-                this.initMatrixEffect();
                 this.initMusicPill();
+
 
                 this.addEventListeners();
                 this.startAnimation();
             },
+            
+            initLoader() {
+                const loaderGreeting = document.getElementById('loader-greeting');
+                const loaderTextContainer = document.getElementById('loader-text-container');
+                if (!loaderGreeting || !this.elements.loader || !this.elements.mainContent || !loaderTextContainer) return;
+
+
+                let greetingInterval;
+
+
+                setTimeout(() => {
+                    loaderTextContainer.style.opacity = '1';
+                    const greetings = ["Hello!", "Hola!", "Salut!", "Hallo!", "Ciao!", "Olá!", "Привет!", "你好!", "こんにちは!", "안녕하세요!", "السلام عليكم!", "שָׁלוֹם!", "नमस्ते!", "Salve!", "Γειά σου!", "Merhaba!"];
+                    let greetingIndex = 0;
+                    greetingInterval = setInterval(() => {
+                        loaderGreeting.style.opacity = 0;
+                        setTimeout(() => {
+                            greetingIndex = (greetingIndex + 1) % greetings.length;
+                            loaderGreeting.textContent = greetings[greetingIndex];
+                            loaderGreeting.style.opacity = 1;
+                        }, 300);
+                    }, 1200);
+                }, 1500);
+
+
+
+
+                const minLoaderTime = 5000; 
+                let minTimePassed = false;
+                let isWindowLoaded = false;
+
+
+                const hideLoader = () => {
+                    if (!this.elements.loader.classList.contains('hidden')) {
+                        if(greetingInterval) clearInterval(greetingInterval);
+                        document.body.classList.add('loaded');
+                        this.elements.loader.classList.add('hidden');
+                        this.elements.mainContent.classList.add('loaded');
+                        setTimeout(() => {
+                            if (this.elements.loader) this.elements.loader.style.display = 'none';
+                        }, 600);
+                    }
+                };
+
+
+                setTimeout(() => {
+                    minTimePassed = true;
+                    if (isWindowLoaded) {
+                        hideLoader();
+                    }
+                }, minLoaderTime);
+
+
+                window.addEventListener('load', () => {
+                    isWindowLoaded = true;
+                    if (minTimePassed) {
+                        hideLoader();
+                    }
+                });
+            },
+
 
             // Event Listeners
             addEventListeners() {
@@ -608,25 +781,33 @@
                     el.addEventListener('mouseover', () => this.elements.cursorFollower?.classList.add('hover'));
                     el.addEventListener('mouseleave', () => this.elements.cursorFollower?.classList.remove('hover'));
                 });
-
-                // Easter Egg Scroll Listener
-                let scrollCheckTimeout;
-                let isCheckingScroll = false;
-                window.addEventListener('scroll', () => {
-                    if (isCheckingScroll) return;
-                    isCheckingScroll = true;
-                    
-                    scrollCheckTimeout = setTimeout(() => {
-                        // ~1% chance to trigger on scroll check
-                        if (Math.random() < 0.01 && this.triggerMatrixEffect) {
-                            this.triggerMatrixEffect();
-                        }
-                        isCheckingScroll = false;
-                    }, 500); // Check every 500ms of scrolling
-                }, { passive: true });
             },
 
+
             // Modules
+            initNavLinksSmoothScroll() {
+                document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = anchor.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+
+
+                        if (targetElement) {
+                            if (this.lenis) {
+                                this.lenis.scrollTo(targetElement);
+                            } else {
+                                window.scrollTo({
+                                    top: targetElement.offsetTop,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }
+                    });
+                });
+            },
+
+
             initMusicPill() {
                 const songNameEl = document.querySelector('.song-name');
                 if (songNameEl) {
@@ -637,68 +818,6 @@
                 }
             },
 
-            initMatrixEffect() {
-                const canvas = document.getElementById('matrix-canvas');
-                if (!canvas) return;
-
-                const ctx = canvas.getContext('2d');
-                let matrixAnimationFrameId;
-
-                const setup = () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                };
-
-                const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-                const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                const nums = '0123456789';
-                const characters = katakana + latin + nums;
-
-                const fontSize = 16;
-                const columns = Math.floor(window.innerWidth / fontSize);
-                const rainDrops = Array(columns).fill(1);
-
-                const drawMatrix = () => {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                    ctx.fillStyle = '#0F0';
-                    ctx.font = `${fontSize}px monospace`;
-
-                    for (let i = 0; i < rainDrops.length; i++) {
-                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                            rainDrops[i] = 0;
-                        }
-                        rainDrops[i]++;
-                    }
-                    matrixAnimationFrameId = requestAnimationFrame(drawMatrix);
-                };
-                
-                window.addEventListener('resize', setup);
-                setup();
-
-                this.triggerMatrixEffect = () => {
-                    if (canvas.classList.contains('visible')) return;
-
-                    this.elements.threeCanvas.style.opacity = '0';
-                    canvas.style.display = 'block';
-                    setTimeout(() => canvas.classList.add('visible'), 10);
-                    
-                    drawMatrix();
-
-                    setTimeout(() => {
-                        canvas.classList.remove('visible');
-                        this.elements.threeCanvas.style.opacity = '1';
-                        setTimeout(() => {
-                            cancelAnimationFrame(matrixAnimationFrameId);
-                            canvas.style.display = 'none';
-                        }, 500);
-                    }, 5000);
-                };
-            },
 
             initKeyboardShortcuts() {
                 const bookingLink = document.querySelector('[data-cal-link]');
@@ -706,21 +825,26 @@
                 let isScrolling = false;
                 let scrollTimeout;
 
+
                 window.addEventListener('keydown', (e) => {
                     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
                         return;
                     }
+
 
                     if (e.key.toLowerCase() === 'b') {
                         e.preventDefault();
                         bookingLink?.click();
                     }
 
+
                     if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isScrolling) {
                         e.preventDefault();
 
+
                         const currentScroll = window.scrollY;
                         let nextSectionIndex = -1;
+
 
                         if (e.key === 'ArrowDown') {
                             for (let i = 0; i < sections.length; i++) {
@@ -738,6 +862,7 @@
                             }
                         }
 
+
                         if (nextSectionIndex !== -1) {
                             isScrolling = true;
                             const targetSection = sections[nextSectionIndex];
@@ -751,6 +876,7 @@
                                 });
                             }
 
+
                             clearTimeout(scrollTimeout);
                             scrollTimeout = setTimeout(() => {
                                 isScrolling = false;
@@ -759,6 +885,7 @@
                     }
                 });
             },
+
 
             initSmoothScroll() {
                 if (window.self !== window.top) {
@@ -770,12 +897,14 @@
                 }
             },
 
+
             initHeader() {
                 if (!this.elements.header) return;
                 window.addEventListener('scroll', () => {
                     this.elements.header.classList.toggle('scrolled', window.scrollY > 50);
                 }, { passive: true });
             },
+
 
             initMobileMenu() {
                 if (!this.elements.openMenuBtn || !this.elements.closeMenuBtn || !this.elements.mobileMenu) return;
@@ -784,9 +913,11 @@
                     this.elements.mobileMenu.classList.remove('hidden');
                 });
 
+
                 this.elements.closeMenuBtn.addEventListener('click', () => {
                     this.elements.mobileMenu.classList.add('hidden');
                 });
+
 
                 this.elements.mobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
@@ -794,6 +925,7 @@
                     });
                 });
             },
+
 
             initBackToTopButton() {
                 if (!this.elements.backToTopButton) return;
@@ -805,6 +937,7 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             },
+
 
             initMagneticLinks() {
                 document.querySelectorAll('.nav-link').forEach(link => {
@@ -819,6 +952,7 @@
                     });
                 });
             },
+
 
             initCustomCursor() {
                 if (!this.elements.cursorFollower) return;
@@ -835,6 +969,7 @@
                     this.elements.cursorFollower.style.opacity = '0';
                 });
             },
+
 
             initScrollAnimations() {
                 const scrollElements = document.querySelectorAll('.animate-on-scroll');
@@ -855,6 +990,7 @@
                 scrollElements.forEach(el => scrollObserver.observe(el));
             },
 
+
             initSoundEffects() {
                 if (typeof Tone === 'undefined') return;
                 const synth = new Tone.PolySynth(Tone.Synth, {
@@ -868,6 +1004,7 @@
                 document.getElementById('conversation-btn')?.addEventListener('click', () => playSound("C4"));
                 document.getElementById('cv-btn')?.addEventListener('click', () => playSound("G4"));
             },
+
 
             initGreetingAnimation() {
                 const el = document.getElementById('animated-greeting');
@@ -893,15 +1030,18 @@
                 }, 2000);
             },
 
+
             initStoryCards() {
                 const container = document.getElementById('story-container');
                 if (!container) return;
                 const cards = Array.from(container.querySelectorAll('.story-card'));
                 if (cards.length === 0) return;
 
+
                 let currentIndex = 0;
                 let storyInterval;
                 const DURATION = 5000;
+
 
                 const updateCards = () => {
                     cards.forEach((card, i) => {
@@ -914,9 +1054,11 @@
                         const zIndex = cards.length - Math.abs(displayIndex);
                         const opacity = Math.abs(displayIndex) > 1 ? 0 : 1;
 
+
                         card.style.transform = `translateX(${translateX}%) rotateY(${rotateY}deg) scale(${scale})`;
                         card.style.zIndex = zIndex;
                         card.style.opacity = opacity;
+
 
                         const progressBar = card.querySelector('.story-timer-progress');
                         if (progressBar) {
@@ -931,6 +1073,7 @@
                     });
                 };
 
+
                 const startTimer = () => {
                     clearInterval(storyInterval);
                     storyInterval = setInterval(() => {
@@ -938,6 +1081,7 @@
                         updateCards();
                     }, DURATION);
                 };
+
 
                 container.addEventListener('click', (e) => {
                     const rect = container.getBoundingClientRect();
@@ -948,15 +1092,18 @@
                     startTimer();
                 });
 
+
                 updateCards();
                 startTimer();
             },
+
 
             initVanillaTilt() {
                 if (typeof VanillaTilt !== 'undefined') {
                     VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
                 }
             },
+
 
             initVisitorCounter() {
                 const counterElement = document.getElementById('visitor-counter');
@@ -965,6 +1112,7 @@
                 count += Math.floor(Math.random() * 10);
                 counterElement.textContent = count.toLocaleString();
             },
+
 
             initClocks() {
                 const footerClock = document.getElementById('footer-clock');
@@ -989,6 +1137,7 @@
                 updateClocks();
             },
 
+
             initThreeJS() {
                 if (typeof THREE === 'undefined' || !this.elements.threeCanvas) return;
                 try {
@@ -999,6 +1148,7 @@
                     this.renderer = new THREE.WebGLRenderer({ canvas: this.elements.threeCanvas, alpha: true, antialias: false });
                     this.renderer.setSize(window.innerWidth, window.innerHeight);
                     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
 
                     const particleCount = 2500;
                     const positions = new Float32Array(particleCount * 3);
@@ -1011,11 +1161,13 @@
                     this.particles = new THREE.Points(particleGeometry, particleMaterial);
                     this.scene.add(this.particles);
 
+
                 } catch (error) {
                     console.error("Three.js initialization failed:", error);
                     if (this.elements.threeCanvas) this.elements.threeCanvas.style.display = 'none';
                 }
             },
+
 
             // Animation Loop & Updates
             onWindowResize() {
@@ -1028,6 +1180,7 @@
             onVisibilityChange() {
                 if (document.hidden) this.stopAnimation(); else this.startAnimation();
             },
+
 
             updateActiveLink() {
                 const navLinks = document.querySelectorAll('nav a.nav-link');
@@ -1042,6 +1195,7 @@
                 });
             },
 
+
             updateProgressBar() {
                 if (!this.elements.progressBar) return;
                 const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1049,10 +1203,13 @@
                 this.elements.progressBar.style.width = `${scrolledPercentage}%`;
             },
 
+
             animate() {
                 this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
 
+
                 if (this.lenis) this.lenis.raf(performance.now());
+
 
                 if (this.elements.cursorFollower) {
                     this.cursorMouse.x += (this.targetCursorMouse.x - this.cursorMouse.x) * 0.15;
@@ -1062,6 +1219,7 @@
                 
                 this.updateActiveLink();
                 this.updateProgressBar();
+
 
                 if (this.scene && this.renderer) {
                     const elapsedTime = this.threeClock.getElapsedTime();
@@ -1076,6 +1234,7 @@
                 }
             },
 
+
             startAnimation() {
                 if (!this.animationFrameId) this.animate();
             },
@@ -1087,19 +1246,31 @@
             }
         };
 
+
         App.init();
     });
     </script>
 </head>
 <body class="antialiased">
 
-    <!-- NEW: Shortcut Hint -->
+
+    <!-- Pre-loader -->
+    <div id="loader" class="fixed inset-0 bg-black z-[99999] flex flex-col items-center justify-center text-center">
+        <div class="hole mb-8">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div id="loader-text-container" class="text-center opacity-0 transition-opacity duration-500">
+             <h1 id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</h1>
+             <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">I'm Yassine, nice to meet you!</p>
+        </div>
+    </div>
+
+
+    <!-- Shortcut Hint -->
     <div id="shortcut-hint" class="fixed top-6 left-6 z-[1001] text-xs text-gray-400 bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm transition-opacity duration-300">
         Press <kbd>B</kbd> to book a call | Use <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to navigate
     </div>
 
-    <!-- NEW: Matrix Effect Canvas -->
-    <canvas id="matrix-canvas" class="fixed top-0 left-0 w-full h-full" style="display: none;"></canvas>
 
     <!-- Mobile menu button and panel -->
     <header id="main-header" class="py-4">
@@ -1114,6 +1285,7 @@
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
             </nav>
 
+
             <!-- Mobile menu button -->
             <button id="open-menu-btn" class="md:hidden z-50" aria-label="Open menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1123,6 +1295,7 @@
         </div>
         <div id="progress-bar" class="absolute bottom-0 left-0 h-0.5 bg-white"></div>
     </header>
+
 
     <!-- Mobile menu panel -->
     <div id="mobile-menu" class="hidden fixed inset-0 bg-black/90 backdrop-blur-lg z-40 flex flex-col items-center justify-center">
@@ -1140,8 +1313,10 @@
         </nav>
     </div>
 
+
     <canvas id="three-canvas"></canvas>
     <div class="cursor-follower"></div>
+
 
     <a href="#top" id="back-to-top" aria-label="Back to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1149,7 +1324,9 @@
         </svg>
     </a>
 
+
     <main class="relative z-10">
+
 
         <!-- Cover Section -->
         <section id="top" class="pt-24 pb-32 lg:pt-28 lg:pb-48 flex items-center min-h-screen">
@@ -1175,6 +1352,7 @@
             </div>
         </section>
 
+
         <!-- About Section -->
         <section id="hero" class="py-24 lg:py-32 flex items-center">
             <div class="container mx-auto px-6 max-w-4xl">
@@ -1198,6 +1376,7 @@
             </div>
         </section>
 
+
         <!-- Marquee Section -->
         <section class="py-32 animate-on-scroll slide-in-bottom">
              <div class="relative flex overflow-x-hidden font-heading group marquee-fade">
@@ -1211,6 +1390,7 @@
                 </div>
              </div>
         </section>
+
 
         <!-- Work Section -->
         <section id="work" class="py-32 lg:py-48">
@@ -1239,6 +1419,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- Values Section -->
         <section id="values" class="py-32 lg:py-48">
@@ -1302,6 +1483,7 @@
             </div>
         </section>
 
+
         <!-- Books Section -->
         <section id="books" class="py-32 lg:py-48">
             <div class="container mx-auto px-6">
@@ -1335,6 +1517,7 @@
             </div>
         </section>
 
+
         <!-- Guidebooks Section -->
         <section id="guidebooks" class="py-32 lg:py-48 bg-gray-900/30">
             <div class="container mx-auto px-6">
@@ -1365,6 +1548,7 @@
             </div>
         </section>
 
+
         <!-- Philosophy Section -->
         <section class="py-32 lg:py-48">
              <div class="container mx-auto px-6 max-w-6xl">
@@ -1387,6 +1571,7 @@
             </div>
         </section>
 
+
         <!-- Contact Section -->
         <section id="contact" class="py-32 lg:py-48 bg-gray-900/30 text-center md:text-left">
             <div class="container mx-auto px-6 animate-on-scroll slide-in-bottom">
@@ -1398,23 +1583,24 @@
                     <p class="font-heading text-lg text-gray-400 mb-4">Have an idea?</p>
                     <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">Every great thing starts with a 'Meet!' </h2>
                     <p class="mt-4 text-xl text-gray-300">Open to conversations, collabs 🤝, challenges or just a friendly FC25 game ⚽️.</p>
-                    <div class="mt-10 flex flex-col md:flex-row items-center md:items-start gap-4">
-                        <a href="#" id="conversation-btn" class="font-heading w-full md:w-auto inline-block bg-white text-black font-bold py-4 px-10 rounded-full transition-transform duration-300 hover:scale-105 text-lg"
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="#" id="conversation-btn" class="font-heading flex justify-center items-center bg-white text-black font-bold py-2 px-6 rounded-full transition-transform duration-300 hover:scale-105 text-lg text-center"
                            data-cal-link="yassine-m-zowgc4/15min"
                            data-cal-namespace="15min"
                            data-cal-config='{"layout":"month_view","theme":"dark"}'>
                             Let's have a conversation!
                         </a>
-                        <a href="https://sites.google.com.rproxy.goskope.com/airbus.com/hi-im-yassine/get2know-me" id="cv-btn" class="font-heading w-full md:w-auto inline-block bg-transparent border-2 border-white text-white font-bold py-3 px-10 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg">
+                        <a href="https://sites.google.com/airbus.com/hi-im-yassine/get2know-me" id="cv-btn" class="font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-2 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg text-center">
                             Grab my CV
                         </a>
-                        <a href="tel:+491722574807" class="call-btn font-heading w-full md:w-auto inline-block bg-transparent border-2 border-gray-600 text-gray-400 font-bold py-3 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:border-white hover:text-white text-lg whitespace-nowrap">
+                        <a href="tel:+491722574807" class="call-btn font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-400 font-bold py-2 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:border-white hover:text-white text-lg whitespace-nowrap text-center">
                             <span class="call-text">Call Now</span><span class="phone-number">&nbsp;+49 172 257 4807</span>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Quotes Section -->
         <section id="quotes" class="py-32">
@@ -1429,6 +1615,7 @@
             </div>
         </section>
     </main>
+
 
     <footer class="pt-8">
         <div class="py-8 overflow-hidden footer-band scale-110">
@@ -1474,6 +1661,7 @@
                                 <div class="visualizer-bar"></div>
                             </div>
 
+
                             <!-- Song Information (Scrolling and Static) -->
                             <div class="song-info">
                                 <!-- Container with faded edges for the scrolling text -->
@@ -1499,6 +1687,7 @@
             </div>
         </div>
     </footer>
+
 
 </body>
 </html>
