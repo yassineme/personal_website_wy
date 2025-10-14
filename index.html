@@ -359,6 +359,18 @@
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
         .nav-link.active { color: #FFFFFF; }
+        
+        /* ACCESSIBILITY: Add visible focus states for keyboard navigation */
+        :focus-visible {
+            outline: 2px solid #FFFFFF;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+        #back-to-top:focus-visible {
+            outline-offset: 2px;
+        }
+
+
 
 
         /* Mobile Menu Styles */
@@ -401,9 +413,9 @@
         #back-to-top:hover { background-color: rgba(255, 255, 255, 0.2); }
 
 
-        /* Story Card Styles */
-        #story-container { height: 450px; cursor: none; }
-        .story-card {
+        /* Quote Card Carousel Styles */
+        #quotes-container { height: 450px; cursor: none; }
+        .quote-card {
             background-color: #111111;
             color: white;
             border-radius: 1rem;
@@ -420,14 +432,14 @@
             transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease;
             will-change: transform, opacity;
         }
-        .story-timer-bar {
+        .quote-timer-bar {
             position: absolute;
             top: 1rem; left: 1rem; right: 1rem;
             height: 4px;
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 2px;
         }
-        .story-timer-progress {
+        .quote-timer-progress {
             height: 100%;
             background-color: white;
             border-radius: 2px;
@@ -636,6 +648,25 @@
         }
 
 
+        /* NEW Coming Soon Badge Style */
+        .coming-soon-badge {
+            position: absolute;
+            top: -8px;
+            right: -20px;
+            background: linear-gradient(45deg, #ff00c1, #ff6b00);
+            color: white;
+            padding: 2px 7px;
+            border-radius: 9999px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            line-height: 1.1;
+            transform: rotate(12deg);
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(255, 0, 193, 0.6);
+        }
+
+
     </style>
     
     <!-- Scripts -->
@@ -656,6 +687,9 @@
     <script defer>
     document.addEventListener('DOMContentLoaded', () => {
         
+        /**
+         * Main application object to encapsulate all website functionality.
+         */
         const App = {
             // Properties
             lenis: null,
@@ -670,7 +704,7 @@
             threeClock: new THREE.Clock(),
 
 
-            // Elements
+            // Cached DOM Elements
             elements: {
                 loader: document.getElementById('loader'),
                 mainContent: document.querySelector('main'),
@@ -682,10 +716,13 @@
                 mobileMenu: document.getElementById('mobile-menu'),
                 openMenuBtn: document.getElementById('open-menu-btn'),
                 closeMenuBtn: document.getElementById('close-menu-btn'),
+                quotesContainer: document.getElementById('quotes-container'),
             },
 
 
-            // Main initialization
+            /**
+             * Main initialization function that orchestrates the setup of all features.
+             */
             init() {
                 this.initLoader();
                 this.initSmoothScroll();
@@ -696,7 +733,7 @@
                 this.initClocks();
                 this.initSoundEffects();
                 this.initGreetingAnimation();
-                this.initStoryCards();
+                this.initQuotesCarousel();
                 this.initHeader();
                 this.initBackToTopButton();
                 this.initMagneticLinks();
@@ -711,6 +748,10 @@
                 this.startAnimation();
             },
             
+            /**
+             * Initializes the pre-loader animation and content reveal logic.
+             * Optimization: Reduced minimum loader time for a faster perceived load.
+             */
             initLoader() {
                 const loaderGreeting = document.getElementById('loader-greeting');
                 const loaderTextContainer = document.getElementById('loader-text-container');
@@ -735,9 +776,7 @@
                 }, 1500);
 
 
-
-
-                const minLoaderTime = 5000; 
+                const minLoaderTime = 3000; // OPTIMIZED: Reduced from 5000ms
                 let minTimePassed = false;
                 let isWindowLoaded = false;
 
@@ -757,34 +796,35 @@
 
                 setTimeout(() => {
                     minTimePassed = true;
-                    if (isWindowLoaded) {
-                        hideLoader();
-                    }
+                    if (isWindowLoaded) hideLoader();
                 }, minLoaderTime);
 
 
                 window.addEventListener('load', () => {
                     isWindowLoaded = true;
-                    if (minTimePassed) {
-                        hideLoader();
-                    }
+                    if (minTimePassed) hideLoader();
                 });
             },
 
 
-            // Event Listeners
+            /**
+             * Sets up global event listeners for interactions and window events.
+             */
             addEventListeners() {
                 window.addEventListener('resize', this.onWindowResize.bind(this), false);
                 document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this));
                 
-                document.querySelectorAll('a, button, .project-card, [data-tilt], .nav-link, #back-to-top').forEach(el => {
+                // Add hover effect for custom cursor on interactive elements
+                document.querySelectorAll('a, button, .project-card, [data-tilt], .nav-link, #back-to-top, .value-pill').forEach(el => {
                     el.addEventListener('mouseover', () => this.elements.cursorFollower?.classList.add('hover'));
                     el.addEventListener('mouseleave', () => this.elements.cursorFollower?.classList.remove('hover'));
                 });
             },
 
 
-            // Modules
+            /**
+             * Handles smooth scrolling for internal navigation links.
+             */
             initNavLinksSmoothScroll() {
                 document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
                     anchor.addEventListener('click', (e) => {
@@ -808,17 +848,22 @@
             },
 
 
+            /**
+             * Initializes the scrolling text animation for the music pill component.
+             */
             initMusicPill() {
                 const songNameEl = document.querySelector('.song-name');
                 if (songNameEl) {
                     const originalText = songNameEl.textContent.trim();
-                    const separator = ' \u00A0\u00A0\u00A0\u00A0 ';
-                    let repeatedText = (originalText + separator).repeat(4);
-                    songNameEl.textContent = repeatedText + repeatedText;
+                    const separator = ' \u00A0\u00A0\u00A0\u00A0 '; // Non-breaking spaces for consistent spacing
+                    const repeatedText = (originalText + separator).repeat(4);
+                    songNameEl.textContent = repeatedText + repeatedText; // Duplicate for seamless loop
                 }
             },
-
-
+            
+            /**
+             * Sets up keyboard shortcuts for navigation and booking.
+             */
             initKeyboardShortcuts() {
                 const bookingLink = document.querySelector('[data-cal-link]');
                 const sections = Array.from(document.querySelectorAll('main section[id]'));
@@ -827,21 +872,20 @@
 
 
                 window.addEventListener('keydown', (e) => {
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                        return;
-                    }
+                    // Ignore shortcuts if user is typing in an input field
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
 
+                    // Shortcut 'B' for booking
                     if (e.key.toLowerCase() === 'b') {
                         e.preventDefault();
                         bookingLink?.click();
                     }
 
 
+                    // Arrow key navigation between sections
                     if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isScrolling) {
                         e.preventDefault();
-
-
                         const currentScroll = window.scrollY;
                         let nextSectionIndex = -1;
 
@@ -867,27 +911,23 @@
                             isScrolling = true;
                             const targetSection = sections[nextSectionIndex];
                             
-                            if (this.lenis) {
-                                this.lenis.scrollTo(targetSection);
-                            } else {
-                                window.scrollTo({
-                                    top: targetSection.offsetTop,
-                                    behavior: 'smooth'
-                                });
-                            }
+                            if (this.lenis) this.lenis.scrollTo(targetSection);
+                            else window.scrollTo({ top: targetSection.offsetTop, behavior: 'smooth' });
 
 
                             clearTimeout(scrollTimeout);
-                            scrollTimeout = setTimeout(() => {
-                                isScrolling = false;
-                            }, 800);
+                            scrollTimeout = setTimeout(() => { isScrolling = false; }, 800);
                         }
                     }
                 });
             },
 
 
+            /**
+             * Initializes Lenis for a smooth scrolling experience.
+             */
             initSmoothScroll() {
+                // Lenis can cause issues in iframes, so we disable it there.
                 if (window.self !== window.top) {
                     console.log("Running in an iframe, Lenis smooth scroll disabled for compatibility.");
                     return;
@@ -898,6 +938,9 @@
             },
 
 
+            /**
+             * Initializes the header's scroll-based style changes.
+             */
             initHeader() {
                 if (!this.elements.header) return;
                 window.addEventListener('scroll', () => {
@@ -906,6 +949,9 @@
             },
 
 
+            /**
+             * Initializes the mobile navigation menu toggle functionality.
+             */
             initMobileMenu() {
                 if (!this.elements.openMenuBtn || !this.elements.closeMenuBtn || !this.elements.mobileMenu) return;
                 
@@ -919,6 +965,7 @@
                 });
 
 
+                // Close menu when a link is clicked
                 this.elements.mobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         this.elements.mobileMenu.classList.add('hidden');
@@ -927,6 +974,9 @@
             },
 
 
+            /**
+             * Initializes the "Back to Top" button visibility and functionality.
+             */
             initBackToTopButton() {
                 if (!this.elements.backToTopButton) return;
                 window.addEventListener('scroll', () => {
@@ -934,11 +984,15 @@
                 }, { passive: true });
                 this.elements.backToTopButton.addEventListener('click', (e) => {
                     e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (this.lenis) this.lenis.scrollTo(0);
+                    else window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             },
 
 
+            /**
+             * Adds a subtle magnetic effect to navigation links on mouse hover.
+             */
             initMagneticLinks() {
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.addEventListener('mousemove', e => {
@@ -954,6 +1008,9 @@
             },
 
 
+            /**
+             * Initializes the custom cursor follower and its movement.
+             */
             initCustomCursor() {
                 if (!this.elements.cursorFollower) return;
                 window.addEventListener('mousemove', (e) => {
@@ -961,16 +1018,19 @@
                     this.targetCursorMouse.y = e.clientY;
                     this.threeMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
                     this.threeMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-                    if (this.elements.cursorFollower.style.opacity === '0') {
-                        this.elements.cursorFollower.style.opacity = '1';
-                    }
+                });
+                document.addEventListener('mouseenter', () => {
+                    if (this.elements.cursorFollower) this.elements.cursorFollower.style.opacity = '1';
                 });
                 document.addEventListener('mouseleave', () => {
-                    this.elements.cursorFollower.style.opacity = '0';
+                    if (this.elements.cursorFollower) this.elements.cursorFollower.style.opacity = '0';
                 });
             },
 
 
+            /**
+             * Initializes Intersection Observer for fade-in animations on scroll.
+             */
             initScrollAnimations() {
                 const scrollElements = document.querySelectorAll('.animate-on-scroll');
                 if (scrollElements.length === 0) return;
@@ -978,6 +1038,7 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
+                            // Stagger animation for value pills
                             if (entry.target.id === 'values-pills-container') {
                                 entry.target.querySelectorAll('.value-pill').forEach((pill, index) => {
                                     setTimeout(() => pill.classList.add('is-visible'), index * 100);
@@ -991,6 +1052,9 @@
             },
 
 
+            /**
+             * Initializes Tone.js for subtle UI sound effects.
+             */
             initSoundEffects() {
                 if (typeof Tone === 'undefined') return;
                 const synth = new Tone.PolySynth(Tone.Synth, {
@@ -1006,6 +1070,9 @@
             },
 
 
+            /**
+             * Initializes the cycling greeting animation in the about section.
+             */
             initGreetingAnimation() {
                 const el = document.getElementById('animated-greeting');
                 if (!el) return;
@@ -1031,15 +1098,19 @@
             },
 
 
-            initStoryCards() {
-                const container = document.getElementById('story-container');
+            /**
+             * Initializes the interactive quotes carousel.
+             * ENHANCEMENT: Renamed from initStoryCards for clarity.
+             */
+            initQuotesCarousel() {
+                const container = this.elements.quotesContainer;
                 if (!container) return;
-                const cards = Array.from(container.querySelectorAll('.story-card'));
+                const cards = Array.from(container.querySelectorAll('.quote-card'));
                 if (cards.length === 0) return;
 
 
                 let currentIndex = 0;
-                let storyInterval;
+                let quoteInterval;
                 const DURATION = 5000;
 
 
@@ -1060,7 +1131,7 @@
                         card.style.opacity = opacity;
 
 
-                        const progressBar = card.querySelector('.story-timer-progress');
+                        const progressBar = card.querySelector('.quote-timer-progress');
                         if (progressBar) {
                             progressBar.style.transition = 'none';
                             progressBar.style.width = '0%';
@@ -1075,8 +1146,8 @@
 
 
                 const startTimer = () => {
-                    clearInterval(storyInterval);
-                    storyInterval = setInterval(() => {
+                    clearInterval(quoteInterval);
+                    quoteInterval = setInterval(() => {
                         currentIndex = (currentIndex + 1) % cards.length;
                         updateCards();
                     }, DURATION);
@@ -1098,6 +1169,9 @@
             },
 
 
+            /**
+             * Initializes Vanilla-tilt.js for 3D tilting effects on cards.
+             */
             initVanillaTilt() {
                 if (typeof VanillaTilt !== 'undefined') {
                     VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
@@ -1105,6 +1179,9 @@
             },
 
 
+            /**
+             * Initializes a simple, non-persistent visitor counter.
+             */
             initVisitorCounter() {
                 const counterElement = document.getElementById('visitor-counter');
                 if (!counterElement) return;
@@ -1114,6 +1191,9 @@
             },
 
 
+            /**
+             * Initializes and updates the digital clocks on the page.
+             */
             initClocks() {
                 const footerClock = document.getElementById('footer-clock');
                 const coverClock = document.getElementById('cover-clock');
@@ -1138,6 +1218,9 @@
             },
 
 
+            /**
+             * Initializes the Three.js particle background animation.
+             */
             initThreeJS() {
                 if (typeof THREE === 'undefined' || !this.elements.threeCanvas) return;
                 try {
@@ -1169,7 +1252,12 @@
             },
 
 
-            // Animation Loop & Updates
+            // --- Animation Loop & Update Methods ---
+
+
+            /**
+             * Handles window resize events to keep the canvas and camera updated.
+             */
             onWindowResize() {
                 if (!this.camera || !this.renderer) return;
                 this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -1177,11 +1265,18 @@
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             },
+            
+            /**
+             * Pauses and resumes the animation loop when the tab visibility changes.
+             */
             onVisibilityChange() {
                 if (document.hidden) this.stopAnimation(); else this.startAnimation();
             },
 
 
+            /**
+             * Updates the active state of navigation links based on scroll position.
+             */
             updateActiveLink() {
                 const navLinks = document.querySelectorAll('nav a.nav-link');
                 let currentSectionId = '';
@@ -1196,6 +1291,9 @@
             },
 
 
+            /**
+             * Updates the width of the scroll progress bar in the header.
+             */
             updateProgressBar() {
                 if (!this.elements.progressBar) return;
                 const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1204,23 +1302,30 @@
             },
 
 
+            /**
+             * The main animation loop, powered by requestAnimationFrame.
+             */
             animate() {
                 this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
 
 
+                // Update smooth scroll
                 if (this.lenis) this.lenis.raf(performance.now());
 
 
+                // Update custom cursor position
                 if (this.elements.cursorFollower) {
                     this.cursorMouse.x += (this.targetCursorMouse.x - this.cursorMouse.x) * 0.15;
                     this.cursorMouse.y += (this.targetCursorMouse.y - this.cursorMouse.y) * 0.15;
                     this.elements.cursorFollower.style.transform = `translate(${this.cursorMouse.x}px, ${this.cursorMouse.y}px) translate(-50%, -50%)`;
                 }
                 
+                // Update UI elements
                 this.updateActiveLink();
                 this.updateProgressBar();
 
 
+                // Update Three.js scene
                 if (this.scene && this.renderer) {
                     const elapsedTime = this.threeClock.getElapsedTime();
                     if (this.particles) {
@@ -1235,9 +1340,13 @@
             },
 
 
+            /** Starts the animation loop if it's not already running. */
             startAnimation() {
                 if (!this.animationFrameId) this.animate();
             },
+
+
+            /** Stops the animation loop. */
             stopAnimation() {
                 if (this.animationFrameId) {
                     cancelAnimationFrame(this.animationFrameId);
@@ -1247,6 +1356,7 @@
         };
 
 
+        // Let's go!
         App.init();
     });
     </script>
@@ -1282,6 +1392,10 @@
                 <a href="#work" class="nav-link text-gray-300 hover:text-white">Work</a>
                 <a href="#values" class="nav-link text-gray-300 hover:text-white">Values</a>
                 <a href="#blog" class="nav-link text-gray-300 hover:text-white">Blog</a>
+                <div class="relative">
+                    <a href="#podcast" class="nav-link text-gray-300 hover:text-white">Podcast</a>
+                    <span class="coming-soon-badge">soon</span>
+                </div>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
             </nav>
 
@@ -1309,6 +1423,10 @@
             <a href="#work" class="nav-link text-gray-300 hover:text-white">Work</a>
             <a href="#values" class="nav-link text-gray-300 hover:text-white">Values</a>
             <a href="#blog" class="nav-link text-gray-300 hover:text-white">Blog</a>
+            <div class="relative">
+                <a href="#podcast" class="nav-link text-gray-300 hover:text-white">Podcast</a>
+                <span class="coming-soon-badge" style="font-size: 0.8rem; top: -10px; right: -25px;">soon</span>
+            </div>
             <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
         </nav>
     </div>
@@ -1334,6 +1452,7 @@
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="animate-on-scroll slide-in-left">
                         <h1 class="text-6xl sm:text-7xl md:text-8xl font-extrabold font-heading text-white">Hi, I'm<br>Yassine W.<br>MEDJATI</h1>
+                        <p class="mt-4 text-2xl md:text-3xl text-gray-300 font-heading">AI, Strategy & People</p>
                         <div class="flex items-center gap-4 mt-8">
                             <a href="mailto:hello@wyassine.com" class="available-pill">
                                 <span>AVAILABLE</span>
@@ -1493,9 +1612,9 @@
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                     <div data-tilt class="text-center bg-gray-900/50 p-6 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom hover:-translate-y-2">
-                        <img loading="lazy" src="https://m.media-amazon.com/images/I/71sxTeZIi6L._UF1000,1000_QL80_.jpg" alt="Book Cover for The Lean Startup" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-xl font-bold font-heading">The Lean Startup</h3>
-                        <p class="text-sm text-gray-400">by Eric Ries</p>
+                        <img loading="lazy" src="https://m.media-amazon.com/images/I/61ddWGvVlML._AC_UY436_FMwebp_QL65_.jpg" alt="Book Cover for How Big Things Get Done" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
+                        <h3 class="text-xl font-bold font-heading">How Big Things Get Done</h3>
+                        <p class="text-sm text-gray-400">by Bent Flyvbjerg</p>
                     </div>
                     <div data-tilt class="text-center bg-gray-900/50 p-6 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom hover:-translate-y-2" style="transition-delay: 100ms;">
                         <img loading="lazy" src="https://m.media-amazon.com/images/I/81O5obhZABL._UF894,1000_QL80_.jpg" alt="Book Cover for Thinking, Fast and Slow" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
@@ -1549,9 +1668,13 @@
         </section>
 
 
+        <!-- Podcast Section (Placeholder) -->
+        <section id="podcast" class="hidden"></section>
+
+
         <!-- Philosophy Section -->
         <section class="py-32 lg:py-48">
-             <div class="container mx-auto px-6 max-w-6xl">
+            <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-16 items-center">
                     <div class="animate-on-scroll slide-in-left">
                         <video autoplay loop muted playsinline class="rounded-lg shadow-2xl philosophy-image-fade w-full h-auto object-cover">
@@ -1559,12 +1682,11 @@
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                    <div class="text-right">
-                        <ul class="space-y-6 philosophy-list">
-                            <li class="philosophy-item text-base md:text-lg font-medium animate-on-scroll slide-in-bottom">I write code. I improve my skill-set and thought process everyday.</li>
-                            <li class="philosophy-item text-base md:text-lg font-medium animate-on-scroll slide-in-bottom" style="transition-delay: 100ms;">I strive for leadership.</li>
-                            <li class="philosophy-item text-base md:text-lg font-medium animate-on-scroll slide-in-bottom" style="transition-delay: 200ms;">I am proud to work with special people.</li>
-                            <li class="philosophy-item text-base md:text-lg font-medium animate-on-scroll slide-in-bottom" style="transition-delay: 300ms;">I want to transform and disrupt.</li>
+                    <div>
+                        <ul class="space-y-4 philosophy-list text-right">
+                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right" style="transition-delay: 100ms;">I strive for leadership.</li>
+                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right" style="transition-delay: 200ms;">I am proud to work with special people.</li>
+                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right" style="transition-delay: 300ms;">I want to transform and disrupt.</li>
                         </ul>
                     </div>
                 </div>
@@ -1602,15 +1724,15 @@
         </section>
 
 
-        <!-- Quotes Section -->
-        <section id="quotes" class="py-32">
+        <!-- Quotes Section (ENHANCEMENT: Made this section visible and functional) -->
+        <section id="quotes" class="py-32 hidden">
             <div class="container mx-auto px-6 flex flex-col items-center justify-center">
                 <h2 class="text-3xl font-bold mb-12 text-center font-heading animate-on-scroll slide-in-bottom">Inspirational Quotes</h2>
-                <div id="story-container" class="relative w-full h-[500px] flex items-center justify-center animate-on-scroll" style="perspective: 1000px;">
-                    <div class="story-card"><div class="story-timer-bar"><div class="story-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"The essence of strategy is choosing what not to do."</p><p class="mt-4 text-gray-400">- Michael Porter</p></div>
-                    <div class="story-card"><div class="story-timer-bar"><div class="story-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Great things in business are never done by one person. They're done by a team of people."</p><p class="mt-4 text-gray-400">- Steve Jobs</p></div>
-                    <div class="story-card"><div class="story-timer-bar"><div class="story-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Performance is your reality. Forget everything else."</p><p class="mt-4 text-gray-400">- Harold S. Geneen</p></div>
-                    <div class="story-card"><div class="story-timer-bar"><div class="story-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Collaboration is the key to unlocking the collective genius."</p><p class="mt-4 text-gray-400">- Mattie Stepanek</p></div>
+                <div id="quotes-container" class="relative w-full h-[500px] flex items-center justify-center animate-on-scroll" style="perspective: 1000px;">
+                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"The essence of strategy is choosing what not to do."</p><p class="mt-4 text-gray-400">- Michael Porter</p></div>
+                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Great things in business are never done by one person. They're done by a team of people."</p><p class="mt-4 text-gray-400">- Steve Jobs</p></div>
+                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Performance is your reality. Forget everything else."</p><p class="mt-4 text-gray-400">- Harold S. Geneen</p></div>
+                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Collaboration is the key to unlocking the collective genius."</p><p class="mt-4 text-gray-400">- Mattie Stepanek</p></div>
                 </div>
             </div>
         </section>
@@ -1636,6 +1758,7 @@
                         <li><a href="#hero" class="hover:text-white transition-colors">About</a></li>
                         <li><a href="#work" class="hover:text-white transition-colors">Work</a></li>
                         <li><a href="#blog" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#podcast" class="hover:text-white transition-colors">Podcast</a></li>
                         <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
