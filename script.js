@@ -1,17 +1,25 @@
 const CAL_EMBED_URL = "https://app.cal.com/embed/embed.js";
 const CAL_ORIGIN = "https://app.cal.com";
+const THREE_JS_URL = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+const GOOGLE_ANALYTICS_SCRIPT_URL = "https://www.googletagmanager.com/gtag/js";
 const COOKIE_CONSENT_KEY = "ywm-cookie-consent-v1";
 const RESUME_ACCESS_SESSION_KEY = "ywm-resume-access-name-v1";
+const GA_MEASUREMENT_ID_PLACEHOLDER = "G-XXXXXXXXXX";
 const COOKIE_CONSENT_VALUES = Object.freeze({
     essential: "essential",
+    analytics: "analytics",
     embedded: "embedded",
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     const App = {
         consentValue: null,
+        analyticsMeasurementId: null,
+        analyticsReadyPromise: null,
+        analyticsConfigured: false,
         calReadyPromise: null,
         calConfiguredNamespaces: new Set(),
+        threeReadyPromise: null,
         scene: null,
         camera: null,
         renderer: null,
@@ -19,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
         particleGeometry: null,
         particleMaterial: null,
         animationFrameId: null,
-        threeClock: new THREE.Clock(),
-        threeMouse: new THREE.Vector2(),
+        threeClock: null,
+        threeMouse: { x: 0, y: 0 },
         prefersReducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)"),
 
         elements: {
@@ -53,12 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
         },
 
         init() {
+            this.analyticsMeasurementId = this.getAnalyticsMeasurementId();
             this.initImageFallbacks();
             this.initCookieConsent();
             this.initResumeAccessGate();
             this.initCountUpValues();
             this.initLoader();
-            this.initThreeJS();
+            this.initThreeJS().then(() => {
+                this.startAnimation();
+            }).catch((error) => {
+                console.error("Three.js setup failed:", error);
+            });
             this.initPointerTracking();
             this.initScrollAnimations();
             this.initHeader();
@@ -71,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this.initKeyboardShortcuts();
             this.addEventListeners();
             this.updateScrollState();
-            this.startAnimation();
         },
 
         initImageFallbacks() {
@@ -90,6 +102,218 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (image.complete && image.naturalWidth === 0) {
                     handleError();
                 }
+            });
+        },
+
+        getAnalyticsMeasurementId() {
+            const configuredId = window.YWM_SITE_CONFIG?.gaMeasurementId?.trim() || "";
+            return this.hasValidAnalyticsMeasurementId(configuredId) ? configuredId.toUpperCase() : "";
+        },
+
+        hasValidAnalyticsMeasurementId(value) {
+            return (
+                typeof value === "string" &&
+                /^G-[A-Z0-9]+$/i.test(value.trim()) &&
+                value.trim().toUpperCase() !== GA_MEASUREMENT_ID_PLACEHOLDER
+            );
+        },
+
+        isAnalyticsConsentGranted() {
+            return (
+                this.consentValue === COOKIE_CONSENT_VALUES.analytics ||
+                this.consentValue === COOKIE_CONSENT_VALUES.embedded
+            );
+        },
+
+        loadAnalyticsScript() {
+            const existingScript = document.querySelector('script[data-google-analytics="true"]');
+            if (existingScript?.dataset.loaded === "true") {
+                return Promise.resolve();
+            }
+
+            if (this.analyticsReadyPromise) {
+                return this.analyticsReadyPromise;
+            }
+
+            this.analyticsReadyPromise = new Promise((resolve, reject) => {
+                const analyticsScript = document.querySelector('script[data-google-analytics="true"]');
+
+                const handleLoad = () => {
+                    if (analyticsScript) analyticsScript.dataset.loaded = "true";
+                    resolve();
+                };
+
+                const handleError = () => {
+                    this.analyticsReadyPromise = null;
+                    reject(new Error("Google Analytics script failed to load."));
+                };
+
+                if (analyticsScript?.dataset.loaded === "true") {
+                    resolve();
+                    return;
+                }
+
+                if (analyticsScript) {
+                    analyticsScript.addEventListener("load", handleLoad, { once: true });
+                    analyticsScript.addEventListener("error", handleError, { once: true });
+                    return;
+                }
+
+                const script = document.createElement("script");
+                script.src = `${GOOGLE_ANALYTICS_SCRIPT_URL}?id=${encodeURIComponent(this.analyticsMeasurementId)}`;
+                script.async = true;
+                script.dataset.googleAnalytics = "true";
+                script.addEventListener("load", () => {
+                    script.dataset.loaded = "true";
+                    handleLoad();
+                }, { once: true });
+                script.addEventListener("error", handleError, { once: true });
+                document.head.appendChild(script);
+            });
+
+            return this.analyticsReadyPromise;
+        },
+
+        enableAnalytics() {
+            if (!this.analyticsMeasurementId) {
+                return Promise.resolve(false);
+            }
+
+            const disableKey = `ga-disable-${this.analyticsMeasurementId}`;
+            window[disableKey] = false;
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function gtag() {
+                window.dataLayer.push(arguments);
+            };
+            window.gtag("consent", "default", {
+                analytics_storage: "denied",
+                ad_storage: "denied",
+                ad_user_data: "denied",
+                ad_personalization: "denied",
+            });
+
+            return this.loadAnalyticsScript()
+                .then(() => {
+                    if (!this.analyticsConfigured) {
+                        window.gtag("js", new Date());
+                    }
+
+                    window.gtag("consent", "update", {
+                        analytics_storage: "granted",
+                        ad_storage: "denied",
+                        ad_user_data: "denied",
+                        ad_personalization: "denied",
+                    });
+
+                    if (!this.analyticsConfigured) {
+                        window.gtag("config", this.analyticsMeasurementId, {
+                            anonymize_ip: true,
+                            transport_type: "beacon",
+                        });
+                        this.analyticsConfigured = true;
+                    }
+
+                    return true;
+                })
+                .catch((error) => {
+                    this.analyticsReadyPromise = null;
+                    console.error("Google Analytics failed to load:", error);
+                    return false;
+                });
+        },
+
+        disableAnalytics() {
+            if (!this.analyticsMeasurementId) return;
+
+            window[`ga-disable-${this.analyticsMeasurementId}`] = true;
+
+            if (typeof window.gtag !== "function") return;
+
+            window.gtag("consent", "update", {
+                analytics_storage: "denied",
+                ad_storage: "denied",
+                ad_user_data: "denied",
+                ad_personalization: "denied",
+            });
+        },
+
+        trackEvent(eventName, params = {}) {
+            if (!this.analyticsMeasurementId || !this.isAnalyticsConsentGranted() || typeof window.gtag !== "function") {
+                return;
+            }
+
+            window.gtag("event", eventName, {
+                page_location: window.location.href,
+                page_path: window.location.pathname,
+                page_title: document.title,
+                ...params,
+            });
+        },
+
+        getLinkLabel(link) {
+            return (link?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 120);
+        },
+
+        trackStrategyCall(link, interactionSource = "click") {
+            this.trackEvent("generate_lead", {
+                lead_type: "strategy_call",
+                engagement_type: "booking",
+                interaction_source: interactionSource,
+                link_text: this.getLinkLabel(link),
+                link_url: this.getBookingUrl(link) || link?.href || "",
+            });
+        },
+
+        isPdfLink(url) {
+            if (!url) return false;
+
+            try {
+                const parsedUrl = new URL(url, window.location.origin);
+                return parsedUrl.pathname.toLowerCase().endsWith(".pdf");
+            } catch (error) {
+                return false;
+            }
+        },
+
+        trackLinkInteraction(link) {
+            const href = link?.getAttribute("href")?.trim() || "";
+            if (!href) return;
+
+            if (href.startsWith("mailto:")) {
+                this.trackEvent("generate_lead", {
+                    lead_type: "email_contact",
+                    engagement_type: "email_click",
+                    link_text: this.getLinkLabel(link),
+                    link_url: link.href,
+                });
+                return;
+            }
+
+            if (href.startsWith("tel:")) {
+                this.trackEvent("generate_lead", {
+                    lead_type: "phone_contact",
+                    engagement_type: "phone_click",
+                    link_text: this.getLinkLabel(link),
+                    link_url: link.href,
+                });
+                return;
+            }
+
+            if (!this.isPdfLink(link.href || href)) return;
+
+            let fileName = "download.pdf";
+            try {
+                const parsedUrl = new URL(link.href || href, window.location.origin);
+                fileName = parsedUrl.pathname.split("/").filter(Boolean).pop() || fileName;
+            } catch (error) {
+                fileName = href.split("/").filter(Boolean).pop() || fileName;
+            }
+
+            this.trackEvent("file_download", {
+                file_name: fileName,
+                file_extension: "pdf",
+                link_text: this.getLinkLabel(link),
+                link_url: link.href || href,
             });
         },
 
@@ -322,14 +546,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!this.consentValue) {
                 this.showCookieBanner();
+                this.disableAnalytics();
                 return;
             }
 
             this.hideCookieBanner({ immediate: true });
-
-            if (this.consentValue === COOKIE_CONSENT_VALUES.embedded) {
-                this.enableEmbeddedScheduling();
-            }
+            this.applyConsentSelection(this.consentValue);
         },
 
         getStoredCookieConsent() {
@@ -354,6 +576,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             this.hideCookieBanner();
+            this.applyConsentSelection(value);
+        },
+
+        applyConsentSelection(value) {
+            if (value === COOKIE_CONSENT_VALUES.essential) {
+                this.disableAnalytics();
+                return;
+            }
+
+            this.enableAnalytics();
 
             if (value === COOKIE_CONSENT_VALUES.embedded) {
                 this.enableEmbeddedScheduling();
@@ -400,6 +632,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         link.dataset.calBypass = "false";
                         return;
                     }
+
+                    this.trackStrategyCall(link);
 
                     if (this.consentValue !== COOKIE_CONSENT_VALUES.embedded) {
                         return;
@@ -622,6 +856,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (responseBody?.ok === false) {
                 throw new Error("Formspree rejected the submission.");
             }
+
+            this.trackEvent("generate_lead", {
+                lead_type: "resume_request",
+                engagement_type: "resume_capture",
+                resume_source: source,
+                requested_asset: "resume",
+                link_url: resumeUrl,
+            });
         },
 
         getBookingUrl(link) {
@@ -725,6 +967,8 @@ document.addEventListener("DOMContentLoaded", () => {
         triggerPrimaryBooking() {
             const primaryBookingLink = this.elements.bookingLinks[0];
             if (!primaryBookingLink) return;
+
+            this.trackStrategyCall(primaryBookingLink, "keyboard_shortcut");
 
             if (this.consentValue === COOKIE_CONSENT_VALUES.embedded) {
                 this.openEmbeddedBooking(primaryBookingLink);
@@ -978,7 +1222,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         shouldUseThreeJS() {
             return (
-                typeof THREE !== "undefined" &&
                 !!this.elements.threeCanvas &&
                 !this.prefersReducedMotion.matches &&
                 window.innerWidth >= 960
@@ -988,47 +1231,112 @@ document.addEventListener("DOMContentLoaded", () => {
         initThreeJS() {
             if (!this.shouldUseThreeJS()) {
                 if (this.elements.threeCanvas) this.elements.threeCanvas.style.display = "none";
-                return;
+                return Promise.resolve();
             }
 
-            if (this.renderer) return;
+            if (this.renderer) return Promise.resolve();
 
-            try {
-                this.scene = new THREE.Scene();
-                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                this.camera.position.z = 52;
+            return this.loadThreeJSScript().then((Three) => {
+                if (!this.shouldUseThreeJS() || this.renderer) return;
 
-                this.renderer = new THREE.WebGLRenderer({
-                    canvas: this.elements.threeCanvas,
-                    alpha: true,
-                    antialias: false,
-                    powerPreference: "low-power",
-                });
-                this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-                this.elements.threeCanvas.style.display = "block";
+                try {
+                    this.threeClock = new Three.Clock();
+                    this.scene = new Three.Scene();
+                    this.camera = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    this.camera.position.z = 52;
 
-                const particleCount = 650;
-                const positions = new Float32Array(particleCount * 3);
-                for (let i = 0; i < particleCount * 3; i += 1) {
-                    positions[i] = (Math.random() - 0.5) * 110;
+                    this.renderer = new Three.WebGLRenderer({
+                        canvas: this.elements.threeCanvas,
+                        alpha: true,
+                        antialias: false,
+                        powerPreference: "low-power",
+                    });
+                    this.renderer.setSize(window.innerWidth, window.innerHeight);
+                    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                    this.elements.threeCanvas.style.display = "block";
+
+                    const particleCount = 650;
+                    const positions = new Float32Array(particleCount * 3);
+                    for (let i = 0; i < particleCount * 3; i += 1) {
+                        positions[i] = (Math.random() - 0.5) * 110;
+                    }
+
+                    this.particleGeometry = new Three.BufferGeometry();
+                    this.particleGeometry.setAttribute("position", new Three.BufferAttribute(positions, 3));
+                    this.particleMaterial = new Three.PointsMaterial({
+                        color: 0xd9e3f0,
+                        size: 0.04,
+                        transparent: true,
+                        opacity: 0.12,
+                    });
+
+                    this.particles = new Three.Points(this.particleGeometry, this.particleMaterial);
+                    this.scene.add(this.particles);
+                } catch (error) {
+                    console.error("Three.js initialization failed:", error);
+                    this.destroyThreeJS();
+                }
+            });
+        },
+
+        loadThreeJSScript() {
+            if (typeof window.THREE !== "undefined") {
+                return Promise.resolve(window.THREE);
+            }
+
+            const existingScript = document.querySelector('script[data-three-js="true"]');
+            if (existingScript?.dataset.loaded === "true") {
+                return Promise.resolve(window.THREE);
+            }
+
+            if (this.threeReadyPromise) {
+                return this.threeReadyPromise;
+            }
+
+            this.threeReadyPromise = new Promise((resolve, reject) => {
+                const threeScript = document.querySelector('script[data-three-js="true"]');
+
+                const handleLoad = () => {
+                    if (threeScript) threeScript.dataset.loaded = "true";
+                    if (typeof window.THREE !== "undefined") {
+                        resolve(window.THREE);
+                        return;
+                    }
+
+                    this.threeReadyPromise = null;
+                    reject(new Error("Three.js did not initialize correctly."));
+                };
+
+                const handleError = () => {
+                    this.threeReadyPromise = null;
+                    reject(new Error("Three.js failed to load."));
+                };
+
+                if (threeScript?.dataset.loaded === "true") {
+                    resolve(window.THREE);
+                    return;
                 }
 
-                this.particleGeometry = new THREE.BufferGeometry();
-                this.particleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-                this.particleMaterial = new THREE.PointsMaterial({
-                    color: 0xd9e3f0,
-                    size: 0.04,
-                    transparent: true,
-                    opacity: 0.12,
-                });
+                if (threeScript) {
+                    threeScript.addEventListener("load", handleLoad, { once: true });
+                    threeScript.addEventListener("error", handleError, { once: true });
+                    return;
+                }
 
-                this.particles = new THREE.Points(this.particleGeometry, this.particleMaterial);
-                this.scene.add(this.particles);
-            } catch (error) {
-                console.error("Three.js initialization failed:", error);
-                this.destroyThreeJS();
-            }
+                const script = document.createElement("script");
+                script.src = THREE_JS_URL;
+                script.async = true;
+                script.defer = true;
+                script.dataset.threeJs = "true";
+                script.addEventListener("load", () => {
+                    script.dataset.loaded = "true";
+                    handleLoad();
+                }, { once: true });
+                script.addEventListener("error", handleError, { once: true });
+                document.head.appendChild(script);
+            });
+
+            return this.threeReadyPromise;
         },
 
         destroyThreeJS() {
@@ -1048,6 +1356,8 @@ document.addEventListener("DOMContentLoaded", () => {
             this.particles = null;
             this.particleGeometry = null;
             this.particleMaterial = null;
+            this.threeClock = null;
+            this.threeMouse = { x: 0, y: 0 };
         },
 
         addEventListeners() {
@@ -1068,6 +1378,11 @@ document.addEventListener("DOMContentLoaded", () => {
         },
 
         onDocumentClick(event) {
+            const clickedLink = event.target.closest("a[href]");
+            if (clickedLink) {
+                this.trackLinkInteraction(clickedLink);
+            }
+
             if (event.target.closest("[data-resume-capture]")) return;
             this.closeResumeCaptures();
         },
@@ -1081,8 +1396,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (!this.renderer) {
-                this.initThreeJS();
-                this.startAnimation();
+                this.initThreeJS()
+                    .then(() => {
+                        this.startAnimation();
+                    })
+                    .catch((error) => {
+                        console.error("Three.js resize setup failed:", error);
+                    });
                 return;
             }
 
@@ -1107,7 +1427,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
-            const elapsedTime = this.threeClock.getElapsedTime();
+            const elapsedTime = this.threeClock ? this.threeClock.getElapsedTime() : 0;
 
             if (this.particles) {
                 this.particles.rotation.y = elapsedTime * 0.004;

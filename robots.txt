@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wyassine.com/sitemap.xml
-Host: wyassine.com
+Sitemap: https://www.wyassine.com/sitemap.xml
+Host: www.wyassine.com

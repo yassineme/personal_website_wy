@@ -9,13 +9,14 @@
     <meta name="author" content="Yassine W. Medjati">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#030507">
-    <link rel="canonical" href="https://wyassine.com/">
+    <link rel="canonical" href="https://www.wyassine.com/">
     <meta property="og:site_name" content="Yassine / Advisory">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wyassine.com/">
+    <meta property="og:url" content="https://www.wyassine.com/">
     <meta property="og:title" content="Yassine W. Medjati | AI Strategy, GenAI & Transformation Advisor">
     <meta property="og:description" content="AI strategy, GenAI implementation, agentic AI, and transformation advisory for aerospace, government, and regulated organizations.">
-    <meta property="og:image" content="https://wyassine.com/assets/yassine-portrait.png">
+    <meta property="og:image" content="https://www.wyassine.com/assets/yassine-portrait.png">
+    <meta property="og:image:secure_url" content="https://www.wyassine.com/assets/yassine-portrait.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="500">
     <meta property="og:image:height" content="500">
@@ -23,7 +24,71 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Yassine W. Medjati | AI Strategy, GenAI & Transformation Advisor">
     <meta name="twitter:description" content="AI strategy, GenAI implementation, agentic AI, and transformation advisory for aerospace, government, and regulated organizations.">
-    <meta name="twitter:image" content="https://wyassine.com/assets/yassine-portrait.png">
+    <meta name="twitter:image" content="https://www.wyassine.com/assets/yassine-portrait.png">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "@id": "https://www.wyassine.com/#website",
+                    "url": "https://www.wyassine.com/",
+                    "name": "Yassine / Advisory",
+                    "description": "AI strategy, GenAI, and transformation advisory for high-stakes organizations.",
+                    "inLanguage": "en"
+                },
+                {
+                    "@type": "Person",
+                    "@id": "https://www.wyassine.com/#person",
+                    "name": "Yassine W. Medjati",
+                    "url": "https://www.wyassine.com/",
+                    "image": "https://www.wyassine.com/assets/yassine-portrait.png",
+                    "jobTitle": "AI Strategy, GenAI and Transformation Advisor",
+                    "description": "Yassine W. Medjati advises leaders in aerospace, government, and regulated industries on AI strategy, GenAI implementation, agentic AI, digital transformation, executive alignment, and leadership enablement.",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Hamburg",
+                        "addressCountry": "DE"
+                    },
+                    "sameAs": [
+                        "https://www.linkedin.com/in/yassine-medjati/"
+                    ],
+                    "knowsAbout": [
+                        "AI strategy",
+                        "Generative AI",
+                        "Agentic AI",
+                        "Digital transformation",
+                        "Executive alignment",
+                        "Aerospace",
+                        "Regulated industries"
+                    ]
+                },
+                {
+                    "@type": "Service",
+                    "@id": "https://www.wyassine.com/#service",
+                    "serviceType": "AI strategy and transformation advisory",
+                    "provider": {
+                        "@id": "https://www.wyassine.com/#person"
+                    },
+                    "areaServed": [
+                        {
+                            "@type": "Country",
+                            "name": "Germany"
+                        },
+                        {
+                            "@type": "Place",
+                            "name": "Europe"
+                        }
+                    ],
+                    "audience": {
+                        "@type": "BusinessAudience",
+                        "audienceType": "Executives and transformation leaders"
+                    },
+                    "description": "Strategic AI advisory for aerospace and other regulated organizations, including AI roadmap design, executive alignment, and agentic workflow design."
+                }
+            ]
+        }
+    </script>
 
 
     <!-- Favicon -->
@@ -40,7 +105,7 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="site-config.js" defer></script>
     <!-- Main application script -->
     <script src="script.js" defer></script>
 </head>
@@ -53,7 +118,7 @@
             <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
         </div>
         <div id="loader-text-container" class="text-center opacity-0 transition-opacity duration-500">
-             <h1 id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</h1>
+             <p id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</p>
              <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">AI strategy, transformation and leadership.</p>
         </div>
     </div>
@@ -789,18 +854,19 @@
     <aside id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-description" hidden>
         <div class="cookie-banner-panel">
             <p class="cookie-banner-kicker">Privacy preferences</p>
-            <h2 id="cookie-banner-title">Keep scheduling on-site, only if you want it.</h2>
+            <h2 id="cookie-banner-title">Choose the level of tracking and on-site scheduling you want.</h2>
             <p id="cookie-banner-description" class="cookie-banner-copy">
-                Essential storage keeps navigation and interface preferences stable. If you allow scheduling cookies, the Cal.com booking experience can open directly on this site instead of sending visitors away.
+                Essential storage keeps navigation and interface preferences stable. Analytics helps measure which pages, calls to action, and resume requests create real client interest. Scheduling consent keeps the Cal.com booking flow on-site instead of sending visitors away.
             </p>
             <div class="cookie-banner-tags" aria-hidden="true">
                 <span>Essential</span>
-                <span>Scheduling</span>
+                <span>Analytics</span>
                 <span>On-site booking</span>
             </div>
             <div class="cookie-banner-actions">
                 <button type="button" class="cookie-btn cookie-btn-secondary" data-cookie-choice="essential">Essential only</button>
-                <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-choice="embedded">Allow on-site scheduling</button>
+                <button type="button" class="cookie-btn cookie-btn-secondary" data-cookie-choice="analytics">Allow analytics</button>
+                <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-choice="embedded">Analytics + on-site scheduling</button>
             </div>
         </div>
     </aside>
