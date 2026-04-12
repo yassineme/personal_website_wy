@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myDIGITAL RESUME | Yassine W. Medjati</title>
+    <meta name="description" content="A web-based digital twin of Yassine W. Medjati's resume, mirroring the original PDF content in a premium, readable format.">
+    <meta name="keywords" content="Yassine Medjati resume, digital resume, aerospace, AI engineering, data science, leadership, Airbus">
+    <meta name="author" content="Yassine W. Medjati">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="theme-color" content="#030507">
+    <link rel="canonical" href="https://wyassine.com/mydigital-resume.html">
+    <meta property="og:site_name" content="Yassine / Advisory">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://wyassine.com/mydigital-resume.html">
+    <meta property="og:title" content="myDIGITAL RESUME | Yassine W. Medjati">
+    <meta property="og:description" content="A web-based digital twin of Yassine W. Medjati's resume, mirroring the original PDF content in a premium, readable format.">
+    <meta property="og:image" content="https://wyassine.com/assets/yassine-portrait.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:image:alt" content="Portrait of Yassine W. Medjati">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="myDIGITAL RESUME | Yassine W. Medjati">
+    <meta name="twitter:description" content="A web-based digital twin of Yassine W. Medjati's resume, mirroring the original PDF content in a premium, readable format.">
+    <meta name="twitter:image" content="https://wyassine.com/assets/yassine-portrait.png">
+
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <link rel="stylesheet" href="tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body class="antialiased site-shell resume-twin-page resume-gate-active">
+    <div id="loader" class="fixed inset-0 bg-black z-[99999] flex flex-col items-center justify-center text-center">
+        <div class="hole mb-8">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div id="loader-text-container" class="text-center opacity-0 transition-opacity duration-500">
+            <h1 id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">AI strategy, transformation and leadership.</p>
+        </div>
+    </div>
+
+    <div id="shortcut-hint" class="fixed top-6 left-6 z-[1001] text-xs text-gray-400 bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm transition-opacity duration-300">
+        Use <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to navigate this resume
+    </div>
+
+    <div id="resume-access-gate" class="resume-access-gate" data-formspree-endpoint="https://formspree.io/f/mzdjgqoa">
+        <div class="resume-access-gate-panel">
+            <p class="resume-access-kicker">Resume access</p>
+            <h2 class="resume-access-title">Enter your name to reveal the digital resume.</h2>
+            <p class="resume-access-copy">Once submitted, the page unlocks and you will be greeted personally at the top of the page.</p>
+            <form id="resume-access-form" class="resume-access-form" novalidate>
+                <label class="sr-only" for="resume-access-name">Your name</label>
+                <input id="resume-access-name" name="name" type="text" class="resume-access-input" placeholder="Your name" autocomplete="name" maxlength="80" required>
+                <button type="submit" id="resume-access-submit" class="resume-access-submit">Reveal resume</button>
+            </form>
+            <p id="resume-access-status" class="resume-access-status" aria-live="polite"></p>
+        </div>
+    </div>
+
+    <header id="main-header" class="py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="brand-link">
+                <span class="desktop-brand">Yassine / Advisory</span>
+                <span class="mobile-brand">
+                    <span class="mobile-brand-avatar-frame">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-brand-avatar" data-fallback-src="assets/portrait-fallback.svg">
+                    </span>
+                    <span class="mobile-brand-copy">
+                        <span class="mobile-brand-name">Yassine Medjati</span>
+                        <span class="mobile-brand-role">myDIGITAL RESUME</span>
+                    </span>
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="nav-link text-gray-300 hover:text-white">Home</a>
+                <a href="#top" class="nav-link text-gray-300 hover:text-white">Overview</a>
+                <a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a>
+                <a href="#education" class="nav-link text-gray-300 hover:text-white">Education</a>
+                <a href="#credentials" class="nav-link text-gray-300 hover:text-white">Credentials</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+            </nav>
+
+            <button id="open-menu-btn" class="md:hidden z-50" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="progress-bar" class="absolute bottom-0 left-0 h-0.5 bg-white"></div>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-black/90 backdrop-blur-lg z-40 flex flex-col items-center justify-center">
+        <div class="mobile-menu-panel w-full max-w-sm">
+            <div class="mobile-menu-handle" aria-hidden="true"></div>
+            <div class="mobile-menu-top">
+                <div class="mobile-menu-profile">
+                    <span class="mobile-menu-profile-avatar-frame">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-menu-profile-avatar" data-fallback-src="assets/portrait-fallback.svg">
+                    </span>
+                    <span class="mobile-menu-profile-copy">
+                        <span class="mobile-menu-label">Yassine Medjati</span>
+                        <span class="mobile-menu-subtitle">myDIGITAL RESUME</span>
+                    </span>
+                </div>
+                <button id="close-menu-btn" aria-label="Close menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <p class="mobile-menu-intro">A web-based mirror of the PDF resume, structured for recruiters, hiring managers, and interview loops without changing the underlying content.</p>
+            <div class="mobile-menu-group">
+                <p class="mobile-menu-group-label">Navigate</p>
+                <nav class="mobile-menu-nav flex flex-col text-2xl font-heading">
+                    <a href="#top" class="nav-link text-gray-300 hover:text-white">Overview</a>
+                    <a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a>
+                    <a href="#education" class="nav-link text-gray-300 hover:text-white">Education</a>
+                    <a href="#credentials" class="nav-link text-gray-300 hover:text-white">Credentials</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+                </nav>
+            </div>
+            <div class="mobile-menu-actions">
+                <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 transition-transform duration-300 text-base text-center">
+                    Open PDF resume
+                </a>
+                <a href="mailto:hello@wyassine.com?subject=Regarding%20a%20role%20opportunity" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-300 font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                    Email directly
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="three-canvas"></canvas>
+
+    <a href="#top" id="back-to-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </a>
+
+    <main class="relative z-10 resume-twin-main">
+        <section id="top" class="pt-28 pb-16 lg:pt-32 lg:pb-20">
+            <div class="container mx-auto px-6">
+                <div id="resume-greeting-banner" class="resume-greeting-banner" hidden>
+                    <div class="resume-greeting-banner-inner">
+                        <span class="resume-greeting-label">Welcome</span>
+                        <p id="resume-greeting-text">Hi, welcome...</p>
+                    </div>
+                </div>
+                <div class="resume-top-grid">
+                    <div class="resume-identity-card animate-on-scroll slide-in-left">
+                        <div class="resume-label-row">
+                            <p class="resume-page-label">[myDIGITAL RESUME]</p>
+                            <span class="resume-availability-badge">
+                                <span class="resume-availability-dot" aria-hidden="true"></span>
+                                Available
+                            </span>
+                        </div>
+                        <h1 class="resume-page-title">Yassine W. MEDJATI</h1>
+                        <div class="resume-contact-lines">
+                            <p>Hamburg, Germany <span class="resume-flag" role="img" aria-label="Germany">🇩🇪</span></p>
+                            <p>+49 (0) 172 257 4807 | +49 (0) 176 7060 8051</p>
+                            <p>
+                                <a href="mailto:hello@wyassine.com">hello@wyassine.com</a>
+                                <span>|</span>
+                                <a href="mailto:yassine.medjati@gmail.com">yassine.medjati@gmail.com</a>
+                            </p>
+                            <p>
+                                <a href="mailto:walid-yassine.medjati@airbus.com">walid-yassine.medjati@airbus.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <aside class="resume-meta-card animate-on-scroll slide-in-right">
+                        <div class="resume-meta-top">
+                            <div class="resume-portrait-frame">
+                                <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="resume-portrait" data-fallback-src="assets/portrait-fallback.svg">
+                            </div>
+                            <div class="resume-meta-stack">
+                                <div class="resume-meta-item">
+                                    <span>Birthday</span>
+                                    <strong>20.05.1994</strong>
+                                </div>
+                                <div class="resume-meta-item">
+                                    <span>Family</span>
+                                    <strong>Married - 1 Child</strong>
+                                </div>
+                                <div class="resume-meta-item">
+                                    <span>Nationality</span>
+                                    <strong>German - Algerian</strong>
+                                </div>
+                                <div class="resume-meta-item">
+                                    <span>Relocation</span>
+                                    <strong>Available</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resume-meta-actions">
+                            <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                                Open PDF
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="resume-section-stack">
+                    <article class="resume-shell animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Skill &amp; Expertise</p>
+                        </div>
+                        <div class="resume-skill-cloud">
+                            <span class="resume-skill-pill">Leadership</span>
+                            <span class="resume-skill-pill">Change Management</span>
+                            <span class="resume-skill-pill">Conflict Management</span>
+                            <span class="resume-skill-pill">Mentoring</span>
+                            <span class="resume-skill-pill">Stakeholder Management</span>
+                            <span class="resume-skill-pill">Cross-functional Leadership</span>
+                            <span class="resume-skill-pill">AI Engineering</span>
+                            <span class="resume-skill-pill">Data Science</span>
+                            <span class="resume-skill-pill">Software Engineering</span>
+                            <span class="resume-skill-pill">Digital Transformation</span>
+                            <span class="resume-skill-pill">Business Improvement</span>
+                            <span class="resume-skill-pill">Strategic Planning</span>
+                            <span class="resume-skill-pill">Facilitation &amp; Communication</span>
+                            <span class="resume-skill-pill">Project Management</span>
+                            <span class="resume-skill-pill">SAFE/Agile</span>
+                            <span class="resume-skill-pill">Graphic Design</span>
+                            <span class="resume-skill-pill">Web Development</span>
+                            <span class="resume-skill-pill">Customer Journey</span>
+                            <span class="resume-skill-pill">Gemini</span>
+                        </div>
+                    </article>
+
+                    <article class="resume-shell resume-profile-shell animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Profile</p>
+                        </div>
+                        <div class="resume-profile-copy">
+                            <p>Customer-centric leader at Airbus with a unique blend of Data Science and Community Engagement expertise. Proven track record in designing digital journeys and building high-impact communication platforms (Airbus Young Voices). Seeking to leverage technical innovation and customer-centric design</p>
+                            <p>I have been living, studying and working in 4 different countries and therefore got a passion for working in multicultural environments.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 lg:py-24">
+            <div class="container mx-auto px-6">
+                <div class="resume-section-heading animate-on-scroll slide-in-bottom">
+                    <p class="section-kicker">Professional Experience</p>
+                    <h2 class="resume-section-title">Professional Experience</h2>
+                </div>
+
+                <div class="resume-timeline resume-timeline--experience">
+                    <article class="resume-entry resume-entry--experience is-current animate-on-scroll slide-in-left">
+                        <div class="resume-date-block resume-date-block--timeline">
+                            <span>March 2022 to NOW</span>
+                        </div>
+                        <div class="resume-entry-marker" aria-hidden="true">
+                            <span class="resume-entry-marker-dot"></span>
+                            <span class="resume-entry-marker-line"></span>
+                        </div>
+                        <div class="resume-shell resume-entry-shell resume-entry-shell--experience">
+                            <div class="resume-entry-header">
+                            <p class="resume-entry-role">Lead E2E Quality, Automation and AI | Quality ENGINEERING Q1A</p>
+                                <div class="resume-entry-context">
+                                    <span class="resume-entry-context-pill">Data Science</span>
+                                    <span class="resume-entry-context-pill">Digitalization</span>
+                                    <span class="resume-entry-context-pill">Quality Engineering</span>
+                                </div>
+                            </div>
+                            <p class="resume-entry-company">AIRBUS OPERATIONS GmbH | HAMBURG, GERMANY <span class="resume-flag" role="img" aria-label="Germany">🇩🇪</span></p>
+                            <div class="resume-entry-divider" aria-hidden="true"></div>
+                            <ul class="resume-bullet-list">
+                                <li>Designing and launching end-to-end <strong>digital journeys and automation pipelines</strong> that optimize the "Quality Engineering" user experience and improve process efficiency.</li>
+                                <li>Leading a global community of <strong>digital ambassadors</strong>, facilitating engagement events and workshops to drive cross-functional collaboration and "Voice of the Customer" feedback loops.</li>
+                                <li>Establishing <strong>5 collaboration platforms</strong> to ensure agility and optimize results delivery for a team of +10 members</li>
+                                <li>Helping the Q1A management board design the <strong>Digitalization Roadmap</strong> with a focus on implementing state-of-the-art tech [Data Analytics, Artificial Intelligence, Process Automation...etc.]</li>
+                                <li>Working with the <strong>Airbus German Board of Management</strong> to improve their social media presence and motivate the future generations to start a career in aerospace</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="resume-entry resume-entry--experience animate-on-scroll slide-in-left">
+                        <div class="resume-date-block resume-date-block--timeline">
+                            <span>August 2019 to March 2022</span>
+                        </div>
+                        <div class="resume-entry-marker" aria-hidden="true">
+                            <span class="resume-entry-marker-dot"></span>
+                            <span class="resume-entry-marker-line"></span>
+                        </div>
+                        <div class="resume-shell resume-entry-shell resume-entry-shell--experience">
+                            <div class="resume-entry-header">
+                                <p class="resume-entry-role">Digital Transformation &amp; Data Science | Airframe Engineering 1A</p>
+                                <div class="resume-entry-context">
+                                    <span class="resume-entry-context-pill">Digital Transformation</span>
+                                    <span class="resume-entry-context-pill">Data Science</span>
+                                    <span class="resume-entry-context-pill">Airframe Engineering</span>
+                                </div>
+                            </div>
+                            <p class="resume-entry-company">AIRBUS OPERATIONS GmbH | HAMBURG, GERMANY <span class="resume-flag" role="img" aria-label="Germany">🇩🇪</span></p>
+                            <div class="resume-entry-divider" aria-hidden="true"></div>
+                            <ul class="resume-bullet-list">
+                                <li>Unleashing the potential of data: being able to take advantage of the enormous possibilities of the data platform <strong>"Skywise"</strong> and to helping to shape its success</li>
+                                <li>Leading <strong>Process Improvement</strong> &amp; product development projects for complex fuselage issues w/ focus on digital technologies</li>
+                                <li>Collaborating to realize product requirements w/ analysis &amp; technical assessment, <strong>proof of concepts</strong>, specification and innovative ideas</li>
+                                <li>Aligning integrated solutions and optimized future work practices as an essential member of an <strong>MFT</strong></li>
+                                <li>Collaborating w/ other Airbus sites and worldwide external partners and suppliers for engineering services and fuselage use cases</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="resume-entry resume-entry--experience animate-on-scroll slide-in-left">
+                        <div class="resume-date-block resume-date-block--timeline">
+                            <span>April 2018 to August 2019</span>
+                        </div>
+                        <div class="resume-entry-marker" aria-hidden="true">
+                            <span class="resume-entry-marker-dot"></span>
+                            <span class="resume-entry-marker-line"></span>
+                        </div>
+                        <div class="resume-shell resume-entry-shell resume-entry-shell--experience">
+                            <div class="resume-entry-header">
+                                <p class="resume-entry-role">Software Engineering Intern - Consultant</p>
+                                <div class="resume-entry-context">
+                                    <span class="resume-entry-context-pill">Software Engineering</span>
+                                    <span class="resume-entry-context-pill">Consultant</span>
+                                    <span class="resume-entry-context-pill">Bern</span>
+                                </div>
+                            </div>
+                            <p class="resume-entry-company">Swisstraffic AG | Bern, Switzerland <span class="resume-flag" role="img" aria-label="Switzerland">🇨🇭</span></p>
+                            <div class="resume-entry-divider" aria-hidden="true"></div>
+                            <ul class="resume-bullet-list">
+                                <li>Implementing, supporting and integrating different <strong>software applications</strong></li>
+                                <li>Gathering, analyzing <strong>client requirements</strong> and monitoring the development cycle to ensure quality and on-time development</li>
+                                <li>Database development and management (<strong>MySQL &amp; PostgreSQL</strong>)</li>
+                                <li>Determining <strong>Operational feasibility</strong> by evaluating analysis, problem definition, requirements, solution development and proposed solutions</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 lg:py-24 bg-gray-900/30">
+            <div class="container mx-auto px-6">
+                <div class="resume-section-heading animate-on-scroll slide-in-bottom">
+                    <p class="section-kicker">Education</p>
+                    <h2 class="resume-section-title">Education</h2>
+                </div>
+
+                <div class="resume-timeline resume-timeline--education">
+                    <article class="resume-entry resume-entry--experience animate-on-scroll slide-in-right">
+                        <div class="resume-date-block resume-date-block--timeline">
+                            <span>October 2017 to October 2018</span>
+                        </div>
+                        <div class="resume-entry-marker" aria-hidden="true">
+                            <span class="resume-entry-marker-dot"></span>
+                            <span class="resume-entry-marker-line"></span>
+                        </div>
+                        <div class="resume-shell resume-entry-shell">
+                            <p class="resume-entry-role">Masters Degree in Computer Sciences - Big Data</p>
+                            <p class="resume-entry-company">ISAE-ENSMA | Poitiers, France <span class="resume-flag" role="img" aria-label="France">🇫🇷</span></p>
+                            <p class="resume-entry-summary">Software development, Embedded systems, real time programming, Human/Machine interaction, Machine learning</p>
+                        </div>
+                    </article>
+
+                    <article class="resume-entry resume-entry--experience animate-on-scroll slide-in-right">
+                        <div class="resume-date-block resume-date-block--timeline">
+                            <span>September 2012 to October 2017</span>
+                        </div>
+                        <div class="resume-entry-marker" aria-hidden="true">
+                            <span class="resume-entry-marker-dot"></span>
+                            <span class="resume-entry-marker-line"></span>
+                        </div>
+                        <div class="resume-shell resume-entry-shell">
+                            <p class="resume-entry-role">Masters Degree in Telecommunications</p>
+                            <p class="resume-entry-company">University of Tlemcen | Tlemcen, Algeria <span class="resume-flag" role="img" aria-label="Algeria">🇩🇿</span></p>
+                            <p class="resume-entry-summary">Master&apos;s degree student in telecommunications with a minor in Networks &amp; Mobile Telecommunications Services.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="credentials" class="py-20 lg:py-24">
+            <div class="container mx-auto px-6">
+                <div class="resume-section-heading animate-on-scroll slide-in-bottom">
+                    <p class="section-kicker">Initiatives, Programs &amp; Credentials</p>
+                    <h2 class="resume-section-title">Initiatives, Programs &amp; Credentials</h2>
+                </div>
+
+                <div class="resume-credentials-grid">
+                    <article class="resume-shell resume-list-shell resume-list-shell--initiatives animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Initiatives &amp; Activities</p>
+                        </div>
+                        <ul class="resume-bullet-list resume-bullet-list--stacked">
+                            <li>Creator and Host of the Airbus Young Voices Podcast, managing end-to-end production, stakeholder interviews, and audience engagement.</li>
+                            <li>VP Member of the Toastmasters Club Hamburg</li>
+                            <li>AI Summit 2021 Speaker (Conversational AI &amp; Chatbots)</li>
+                        </ul>
+                    </article>
+
+                    <article class="resume-shell resume-list-shell resume-list-shell--achievements animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Achievements/Programs</p>
+                        </div>
+                        <ul class="resume-bullet-list resume-bullet-list--stacked">
+                            <li>Nominated for AIRBUS STEP program 2024</li>
+                            <li>Nominated for the NextGen Aviation Leaders 2022 - 2024</li>
+                            <li>Accelerated Developer Track</li>
+                            <li>Future Leader Program 2025</li>
+                        </ul>
+                    </article>
+
+                    <article class="resume-shell resume-list-shell resume-list-shell--certifications animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Certifications</p>
+                        </div>
+                        <ul class="resume-bullet-list resume-bullet-list--stacked resume-bullet-list--dense">
+                            <li>AIRBUS AI Nanodegree</li>
+                            <li>A320 GENERAL FAMILIARIZATION - EI01N - AIRBUS A319/A320/A321 (PW 1100G) - AIRBUS A319/A320/A321 (CFM LEAP-1A)</li>
+                            <li>Certified ScrumMaster (CSM&#174;)</li>
+                            <li>CISCO CCNA</li>
+                        </ul>
+                    </article>
+
+                    <article class="resume-shell resume-list-shell animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Languages</p>
+                        </div>
+                        <div class="resume-inline-list">
+                            <span class="resume-inline-pill">English (Fluent)</span>
+                            <span class="resume-inline-pill">French (Fluent)</span>
+                            <span class="resume-inline-pill">Arabic (Native)</span>
+                            <span class="resume-inline-pill">German (Intermediate B1 fluency)</span>
+                        </div>
+                    </article>
+
+                    <article class="resume-shell resume-list-shell resume-list-shell--interests animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">Interests</p>
+                        </div>
+                        <ul class="resume-bullet-list resume-bullet-list--stacked resume-bullet-list--compact">
+                            <li>Hybrid weight-lifting & long distance running training</li>
+                            <li>Psychology | Self-development books</li>
+                        </ul>
+                    </article>
+
+                    <article class="resume-shell resume-list-shell resume-list-shell--references animate-on-scroll slide-in-bottom">
+                        <div class="resume-section-header">
+                            <p class="section-kicker">References</p>
+                        </div>
+                        <ul class="resume-bullet-list resume-bullet-list--stacked">
+                            <li>
+                                Christelle Olalde (Airbus)
+                                <a href="mailto:christelle.c.olalde@airbus.com" class="resume-inline-link">christelle.c.olalde@airbus.com</a>
+                            </li>
+                            <li>
+                                Andr&eacute; Borgerhoff (Airbus Direct Manager)
+                                <a href="mailto:andre.borgerhoff@airbus.com" class="resume-inline-link">andre.borgerhoff@airbus.com</a>
+                            </li>
+                            <li>
+                                Nicole Dreyer-Langlet (Airbus)
+                                <a href="mailto:nicole.dreyer-langlet@airbus.com" class="resume-inline-link">nicole.dreyer-langlet@airbus.com</a>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <article class="resume-shell resume-strengths-shell animate-on-scroll slide-in-bottom">
+                    <div class="resume-section-header">
+                        <p class="section-kicker">Airbus Leadership Model | Strengths Feedback</p>
+                    </div>
+                    <ul class="resume-bullet-list">
+                        <li>Nurtures internal and external networks</li>
+                        <li>Creates a safe environment to speak up</li>
+                        <li>Acts with courage and experiments with new ways of thinking and working</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 lg:py-24">
+            <div class="container mx-auto px-6 animate-on-scroll slide-in-bottom">
+                <div class="footer-shell">
+                    <div class="footer-shell-hud" aria-hidden="true">
+                        <span>myDIGITAL RESUME // direct page</span>
+                        <span>employer-ready web resume</span>
+                        <span>candidate profile</span>
+                    </div>
+                    <div class="footer-primary">
+                        <div class="footer-intro">
+                            <p class="section-kicker footer-kicker">Direct contact</p>
+                            <h2 class="footer-title">If this profile fits your search, reach out directly.</h2>
+                            <p class="footer-copy">
+                                This page mirrors the PDF resume in web form. For hiring conversations, interview coordination, or reference checks, contact me directly by email or open the original PDF resume.
+                            </p>
+                            <div class="resume-phone-badge">
+                                <a href="tel:+4917670608051" class="resume-phone-call">
+                                    <span class="resume-phone-label">Direct call</span>
+                                    <strong>0176 70608051</strong>
+                                </a>
+                                <button
+                                    type="button"
+                                    class="resume-phone-copy"
+                                    data-copy-text="0176 70608051"
+                                    data-copy-label-default="Copy number"
+                                    data-copy-label-success="Copied"
+                                    aria-label="Copy phone number to clipboard"
+                                >
+                                    Copy number
+                                </button>
+                            </div>
+                            <div class="footer-cta-row">
+                                <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 transition-transform duration-300 text-base text-center">
+                                    Open PDF resume
+                                </a>
+                                <a href="mailto:hello@wyassine.com?subject=Regarding%20a%20role%20opportunity" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-300 font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                                    Email directly
+                                </a>
+                            </div>
+                        </div>
+                        <article class="footer-panel">
+                            <p class="footer-panel-label">Contact details</p>
+                            <div class="footer-link-list">
+                                <a href="mailto:hello@wyassine.com"><span>hello@wyassine.com</span><span class="footer-link-arrow">Email</span></a>
+                                <a href="mailto:yassine.medjati@gmail.com"><span>yassine.medjati@gmail.com</span><span class="footer-link-arrow">Email</span></a>
+                                <a href="mailto:walid-yassine.medjati@airbus.com"><span>walid-yassine.medjati@airbus.com</span><span class="footer-link-arrow">Airbus</span></a>
+                                <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer"><span>Original PDF resume</span><span class="footer-link-arrow">Open</span></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container mx-auto px-6">
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Yassine W. Medjati. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="index.html" class="footer-action-link">Back to home</a>
+                    <button type="button" id="open-cookie-settings" class="footer-action-link">Cookie settings</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

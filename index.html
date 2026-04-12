@@ -3,1365 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yassine W. Medjati | AI & Data Science</title>
-    <meta name="description" content="Personal portfolio of Yassine W. Medjati, an AI & Data Science professional focusing on digital innovation and data-driven aerospace solutions.">
-    <meta name="keywords" content="Yassine Medjati, AI, Data Science, Airbus, Aerospace, Digital Transformation, Generative AI, Portfolio">
+    <title>Yassine W. Medjati | AI Strategy, GenAI & Transformation Advisor</title>
+    <meta name="description" content="Yassine W. Medjati advises leaders in aerospace, government, and regulated industries on AI strategy, GenAI implementation, agentic AI, digital transformation, executive alignment, and leadership enablement.">
+    <meta name="keywords" content="Yassine Medjati, AI Strategy, GenAI, Agentic AI, Strategic Advisor, Aerospace, Government, Digital Transformation, Leadership, Executive Advisory, Regulated Industries">
     <meta name="author" content="Yassine W. Medjati">
-    <link rel="canonical" href="https://your-domain.com/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#030507">
+    <link rel="canonical" href="https://wyassine.com/">
+    <meta property="og:site_name" content="Yassine / Advisory">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wyassine.com/">
+    <meta property="og:title" content="Yassine W. Medjati | AI Strategy, GenAI & Transformation Advisor">
+    <meta property="og:description" content="AI strategy, GenAI implementation, agentic AI, and transformation advisory for aerospace, government, and regulated organizations.">
+    <meta property="og:image" content="https://wyassine.com/assets/yassine-portrait.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:image:alt" content="Portrait of Yassine W. Medjati">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Yassine W. Medjati | AI Strategy, GenAI & Transformation Advisor">
+    <meta name="twitter:description" content="AI strategy, GenAI implementation, agentic AI, and transformation advisory for aerospace, government, and regulated organizations.">
+    <meta name="twitter:image" content="https://wyassine.com/assets/yassine-portrait.png">
 
 
     <!-- Favicon -->
-    <link rel="icon" href="https://iili.io/F8972un.png" type="image/png">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
 
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.css">
     
     <!-- Font Imports -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Syne:wght@700;800&family=Whisper&family=VT323&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-
-    <style>
-        /* Font Family Definitions */
-        :root {
-            --font-heading: 'Syne', sans-serif;
-            --font-body: 'Montserrat', sans-serif;
-            --font-signature: 'Whisper', cursive;
-            --font-tech: 'VT323', monospace;
-        }
-
-
-        /* Base styles */
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            background: #000000;
-            color: #FFFFFF;
-            font-family: var(--font-body);
-            overflow-x: hidden; /* Prevents horizontal scroll */
-        }
-        
-        body:not(.loaded) {
-            cursor: wait;
-        }
-        
-        body.loaded {
-            cursor: none;
-        }
-
-
-        /* Loader Styles */
-        #loader {
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-        }
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        #loader-greeting {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-
-        /* Hide main content until loaded */
-        main {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        main.loaded {
-            opacity: 1;
-        }
-        
-        /* New Loader Animation Styles */
-        .hole {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            width: 50px;
-            height: 50px;
-        }
-
-
-        .hole i {
-            display: block;
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 140px;
-            opacity: 0;
-            animation-name: scale;
-            animation-duration: 3s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-
-        .hole i:nth-child(1) { animation-delay: 0.3s; }
-        .hole i:nth-child(2) { animation-delay: 0.6s; }
-        .hole i:nth-child(3) { animation-delay: 0.9s; }
-        .hole i:nth-child(4) { animation-delay: 1.2s; }
-        .hole i:nth-child(5) { animation-delay: 1.5s; }
-        .hole i:nth-child(6) { animation-delay: 1.8s; }
-        .hole i:nth-child(7) { animation-delay: 2.1s; }
-        .hole i:nth-child(8) { animation-delay: 2.4s; }
-        .hole i:nth-child(9) { animation-delay: 2.7s; }
-        .hole i:nth-child(10) { animation-delay: 3s; }
-
-
-        @keyframes scale {
-            0% {
-                transform: scale(2);
-                opacity: 0;
-                box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                transform: scale(1) translate(0px, -5px);
-                opacity: 1;
-                box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.5);
-            }
-            100% {
-                transform: scale(0.1) translate(0px, 5px);
-                opacity: 0;
-                box-shadow: 0px 10px 20px rgba(255, 255, 255, 0);
-            }
-        }
-
-
-
-
-        /* Custom Scrollbar Styles */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4a4a4a;
-            border-radius: 4px;
-            border: 1px solid #000;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6a6a6a;
-        }
-
-
-        /* OPTIMIZATION: Lenis smooth scroll styles */
-        html.lenis { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
-        .lenis.lenis-stopped { overflow: hidden; }
-
-
-        /* Three.js Canvas for background */
-        #three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-
-        /* Apply custom fonts */
-        h1, h2, h3, h4, h5, h6, .font-heading {
-            font-family: var(--font-heading);
-            font-weight: 700;
-        }
-        .font-signature { font-family: var(--font-signature); }
-
-
-        /* Custom Cursor Animation Styles */
-        .cursor-follower {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            z-index: 9999;
-            opacity: 0;
-            transform: translate(-50%, -50%);
-            will-change: transform, width, height, background-color, box-shadow;
-            transition: opacity 0.3s ease-in-out,
-                        width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                        height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                        background-color 0.3s ease,
-                        box-shadow 0.3s ease;
-        }
-        .cursor-follower.hover {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-
-
-        /* Enhanced animation for elements fading in on scroll */
-        .animate-on-scroll {
-            opacity: 0;
-            will-change: transform, opacity;
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .animate-on-scroll.slide-in-bottom { transform: translateY(50px); }
-        .animate-on-scroll.slide-in-left { transform: translateX(-50px); }
-        .animate-on-scroll.slide-in-right { transform: translateX(50px); }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0) translateX(0);
-        }
-
-
-        /* Text gradient for emphasis with animation */
-        @keyframes animate-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .text-gradient {
-            background: linear-gradient(90deg, #e0e0e0, #ffffff, #e0e0e0);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: animate-gradient 5s ease-in-out infinite;
-        }
-
-
-        /* Project card glow effect */
-        .project-card { will-change: transform; }
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 1rem;
-            border: 1px solid transparent;
-            background: linear-gradient(120deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-        .project-card:hover::before { opacity: 1; }
-
-
-        /* Marquee Animation Styling */
-        @keyframes marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-            display: flex;
-            animation: marquee 40s linear infinite;
-            will-change: transform;
-        }
-        .animate-marquee-fast {
-            display: flex;
-            animation: marquee 20s linear infinite;
-            will-change: transform;
-        }
-        .marquee-fade {
-            -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-        }
-        
-        /* Glitch Effect Styles */
-        .glitch {
-            position: relative;
-            animation: glitch-skew 1.5s infinite linear alternate-reverse;
-            will-change: transform;
-        }
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00c1;
-            animation: glitch-anim-1 3s infinite linear alternate-reverse;
-        }
-        .glitch::after {
-            left: -2px;
-            text-shadow: 2px 2px #ff00c1;
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-skew { 0% { transform: skewX(0deg); } 10% { transform: skewX(0.05deg); } 50% { transform: skewX(-0.02deg); } 100% { transform: skewX(0deg); } }
-        @keyframes glitch-anim-1 { 0% { clip-path: inset(85% 0 5% 0); } 10% { clip-path: inset(45% 0 50% 0); } 20% { clip-path: inset(20% 0 75% 0); } 30% { clip-path: inset(90% 0 8% 0); } 40% { clip-path: inset(60% 0 35% 0); } 50% { clip-path: inset(10% 0 88% 0); } 60% { clip-path: inset(75% 0 20% 0); } 70% { clip-path: inset(55% 0 40% 0); } 80% { clip-path: inset(5% 0 92% 0); } 90% { clip-path: inset(30% 0 65% 0); } 100% { clip-path: inset(85% 0 5% 0); } }
-        @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 85% 0); } 10% { clip-path: inset(65% 0 30% 0); } 20% { clip-path: inset(5% 0 90% 0); } 30% { clip-path: inset(50% 0 45% 0); } 40% { clip-path: inset(80% 0 15% 0); } 50% { clip-path: inset(25% 0 70% 0); } 60% { clip-path: inset(95% 0 2% 0); } 70% { clip-path: inset(40% 0 58% 0); } 80% { clip-path: inset(15% 0 80% 0); } 90% { clip-path: inset(70% 0 28% 0); } 100% { clip-path: inset(10% 0 85% 0); } }
-
-
-        /* Philosophy Item Glow and Dim Effect */
-        .philosophy-item {
-            transition: text-shadow 0.3s ease, opacity 0.3s ease;
-            cursor: none;
-        }
-        .philosophy-list:hover .philosophy-item { opacity: 0.4; }
-        .philosophy-list .philosophy-item:hover {
-            opacity: 1;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 5px rgba(255, 255, 255, 0.8);
-        }
-        
-        /* Image Fade Effects */
-        .philosophy-image-fade {
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
-            mask-image: linear-gradient(to right, transparent 0%, black 30%);
-        }
-        .cover-image-fade {
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-        }
-
-
-        /* Header/Menu Bar Styles */
-        #main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        #main-header.scrolled {
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-        .nav-link.active { color: #FFFFFF; }
-        
-        /* ACCESSIBILITY: Add visible focus states for keyboard navigation */
-        :focus-visible {
-            outline: 2px solid #FFFFFF;
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-        #back-to-top:focus-visible {
-            outline-offset: 2px;
-        }
-
-
-
-
-        /* Mobile Menu Styles */
-        #mobile-menu {
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        #mobile-menu.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-
-        /* Back to Top Button Styles */
-        #back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        #back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        #back-to-top:hover { background-color: rgba(255, 255, 255, 0.2); }
-
-
-        /* Quote Card Carousel Styles */
-        #quotes-container { height: 450px; cursor: none; }
-        .quote-card {
-            background-color: #111111;
-            color: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            width: 280px;
-            height: 420px;
-            transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease;
-            will-change: transform, opacity;
-        }
-        .quote-timer-bar {
-            position: absolute;
-            top: 1rem; left: 1rem; right: 1rem;
-            height: 4px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-        }
-        .quote-timer-progress {
-            height: 100%;
-            background-color: white;
-            border-radius: 2px;
-            width: 0%;
-        }
-
-
-        /* Restored original button and other custom component styles */
-        .call-btn .phone-number {
-            display: inline-block;
-            max-width: 0;
-            overflow: hidden;
-            transition: max-width 0.5s ease-in-out;
-            vertical-align: middle;
-        }
-        .call-btn:hover .phone-number { max-width: 200px; }
-        .call-btn .call-text { vertical-align: middle; }
-
-
-        .available-pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.375rem 0.75rem;
-            background-color: #000000;
-            color: white;
-            border-radius: 9999px;
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            border: 1px solid #374151;
-        }
-        .available-pill:hover {
-            background-color: white;
-            color: black;
-        }
-        .available-pill .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #4ade80;
-            border-radius: 50%;
-            margin-left: 0.5rem;
-            box-shadow: 0 0 6px #4ade80;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .available-pill:hover .dot {
-            background-color: #22c55e;
-            box-shadow: 0 0 10px #22c55e;
-        }
-
-
-        .new-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: linear-gradient(45deg, #ff00c1, #ff6b00);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            font-family: var(--font-body);
-            animation: pulse-badge 2s infinite;
-            box-shadow: 0 0 15px rgba(255, 0, 193, 0.5);
-            transform: rotate(15deg);
-        }
-        @keyframes pulse-badge {
-            0% { transform: scale(1) rotate(15deg); box-shadow: 0 0 15px rgba(255, 0, 193, 0.5); }
-            50% { transform: scale(1.05) rotate(15deg); box-shadow: 0 0 25px rgba(255, 0, 193, 0.8); }
-            100% { transform: scale(1) rotate(15deg); box-shadow: 0 0 15px rgba(255, 0, 193, 0.5); }
-        }
-
-
-        .value-pill {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .value-pill.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        .bio-text .highlight-text {
-            transition: text-shadow 0.3s ease, color 0.3s ease;
-        }
-        .bio-text:hover .highlight-text {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.9),
-                         0 0 25px rgba(255, 82, 82, 0.9),
-                         0 0 50px rgba(255, 82, 82, 0.6);
-        }
-
-
-        #animated-greeting {
-            transition: opacity 0.2s ease-in-out;
-        }
-        .greeting-hidden {
-            opacity: 0;
-        }
-
-
-        .cover-clock {
-            font-family: var(--font-tech);
-            font-size: 1rem;
-            color: #9CA3AF; /* gray-400 */
-        }
-
-
-        /* Footer clock animation */
-        @keyframes pulse-clock {
-            0%, 100% { opacity: 1; text-shadow: 0 0 5px #00FF41; }
-            50% { opacity: 0.7; text-shadow: 0 0 10px #00FF41; }
-        }
-        #footer-clock {
-            animation: pulse-clock 2s infinite ease-in-out;
-            color: #00FF41; /* Matrix Green */
-            text-shadow: 0 0 5px #00FF41;
-        }
-
-
-        /* Keyboard key style */
-        kbd {
-            font-family: var(--font-body);
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.1rem 0.4rem;
-            border-radius: 0.25rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.7rem;
-        }
-        
-        /* NEW Music Pill Styles */
-        .music-pill {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background-color: #282828; /* Very dark grey */
-            border-radius: 50px;
-            padding: 8px 20px; /* Adjusted padding for a tighter look */
-            width: 100%;
-            max-width: 280px; /* Shortened the pill's width */
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-            overflow: hidden; /* Ensures nothing spills out of the rounded corners */
-            font-family: 'Inter', sans-serif;
-        }
-        .audio-visualizer {
-            display: flex;
-            align-items: flex-end;
-            gap: 3px;
-            height: 32px; /* Increased height for the visualizer area */
-        }
-        .visualizer-bar {
-            width: 5px; /* Made bars thicker */
-            height: 5px; /* Increased base height */
-            background-color: #888888; /* Grey color for the bars */
-            border-radius: 2px;
-            animation: bar-animation 1.2s infinite ease-in-out;
-        }
-        @keyframes bar-animation {
-            0%, 100% { transform: scaleY(0.2); }
-            20% { transform: scaleY(1.0); }
-            40% { transform: scaleY(0.4); }
-            60% { transform: scaleY(0.8); }
-            80% { transform: scaleY(0.6); }
-        }
-        .visualizer-bar:nth-child(2) {
-            animation-delay: -0.2s;
-        }
-        .visualizer-bar:nth-child(3) {
-            animation-delay: -0.4s;
-        }
-        .song-info {
-            flex-grow: 1;
-            overflow: hidden;
-            min-width: 0; 
-        }
-        .scrolling-text-container {
-            width: 100%;
-            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
-        .song-name {
-            color: rgba(255, 255, 255, 0.9); /* Faded white */
-            font-weight: 500;
-            font-size: 16px;
-            white-space: nowrap;
-            display: inline-block; 
-            animation: scroll-text 15s linear infinite; /* Increased duration for longer text */
-        }
-        @keyframes scroll-text {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-50%);
-            }
-        }
-        .artist-album {
-            color: rgba(255, 255, 255, 0.6); /* More faded white */
-            font-size: 13px;
-            margin-top: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis; 
-        }
-
-
-        /* NEW Coming Soon Badge Style */
-        .coming-soon-badge {
-            position: absolute;
-            top: -8px;
-            right: -20px;
-            background: linear-gradient(45deg, #ff00c1, #ff6b00);
-            color: white;
-            padding: 2px 7px;
-            border-radius: 9999px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            font-family: var(--font-body);
-            line-height: 1.1;
-            transform: rotate(12deg);
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(255, 0, 193, 0.6);
-        }
-
-
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js" defer></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js" defer></script>
-    
-    <!-- Cal.com embed code -->
-    <script type="text/javascript">
-      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "15min", {origin:"https://app.cal.com"});
-      Cal.ns["15min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
-    </script>
-
-
     <!-- Main application script -->
-    <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        /**
-         * Main application object to encapsulate all website functionality.
-         */
-        const App = {
-            // Properties
-            lenis: null,
-            scene: null,
-            camera: null,
-            renderer: null,
-            particles: null,
-            threeMouse: new THREE.Vector2(),
-            cursorMouse: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-            targetCursorMouse: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-            animationFrameId: null,
-            threeClock: new THREE.Clock(),
-
-
-            // Cached DOM Elements
-            elements: {
-                loader: document.getElementById('loader'),
-                mainContent: document.querySelector('main'),
-                cursorFollower: document.querySelector('.cursor-follower'),
-                threeCanvas: document.getElementById('three-canvas'),
-                header: document.getElementById('main-header'),
-                backToTopButton: document.getElementById('back-to-top'),
-                progressBar: document.getElementById('progress-bar'),
-                mobileMenu: document.getElementById('mobile-menu'),
-                openMenuBtn: document.getElementById('open-menu-btn'),
-                closeMenuBtn: document.getElementById('close-menu-btn'),
-                quotesContainer: document.getElementById('quotes-container'),
-            },
-
-
-            /**
-             * Main initialization function that orchestrates the setup of all features.
-             */
-            init() {
-                this.initLoader();
-                this.initSmoothScroll();
-                this.initThreeJS();
-                this.initCustomCursor();
-                this.initScrollAnimations();
-                this.initVanillaTilt();
-                this.initClocks();
-                this.initSoundEffects();
-                this.initGreetingAnimation();
-                this.initQuotesCarousel();
-                this.initHeader();
-                this.initBackToTopButton();
-                this.initMagneticLinks();
-                this.initVisitorCounter();
-                this.initMobileMenu();
-                this.initNavLinksSmoothScroll();
-                this.initKeyboardShortcuts();
-                this.initMusicPill();
-
-
-                this.addEventListeners();
-                this.startAnimation();
-            },
-            
-            /**
-             * Initializes the pre-loader animation and content reveal logic.
-             * Optimization: Reduced minimum loader time for a faster perceived load.
-             */
-            initLoader() {
-                const loaderGreeting = document.getElementById('loader-greeting');
-                const loaderTextContainer = document.getElementById('loader-text-container');
-                if (!loaderGreeting || !this.elements.loader || !this.elements.mainContent || !loaderTextContainer) return;
-
-
-                let greetingInterval;
-
-
-                setTimeout(() => {
-                    loaderTextContainer.style.opacity = '1';
-                    const greetings = ["Hello!", "Hola!", "Salut!", "Hallo!", "Ciao!", "Olá!", "Привет!", "你好!", "こんにちは!", "안녕하세요!", "السلام عليكم!", "שָׁלוֹם!", "नमस्ते!", "Salve!", "Γειά σου!", "Merhaba!"];
-                    let greetingIndex = 0;
-                    greetingInterval = setInterval(() => {
-                        loaderGreeting.style.opacity = 0;
-                        setTimeout(() => {
-                            greetingIndex = (greetingIndex + 1) % greetings.length;
-                            loaderGreeting.textContent = greetings[greetingIndex];
-                            loaderGreeting.style.opacity = 1;
-                        }, 300);
-                    }, 1200);
-                }, 1500);
-
-
-                const minLoaderTime = 3000; // OPTIMIZED: Reduced from 5000ms
-                let minTimePassed = false;
-                let isWindowLoaded = false;
-
-
-                const hideLoader = () => {
-                    if (!this.elements.loader.classList.contains('hidden')) {
-                        if(greetingInterval) clearInterval(greetingInterval);
-                        document.body.classList.add('loaded');
-                        this.elements.loader.classList.add('hidden');
-                        this.elements.mainContent.classList.add('loaded');
-                        setTimeout(() => {
-                            if (this.elements.loader) this.elements.loader.style.display = 'none';
-                        }, 600);
-                    }
-                };
-
-
-                setTimeout(() => {
-                    minTimePassed = true;
-                    if (isWindowLoaded) hideLoader();
-                }, minLoaderTime);
-
-
-                window.addEventListener('load', () => {
-                    isWindowLoaded = true;
-                    if (minTimePassed) hideLoader();
-                });
-            },
-
-
-            /**
-             * Sets up global event listeners for interactions and window events.
-             */
-            addEventListeners() {
-                window.addEventListener('resize', this.onWindowResize.bind(this), false);
-                document.addEventListener('visibilitychange', this.onVisibilityChange.bind(this));
-                
-                // Add hover effect for custom cursor on interactive elements
-                document.querySelectorAll('a, button, .project-card, [data-tilt], .nav-link, #back-to-top, .value-pill').forEach(el => {
-                    el.addEventListener('mouseover', () => this.elements.cursorFollower?.classList.add('hover'));
-                    el.addEventListener('mouseleave', () => this.elements.cursorFollower?.classList.remove('hover'));
-                });
-            },
-
-
-            /**
-             * Handles smooth scrolling for internal navigation links.
-             */
-            initNavLinksSmoothScroll() {
-                document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const targetId = anchor.getAttribute('href');
-                        const targetElement = document.querySelector(targetId);
-
-
-                        if (targetElement) {
-                            if (this.lenis) {
-                                this.lenis.scrollTo(targetElement);
-                            } else {
-                                window.scrollTo({
-                                    top: targetElement.offsetTop,
-                                    behavior: 'smooth'
-                                });
-                            }
-                        }
-                    });
-                });
-            },
-
-
-            /**
-             * Initializes the scrolling text animation for the music pill component.
-             */
-            initMusicPill() {
-                const songNameEl = document.querySelector('.song-name');
-                if (songNameEl) {
-                    const originalText = songNameEl.textContent.trim();
-                    const separator = ' \u00A0\u00A0\u00A0\u00A0 '; // Non-breaking spaces for consistent spacing
-                    const repeatedText = (originalText + separator).repeat(4);
-                    songNameEl.textContent = repeatedText + repeatedText; // Duplicate for seamless loop
-                }
-            },
-            
-            /**
-             * Sets up keyboard shortcuts for navigation and booking.
-             */
-            initKeyboardShortcuts() {
-                const bookingLink = document.querySelector('[data-cal-link]');
-                const sections = Array.from(document.querySelectorAll('main section[id]'));
-                let isScrolling = false;
-                let scrollTimeout;
-
-
-                window.addEventListener('keydown', (e) => {
-                    // Ignore shortcuts if user is typing in an input field
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
-
-                    // Shortcut 'B' for booking
-                    if (e.key.toLowerCase() === 'b') {
-                        e.preventDefault();
-                        bookingLink?.click();
-                    }
-
-
-                    // Arrow key navigation between sections
-                    if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isScrolling) {
-                        e.preventDefault();
-                        const currentScroll = window.scrollY;
-                        let nextSectionIndex = -1;
-
-
-                        if (e.key === 'ArrowDown') {
-                            for (let i = 0; i < sections.length; i++) {
-                                if (sections[i].offsetTop > currentScroll + 50) {
-                                    nextSectionIndex = i;
-                                    break;
-                                }
-                            }
-                        } else { // ArrowUp
-                            for (let i = sections.length - 1; i >= 0; i--) {
-                                if (sections[i].offsetTop < currentScroll - 50) {
-                                    nextSectionIndex = i;
-                                    break;
-                                }
-                            }
-                        }
-
-
-                        if (nextSectionIndex !== -1) {
-                            isScrolling = true;
-                            const targetSection = sections[nextSectionIndex];
-                            
-                            if (this.lenis) this.lenis.scrollTo(targetSection);
-                            else window.scrollTo({ top: targetSection.offsetTop, behavior: 'smooth' });
-
-
-                            clearTimeout(scrollTimeout);
-                            scrollTimeout = setTimeout(() => { isScrolling = false; }, 800);
-                        }
-                    }
-                });
-            },
-
-
-            /**
-             * Initializes Lenis for a smooth scrolling experience.
-             */
-            initSmoothScroll() {
-                // Lenis can cause issues in iframes, so we disable it there.
-                if (window.self !== window.top) {
-                    console.log("Running in an iframe, Lenis smooth scroll disabled for compatibility.");
-                    return;
-                }
-                if (typeof Lenis !== 'undefined') {
-                    this.lenis = new Lenis();
-                }
-            },
-
-
-            /**
-             * Initializes the header's scroll-based style changes.
-             */
-            initHeader() {
-                if (!this.elements.header) return;
-                window.addEventListener('scroll', () => {
-                    this.elements.header.classList.toggle('scrolled', window.scrollY > 50);
-                }, { passive: true });
-            },
-
-
-            /**
-             * Initializes the mobile navigation menu toggle functionality.
-             */
-            initMobileMenu() {
-                if (!this.elements.openMenuBtn || !this.elements.closeMenuBtn || !this.elements.mobileMenu) return;
-                
-                this.elements.openMenuBtn.addEventListener('click', () => {
-                    this.elements.mobileMenu.classList.remove('hidden');
-                });
-
-
-                this.elements.closeMenuBtn.addEventListener('click', () => {
-                    this.elements.mobileMenu.classList.add('hidden');
-                });
-
-
-                // Close menu when a link is clicked
-                this.elements.mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        this.elements.mobileMenu.classList.add('hidden');
-                    });
-                });
-            },
-
-
-            /**
-             * Initializes the "Back to Top" button visibility and functionality.
-             */
-            initBackToTopButton() {
-                if (!this.elements.backToTopButton) return;
-                window.addEventListener('scroll', () => {
-                    this.elements.backToTopButton.classList.toggle('visible', window.scrollY > 300);
-                }, { passive: true });
-                this.elements.backToTopButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (this.lenis) this.lenis.scrollTo(0);
-                    else window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            },
-
-
-            /**
-             * Adds a subtle magnetic effect to navigation links on mouse hover.
-             */
-            initMagneticLinks() {
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('mousemove', e => {
-                        const rect = link.getBoundingClientRect();
-                        const x = (e.clientX - rect.left - rect.width / 2) * 0.15;
-                        const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-                        link.style.transform = `translate(${x}px, ${y}px)`;
-                    });
-                    link.addEventListener('mouseleave', () => {
-                        link.style.transform = 'translate(0, 0)';
-                    });
-                });
-            },
-
-
-            /**
-             * Initializes the custom cursor follower and its movement.
-             */
-            initCustomCursor() {
-                if (!this.elements.cursorFollower) return;
-                window.addEventListener('mousemove', (e) => {
-                    this.targetCursorMouse.x = e.clientX;
-                    this.targetCursorMouse.y = e.clientY;
-                    this.threeMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-                    this.threeMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-                });
-                document.addEventListener('mouseenter', () => {
-                    if (this.elements.cursorFollower) this.elements.cursorFollower.style.opacity = '1';
-                });
-                document.addEventListener('mouseleave', () => {
-                    if (this.elements.cursorFollower) this.elements.cursorFollower.style.opacity = '0';
-                });
-            },
-
-
-            /**
-             * Initializes Intersection Observer for fade-in animations on scroll.
-             */
-            initScrollAnimations() {
-                const scrollElements = document.querySelectorAll('.animate-on-scroll');
-                if (scrollElements.length === 0) return;
-                const scrollObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            // Stagger animation for value pills
-                            if (entry.target.id === 'values-pills-container') {
-                                entry.target.querySelectorAll('.value-pill').forEach((pill, index) => {
-                                    setTimeout(() => pill.classList.add('is-visible'), index * 100);
-                                });
-                            }
-                            scrollObserver.unobserve(entry.target);
-                        }
-                    });
-                }, { root: null, threshold: 0.2 });
-                scrollElements.forEach(el => scrollObserver.observe(el));
-            },
-
-
-            /**
-             * Initializes Tone.js for subtle UI sound effects.
-             */
-            initSoundEffects() {
-                if (typeof Tone === 'undefined') return;
-                const synth = new Tone.PolySynth(Tone.Synth, {
-                    oscillator: { type: 'triangle' },
-                    envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.1 }
-                }).toDestination();
-                const playSound = (note) => {
-                    if (Tone.context.state !== 'running') Tone.start();
-                    synth.triggerAttackRelease(note, "16n");
-                };
-                document.getElementById('conversation-btn')?.addEventListener('click', () => playSound("C4"));
-                document.getElementById('cv-btn')?.addEventListener('click', () => playSound("G4"));
-            },
-
-
-            /**
-             * Initializes the cycling greeting animation in the about section.
-             */
-            initGreetingAnimation() {
-                const el = document.getElementById('animated-greeting');
-                if (!el) return;
-                const greetings = ["Hello!", "Hola!", "Salut!", "Hallo!", "Ciao!", "Olá!", "Привет!", "你好!", "こんにちは!", "안녕하세요!", "السلام عليكم!", "שָׁלוֹם!", "नमस्ते!", "Salve!", "Γειά σου!", "Merhaba!"];
-                let slowIndex = 0;
-                const changeText = () => {
-                    el.classList.add('greeting-hidden');
-                    setTimeout(() => {
-                        el.textContent = greetings[slowIndex % greetings.length];
-                        el.classList.remove('greeting-hidden');
-                        slowIndex++;
-                    }, 200);
-                };
-                let fastIndex = 0;
-                const fastAnimation = setInterval(() => {
-                    el.textContent = greetings[fastIndex++ % greetings.length];
-                }, 75);
-                setTimeout(() => {
-                    clearInterval(fastAnimation);
-                    changeText();
-                    setInterval(changeText, 2500);
-                }, 2000);
-            },
-
-
-            /**
-             * Initializes the interactive quotes carousel.
-             * ENHANCEMENT: Renamed from initStoryCards for clarity.
-             */
-            initQuotesCarousel() {
-                const container = this.elements.quotesContainer;
-                if (!container) return;
-                const cards = Array.from(container.querySelectorAll('.quote-card'));
-                if (cards.length === 0) return;
-
-
-                let currentIndex = 0;
-                let quoteInterval;
-                const DURATION = 5000;
-
-
-                const updateCards = () => {
-                    cards.forEach((card, i) => {
-                        const relativeIndex = (i - currentIndex + cards.length) % cards.length;
-                        const displayIndex = relativeIndex > cards.length / 2 ? relativeIndex - cards.length : relativeIndex;
-                        
-                        const translateX = displayIndex * 60;
-                        const rotateY = displayIndex * -10;
-                        const scale = 1 - Math.abs(displayIndex) * 0.1;
-                        const zIndex = cards.length - Math.abs(displayIndex);
-                        const opacity = Math.abs(displayIndex) > 1 ? 0 : 1;
-
-
-                        card.style.transform = `translateX(${translateX}%) rotateY(${rotateY}deg) scale(${scale})`;
-                        card.style.zIndex = zIndex;
-                        card.style.opacity = opacity;
-
-
-                        const progressBar = card.querySelector('.quote-timer-progress');
-                        if (progressBar) {
-                            progressBar.style.transition = 'none';
-                            progressBar.style.width = '0%';
-                            if (i === currentIndex) {
-                                void progressBar.offsetWidth; // Force reflow
-                                progressBar.style.transition = `width ${DURATION}ms linear`;
-                                progressBar.style.width = '100%';
-                            }
-                        }
-                    });
-                };
-
-
-                const startTimer = () => {
-                    clearInterval(quoteInterval);
-                    quoteInterval = setInterval(() => {
-                        currentIndex = (currentIndex + 1) % cards.length;
-                        updateCards();
-                    }, DURATION);
-                };
-
-
-                container.addEventListener('click', (e) => {
-                    const rect = container.getBoundingClientRect();
-                    currentIndex = (e.clientX - rect.left < rect.width / 2)
-                        ? (currentIndex - 1 + cards.length) % cards.length
-                        : (currentIndex + 1) % cards.length;
-                    updateCards();
-                    startTimer();
-                });
-
-
-                updateCards();
-                startTimer();
-            },
-
-
-            /**
-             * Initializes Vanilla-tilt.js for 3D tilting effects on cards.
-             */
-            initVanillaTilt() {
-                if (typeof VanillaTilt !== 'undefined') {
-                    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
-                }
-            },
-
-
-            /**
-             * Initializes a simple, non-persistent visitor counter.
-             */
-            initVisitorCounter() {
-                const counterElement = document.getElementById('visitor-counter');
-                if (!counterElement) return;
-                let count = parseInt(counterElement.textContent.replace(/,/g, '')) || 6324;
-                count += Math.floor(Math.random() * 10);
-                counterElement.textContent = count.toLocaleString();
-            },
-
-
-            /**
-             * Initializes and updates the digital clocks on the page.
-             */
-            initClocks() {
-                const footerClock = document.getElementById('footer-clock');
-                const coverClock = document.getElementById('cover-clock');
-                const updateClocks = () => {
-                    const now = new Date();
-                    if (footerClock) {
-                        const hours = String(now.getHours()).padStart(2, '0');
-                        const minutes = String(now.getMinutes()).padStart(2, '0');
-                        const day = String(now.getDate()).padStart(2, '0');
-                        const month = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
-                        footerClock.textContent = `${day} ${month} | ${hours}:${minutes}`;
-                    }
-                    if (coverClock) {
-                        const hours = String(now.getHours()).padStart(2, '0');
-                        const minutes = String(now.getMinutes()).padStart(2, '0');
-                        const seconds = String(now.getSeconds()).padStart(2, '0');
-                        coverClock.textContent = `${hours}:${minutes}:${seconds}`;
-                    }
-                };
-                setInterval(updateClocks, 1000);
-                updateClocks();
-            },
-
-
-            /**
-             * Initializes the Three.js particle background animation.
-             */
-            initThreeJS() {
-                if (typeof THREE === 'undefined' || !this.elements.threeCanvas) return;
-                try {
-                    this.scene = new THREE.Scene();
-                    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                    this.camera.position.z = 50;
-                    
-                    this.renderer = new THREE.WebGLRenderer({ canvas: this.elements.threeCanvas, alpha: true, antialias: false });
-                    this.renderer.setSize(window.innerWidth, window.innerHeight);
-                    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-
-                    const particleCount = 2500;
-                    const positions = new Float32Array(particleCount * 3);
-                    for (let i = 0; i < particleCount * 3; i++) {
-                        positions[i] = (Math.random() - 0.5) * 100;
-                    }
-                    const particleGeometry = new THREE.BufferGeometry();
-                    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-                    const particleMaterial = new THREE.PointsMaterial({ color: 0xaaaaaa, size: 0.05, transparent: true, opacity: 0.6 });
-                    this.particles = new THREE.Points(particleGeometry, particleMaterial);
-                    this.scene.add(this.particles);
-
-
-                } catch (error) {
-                    console.error("Three.js initialization failed:", error);
-                    if (this.elements.threeCanvas) this.elements.threeCanvas.style.display = 'none';
-                }
-            },
-
-
-            // --- Animation Loop & Update Methods ---
-
-
-            /**
-             * Handles window resize events to keep the canvas and camera updated.
-             */
-            onWindowResize() {
-                if (!this.camera || !this.renderer) return;
-                this.camera.aspect = window.innerWidth / window.innerHeight;
-                this.camera.updateProjectionMatrix();
-                this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            },
-            
-            /**
-             * Pauses and resumes the animation loop when the tab visibility changes.
-             */
-            onVisibilityChange() {
-                if (document.hidden) this.stopAnimation(); else this.startAnimation();
-            },
-
-
-            /**
-             * Updates the active state of navigation links based on scroll position.
-             */
-            updateActiveLink() {
-                const navLinks = document.querySelectorAll('nav a.nav-link');
-                let currentSectionId = '';
-                document.querySelectorAll('main section[id]').forEach(section => {
-                    if (section.offsetTop <= window.scrollY + window.innerHeight / 2) {
-                        currentSectionId = section.id;
-                    }
-                });
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === `#${currentSectionId}`);
-                });
-            },
-
-
-            /**
-             * Updates the width of the scroll progress bar in the header.
-             */
-            updateProgressBar() {
-                if (!this.elements.progressBar) return;
-                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolledPercentage = (window.scrollY / scrollableHeight) * 100;
-                this.elements.progressBar.style.width = `${scrolledPercentage}%`;
-            },
-
-
-            /**
-             * The main animation loop, powered by requestAnimationFrame.
-             */
-            animate() {
-                this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
-
-
-                // Update smooth scroll
-                if (this.lenis) this.lenis.raf(performance.now());
-
-
-                // Update custom cursor position
-                if (this.elements.cursorFollower) {
-                    this.cursorMouse.x += (this.targetCursorMouse.x - this.cursorMouse.x) * 0.15;
-                    this.cursorMouse.y += (this.targetCursorMouse.y - this.cursorMouse.y) * 0.15;
-                    this.elements.cursorFollower.style.transform = `translate(${this.cursorMouse.x}px, ${this.cursorMouse.y}px) translate(-50%, -50%)`;
-                }
-                
-                // Update UI elements
-                this.updateActiveLink();
-                this.updateProgressBar();
-
-
-                // Update Three.js scene
-                if (this.scene && this.renderer) {
-                    const elapsedTime = this.threeClock.getElapsedTime();
-                    if (this.particles) {
-                        this.particles.rotation.y = elapsedTime * 0.01;
-                        this.particles.rotation.x = elapsedTime * 0.005;
-                    }
-                    this.camera.position.x += (this.threeMouse.x * 2 - this.camera.position.x) * 0.02;
-                    this.camera.position.y += (-this.threeMouse.y * 2 - this.camera.position.y) * 0.02;
-                    this.camera.lookAt(this.scene.position);
-                    this.renderer.render(this.scene, this.camera);
-                }
-            },
-
-
-            /** Starts the animation loop if it's not already running. */
-            startAnimation() {
-                if (!this.animationFrameId) this.animate();
-            },
-
-
-            /** Stops the animation loop. */
-            stopAnimation() {
-                if (this.animationFrameId) {
-                    cancelAnimationFrame(this.animationFrameId);
-                    this.animationFrameId = null;
-                }
-            }
-        };
-
-
-        // Let's go!
-        App.init();
-    });
-    </script>
+    <script src="script.js" defer></script>
 </head>
-<body class="antialiased">
+<body class="antialiased site-shell">
 
 
     <!-- Pre-loader -->
@@ -1371,31 +54,40 @@
         </div>
         <div id="loader-text-container" class="text-center opacity-0 transition-opacity duration-500">
              <h1 id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</h1>
-             <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">I'm Yassine, nice to meet you!</p>
+             <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">AI strategy, transformation and leadership.</p>
         </div>
     </div>
 
 
     <!-- Shortcut Hint -->
     <div id="shortcut-hint" class="fixed top-6 left-6 z-[1001] text-xs text-gray-400 bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm transition-opacity duration-300">
-        Press <kbd>B</kbd> to book a call | Use <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to navigate
+        Press <kbd>B</kbd> to book a strategy call | Use <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to navigate
     </div>
 
 
     <!-- Mobile menu button and panel -->
     <header id="main-header" class="py-4">
-        <div class="container mx-auto px-6 flex justify-end items-center">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#top" class="brand-link">
+                <span class="desktop-brand">Yassine / Advisory</span>
+                <span class="mobile-brand">
+                    <span class="mobile-brand-avatar-frame">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-brand-avatar" data-fallback-src="assets/portrait-fallback.svg">
+                    </span>
+                    <span class="mobile-brand-copy">
+                        <span class="mobile-brand-name">Yassine Medjati</span>
+                        <span class="mobile-brand-role">AI Strategy Advisor</span>
+                    </span>
+                </span>
+            </a>
             
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#hero" class="nav-link text-gray-300 hover:text-white">About</a>
-                <a href="#work" class="nav-link text-gray-300 hover:text-white">Work</a>
-                <a href="#values" class="nav-link text-gray-300 hover:text-white">Values</a>
-                <a href="#blog" class="nav-link text-gray-300 hover:text-white">Blog</a>
-                <div class="relative">
-                    <a href="#podcast" class="nav-link text-gray-300 hover:text-white">Podcast</a>
-                    <span class="coming-soon-badge">soon</span>
-                </div>
+                <a href="#advisory" class="nav-link text-gray-300 hover:text-white">Advisory</a>
+                <a href="#services" class="nav-link text-gray-300 hover:text-white">Services</a>
+                <a href="#sectors" class="nav-link text-gray-300 hover:text-white">Sectors</a>
+                <a href="#proof" class="nav-link text-gray-300 hover:text-white">Proof</a>
+                <a href="#insights" class="nav-link text-gray-300 hover:text-white">Insights</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
             </nav>
 
@@ -1413,27 +105,52 @@
 
     <!-- Mobile menu panel -->
     <div id="mobile-menu" class="hidden fixed inset-0 bg-black/90 backdrop-blur-lg z-40 flex flex-col items-center justify-center">
-        <button id="close-menu-btn" class="absolute top-8 right-6" aria-label="Close menu">
-             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-        <nav class="flex flex-col items-center space-y-8 text-2xl font-heading">
-            <a href="#hero" class="nav-link text-gray-300 hover:text-white">About</a>
-            <a href="#work" class="nav-link text-gray-300 hover:text-white">Work</a>
-            <a href="#values" class="nav-link text-gray-300 hover:text-white">Values</a>
-            <a href="#blog" class="nav-link text-gray-300 hover:text-white">Blog</a>
-            <div class="relative">
-                <a href="#podcast" class="nav-link text-gray-300 hover:text-white">Podcast</a>
-                <span class="coming-soon-badge" style="font-size: 0.8rem; top: -10px; right: -25px;">soon</span>
+        <div class="mobile-menu-panel w-full max-w-sm">
+            <div class="mobile-menu-handle" aria-hidden="true"></div>
+            <div class="mobile-menu-top">
+                <div class="mobile-menu-profile">
+                    <span class="mobile-menu-profile-avatar-frame">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-menu-profile-avatar" data-fallback-src="assets/portrait-fallback.svg">
+                    </span>
+                    <span class="mobile-menu-profile-copy">
+                        <span class="mobile-menu-label">Yassine Medjati</span>
+                        <span class="mobile-menu-subtitle">AI Strategy Advisory</span>
+                    </span>
+                </div>
+                <button id="close-menu-btn" aria-label="Close menu">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
-        </nav>
+            <p class="mobile-menu-intro">AI strategy, aerospace, and leadership advisory for organizations where trust, execution, and decision quality matter.</p>
+            <div class="mobile-menu-group">
+                <p class="mobile-menu-group-label">Navigate</p>
+                <nav class="mobile-menu-nav flex flex-col text-2xl font-heading">
+                    <a href="#advisory" class="nav-link text-gray-300 hover:text-white">Advisory</a>
+                    <a href="#services" class="nav-link text-gray-300 hover:text-white">Services</a>
+                    <a href="#sectors" class="nav-link text-gray-300 hover:text-white">Sectors</a>
+                    <a href="#proof" class="nav-link text-gray-300 hover:text-white">Proof</a>
+                    <a href="#insights" class="nav-link text-gray-300 hover:text-white">Insights</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+                </nav>
+            </div>
+            <div class="mobile-menu-actions">
+                <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 transition-transform duration-300 text-base text-center"
+                   data-cal-link="yassine-m-zowgc4/15min"
+                   data-cal-namespace="15min"
+                   data-cal-config='{"layout":"month_view","theme":"dark"}'>
+                    Book strategy call
+                </a>
+                <a href="mailto:hello@wyassine.com" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-300 font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                    Email directly
+                </a>
+            </div>
+        </div>
     </div>
 
 
     <canvas id="three-canvas"></canvas>
-    <div class="cursor-follower"></div>
 
 
     <a href="#top" id="back-to-top" aria-label="Back to top">
@@ -1441,6 +158,36 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
         </svg>
     </a>
+
+    <nav class="mobile-action-dock" aria-label="Primary mobile navigation">
+        <a href="#top" class="nav-link mobile-dock-link">
+            <span class="mobile-dock-icon-wrap">
+                <svg class="mobile-dock-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4.75 10.5 12 4.75l7.25 5.75v8a1.5 1.5 0 0 1-1.5 1.5h-11.5a1.5 1.5 0 0 1-1.5-1.5v-8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    <path d="M9.5 20v-5.25c0-.414.336-.75.75-.75h3.5c.414 0 .75.336.75.75V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span class="mobile-dock-label">Home</span>
+        </a>
+        <a href="#proof" class="nav-link mobile-dock-link">
+            <span class="mobile-dock-icon-wrap">
+                <svg class="mobile-dock-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3.75 18.5 6v5.65c0 3.74-2.24 7.12-5.68 8.59a1.95 1.95 0 0 1-1.54 0C7.84 18.77 5.6 15.39 5.6 11.65V6L12 3.75Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    <path d="m9.3 11.95 1.8 1.8 3.6-3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span class="mobile-dock-label">Proof</span>
+        </a>
+        <a href="#contact" class="nav-link mobile-dock-link">
+            <span class="mobile-dock-icon-wrap">
+                <svg class="mobile-dock-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 6.75h10A2.25 2.25 0 0 1 19.25 9v6A2.25 2.25 0 0 1 17 17.25H9.2l-3.45 2.1c-.5.304-1.125-.056-1.125-.644V9A2.25 2.25 0 0 1 7 6.75Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    <path d="M8.75 11.5h6.5M8.75 14h4.25" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span class="mobile-dock-label">Contact</span>
+        </a>
+    </nav>
 
 
     <main class="relative z-10">
@@ -1450,243 +197,443 @@
         <section id="top" class="pt-24 pb-32 lg:pt-28 lg:pb-48 flex items-center min-h-screen">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="animate-on-scroll slide-in-left">
-                        <h1 class="text-6xl sm:text-7xl md:text-8xl font-extrabold font-heading text-white">Hi, I'm<br>Yassine W.<br>MEDJATI</h1>
-                        <p class="mt-4 text-2xl md:text-3xl text-gray-300 font-heading">AI, Strategy & People</p>
-                        <div class="flex items-center gap-4 mt-8">
-                            <a href="mailto:hello@wyassine.com" class="available-pill">
-                                <span>AVAILABLE</span>
-                                <span class="dot"></span>
+                    <div class="hero-copy animate-on-scroll slide-in-left">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">AI Strategy • Aerospace • Leadership</p>
+                        <h1 class="mt-6 text-5xl sm:text-7xl md:text-8xl font-extrabold font-heading text-white leading-[0.95]">
+                            <span class="hero-title-line">Strategic AI</span>
+                            <span class="hero-title-line">advisory for</span>
+                            <span class="hero-title-line">high-stakes</span>
+                            <span class="hero-title-line">organizations.</span>
+                        </h1>
+                        <p class="hero-copy-body mt-6 text-lg md:text-2xl text-gray-300 leading-relaxed max-w-2xl">
+                            I help leaders in aerospace and other regulated environments turn AI ambition into clear roadmaps, executive alignment, and transformation programs that hold up in complex organizations.
+                        </p>
+                        <div class="hero-actions mt-10 flex flex-col sm:flex-row gap-4">
+                            <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105 text-lg text-center"
+                               data-cal-link="yassine-m-zowgc4/15min"
+                               data-cal-namespace="15min"
+                               data-cal-config='{"layout":"month_view","theme":"dark"}'>
+                                Book an advisory call
                             </a>
-                            <div id="cover-clock" class="cover-clock"></div>
-                            <a href="https://www.linkedin.com/in/yassine-medjati/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn Profile">
-                                <svg class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.79 0 0 .79 0 1.77v20.46C0 23.21.79 24 1.77 24h20.46c.98 0 1.77-.79 1.77-1.77V1.77C24 .79 23.21 0 22.23 0zM7.06 20.45H3.53V9h3.53v11.45zM5.29 7.43c-1.11 0-2.01-.9-2.01-2.01s.9-2.01 2.01-2.01 2.01.9 2.01 2.01-.9 2.01-2.01 2.01zm15.16 13.02h-3.53v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.68h-3.53V9h3.39v1.56h.05c.47-.89 1.62-1.82 3.34-1.82 3.58 0 4.24 2.35 4.24 5.4v6.29z"/></svg>
-                            </a>
+                            <div class="resume-capture" data-resume-capture data-formspree-endpoint="https://formspree.io/f/mzdjgqoa" data-resume-source="hero" data-resume-url="assets/YassineW.Medjati_Resume.pdf">
+                                <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg text-center resume-capture-trigger"
+                                   data-resume-trigger
+                                   aria-expanded="false">
+                                    Get resume
+                                </a>
+                                <form class="resume-capture-form" data-resume-form novalidate>
+                                    <input type="email" class="resume-capture-input" name="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Email address to access the resume" required>
+                                    <button type="submit" class="resume-capture-submit" data-resume-submit>Send</button>
+                                    <button type="button" class="resume-capture-close" data-resume-close aria-label="Close resume form">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="animate-on-scroll slide-in-right">
-                        <img src="https://iili.io/F8972un.png" alt="Portrait of Yassine W. Medjati" class="w-full h-auto rounded-lg shadow-2xl cover-image-fade" onerror="this.onerror=null;this.src='https://placehold.co/600x600/000000/ffffff?text=Y.W.M';">
+                    <div class="hero-visual relative animate-on-scroll slide-in-right">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="hero-portrait w-full h-auto rounded-lg shadow-2xl cover-image-fade" data-fallback-src="assets/portrait-fallback.svg">
+                        <div class="hero-aside mt-6 md:mt-0 md:absolute md:-bottom-6 md:left-6 md:right-6 bg-black/80 border border-gray-800/60 rounded-2xl p-6 backdrop-blur-sm">
+                            <p class="section-kicker text-xs uppercase tracking-[0.3em] text-gray-500">Why clients call</p>
+                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300">
+                                <p class="border border-gray-800/60 rounded-xl p-4">Translate AI complexity into executive decisions and roadmaps.</p>
+                                <p class="border border-gray-800/60 rounded-xl p-4">Bridge leadership communication, customer voice, and delivery reality.</p>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="hero-metrics mt-10 grid grid-cols-2 gap-4">
+                            <div class="hero-metric bg-gray-900/40 border border-gray-800/60 rounded-2xl p-4">
+                                <p class="hero-metric-value text-3xl font-heading font-extrabold text-white" data-count-up data-count-target="7" data-count-suffix="+">7+</p>
+                                <p class="mt-2 text-sm text-gray-400">years across software, data, and digital transformation</p>
+                            </div>
+                            <div class="hero-metric bg-gray-900/40 border border-gray-800/60 rounded-2xl p-4">
+                                <p class="hero-metric-value text-3xl font-heading font-extrabold text-white" data-count-up data-count-target="5">5</p>
+                                <p class="mt-2 text-sm text-gray-400">collaboration platforms launched to improve delivery</p>
+                            </div>
+                            <div class="hero-metric bg-gray-900/40 border border-gray-800/60 rounded-2xl p-4">
+                                <p class="hero-metric-value text-3xl font-heading font-extrabold text-white" data-count-up data-count-target="4">4</p>
+                                <p class="mt-2 text-sm text-gray-400">countries lived, studied, or worked in</p>
+                            </div>
+                            <div class="hero-metric bg-gray-900/40 border border-gray-800/60 rounded-2xl p-4">
+                                <p class="hero-metric-value text-3xl font-heading font-extrabold text-white" data-count-up data-count-target="2">2</p>
+                                <p class="mt-2 text-sm text-gray-400">Airbus functions shaped through digitalization work</p>
+                            </div>
+                        </div>
+                </div>
+                <div class="scroll-prompt-wrap" aria-hidden="true">
+                    <div id="scroll-prompt" class="scroll-prompt animate-on-scroll slide-in-bottom">
+                        <span class="scroll-icon">
+                            <span class="scroll-wheel"></span>
+                        </span>
+                        <p>Scroll to explore the experience</p>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- About Section -->
-        <section id="hero" class="py-24 lg:py-32 flex items-center">
-            <div class="container mx-auto px-6 max-w-4xl">
-                <div class="text-center">
-                    <div class="mb-8">
-                        <span id="animated-greeting" class="text-2xl md:text-3xl font-medium text-gray-400 inline-block min-h-[40px]"></span>
+        <!-- Advisory Positioning -->
+        <section id="advisory" class="py-32 lg:py-48">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="animate-on-scroll slide-in-left">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Advisory positioning</p>
+                        <h2 class="mt-4 text-4xl md:text-6xl font-extrabold">
+                            From engineering depth to executive influence.
+                        </h2>
                     </div>
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-gradient glitch" data-text="My focus is on leading the charge in digital innovation, leveraging AI to build more efficient companies and more capable teams">
-                        My focus is on leading the charge in digital innovation, leveraging AI to build more efficient companies and more capable teams
-                    </h1>
+                    <div class="animate-on-scroll slide-in-right space-y-6 text-lg text-gray-300 leading-relaxed">
+                        <p>
+                            Inside Airbus, I have worked across airframe engineering and quality engineering to design digital journeys, automation pipelines, and digitalization roadmaps for complex organizations.
+                        </p>
+                        <p>
+                            What differentiates my profile is not just technical fluency. It is the ability to connect AI, customer voice, leadership communication, and change adoption, then turn that into decisions executives can actually act on.
+                        </p>
+                        <p>
+                            I am best positioned for leaders who need a strategic partner that can speak both to technical ambition and organizational reality.
+                        </p>
+                    </div>
                 </div>
-                <div class="mt-32 text-base md:text-lg text-gray-300 space-y-6 leading-relaxed text-left bio-text">
-                    <h2 class="text-3xl font-bold font-heading mb-6 animate-on-scroll slide-in-bottom">About Me</h2>
-                    <p class="animate-on-scroll slide-in-bottom" style="transition-delay: 100ms;">
-                        <span class="highlight-text">Based in Hamburg</span> 🇩🇪, I am an Engineer focused on driving <span class="highlight-text">Airbus's transformation</span> into a leader in <span class="highlight-text">data-driven aerospace</span> 🚀. I combine technical expertise with strategic communication to turn complex data into actionable insights and tangible value.
-                    </p>
-                    <p class="animate-on-scroll slide-in-bottom" style="transition-delay: 200ms;">
-                        I specialize in developing and implementing <span class="highlight-text">cutting-edge solutions across GenAI</span>, Computer Vision, and Reinforcement Learning, while fostering a collaborative community and sharing insights through my writing.
-                    </p>
+                <div class="mt-16 grid md:grid-cols-3 gap-6">
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Who I advise</p>
+                        <h3 class="mt-4 text-2xl font-bold">Executives and transformation leaders</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Ideal for heads of strategy, digital, engineering, quality, operations, or innovation working in complex and regulated environments.</p>
+                    </div>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom delay-100">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">What I bring</p>
+                        <h3 class="mt-4 text-2xl font-bold">AI, GenAI, and change leadership</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Strategy framing, GenAI tool fluency, agentic workflow thinking, stakeholder alignment, digital journey design, and transformation narratives that move teams forward.</p>
+                    </div>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom delay-200">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">What clients get</p>
+                        <h3 class="mt-4 text-2xl font-bold">Clarity, prioritization, momentum</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">A sharper executive agenda, better sequencing of AI bets, clearer operating choices, and stronger buy-in across the organization.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- Marquee Section -->
-        <section class="py-32 animate-on-scroll slide-in-bottom">
-             <div class="relative flex overflow-x-hidden font-heading group marquee-fade">
-                <div class="flex animate-marquee whitespace-nowrap">
-                    <span class="text-6xl mx-8 font-bold text-white">Digitalization & Automation</span>
-                    <span class="text-6xl mx-8 font-bold text-white/70">Analytics & AI Capabilities</span>
-                    <span class="text-6xl mx-8 font-bold text-white">Customer Centricity</span>
-                    <span class="text-6xl mx-8 font-bold text-white/70" aria-hidden="true">Digitalization & Automation</span>
-                    <span class="text-6xl mx-8 font-bold text-white" aria-hidden="true">Analytics & AI Capabilities</span>
-                    <span class="text-6xl mx-8 font-bold text-white/70" aria-hidden="true">Customer Centricity</span>
+        <!-- GenAI Capability Section -->
+        <section id="genai-capability" class="py-32 lg:py-40">
+            <div class="container mx-auto px-6">
+                <div class="genai-capability-layout grid lg:grid-cols-[1.08fr_0.92fr] gap-10 items-start">
+                    <div class="animate-on-scroll slide-in-left">
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">GenAI & Agentic AI</p>
+                        <h2 class="mt-4 text-4xl md:text-5xl font-extrabold">GenAI judgment for real operating decisions.</h2>
+                        <p class="genai-intro mt-6 text-lg text-gray-300 leading-relaxed max-w-3xl">
+                            I help leaders cut through GenAI noise, choose the right providers and workflow patterns, and shape implementations that are useful, governable, and credible inside regulated organizations.
+                        </p>
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">LLM Provider Selection</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Agentic Workflows</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Human Oversight</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Enterprise Adoption</span>
+                        </div>
+                    </div>
+                    <div class="genai-capability-brief project-card p-8 animate-on-scroll slide-in-right">
+                        <span class="card-seal">Implementation Lens</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">What this looks like in practice</p>
+                        <p class="mt-4 text-gray-300 leading-relaxed">
+                            The work is not tracking models for their own sake. It is translating provider choice, workflow design, and governance into decisions leadership teams can actually defend.
+                        </p>
+                        <ul class="mt-6 space-y-3 text-gray-400 leading-relaxed capability-list">
+                            <li>Map business problems to the right provider, workflow, and governance pattern.</li>
+                            <li>Decide where agentic systems make sense and where simpler workflows are the better bet.</li>
+                            <li>Move from fragmented GenAI experiments to a coherent implementation agenda.</li>
+                        </ul>
+                    </div>
                 </div>
-             </div>
+                <div class="provider-board project-card p-8 mt-10 animate-on-scroll slide-in-bottom">
+                    <div class="provider-board-head">
+                        <div>
+                            <span class="card-seal">Provider Landscape</span>
+                            <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Selected ecosystems I actively track</p>
+                        </div>
+                        <p class="provider-board-note text-sm text-gray-400 leading-relaxed">
+                            I benchmark providers through governance, deployment model, multimodality, openness, and whether they can be defended in high-trust operating environments.
+                        </p>
+                    </div>
+                    <div class="provider-grid mt-6" aria-label="Selected GenAI providers">
+                        <article class="provider-tile">
+                            <span class="provider-logo-frame provider-logo-frame--wide">
+                                <img src="assets/logos/openai.svg" alt="OpenAI logo" class="provider-logo provider-logo--wide" loading="lazy" decoding="async">
+                            </span>
+                            <div class="provider-tile-copy">
+                                <strong>OpenAI</strong>
+                                <span>Reasoning</span>
+                            </div>
+                        </article>
+                        <article class="provider-tile">
+                            <span class="provider-logo-frame">
+                                <img src="assets/logos/anthropic.svg" alt="Anthropic logo" class="provider-logo" loading="lazy" decoding="async">
+                            </span>
+                            <div class="provider-tile-copy">
+                                <strong>Anthropic</strong>
+                                <span>Safety</span>
+                            </div>
+                        </article>
+                        <article class="provider-tile">
+                            <span class="provider-logo-frame">
+                                <img src="assets/logos/googlegemini.svg" alt="Google Gemini logo" class="provider-logo provider-logo--gemini" loading="lazy" decoding="async">
+                            </span>
+                            <div class="provider-tile-copy">
+                                <strong>Google Gemini</strong>
+                                <span>Multimodal</span>
+                            </div>
+                        </article>
+                        <article class="provider-tile">
+                            <span class="provider-logo-frame">
+                                <img src="assets/logos/meta.svg" alt="Meta logo" class="provider-logo" loading="lazy" decoding="async">
+                            </span>
+                            <div class="provider-tile-copy">
+                                <strong>Meta Llama</strong>
+                                <span>Open-weight</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="genai-capability-grid mt-10 grid md:grid-cols-2 gap-8">
+                    <div class="capability-card project-card p-8 animate-on-scroll slide-in-bottom">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Provider judgment</p>
+                        <h3 class="mt-4 text-2xl font-bold">Provider choice tied back to risk, governance, and operating fit</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">The point is not to know every model release. It is to understand which provider choices change governance, deployment logic, vendor dependence, and executive defensibility.</p>
+                    </div>
+                    <div class="capability-card project-card p-8 animate-on-scroll slide-in-bottom delay-100">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Agentic systems</p>
+                        <h3 class="mt-4 text-2xl font-bold">Agentic workflows designed with human control and auditability</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">A practical lens on when tool-using systems make sense, how humans stay in the loop, and what guardrails are required before agentic workflows become operationally credible.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
 
-        <!-- Work Section -->
-        <section id="work" class="py-32 lg:py-48">
+        <!-- Services Section -->
+        <section id="services" class="py-32 lg:py-48">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <h2 class="text-4xl md:text-5xl font-extrabold">My Work & Initiatives</h2>
-                    <p class="text-lg text-gray-400 mt-3">Constantly pushing ideas forward.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-left">
-                        <h3 class="text-2xl font-bold">Introduction to Artificial Intelligence</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">A keynote speech on the profound impact of AI and the future of Automation at Airbus, discussing how millions will adapt to a digitized economy.</p>
-                        <a href="#" class="font-heading inline-block mt-6 font-semibold text-white group">
-                            Watch Keynote
-                            <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
-                        </a>
-                    </div>
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-right" style="transition-delay: 100ms;">
-                        <h3 class="text-2xl font-bold">Thought Leadership</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">Driving conversations and strategies that position Airbus at the forefront of the data-driven revolution in the aerospace industry.</p>
-                        <a href="#" class="font-heading inline-block mt-6 font-semibold text-white group">
-                            Learn More
-                            <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Values Section -->
-        <section id="values" class="py-32 lg:py-48">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <h2 class="text-4xl md:text-5xl font-extrabold">My Values</h2>
-                    <p class="text-lg text-gray-400 mt-3">The principles that guide my work and decisions.</p>
-                </div>
-                <div id="values-pills-container" class="max-w-5xl mx-auto flex flex-wrap justify-center gap-3 text-center animate-on-scroll">
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Integrity</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Honesty</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Accountability</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Responsibility</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Teamwork</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Collaboration</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Adaptability</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Flexibility</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Respect</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Professionalism</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Initiative</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Proactivity</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Strategic Thinking</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Vision</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Leadership</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Influence</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Continuous Learning</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Growth Mindset</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Results Orientation</h3></div>
-                    <div class="value-pill bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50 transition-all duration-300 hover:bg-white hover:text-black hover:border-white cursor-none"><h3 class="text-lg font-semibold">Impact</h3></div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Blog Section -->
-        <section id="blog" class="py-32 lg:py-48 bg-gray-900/30">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <h2 class="text-4xl md:text-5xl font-extrabold">From the Blog</h2>
-                    <p class="text-lg text-gray-400 mt-3">Thoughts on AI, technology, and leadership.</p>
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Services</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-4">How I support strategic AI agendas</h2>
+                    <p class="text-lg text-gray-400 mt-3">Focused engagements designed for leaders who need clarity and movement, not noise.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom">
-                        <p class="text-sm text-gray-400">July 28, 2024</p>
-                        <h3 class="text-2xl font-bold mt-2">The Future of Generative AI in Aerospace</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">Exploring how large language models and diffusion models are set to revolutionize aircraft design, manufacturing, and maintenance.</p>
-                        <a href="#" class="font-heading inline-block mt-6 font-semibold text-white group">Read More <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">01</p>
+                        <h3 class="text-2xl font-bold mt-4">AI strategy and roadmap design</h3>
+                        <ul class="mt-6 space-y-3 text-gray-400 leading-relaxed">
+                            <li>Identify the right use cases and decision priorities.</li>
+                            <li>Sequence near-term wins and long-term capability building.</li>
+                            <li>Shape an AI agenda leaders can defend and fund.</li>
+                        </ul>
+                        <a href="#contact" class="font-heading inline-block mt-8 font-semibold text-white group">Discuss scope <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom" style="transition-delay: 100ms;">
-                        <p class="text-sm text-gray-400">June 15, 2024</p>
-                        <h3 class="text-2xl font-bold mt-2">Data Storytelling: From Numbers to Narratives</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">Why the ability to communicate data-driven insights through compelling stories is the most underrated skill for modern engineers.</p>
-                        <a href="#" class="font-heading inline-block mt-6 font-semibold text-white group">Read More <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-100">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">02</p>
+                        <h3 class="text-2xl font-bold mt-4">Executive alignment and change leadership</h3>
+                        <ul class="mt-6 space-y-3 text-gray-400 leading-relaxed">
+                            <li>Leadership workshops that bring strategy, delivery, and adoption together.</li>
+                            <li>Stakeholder alignment for complex, cross-functional initiatives.</li>
+                            <li>Transformation narratives people can understand and support.</li>
+                        </ul>
+                        <a href="#contact" class="font-heading inline-block mt-8 font-semibold text-white group">Plan a workshop <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom" style="transition-delay: 200ms;">
-                        <p class="text-sm text-gray-400">May 02, 2024</p>
-                        <h3 class="text-2xl font-bold mt-2">Leading Through Influence, Not Authority</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">My key takeaways on how to drive change and build consensus in a large, complex organization like Airbus.</p>
-                        <a href="#" class="font-heading inline-block mt-6 font-semibold text-white group">Read More <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-200">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">03</p>
+                        <h3 class="text-2xl font-bold mt-4">GenAI workflow and agentic solution design</h3>
+                        <ul class="mt-6 space-y-3 text-gray-400 leading-relaxed">
+                            <li>Scope copilots, decision support tools, and agentic workflows around real business friction.</li>
+                            <li>Design escalation, governance, and human review into the solution from the start.</li>
+                            <li>Connect latest tooling choices to an adoption path leaders can trust.</li>
+                        </ul>
+                        <a href="#contact" class="font-heading inline-block mt-8 font-semibold text-white group">Explore an engagement <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- Books Section -->
-        <section id="books" class="py-32 lg:py-48">
+        <!-- Sectors Section -->
+        <section id="sectors" class="py-32 lg:py-48 bg-gray-900/30">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <h2 class="text-4xl md:text-5xl font-extrabold">Top Book Recommendations</h2>
-                    <p class="text-lg text-gray-400 mt-3">Books that have shaped my thinking.</p>
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Sectors</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-4">Best suited for aerospace and adjacent regulated environments</h2>
+                    <p class="text-lg text-gray-400 mt-3">My deepest operating experience is in aerospace, with a selective advisory model that transfers best where governance, trust, and leadership alignment matter more than hype.</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-                    <div data-tilt class="text-center bg-gray-900/50 p-6 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom hover:-translate-y-2">
-                        <img loading="lazy" src="https://m.media-amazon.com/images/I/61ddWGvVlML._AC_UY436_FMwebp_QL65_.jpg" alt="Book Cover for How Big Things Get Done" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-xl font-bold font-heading">How Big Things Get Done</h3>
-                        <p class="text-sm text-gray-400">by Bent Flyvbjerg</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Aerospace & Defense</p>
+                        <h3 class="text-2xl font-bold mt-4">Engineering-heavy organizations that cannot afford weak decisions</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Strategy, roadmaps, and leadership alignment for engineering, quality, operations, and transformation teams working in complex delivery environments.</p>
                     </div>
-                    <div data-tilt class="text-center bg-gray-900/50 p-6 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom hover:-translate-y-2" style="transition-delay: 100ms;">
-                        <img loading="lazy" src="https://m.media-amazon.com/images/I/81O5obhZABL._UF894,1000_QL80_.jpg" alt="Book Cover for Thinking, Fast and Slow" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-xl font-bold font-heading">Thinking, Fast and Slow</h3>
-                        <p class="text-sm text-gray-400">by Daniel Kahneman</p>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom delay-100">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Government & Public Sector</p>
+                        <h3 class="text-2xl font-bold mt-4">Transformation where accountability, governance, and trust are central</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Best fit when the challenge is prioritization, stakeholder alignment, adoption, and turning AI ambition into a roadmap that can survive institutional scrutiny.</p>
                     </div>
-                    <div data-tilt class="text-center bg-gray-900/50 p-6 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom hover:-translate-y-2" style="transition-delay: 200ms;">
-                        <div class="new-badge">NEW</div>
-                        <img loading="lazy" src="https://m.media-amazon.com/images/I/814sKOe+BcL.jpg" alt="Book Cover for Superintelligence" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-xl font-bold font-heading">Superintelligence</h3>
-                        <p class="text-sm text-gray-400">by Nick Bostrom</p>
-                    </div>
-                    <div data-tilt class="text-center bg-gray-900/50 p-6 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom hover:-translate-y-2" style="transition-delay: 300ms;">
-                        <img loading="lazy" src="https://m.media-amazon.com/images/I/810u9MkT3SL._UF1000,1000_QL80_.jpg" alt="Book Cover for The Hard Thing About Hard Things" class="rounded-lg mb-4 w-full aspect-[2/3] object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/400x600/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-xl font-bold font-heading">The Hard Thing About Hard Things</h3>
-                        <p class="text-sm text-gray-400">by Ben Horowitz</p>
+                    <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom delay-200">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Private Banking & Wealth Management</p>
+                        <h3 class="text-2xl font-bold mt-4">A trust-first AI agenda for relationship-driven businesses</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Most credible where the mandate is internal productivity, advisor enablement, decision support, and operating model design in tightly regulated contexts.</p>
                     </div>
                 </div>
+                <p class="max-w-4xl mx-auto text-center text-sm text-gray-500 mt-10 animate-on-scroll slide-in-bottom">
+                    The strongest proof base on this site comes from aerospace. Public sector and regulated financial mandates are strongest when the problem is AI strategy, governance, operating model design, or executive alignment rather than narrow domain-specialist advice.
+                </p>
             </div>
         </section>
 
 
-        <!-- Guidebooks Section -->
-        <section id="guidebooks" class="py-32 lg:py-48 bg-gray-900/30">
+        <!-- Proof Section -->
+        <section id="proof" class="section-proof py-32 lg:py-48">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <h2 class="text-4xl md:text-5xl font-extrabold">AI Career Guidebooks</h2>
-                    <p class="text-lg text-gray-400 mt-3">Your roadmaps to a successful career in Artificial Intelligence.</p>
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Proof</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-4">Evidence beats adjectives</h2>
+                    <p class="text-lg text-gray-400 mt-3">Selected mini case studies drawn directly from operating work, leadership roles, and public credibility signals.</p>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-                    <!-- Guidebook 1 -->
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom">
-                        <img loading="lazy" src="https://placehold.co/600x400/111827/ffffff?text=Guidebook+Cover" alt="Guidebook Cover" class="rounded-lg mb-6 w-full aspect-video object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-2xl font-bold">The AI Product Manager</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">A comprehensive guide to landing your first AI Product Manager role, from crafting the perfect resume to acing the technical interview.</p>
-                        <a href="#" class="font-heading inline-block mt-6 bg-white text-black font-bold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105">
-                            Buy Now
-                        </a>
+                <div class="proof-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="proof-card project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom">
+                        <span class="card-seal">Case 01 // Airbus</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Quality engineering digitalization</p>
+                        <h3 class="text-2xl font-bold mt-4">Turned fragmented process pain into a clearer digital journey and automation agenda.</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Worked inside Airbus quality engineering to clarify user pain points, redesign workflows, and connect automation choices to operational reality rather than abstract innovation language.</p>
+                        <ul class="mt-6 space-y-3 text-gray-400 leading-relaxed">
+                            <li>Mapped friction across the user journey and surfaced where process design was blocking delivery quality.</li>
+                            <li>Shaped end-to-end digital journeys and automation pipelines with adoption and usability in mind.</li>
+                            <li>Connected technical decisions to stakeholder buy-in, making the work easier to defend and scale.</li>
+                        </ul>
+                        <p class="text-gray-300 mt-6 leading-relaxed"><span class="font-heading text-white">Result:</span> Stronger process clarity, better user experience, and a more credible base for automation in a high-stakes engineering environment.</p>
+                        <a href="case-study-airbus-digitalization.html" class="font-heading inline-block mt-8 font-semibold text-white group">Read the case study <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
-                    <!-- Guidebook 2 -->
-                    <div data-tilt class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom" style="transition-delay: 100ms;">
-                         <img loading="lazy" src="https://placehold.co/600x400/111827/ffffff?text=Guidebook+Cover" alt="Guidebook Cover" class="rounded-lg mb-6 w-full aspect-video object-cover shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/ffffff?text=Image+Not+Found';">
-                        <h3 class="text-2xl font-bold">From Zero to AI Engineer</h3>
-                        <p class="text-gray-400 mt-4 leading-relaxed">The ultimate roadmap for aspiring AI engineers. Learn the essential skills, build a standout portfolio, and navigate the job market with confidence.</p>
-                        <a href="#" class="font-heading inline-block mt-6 bg-white text-black font-bold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105">
-                            Buy Now
-                        </a>
+                    <div class="proof-card project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-100">
+                        <span class="card-seal">Case 02</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Roadmap design</p>
+                        <h3 class="text-2xl font-bold mt-4">Helped management shape a more defensible analytics, AI, and GenAI roadmap.</h3>
+                        <p class="text-gray-300 mt-4 leading-relaxed">Supported management-level roadmap work across analytics, AI, automation, and where GenAI could create real value without diluting operational priorities.</p>
+                        <p class="text-gray-400 mt-5 leading-relaxed"><span class="font-heading text-white">Why it matters:</span> This is the core advisory move many organizations need now: turning scattered AI ideas into sequencing, priorities, and executive decision points.</p>
+                    </div>
+                    <div class="proof-card project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-200">
+                        <span class="card-seal">Case 03</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Community leadership</p>
+                        <h3 class="text-2xl font-bold mt-4">Built cross-site energy around digital change instead of leaving transformation as a slide deck.</h3>
+                        <p class="text-gray-300 mt-4 leading-relaxed">Led a global digital ambassador community and facilitated workshops that strengthened collaboration, surfaced customer voice, and made change adoption more social and actionable.</p>
+                        <p class="text-gray-400 mt-5 leading-relaxed"><span class="font-heading text-white">Signal:</span> This is evidence of facilitation, network-building, and leadership alignment, not only technical contribution.</p>
+                    </div>
+                    <div class="proof-card project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-300">
+                        <span class="card-seal">Case 04 // Influence</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Visibility, communication, and executive-facing range</p>
+                        <h3 class="text-2xl font-bold mt-4">Technical depth backed by public communication and leadership visibility.</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">The profile is not limited to delivery work. It is reinforced by external speaking, internal community building, and leadership-development participation that signal boardroom fluency as well as technical credibility.</p>
+                        <ul class="mt-6 space-y-3 text-gray-400 leading-relaxed">
+                            <li>AI Summit speaker and active contributor to AI and leadership conversations.</li>
+                            <li>Creator of Airbus Young Voices and facilitator in community-led leadership formats.</li>
+                            <li>Participant in Airbus leadership development pathways and high-potential programs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="proof-support-grid mt-12 grid lg:grid-cols-2 gap-8">
+                    <div class="proof-support-card proof-support-card--credentials project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-left">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Credentials & visibility</p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Airbus AI Nanodegree</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Certified ScrumMaster</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">AI Summit Speaker</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Future Leader Program 2025</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">NextGen Aviation Leaders</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Airbus Young Voices Host</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Toastmasters Leadership</span>
+                        </div>
+                    </div>
+                    <div class="proof-support-card proof-support-card--leadership project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-right">
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Why this transfers beyond aerospace</p>
+                        <ul class="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                            <li>Best applied where AI decisions must stand up to governance, trust, or delivery scrutiny.</li>
+                            <li>Strongest on prioritization, roadmap design, adoption, and executive alignment rather than narrow domain-specialist consulting.</li>
+                            <li>Useful when business, operations, and technical teams need a shared decision frame.</li>
+                            <li>Most credible in mandates where regulated-sector operating logic matters as much as the technology itself.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- Podcast Section (Placeholder) -->
-        <section id="podcast" class="hidden"></section>
-
-
-        <!-- Philosophy Section -->
-        <section class="py-32 lg:py-48">
+        <!-- Insights Section -->
+        <section id="insights" class="py-32 lg:py-48 bg-gray-900/30">
             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="animate-on-scroll slide-in-left">
-                        <video autoplay loop muted playsinline class="rounded-lg shadow-2xl philosophy-image-fade w-full h-auto object-cover">
-                            <source src="https://videos.pexels.com/video-files/16403223/16403223-hd_1080_1920_30fps.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Insights</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-4">One flagship brief, two executive conversation starters</h2>
+                    <p class="text-lg text-gray-400 mt-3">This section now reflects real briefing formats I can already bring into leadership conversations, not placeholder thought-leadership themes.</p>
+                </div>
+                <div class="insight-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="insight-card insight-card--feature project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom">
+                        <span class="card-seal">Flagship brief</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Available now</p>
+                        <h3 class="text-2xl font-bold mt-4">From GenAI experiments to a governable operating model</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">A concise executive briefing for leaders who need to move beyond disconnected pilots and make clearer decisions on priorities, governance, provider choice, and adoption sequencing.</p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Executive briefing</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">GenAI operating model</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Regulated environments</span>
+                        </div>
+                        <ul class="mt-6 space-y-3 text-gray-300 leading-relaxed">
+                            <li>How to distinguish real enterprise use cases from low-value experimentation.</li>
+                            <li>Where governance, human oversight, and provider selection should enter the decision process.</li>
+                            <li>What leaders need to align on before GenAI becomes an operating model rather than a pilot portfolio.</li>
+                        </ul>
+                        <a href="brief-genai-operating-model.html" class="font-heading inline-block mt-6 font-semibold text-white group">Read the online briefing <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
-                    <div>
+                    <div class="insight-card project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-100">
+                        <span class="card-seal">Conversation 01</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Leadership note</p>
+                        <h3 class="text-2xl font-bold mt-4">Why AI transformation fails without alignment</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">A practical point of view on the decision-quality failures that happen when executives, delivery teams, and transformation stakeholders operate with different narratives.</p>
+                        <ul class="mt-6 space-y-3 text-gray-300 leading-relaxed">
+                            <li>What alignment actually means in AI programs.</li>
+                            <li>Why adoption fails when communication is treated as a side task.</li>
+                            <li>How to create a shared executive decision frame early.</li>
+                        </ul>
+                        <a href="mailto:hello@wyassine.com?subject=Discuss%20AI%20transformation%20alignment" class="font-heading inline-block mt-6 font-semibold text-white group">Discuss this with your team <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
+                    </div>
+                    <div class="insight-card project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-200">
+                        <span class="card-seal">Conversation 02</span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Sector perspective</p>
+                        <h3 class="text-2xl font-bold mt-4">What aerospace can teach other regulated industries</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">A cross-sector lens on governance, trust, quality, and the leadership discipline required when AI decisions have operational and reputational consequences.</p>
+                        <ul class="mt-6 space-y-3 text-gray-300 leading-relaxed">
+                            <li>Why regulated adoption needs engineering discipline, not just excitement.</li>
+                            <li>How quality culture changes the shape of AI roadmaps.</li>
+                            <li>What banking and public-sector leaders can borrow without pretending the sectors are identical.</li>
+                        </ul>
+                        <a href="mailto:hello@wyassine.com?subject=Cross-sector%20AI%20briefing" class="font-heading inline-block mt-6 font-semibold text-white group">Bring this into your team <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Approach Section -->
+        <section id="approach" class="py-32 lg:py-48">
+            <div class="container mx-auto px-6">
+                <div class="approach-layout grid md:grid-cols-2 gap-16 items-center">
+                    <div class="approach-panel animate-on-scroll slide-in-left bg-gray-900/40 border border-gray-800/50 rounded-2xl p-8">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">How I work</p>
+                        <h2 class="mt-4 text-4xl md:text-5xl font-extrabold">A simple advisory model for complex environments</h2>
+                        <div class="mt-8 space-y-6 text-gray-300 leading-relaxed">
+                            <p><span class="font-heading text-white">Diagnose.</span> Clarify the problem, the value at stake, the constraints, and the real stakeholder landscape.</p>
+                            <p><span class="font-heading text-white">Align.</span> Build a common narrative and decision frame across executives, delivery teams, and transformation stakeholders.</p>
+                            <p><span class="font-heading text-white">Activate.</span> Turn the strategy into a roadmap, working rhythm, and next set of visible moves.</p>
+                        </div>
+                    </div>
+                    <div class="approach-steps">
                         <ul class="space-y-4 philosophy-list text-right">
-                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right" style="transition-delay: 100ms;">I strive for leadership.</li>
-                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right" style="transition-delay: 200ms;">I am proud to work with special people.</li>
-                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right" style="transition-delay: 300ms;">I want to transform and disrupt.</li>
+                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right delay-100">Diagnose the opportunity.</li>
+                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right delay-200">Align the leadership.</li>
+                            <li class="philosophy-item text-5xl md:text-6xl lg:text-7xl font-heading animate-on-scroll slide-in-right delay-300">Activate the roadmap.</li>
                         </ul>
                     </div>
                 </div>
@@ -1697,119 +644,166 @@
         <!-- Contact Section -->
         <section id="contact" class="py-32 lg:py-48 bg-gray-900/30 text-center md:text-left">
             <div class="container mx-auto px-6 animate-on-scroll slide-in-bottom">
-                <div class="max-w-2xl mx-auto md:mx-0">
+                <div class="contact-panel max-w-3xl mx-auto md:mx-0">
                     <a href="mailto:hello@wyassine.com" class="available-pill mb-6">
                         <span>AVAILABLE</span>
                         <span class="dot"></span>
                     </a>
-                    <p class="font-heading text-lg text-gray-400 mb-4">Have an idea?</p>
-                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">Every great thing starts with a 'Meet!' </h2>
-                    <p class="mt-4 text-xl text-gray-300">Open to conversations, collabs 🤝, challenges or just a friendly FC25 game ⚽️.</p>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <a href="#" id="conversation-btn" class="font-heading flex justify-center items-center bg-white text-black font-bold py-2 px-6 rounded-full transition-transform duration-300 hover:scale-105 text-lg text-center"
+                    <p class="font-heading text-lg text-gray-400 mb-4">Ready to define the next move?</p>
+                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">If AI is on the agenda, let&apos;s make it actionable.</h2>
+                    <p class="mt-4 text-xl text-gray-300">I work best with executive teams, transformation leaders, and business owners who need clarity, prioritization, and momentum around AI, GenAI, and complex change.</p>
+                    <p class="section-kicker mt-4 text-sm uppercase tracking-[0.3em] text-gray-500">Typical first conversation: 20 minutes</p>
+                    <div class="contact-actions mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" id="conversation-btn" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 rounded-full transition-transform duration-300 hover:scale-105 text-lg text-center"
                            data-cal-link="yassine-m-zowgc4/15min"
                            data-cal-namespace="15min"
                            data-cal-config='{"layout":"month_view","theme":"dark"}'>
-                            Let's have a conversation!
+                            Book an advisory call
                         </a>
-                        <a href="https://sites.google.com/airbus.com/hi-im-yassine/get2know-me" id="cv-btn" class="font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-2 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg text-center">
-                            Grab my CV
-                        </a>
-                        <a href="tel:+491722574807" class="call-btn font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-400 font-bold py-2 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:border-white hover:text-white text-lg whitespace-nowrap text-center">
-                            <span class="call-text">Call Now</span><span class="phone-number">&nbsp;+49 172 257 4807</span>
+                        <div class="resume-capture" data-resume-capture data-formspree-endpoint="https://formspree.io/f/mzdjgqoa" data-resume-source="contact" data-resume-url="assets/YassineW.Medjati_Resume.pdf">
+                            <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer" id="cv-btn" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg text-center resume-capture-trigger"
+                               data-resume-trigger
+                               aria-expanded="false">
+                                Get resume
+                            </a>
+                            <form class="resume-capture-form" data-resume-form novalidate>
+                                <input type="email" class="resume-capture-input" name="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Email address to access the resume" required>
+                                <button type="submit" class="resume-capture-submit" data-resume-submit>Send</button>
+                                <button type="button" class="resume-capture-close" data-resume-close aria-label="Close resume form">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </form>
+                        </div>
+                        <a href="mailto:hello@wyassine.com" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-400 font-bold py-3 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:border-white hover:text-white text-lg text-center">
+                            Email directly
                         </a>
                     </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Quotes Section (ENHANCEMENT: Made this section visible and functional) -->
-        <section id="quotes" class="py-32 hidden">
-            <div class="container mx-auto px-6 flex flex-col items-center justify-center">
-                <h2 class="text-3xl font-bold mb-12 text-center font-heading animate-on-scroll slide-in-bottom">Inspirational Quotes</h2>
-                <div id="quotes-container" class="relative w-full h-[500px] flex items-center justify-center animate-on-scroll" style="perspective: 1000px;">
-                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"The essence of strategy is choosing what not to do."</p><p class="mt-4 text-gray-400">- Michael Porter</p></div>
-                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Great things in business are never done by one person. They're done by a team of people."</p><p class="mt-4 text-gray-400">- Steve Jobs</p></div>
-                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Performance is your reality. Forget everything else."</p><p class="mt-4 text-gray-400">- Harold S. Geneen</p></div>
-                    <div class="quote-card"><div class="quote-timer-bar"><div class="quote-timer-progress"></div></div><p class="text-2xl font-heading leading-snug">"Collaboration is the key to unlocking the collective genius."</p><p class="mt-4 text-gray-400">- Mattie Stepanek</p></div>
                 </div>
             </div>
         </section>
     </main>
 
 
-    <footer class="pt-8">
-        <div class="py-8 overflow-hidden footer-band scale-110">
-            <div class="flex animate-marquee-fast whitespace-nowrap">
-                <span class="font-heading text-[12rem] mx-8 font-extrabold text-white">LET'S WORK</span>
-                <span class="font-heading text-[12rem] mx-8 font-extrabold text-white/70">LET'S WORK</span>
-                <span class="font-heading text-[12rem] mx-8 font-extrabold text-white">LET'S WORK</span>
-                <span class="font-heading text-[12rem] mx-8 font-extrabold text-white/70" aria-hidden="true">LET'S WORK</span>
-                <span class="font-heading text-[12rem] mx-8 font-extrabold text-white" aria-hidden="true">LET'S WORK</span>
-                <span class="font-heading text-[12rem] mx-8 font-extrabold text-white/70" aria-hidden="true">LET'S WORK</span>
+    <footer class="site-footer">
+        <div class="footer-band">
+            <div class="footer-band-track animate-marquee-fast whitespace-nowrap" aria-hidden="true">
+                <span class="font-heading font-extrabold">AI STRATEGY</span>
+                <span class="font-heading font-extrabold">GENAI</span>
+                <span class="font-heading font-extrabold">AEROSPACE</span>
+                <span class="font-heading font-extrabold">LEADERSHIP</span>
+                <span class="font-heading font-extrabold">TRANSFORMATION</span>
+                <span class="font-heading font-extrabold">AI STRATEGY</span>
+                <span class="font-heading font-extrabold">GENAI</span>
+                <span class="font-heading font-extrabold">AEROSPACE</span>
+                <span class="font-heading font-extrabold">LEADERSHIP</span>
+                <span class="font-heading font-extrabold">TRANSFORMATION</span>
             </div>
         </div>
-        <div class="container mx-auto px-6 pt-16 pb-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
-                <div>
-                    <h3 class="font-heading font-bold text-lg mb-4">Navigation</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#hero" class="hover:text-white transition-colors">About</a></li>
-                        <li><a href="#work" class="hover:text-white transition-colors">Work</a></li>
-                        <li><a href="#blog" class="hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#podcast" class="hover:text-white transition-colors">Podcast</a></li>
-                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-                    </ul>
+        <div class="container mx-auto px-6 pt-12 pb-8">
+            <div class="footer-shell">
+                <div class="footer-shell-hud" aria-hidden="true">
+                    <span>Hamburg node // 53.5511N / 9.9937E</span>
+                    <span>Strategic advisory grid // active</span>
                 </div>
-                <div>
-                    <h3 class="font-heading font-bold text-lg mb-4">Social</h3>
-                    <div class="flex space-x-6 justify-center md:justify-start">
-                        <a href="https://www.linkedin.com/in/yassine-medjati/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn Profile"><svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.79 0 0 .79 0 1.77v20.46C0 23.21.79 24 1.77 24h20.46c.98 0 1.77-.79 1.77-1.77V1.77C24 .79 23.21 0 22.23 0zM7.06 20.45H3.53V9h3.53v11.45zM5.29 7.43c-1.11 0-2.01-.9-2.01-2.01s.9-2.01 2.01-2.01 2.01.9 2.01 2.01-.9 2.01-2.01 2.01zm15.16 13.02h-3.53v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.68h-3.53V9h3.39v1.56h.05c.47-.89 1.62-1.82 3.34-1.82 3.58 0 4.24 2.35 4.24 5.4v6.29z"/></svg></a>
-                        <a href="#" class="hover:text-white transition-colors" aria-label="X (Twitter) Profile"><svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                        <a href="#" class="hover:text-white transition-colors" aria-label="GitHub Profile"><svg class="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                    </div>
-                </div>
-                <div class="lg:col-span-2">
-                    <h3 class="font-heading font-bold text-lg mb-4">Contact</h3>
-                    <a href="mailto:hello@wyassine.com" class="text-gray-400 hover:text-white transition-colors">hello@wyassine.com</a>
-                    <p class="text-gray-500 text-sm mt-4">Created with curiosity, coffee and way too many open tabs. 🥷🏻</p>
-                    <div class="mt-6 animate-on-scroll slide-in-bottom flex justify-center md:justify-start">
-                        <!-- The Music Pill Component -->
-                        <div class="music-pill">
-                            <!-- 3-Bar Audio Visualizer -->
-                            <div class="audio-visualizer">
-                                <div class="visualizer-bar"></div>
-                                <div class="visualizer-bar"></div>
-                                <div class="visualizer-bar"></div>
-                            </div>
-
-
-                            <!-- Song Information (Scrolling and Static) -->
-                            <div class="song-info">
-                                <!-- Container with faded edges for the scrolling text -->
-                                <div class="scrolling-text-container">
-                                    <div class="song-name">DA WIZARD</div>
-                                </div>
-                                <!-- Fixed artist and album name -->
-                                <div class="artist-album">
-                                    Travis Scott &bull; JACKBOYS 2
-                                </div>
-                            </div>
+                <div class="footer-primary">
+                    <div class="footer-intro">
+                        <p class="section-kicker footer-kicker">Selected advisory mandates</p>
+                        <h2 class="footer-title">Turn AI ambition into a roadmap leaders can actually execute.</h2>
+                        <p class="footer-copy">
+                            Strategic advisory for aerospace, government, and regulated organizations that need GenAI, agentic AI, and transformation work to hold up operationally, politically, and commercially.
+                        </p>
+                        <div class="footer-cta-row">
+                            <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 transition-transform duration-300 text-base text-center"
+                               data-cal-link="yassine-m-zowgc4/15min"
+                               data-cal-namespace="15min"
+                               data-cal-config='{"layout":"month_view","theme":"dark"}'>
+                                Book an advisory call
+                            </a>
+                            <a href="mailto:hello@wyassine.com" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-300 font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                                Email directly
+                            </a>
                         </div>
                     </div>
+                    <div class="footer-signal-stack">
+                        <article class="footer-signal-card">
+                            <span class="footer-signal-label">Base</span>
+                            <strong>Hamburg, Germany</strong>
+                            <p>Working across Europe and available for selected international advisory mandates.</p>
+                        </article>
+                        <article class="footer-signal-card">
+                            <span class="footer-signal-label">Best fit</span>
+                            <strong>High-stakes environments</strong>
+                            <p>Aerospace, public sector, private banking, wealth management, and regulated transformation programs.</p>
+                        </article>
+                        <article class="footer-signal-card">
+                            <span class="footer-signal-label">Engagements</span>
+                            <strong>Strategy, alignment, execution</strong>
+                            <p>Executive briefings, AI roadmaps, GenAI operating models, and leadership-level transformation support.</p>
+                        </article>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-gray-500 text-sm">
-                <p>&copy; 2025 Yassine W. Medjati. All Rights Reserved.</p>
-                <div class="flex items-center gap-4 mt-4 sm:mt-0">
-                    <div id="footer-clock" class="font-mono text-xs"></div>
-                    <div>|</div>
-                    <div>Visitors: <span id="visitor-counter" class="font-bold">6,324</span></div>
+
+                <div class="footer-panels">
+                    <article class="footer-panel">
+                        <p class="footer-panel-label">Navigate</p>
+                        <div class="footer-link-list">
+                            <a href="#advisory"><span>Advisory</span><span class="footer-link-arrow">01</span></a>
+                            <a href="#services"><span>Services</span><span class="footer-link-arrow">02</span></a>
+                            <a href="#sectors"><span>Sectors</span><span class="footer-link-arrow">03</span></a>
+                            <a href="#proof"><span>Proof</span><span class="footer-link-arrow">04</span></a>
+                            <a href="#insights"><span>Insights</span><span class="footer-link-arrow">05</span></a>
+                            <a href="#contact"><span>Contact</span><span class="footer-link-arrow">06</span></a>
+                        </div>
+                    </article>
+                    <article class="footer-panel">
+                        <p class="footer-panel-label">Connect</p>
+                        <div class="footer-link-list">
+                            <a href="https://www.linkedin.com/in/yassine-medjati/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><span class="footer-link-arrow">External</span></a>
+                            <a href="mailto:hello@wyassine.com"><span>hello@wyassine.com</span><span class="footer-link-arrow">Email</span></a>
+                            <a href="assets/YassineW.Medjati_Resume.pdf" target="_blank" rel="noopener noreferrer"><span>Resume</span><span class="footer-link-arrow">PDF</span></a>
+                        </div>
+                    </article>
+                    <article class="footer-panel">
+                        <p class="footer-panel-label">Coverage</p>
+                        <ul class="footer-tag-list">
+                            <li>Aerospace &amp; Defense</li>
+                            <li>Government &amp; Public Sector</li>
+                            <li>Private Banking &amp; Wealth Management</li>
+                            <li>AI Strategy &amp; Transformation</li>
+                            <li>GenAI &amp; Agentic AI</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="footer-copyright">&copy; 2026 Yassine W. Medjati. All Rights Reserved.</p>
+                    <div class="footer-bottom-links">
+                        <span class="footer-bottom-note">Available for selected advisory mandates</span>
+                        <button type="button" id="open-cookie-settings" class="footer-action-link">Cookie settings</button>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <aside id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-description" hidden>
+        <div class="cookie-banner-panel">
+            <p class="cookie-banner-kicker">Privacy preferences</p>
+            <h2 id="cookie-banner-title">Keep scheduling on-site, only if you want it.</h2>
+            <p id="cookie-banner-description" class="cookie-banner-copy">
+                Essential storage keeps navigation and interface preferences stable. If you allow scheduling cookies, the Cal.com booking experience can open directly on this site instead of sending visitors away.
+            </p>
+            <div class="cookie-banner-tags" aria-hidden="true">
+                <span>Essential</span>
+                <span>Scheduling</span>
+                <span>On-site booking</span>
+            </div>
+            <div class="cookie-banner-actions">
+                <button type="button" class="cookie-btn cookie-btn-secondary" data-cookie-choice="essential">Essential only</button>
+                <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-choice="embedded">Allow on-site scheduling</button>
+            </div>
+        </div>
+    </aside>
 
 
 </body>

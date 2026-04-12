@@ -1,0 +1,28 @@
+{
+  "name": "personal_website",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./tailwind.input.css -o ./tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./tailwind.input.css -o ./tailwind.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yassineme/personal_website_wy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yassineme/personal_website_wy/issues"
+  },
+  "homepage": "https://github.com/yassineme/personal_website_wy#readme",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "simple-icons": "^16.11.0"
+  }
+}

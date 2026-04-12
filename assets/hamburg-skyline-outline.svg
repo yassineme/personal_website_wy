@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 340" fill="none">
+  <path
+    d="M0 266h34l10-18h18v18h24v-8h8v8h32v-22h10v-42h18v42h18v-18h12v18h40v-10h8v10h46v-34h12l8-74 8 74h14v34h18v-12h10v12h30v-46h18v46h18v-14h12v14h42v-38h18v38h14v-10h8v10h36v-56h16v56h20v-18h12v18h44v-34h12v-92h10v92h10v34h32v-12h8v12h46v-26h18v26h22v-10h8v10h40v-58h14v58h12v-14h12v14h36v-40h14v40h16v-22h10v22h62v-16h12v16h30v-28h18v28h52v-70h10V54h10v114h12v98h-12v-18h-12v18h-30v-10h-8v10h46v-24h10v-12h8v12h12v24h56v-18h12v-12h10v12h12v18h30v-26h12v-36h8v36h12v26h66v-40h12l10-22 10 22h12v40h16v-18h12v-10h10v10h12v18h72v-12h10v12h32v-48h18v48h30v-16h12v16h36v-12h12v12h44v-30h18v30h18v-10h10v10h44v-20h12v20h44v-12h12v12h46v-28h14v28h26v-10h8v10h42v-18h12v18h58v-14h10v14h54"
+    stroke="#d6e3f3"
+    stroke-opacity=".28"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M1118 266v-46l20-18 20 18v46M1168 220h-60"
+    stroke="#f4f6f8"
+    stroke-opacity=".22"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

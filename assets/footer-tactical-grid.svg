@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 780" fill="none">
+  <g stroke="#F2F6FF" stroke-linecap="round" vector-effect="non-scaling-stroke">
+    <path d="M-48 102Q180 80 404 100T848 96T1294 112T1654 106" stroke-opacity=".18"/>
+    <path d="M-56 146Q182 118 392 138T838 146T1278 152T1648 148" stroke-opacity=".16"/>
+    <path d="M-52 196Q204 158 430 182T910 188T1290 206T1660 188" stroke-opacity=".15"/>
+    <path d="M-38 252Q192 206 426 224T860 236T1304 260T1650 238" stroke-opacity=".14"/>
+    <path d="M-30 316Q182 262 410 280T848 300T1288 322T1658 296" stroke-opacity=".13"/>
+    <path d="M-42 388Q170 324 404 340T870 366T1306 392T1644 360" stroke-opacity=".12"/>
+    <path d="M-34 470Q184 398 414 414T876 446T1308 476T1656 432" stroke-opacity=".12"/>
+    <path d="M-24 560Q204 482 448 500T900 534T1326 566T1662 514" stroke-opacity=".13"/>
+    <path d="M-18 648Q236 558 494 578T968 624T1382 656T1664 604" stroke-opacity=".14"/>
+    <path d="M-8 726Q288 628 570 652T1060 710T1446 744T1674 694" stroke-opacity=".16"/>
+
+    <path d="M64 780L226 0" stroke-opacity=".08"/>
+    <path d="M160 780L318 0" stroke-opacity=".08"/>
+    <path d="M270 780L414 0" stroke-opacity=".08"/>
+    <path d="M394 780L532 0" stroke-opacity=".07"/>
+    <path d="M528 780L670 0" stroke-opacity=".07"/>
+    <path d="M682 780L828 0" stroke-opacity=".07"/>
+    <path d="M844 780L996 0" stroke-opacity=".08"/>
+    <path d="M1022 780L1168 0" stroke-opacity=".08"/>
+    <path d="M1206 780L1352 0" stroke-opacity=".09"/>
+    <path d="M1390 780L1524 0" stroke-opacity=".08"/>
+    <path d="M1544 780L1658 0" stroke-opacity=".07"/>
+
+    <path d="M0 154H1600" stroke-opacity=".05"/>
+    <path d="M0 288H1600" stroke-opacity=".05"/>
+    <path d="M0 438H1600" stroke-opacity=".05"/>
+    <path d="M0 616H1600" stroke-opacity=".05"/>
+
+    <path d="M1120 210Q1214 254 1320 244T1600 184" stroke-opacity=".08"/>
+    <path d="M996 272Q1112 326 1244 316T1600 240" stroke-opacity=".08"/>
+    <path d="M864 348Q1012 414 1172 402T1600 310" stroke-opacity=".08"/>
+  </g>
+</svg>

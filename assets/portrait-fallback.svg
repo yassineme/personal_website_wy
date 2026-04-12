@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Portrait fallback</title>
+  <desc id="desc">Fallback portrait graphic for Yassine W. Medjati.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1118" />
+      <stop offset="55%" stop-color="#04070b" />
+      <stop offset="100%" stop-color="#111a24" />
+    </linearGradient>
+    <radialGradient id="glow" cx="28%" cy="26%" r="58%">
+      <stop offset="0%" stop-color="rgba(236,240,245,0.28)" />
+      <stop offset="28%" stop-color="rgba(170,182,197,0.12)" />
+      <stop offset="100%" stop-color="rgba(3,5,8,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)" />
+  <rect width="600" height="600" fill="url(#glow)" />
+  <g fill="none" stroke="rgba(224,232,241,0.18)">
+    <rect x="18" y="18" width="564" height="564" rx="28" />
+  </g>
+  <text x="300" y="306" text-anchor="middle" fill="#f4f6f8" font-family="Sora, Arial, sans-serif" font-size="176" font-weight="800" letter-spacing="-8">
+    YM
+  </text>
+  <text x="300" y="386" text-anchor="middle" fill="rgba(169,182,197,0.88)" font-family="IBM Plex Mono, monospace" font-size="28" letter-spacing="8">
+    AI STRATEGY ADVISOR
+  </text>
+</svg>

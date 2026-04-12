@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbus Case Study | Digitalization, Automation & Quality Transformation</title>
+    <meta name="description" content="A focused case study on how Yassine W. Medjati helped reframe digitalization and automation work inside Airbus quality engineering around user journeys, operational credibility, and stakeholder alignment.">
+    <meta name="keywords" content="Airbus case study, AI strategy case study, digitalization roadmap, quality engineering, automation pipeline, aerospace transformation, Yassine Medjati">
+    <meta name="author" content="Yassine W. Medjati">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#030507">
+    <link rel="canonical" href="https://wyassine.com/case-study-airbus-digitalization.html">
+    <meta property="og:site_name" content="Yassine / Advisory">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://wyassine.com/case-study-airbus-digitalization.html">
+    <meta property="og:title" content="Airbus Case Study | Digitalization, Automation & Quality Transformation">
+    <meta property="og:description" content="A case study on reframing digitalization and automation work inside Airbus quality engineering around user journeys, adoption, and operational credibility.">
+    <meta property="og:image" content="https://wyassine.com/assets/yassine-portrait.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:image:alt" content="Portrait of Yassine W. Medjati">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Airbus Case Study | Digitalization, Automation & Quality Transformation">
+    <meta name="twitter:description" content="A case study on reframing digitalization and automation work inside Airbus quality engineering around user journeys, adoption, and operational credibility.">
+    <meta name="twitter:image" content="https://wyassine.com/assets/yassine-portrait.png">
+
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <link rel="stylesheet" href="tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body class="antialiased site-shell">
+    <div id="loader" class="fixed inset-0 bg-black z-[99999] flex flex-col items-center justify-center text-center">
+        <div class="hole mb-8">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div id="loader-text-container" class="text-center opacity-0 transition-opacity duration-500">
+            <h1 id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">AI strategy, transformation and leadership.</p>
+        </div>
+    </div>
+
+    <div id="shortcut-hint" class="fixed top-6 left-6 z-[1001] text-xs text-gray-400 bg-black/50 px-2 py-1 rounded-md backdrop-blur-sm transition-opacity duration-300">
+        Press <kbd>B</kbd> to book a strategy call | Use <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to navigate
+    </div>
+
+    <header id="main-header" class="py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="brand-link">
+                <span class="desktop-brand">Yassine / Advisory</span>
+                <span class="mobile-brand">
+                    <span class="mobile-brand-avatar-frame">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-brand-avatar" data-fallback-src="assets/portrait-fallback.svg">
+                    </span>
+                    <span class="mobile-brand-copy">
+                        <span class="mobile-brand-name">Yassine Medjati</span>
+                        <span class="mobile-brand-role">AI Strategy Advisor</span>
+                    </span>
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="nav-link text-gray-300 hover:text-white">Home</a>
+                <a href="#top" class="nav-link text-gray-300 hover:text-white">Overview</a>
+                <a href="#mandate" class="nav-link text-gray-300 hover:text-white">Mandate</a>
+                <a href="#outcomes" class="nav-link text-gray-300 hover:text-white">Outcomes</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+            </nav>
+
+            <button id="open-menu-btn" class="md:hidden z-50" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="progress-bar" class="absolute bottom-0 left-0 h-0.5 bg-white"></div>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-black/90 backdrop-blur-lg z-40 flex flex-col items-center justify-center">
+        <div class="mobile-menu-panel w-full max-w-sm">
+            <div class="mobile-menu-handle" aria-hidden="true"></div>
+            <div class="mobile-menu-top">
+                <div class="mobile-menu-profile">
+                    <span class="mobile-menu-profile-avatar-frame">
+                        <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-menu-profile-avatar" data-fallback-src="assets/portrait-fallback.svg">
+                    </span>
+                    <span class="mobile-menu-profile-copy">
+                        <span class="mobile-menu-label">Yassine Medjati</span>
+                        <span class="mobile-menu-subtitle">Airbus case study</span>
+                    </span>
+                </div>
+                <button id="close-menu-btn" aria-label="Close menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <p class="mobile-menu-intro">A deeper look at how digitalization and automation work were reframed around user journeys, adoption, and operational credibility inside Airbus quality engineering.</p>
+            <div class="mobile-menu-group">
+                <p class="mobile-menu-group-label">Navigate</p>
+                <nav class="mobile-menu-nav flex flex-col text-2xl font-heading">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-white">Home</a>
+                    <a href="#top" class="nav-link text-gray-300 hover:text-white">Overview</a>
+                    <a href="#mandate" class="nav-link text-gray-300 hover:text-white">Mandate</a>
+                    <a href="#outcomes" class="nav-link text-gray-300 hover:text-white">Outcomes</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+                </nav>
+            </div>
+            <div class="mobile-menu-actions">
+                <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 transition-transform duration-300 text-base text-center"
+                   data-cal-link="yassine-m-zowgc4/15min"
+                   data-cal-namespace="15min"
+                   data-cal-config='{"layout":"month_view","theme":"dark"}'>
+                    Book strategy call
+                </a>
+                <a href="mailto:hello@wyassine.com?subject=Discuss%20a%20similar%20AI%20transformation%20mandate" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-300 font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                    Email directly
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="three-canvas"></canvas>
+
+    <a href="#top" id="back-to-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </a>
+
+    <main class="relative z-10">
+        <section id="top" class="pt-28 pb-20 lg:pt-32 lg:pb-28 min-h-[70vh] flex items-center">
+            <div class="container mx-auto px-6">
+                <a href="index.html#proof" class="section-kicker inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-500 hover:text-white transition-colors">
+                    Back to proof
+                </a>
+                <div class="mt-8 grid lg:grid-cols-[1.08fr_0.92fr] gap-10 items-start">
+                    <div class="animate-on-scroll slide-in-left">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Case Study // Airbus Quality Engineering</p>
+                        <h1 class="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold font-heading text-white leading-[0.94] max-w-[11ch]">
+                            Reframing digitalization around user journeys, adoption, and operational credibility.
+                        </h1>
+                        <p class="mt-6 text-lg md:text-2xl text-gray-300 leading-relaxed max-w-3xl">
+                            This case captures the kind of advisory work I do best: turning fragmented pain points, automation ideas, and process friction into a clearer digital journey and a more credible transformation agenda.
+                        </p>
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">User journey mapping</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Automation agenda</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">Stakeholder alignment</span>
+                            <span class="value-pill is-visible bg-gray-900/50 py-2 px-5 rounded-full border border-gray-800/50">High-stakes engineering</span>
+                        </div>
+                        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+                            <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105 text-lg text-center"
+                               data-cal-link="yassine-m-zowgc4/15min"
+                               data-cal-namespace="15min"
+                               data-cal-config='{"layout":"month_view","theme":"dark"}'>
+                                Discuss a similar mandate
+                            </a>
+                            <a href="brief-genai-operating-model.html" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg text-center">
+                                Read flagship brief
+                            </a>
+                        </div>
+                    </div>
+                    <aside class="project-card p-8 animate-on-scroll slide-in-right">
+                        <span class="card-seal">Mandate snapshot</span>
+                        <div class="space-y-6 text-gray-300">
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Environment</p>
+                                <p class="mt-2 leading-relaxed">Airbus quality engineering, where process choices and digitalization decisions have operational consequences and must stand up to real stakeholder scrutiny.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Core issue</p>
+                                <p class="mt-2 leading-relaxed">Digitalization and automation only create value when they are tied to real user pain, process logic, and adoption conditions, not abstract innovation language.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Advisory value</p>
+                                <p class="mt-2 leading-relaxed">Clarify friction, redesign the journey, connect technical choices to operational logic, and help stakeholders align around a roadmap they can actually support.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Why it transfers</p>
+                                <p class="mt-2 leading-relaxed">The same pattern appears in other regulated sectors: too many ideas, not enough clarity on where value is real and how change becomes operationally credible.</p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section id="mandate" class="py-20 lg:py-24">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-start">
+                    <article class="project-card p-8 animate-on-scroll slide-in-left">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">The challenge</p>
+                        <h2 class="mt-4 text-4xl md:text-5xl font-extrabold">When digitalization is disconnected from the real journey, trust drops fast.</h2>
+                        <div class="mt-8 space-y-5 text-gray-300 leading-relaxed">
+                            <p>Inside complex engineering environments, teams often know there is friction but not exactly where it starts, how it compounds, or which changes will actually improve delivery quality.</p>
+                            <p>That creates a familiar failure mode: automation ideas appear attractive, but the underlying process logic is still fragmented, user pain is not fully clarified, and stakeholders do not yet share the same decision frame.</p>
+                            <p>The role I played was not just technical delivery. It was to make the problem clearer, connect the user experience to the process architecture, and translate that into a stronger digitalization agenda.</p>
+                        </div>
+                    </article>
+                    <article class="project-card p-8 animate-on-scroll slide-in-right">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">What changed</p>
+                        <div class="mt-6 grid gap-6">
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">01 Diagnose</p>
+                                <p class="mt-2 text-gray-300 leading-relaxed">Mapped the user journey end to end and surfaced where friction, ambiguity, and process handoffs were undermining the experience.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">02 Reframe</p>
+                                <p class="mt-2 text-gray-300 leading-relaxed">Moved the conversation away from isolated tooling ideas toward a clearer view of which digital journeys and automation paths were actually worth pursuing.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">03 Align</p>
+                                <p class="mt-2 text-gray-300 leading-relaxed">Connected technical possibilities to stakeholder logic so the work could be explained, supported, and carried into a more credible roadmap.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="approach" class="py-20 lg:py-24 bg-gray-900/30">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Advisory sequence</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-4">How the work moved from friction to a more defensible agenda</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <article class="project-card p-8 animate-on-scroll slide-in-bottom">
+                        <span class="card-seal">01</span>
+                        <h3 class="text-2xl font-bold">Clarify where the process is failing the user</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">The first step was not to push technology. It was to make the journey legible, expose the pain points, and understand where the operating reality was breaking down.</p>
+                    </article>
+                    <article class="project-card p-8 animate-on-scroll slide-in-bottom delay-100">
+                        <span class="card-seal">02</span>
+                        <h3 class="text-2xl font-bold">Design digital and automation moves around real logic</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Once the journey became clearer, digitalization and automation choices could be framed around actual value rather than around novelty or disconnected efficiency claims.</p>
+                    </article>
+                    <article class="project-card p-8 animate-on-scroll slide-in-bottom delay-200">
+                        <span class="card-seal">03</span>
+                        <h3 class="text-2xl font-bold">Create a roadmap stakeholders can support</h3>
+                        <p class="text-gray-400 mt-4 leading-relaxed">The last move was alignment: making the agenda understandable and defendable so it could move inside a complex organization without losing credibility.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="outcomes" class="py-20 lg:py-24">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-start">
+                    <article class="project-card p-8 animate-on-scroll slide-in-left">
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Outcome logic</p>
+                        <h2 class="mt-4 text-4xl md:text-5xl font-extrabold">The value was not one tool. It was stronger clarity, better sequencing, and a more credible path forward.</h2>
+                        <div class="mt-8 space-y-5 text-gray-300 leading-relaxed">
+                            <p>The visible outcome was a clearer digital journey and a stronger automation agenda. The deeper outcome was decision quality: stakeholders could better see where value was real, what should happen first, and how the work connected to operational priorities.</p>
+                            <p>That is the type of advisory contribution that translates beyond aerospace. Many regulated organizations do not primarily need more AI enthusiasm. They need sharper framing, stronger sequencing, and more confidence that the chosen move will hold up operationally.</p>
+                        </div>
+                    </article>
+                    <div class="grid gap-8">
+                        <article class="project-card p-8 animate-on-scroll slide-in-right">
+                            <p class="text-xs uppercase tracking-[0.3em] text-gray-500">What improved</p>
+                            <ul class="mt-5 space-y-3 text-gray-300 leading-relaxed">
+                                <li>Clearer understanding of the user journey and where friction was concentrated.</li>
+                                <li>More grounded digitalization and automation choices.</li>
+                                <li>Better alignment between technical decisions and stakeholder support.</li>
+                            </ul>
+                        </article>
+                        <article class="project-card p-8 animate-on-scroll slide-in-right delay-100">
+                            <p class="text-xs uppercase tracking-[0.3em] text-gray-500">Why this matters for clients now</p>
+                            <p class="mt-4 text-gray-300 leading-relaxed">This is the same move leaders now need around GenAI and agentic AI: map real friction, choose the right operating intervention, and build a roadmap that people can actually trust.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 lg:py-24">
+            <div class="container mx-auto px-6 animate-on-scroll slide-in-bottom">
+                <div class="footer-shell">
+                    <div class="footer-shell-hud" aria-hidden="true">
+                        <span>Case review // Airbus quality engineering</span>
+                        <span>Advisory translation // regulated environments</span>
+                    </div>
+                    <div class="footer-primary">
+                        <div class="footer-intro">
+                            <p class="section-kicker footer-kicker">Next step</p>
+                            <h2 class="footer-title">If your mandate looks similar, let&apos;s define the next move.</h2>
+                            <p class="footer-copy">
+                                I work best where digitalization, AI, or GenAI decisions need to be tied back to real operating logic, stakeholder trust, and a roadmap leadership can support.
+                            </p>
+                            <div class="footer-cta-row">
+                                <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-6 transition-transform duration-300 text-base text-center"
+                                   data-cal-link="yassine-m-zowgc4/15min"
+                                   data-cal-namespace="15min"
+                                   data-cal-config='{"layout":"month_view","theme":"dark"}'>
+                                    Book an advisory call
+                                </a>
+                                <a href="mailto:hello@wyassine.com?subject=Discuss%20a%20similar%20AI%20transformation%20mandate" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-300 font-bold py-3 px-6 transition-all duration-300 text-base text-center">
+                                    Email directly
+                                </a>
+                            </div>
+                        </div>
+                        <article class="footer-panel">
+                            <p class="footer-panel-label">Related pages</p>
+                            <div class="footer-link-list">
+                                <a href="index.html#proof"><span>Homepage proof</span><span class="footer-link-arrow">Main site</span></a>
+                                <a href="brief-genai-operating-model.html"><span>Flagship GenAI brief</span><span class="footer-link-arrow">Read</span></a>
+                                <a href="index.html#contact"><span>Homepage contact</span><span class="footer-link-arrow">Return</span></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container mx-auto px-6 pt-4 pb-8">
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Yassine W. Medjati. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="index.html" class="footer-action-link">Back to home</a>
+                    <button type="button" id="open-cookie-settings" class="footer-action-link">Cookie settings</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <aside id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-description" hidden>
+        <div class="cookie-banner-panel">
+            <p class="cookie-banner-kicker">Privacy preferences</p>
+            <h2 id="cookie-banner-title">Keep scheduling on-site, only if you want it.</h2>
+            <p id="cookie-banner-description" class="cookie-banner-copy">
+                Essential storage keeps navigation and interface preferences stable. If you allow scheduling cookies, the Cal.com booking experience can open directly on this site instead of sending visitors away.
+            </p>
+            <div class="cookie-banner-tags" aria-hidden="true">
+                <span>Essential</span>
+                <span>Scheduling</span>
+                <span>On-site booking</span>
+            </div>
+            <div class="cookie-banner-actions">
+                <button type="button" class="cookie-btn cookie-btn-secondary" data-cookie-choice="essential">Essential only</button>
+                <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-choice="embedded">Allow on-site scheduling</button>
+            </div>
+        </div>
+    </aside>
+</body>
+</html>
