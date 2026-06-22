@@ -986,17 +986,33 @@ document.addEventListener("DOMContentLoaded", () => {
             const loaderTextContainer = document.getElementById("loader-text-container");
             if (!loaderGreeting || !this.elements.loader || !this.elements.mainContent || !loaderTextContainer) return;
 
-            loaderGreeting.textContent = "Hello!";
+            // Multilingual greetings matching the 4 languages on the credentials section
+            const greetings = ["Hello", "Bonjour", "Hallo", "مرحبا"];
+            let greetingIndex = 0;
+
+            loaderGreeting.textContent = greetings[0];
             setTimeout(() => {
                 loaderTextContainer.style.opacity = "1";
             }, 180);
 
-            const minLoaderTime = 950;
+            // Cycle greetings with a smooth fade
+            const cycleInterval = setInterval(() => {
+                greetingIndex = (greetingIndex + 1) % greetings.length;
+                loaderGreeting.classList.add("fading");
+                setTimeout(() => {
+                    loaderGreeting.textContent = greetings[greetingIndex];
+                    loaderGreeting.classList.remove("fading");
+                }, 220);
+            }, 520);
+
+            // Slightly longer min-time so visitors see at least 2 languages cycle
+            const minLoaderTime = 1500;
             let minTimePassed = false;
             let isWindowLoaded = false;
 
             const hideLoader = () => {
                 if (this.elements.loader.classList.contains("hidden")) return;
+                clearInterval(cycleInterval);
                 document.body.classList.add("loaded");
                 this.elements.loader.classList.add("hidden");
                 this.elements.mainContent.classList.add("loaded");

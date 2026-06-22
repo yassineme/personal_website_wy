@@ -113,13 +113,32 @@
 
 
     <!-- Pre-loader -->
-    <div id="loader" class="fixed inset-0 bg-black z-[99999] flex flex-col items-center justify-center text-center">
-        <div class="hole mb-8">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    <div id="loader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center text-center">
+        <div class="loader-bg-glow" aria-hidden="true"></div>
+
+        <!-- Modern minimal spinner — rotating indigo arc -->
+        <div class="loader-spinner" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="loader-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#a5b4fc"/>
+                        <stop offset="100%" stop-color="#6366f1"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+                <circle cx="32" cy="32" r="28" stroke="url(#loader-grad)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="56 176" pathLength="176"/>
+            </svg>
         </div>
-        <div id="loader-text-container" class="text-center opacity-0 transition-opacity duration-500">
-             <p id="loader-greeting" class="text-5xl md:text-7xl font-heading text-white">Hello!</p>
-             <p class="text-lg md:text-xl text-gray-300 mt-4 font-body">AI strategy, transformation and leadership.</p>
+
+        <div id="loader-text-container" class="opacity-0 transition-opacity duration-500">
+            <p id="loader-greeting" class="loader-greeting" dir="auto">Hello</p>
+            <p class="loader-subtitle">
+                <span>Independent</span>
+                <span class="loader-dot" aria-hidden="true"></span>
+                <span class="loader-accent">AI advisor</span>
+                <span class="loader-dot" aria-hidden="true"></span>
+                <span>Europe</span>
+            </p>
         </div>
     </div>
 
@@ -134,7 +153,7 @@
     <header id="main-header" class="py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <a href="#top" class="brand-link">
-                <span class="desktop-brand">AI Strategy · Independent Counsel · Europe</span>
+                <span class="desktop-brand">AI Strategy · Independent Advisor · Europe</span>
                 <span class="mobile-brand">
                     <span class="mobile-brand-avatar-frame">
                         <img src="assets/yassine-portrait.png" alt="Portrait of Yassine W. Medjati" class="mobile-brand-avatar" data-fallback-src="assets/portrait-fallback.svg">
@@ -151,7 +170,6 @@
                 <a href="#advisory" class="nav-link text-gray-300 hover:text-white">Advisory</a>
                 <a href="#services" class="nav-link text-gray-300 hover:text-white">Services</a>
                 <a href="#sectors" class="nav-link text-gray-300 hover:text-white">Sectors</a>
-                <a href="#proof" class="nav-link text-gray-300 hover:text-white">Proof</a>
                 <a href="#insights" class="nav-link text-gray-300 hover:text-white">Insights</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
             </nav>
@@ -196,7 +214,6 @@
                     <a href="#advisory" class="nav-link text-gray-300 hover:text-white">Advisory</a>
                     <a href="#services" class="nav-link text-gray-300 hover:text-white">Services</a>
                     <a href="#sectors" class="nav-link text-gray-300 hover:text-white">Sectors</a>
-                    <a href="#proof" class="nav-link text-gray-300 hover:text-white">Proof</a>
                     <a href="#insights" class="nav-link text-gray-300 hover:text-white">Insights</a>
                     <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
                 </nav>
@@ -235,7 +252,7 @@
             </span>
             <span class="mobile-dock-label">Home</span>
         </a>
-        <a href="#proof" class="nav-link mobile-dock-link">
+        <a href="#services" class="nav-link mobile-dock-link">
             <span class="mobile-dock-icon-wrap">
                 <svg class="mobile-dock-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M9.94 2.97a.75.75 0 0 1 1.42 0l1.42 4.27 4.27 1.42a.75.75 0 0 1 0 1.42l-4.27 1.42-1.42 4.27a.75.75 0 0 1-1.42 0L8.52 11.5l-4.27-1.42a.75.75 0 0 1 0-1.42L8.52 7.24l1.42-4.27Z"/>
@@ -270,25 +287,22 @@
                             <span class="hero-mobile-badge-dot"></span>
                             Independent · Inquiries open
                         </div>
-                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Independent AI Counsel · Europe</p>
+                        <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Independent AI Advisor · Europe</p>
                         <h1 class="mt-6 text-5xl sm:text-7xl md:text-8xl font-extrabold font-heading text-white leading-[0.95]">
-                            <span class="hero-title-line">AI counsel for</span>
+                            <span class="hero-title-line">AI advisor for</span>
                             <span class="hero-title-line"><span class="hero-accent">European leaders</span></span>
                             <span class="hero-title-line">from inside</span>
                             <span class="hero-title-line">the industry.</span>
                         </h1>
                         <p class="hero-copy-body mt-6 text-lg md:text-2xl text-gray-300 leading-relaxed max-w-2xl">
-                            I'm Yassine — six years leading AI and digitalization inside European industrial aerospace. I provide independent strategic counsel to executives, AI implementation leaders, and policymakers facing AI decisions in legacy and regulated environments — without vendor incentives or product pitches.
+                            Six years leading AI and digitalization inside European industrial aerospace. I provide independent strategic advice to executives, AI implementation leaders, and policymakers facing AI decisions in legacy and regulated environments — without vendor incentives or product pitches.
                         </p>
-                        <div class="hero-actions mt-10 flex flex-col sm:flex-row gap-4">
+                        <div class="hero-actions hero-actions--single mt-10 flex flex-col sm:flex-row gap-4">
                             <a href="https://cal.com/yassine-m-zowgc4/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-heading flex justify-center items-center bg-white text-black font-bold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105 text-lg text-center"
                                data-cal-link="yassine-m-zowgc4/15min"
                                data-cal-namespace="15min"
                                data-cal-config='{"layout":"month_view","theme":"dark"}'>
-                                Request a briefing
-                            </a>
-                            <a href="mailto:hello@wyassine.com" class="btn btn-secondary hero-mobile-email font-heading flex justify-center items-center bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 hover:bg-white hover:text-black text-lg text-center">
-                                Reach out Now
+                                Let's connect
                             </a>
                         </div>
                         <!-- Mobile-only trust strip -->
@@ -324,7 +338,7 @@
                                 <svg class="hero-portrait-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
                                 </svg>
-                                <span>Independent counsel</span>
+                                <span>Independent advisor</span>
                             </div>
 
                             <!-- Floating location tag — bottom -->
@@ -407,7 +421,7 @@
                     </div>
                     <div class="animate-on-scroll slide-in-right space-y-6 text-lg text-gray-300 leading-relaxed">
                         <p>
-                            Most AI counsel in Europe comes from one of three places: academics who have never shipped a system, vendors with obvious commercial incentives, or consultants who write decks but have never carried a roadmap. Each has limits. None is enough on its own.
+                            Most AI advice in Europe comes from one of three places: academics who have never shipped a system, vendors with obvious commercial incentives, or consultants who write decks but have never carried a roadmap. Each has limits. None is enough on its own.
                         </p>
                         <p>
                             Industrial executives, AI implementation leaders, and policymakers deserve a fourth source: operators who actually ship AI inside complex regulated environments, willing to advise without commercial stake.
@@ -416,7 +430,7 @@
                             I work inside European industrial aerospace, in airframe and quality engineering — environments shaped by safety, audit, regulator scrutiny, and decades of operational legacy. I see daily what AI can and cannot do in critical industrial systems. That perspective, translated into language CEOs, AI leaders, and ministers can actually use, is rare in advisory circles.
                         </p>
                         <p class="text-white">
-                            This work is offered as <strong>expert counsel, not consulting</strong>. No mandates, no slides, no products. Briefings, written memos, and ongoing availability for those facing the AI decisions Europe is making this decade — in industry and in policy.
+                            This work is offered as <strong>expert advice, not consulting</strong>. No mandates, no slides, no products. Briefings, written memos, and ongoing availability for those facing the AI decisions Europe is making this decade — in industry and in policy.
                         </p>
                     </div>
                 </div>
@@ -429,7 +443,7 @@
                             My independence is the value.
                         </h3>
                         <p class="mt-5 text-gray-400 leading-relaxed">
-                            A clear list of what is off the table. Executives, AI leaders, and policymakers deserve to know exactly where my counsel stops — before they ask.
+                            A clear list of what is off the table. Executives, AI leaders, and policymakers deserve to know exactly where my advice stops — before they ask.
                         </p>
                     </div>
                     <ul class="advisory-boundaries-grid">
@@ -463,11 +477,11 @@
         </section>
 
 
-        <!-- Counsel Formats -->
+        <!-- Advisor Formats -->
         <section id="services" class="py-32 lg:py-48">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Counsel formats</p>
+                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Advisor formats</p>
                     <h2 class="text-4xl md:text-5xl font-extrabold mt-4">How I work with leaders</h2>
                     <p class="text-lg text-gray-400 mt-3 max-w-2xl mx-auto">Four formats matched to how executives, AI leaders, and policymakers actually consume expert input — not consulting tiers.</p>
                 </div>
@@ -480,14 +494,14 @@
                         <a href="#contact" class="font-heading inline-block mt-6 font-semibold text-white group">Request a briefing <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
                     <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-100">
-                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">02 · Standing counsel</p>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">02 · Standing advisor</p>
                         <h3 class="text-2xl font-bold mt-4">Ongoing availability</h3>
                         <p class="text-gray-400 mt-4 leading-relaxed">For a CEO, AI implementation leader, public-sector institution, or political office. Episodic deeper sessions when AI decisions arise — the call you make when something hits your desk and needs an outside perspective fast. Quiet, discreet, low-overhead.</p>
                         <p class="text-xs text-gray-500 mt-6 uppercase tracking-[0.18em]">Typical: 6–12 month standing relationship</p>
                         <a href="#contact" class="font-heading inline-block mt-6 font-semibold text-white group">Open a conversation <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span></a>
                     </div>
                     <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 transition-transform duration-300 relative animate-on-scroll slide-in-bottom delay-200">
-                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">03 · Written counsel</p>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gray-500">03 · Written advice</p>
                         <h3 class="text-2xl font-bold mt-4">Memos, reviews, position papers</h3>
                         <p class="text-gray-400 mt-4 leading-relaxed">Independent reviews of AI strategies, roadmaps, draft legislation, and policy positions. 5–15 pages. Citable, on the record, and written so a board member, civil servant, or AI leader can act on them directly — not a slide deck nobody reads.</p>
                         <p class="text-xs text-gray-500 mt-6 uppercase tracking-[0.18em]">Typical: 2–4 weeks · 5–15 page document</p>
@@ -511,7 +525,7 @@
                 <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
                     <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Who I advise</p>
                     <h2 class="text-4xl md:text-5xl font-extrabold mt-4">European decision-makers facing AI calls this decade.</h2>
-                    <p class="text-lg text-gray-400 mt-3 max-w-3xl mx-auto">My counsel is targeted to leaders in industry and policy who need an operator's perspective — without commercial entanglement.</p>
+                    <p class="text-lg text-gray-400 mt-3 max-w-3xl mx-auto">My advice is targeted to leaders in industry and policy who need an operator's perspective — without commercial entanglement.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="project-card bg-gray-900/50 p-8 rounded-2xl border border-gray-800/50 relative animate-on-scroll slide-in-bottom">
@@ -531,81 +545,8 @@
                     </div>
                 </div>
                 <p class="max-w-4xl mx-auto text-center text-sm text-gray-500 mt-10 animate-on-scroll slide-in-bottom">
-                    Counsel is offered without conflict with my full-time industrial role. I do not advise on procurement that benefits a specific provider, nor on military or weapons applications.
+                    Advice is offered without conflict with my full-time industrial role. I do not advise on procurement that benefits a specific provider, nor on military or weapons applications.
                 </p>
-            </div>
-        </section>
-
-
-        <!-- Credentials -->
-        <section id="proof" class="section-proof py-32 lg:py-48">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 animate-on-scroll slide-in-bottom">
-                    <p class="section-kicker text-xs uppercase tracking-[0.35em] text-gray-500">Credentials</p>
-                    <h2 class="text-4xl md:text-5xl font-extrabold mt-4">The track record behind the counsel.</h2>
-                    <p class="text-lg text-gray-400 mt-3 max-w-3xl mx-auto">Education, certifications, recognition, languages — what I can put on the public record. Operational specifics from my full-time role stay confidential.</p>
-                </div>
-
-                <div class="credentials-stack max-w-4xl mx-auto">
-                    <div class="credential-row animate-on-scroll slide-in-left">
-                        <div class="credential-row-meta">
-                            <p class="credential-row-label">Education</p>
-                            <p class="credential-row-hint">Computer science · big data · telecommunications</p>
-                        </div>
-                        <div class="credential-pills">
-                            <span class="credential-pill">MSc Big Data · ISAE-ENSMA</span>
-                            <span class="credential-pill">MSc Telecommunications</span>
-                            <span class="credential-pill">AI Nanodegree</span>
-                        </div>
-                    </div>
-
-                    <div class="credential-row animate-on-scroll slide-in-left delay-100">
-                        <div class="credential-row-meta">
-                            <p class="credential-row-label">Recognition</p>
-                            <p class="credential-row-hint">Internal leadership &amp; talent programs</p>
-                        </div>
-                        <div class="credential-pills">
-                            <span class="credential-pill">Future Leader Program 2025</span>
-                            <span class="credential-pill">NextGen Aviation Leaders 2022–2024</span>
-                        </div>
-                    </div>
-
-                    <div class="credential-row animate-on-scroll slide-in-left delay-200">
-                        <div class="credential-row-meta">
-                            <p class="credential-row-label">Certifications</p>
-                            <p class="credential-row-hint">Independently certified</p>
-                        </div>
-                        <div class="credential-pills">
-                            <span class="credential-pill">Certified ScrumMaster (CSM)</span>
-                            <span class="credential-pill">CISCO CCNA</span>
-                        </div>
-                    </div>
-
-                    <div class="credential-row animate-on-scroll slide-in-left delay-300">
-                        <div class="credential-row-meta">
-                            <p class="credential-row-label">Speaking &amp; voice</p>
-                            <p class="credential-row-hint">Public communication practice</p>
-                        </div>
-                        <div class="credential-pills">
-                            <span class="credential-pill">AI Summit 2021 · Speaker</span>
-                            <span class="credential-pill">VP · Toastmasters Hamburg</span>
-                        </div>
-                    </div>
-
-                    <div class="credential-row animate-on-scroll slide-in-left delay-400">
-                        <div class="credential-row-meta">
-                            <p class="credential-row-label">Languages &amp; geography</p>
-                            <p class="credential-row-hint">Cross-European fluency</p>
-                        </div>
-                        <div class="credential-pills">
-                            <span class="credential-pill">English</span>
-                            <span class="credential-pill">French</span>
-                            <span class="credential-pill">Arabic</span>
-                            <span class="credential-pill">German</span>
-                            <span class="credential-pill">4 countries lived &amp; worked</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -662,7 +603,7 @@
                         <span class="dot"></span>
                     </a>
                     <p class="font-heading text-lg text-gray-400 mb-4">Ready to define the next move?</p>
-                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">If AI is already on the agenda, let&apos;s define the next decision.</h2>
+                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">If AI is already on the agenda, let&apos;s define the next steps .</h2>
                     <p class="mt-4 text-xl text-gray-300">I work best with executive teams and transformation leaders who need sharper priorities, clearer ownership, and a roadmap they can actually carry through the organization.</p>
                     <p class="section-kicker mt-4 text-sm uppercase tracking-[0.3em] text-gray-500">Typical first conversation: 15 minutes</p>
                     <div class="contact-actions mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -670,10 +611,10 @@
                            data-cal-link="yassine-m-zowgc4/15min"
                            data-cal-namespace="15min"
                            data-cal-config='{"layout":"month_view","theme":"dark"}'>
-                            Request a briefing
+                            Let's have a call
                         </a>
                         <a href="mailto:hello@wyassine.com" class="btn btn-secondary font-heading flex justify-center items-center bg-transparent border-2 border-gray-600 text-gray-400 font-bold py-3 px-6 rounded-full transition-all duration-300 hover:scale-105 hover:border-white hover:text-white text-lg text-center">
-                            Reach out Now
+                            Email Now
                         </a>
                     </div>
                 </div>
@@ -748,9 +689,8 @@
                             <a href="#advisory"><span>Advisory</span><span class="footer-link-arrow">01</span></a>
                             <a href="#services"><span>Services</span><span class="footer-link-arrow">02</span></a>
                             <a href="#sectors"><span>Sectors</span><span class="footer-link-arrow">03</span></a>
-                            <a href="#proof"><span>Proof</span><span class="footer-link-arrow">04</span></a>
-                            <a href="#insights"><span>Insights</span><span class="footer-link-arrow">05</span></a>
-                            <a href="#contact"><span>Contact</span><span class="footer-link-arrow">06</span></a>
+                            <a href="#insights"><span>Insights</span><span class="footer-link-arrow">04</span></a>
+                            <a href="#contact"><span>Contact</span><span class="footer-link-arrow">05</span></a>
                         </div>
                     </article>
                     <article class="footer-panel">
