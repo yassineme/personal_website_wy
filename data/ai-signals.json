@@ -1,40 +1,485 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-25T14:00:13.907Z",
-  "updatedAt": "2026-10-25T14:00:13.907Z",
-  "refreshMinutes": 15,
+  "checkedAt": "2026-10-26T13:39:33.966Z",
+  "updatedAt": "2026-10-26T13:39:33.966Z",
   "status": "ok",
+  "refreshMinutes": 5,
   "sources": [
     {
       "id": "openai",
       "name": "OpenAI",
       "home": "https://openai.com/news/",
       "status": "ok",
-      "lastSuccessfulAt": "2026-10-25T14:00:13.907Z"
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
     },
     {
       "id": "deepmind",
       "name": "Google DeepMind",
       "home": "https://deepmind.google/blog/",
       "status": "ok",
-      "lastSuccessfulAt": "2026-10-25T14:00:13.907Z"
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
     },
     {
       "id": "huggingface",
       "name": "Hugging Face",
       "home": "https://huggingface.co/blog",
       "status": "ok",
-      "lastSuccessfulAt": "2026-10-25T14:00:13.907Z"
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
     },
     {
       "id": "nist",
       "name": "NIST",
       "home": "https://www.nist.gov/artificial-intelligence",
       "status": "ok",
-      "lastSuccessfulAt": "2026-10-25T14:00:13.907Z"
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "google",
+      "name": "Google AI",
+      "home": "https://blog.google/innovation-and-ai/technology/ai/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "home": "https://mistral.ai/news",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft AI",
+      "home": "https://www.microsoft.com/en-us/ai/blog/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "mit",
+      "name": "MIT News",
+      "home": "https://news.mit.edu/topic/artificial-intelligence2",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "aws",
+      "name": "AWS Machine Learning",
+      "home": "https://aws.amazon.com/blogs/machine-learning/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "home": "https://blogs.nvidia.com/blog/category/generative-ai/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "arstechnica",
+      "name": "Ars Technica",
+      "home": "https://arstechnica.com/ai/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "decoder",
+      "name": "The Decoder",
+      "home": "https://the-decoder.com/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "simon",
+      "name": "Simon Willison",
+      "home": "https://simonwillison.net/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "usefulthing",
+      "name": "One Useful Thing",
+      "home": "https://www.oneusefulthing.org/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "snakeoil",
+      "name": "AI as Normal Technology",
+      "home": "https://www.normaltech.ai/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "interconnects",
+      "name": "Interconnects",
+      "home": "https://www.interconnects.ai/",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
+    },
+    {
+      "id": "ukaisi",
+      "name": "UK AI Security Institute",
+      "home": "https://www.gov.uk/government/organisations/ai-security-institute",
+      "status": "ok",
+      "lastSuccessfulAt": "2026-10-26T13:39:33.966Z"
     }
   ],
   "items": [
+    {
+      "id": "36b15cc38f42324d",
+      "sourceId": "decoder",
+      "source": "The Decoder",
+      "lens": "Independent reporting",
+      "title": "Wall Street's fastest traders are building data centers and backing chip startups to stay ahead in AI",
+      "excerpt": "High-frequency traders like Jane Street and Hudson River Trading are now racing each other for AI computing power. The article Wall Street's fastest traders are building data centers and backing chip startups to stay ahead in AI appeared first on The Decoder .",
+      "url": "https://the-decoder.com/wall-streets-fastest-traders-are-building-data-centers-and-backing-chip-startups-to-stay-ahead-in-ai/",
+      "publishedAt": "2026-10-26T09:49:33.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "36b15cc38f42324d",
+      "topics": [
+        "Enterprise adoption"
+      ],
+      "implication": "For adoption planning, test the workflow fit, operating cost and ownership before scaling beyond a pilot.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "36b15cc38f42324d",
+          "sourceId": "decoder",
+          "source": "The Decoder",
+          "title": "Wall Street's fastest traders are building data centers and backing chip startups to stay ahead in AI",
+          "url": "https://the-decoder.com/wall-streets-fastest-traders-are-building-data-centers-and-backing-chip-startups-to-stay-ahead-in-ai/",
+          "publishedAt": "2026-10-26T09:49:33.000Z"
+        }
+      ]
+    },
+    {
+      "id": "5b844fecb260da22",
+      "sourceId": "decoder",
+      "source": "The Decoder",
+      "lens": "Independent reporting",
+      "title": "Toyota is betting $6.4 billion a year on humanoid robots and factory automation",
+      "excerpt": "Toyota wants to turn itself into a global robotics company, and it's betting on humanoid robots and factory automation to get there. The article Toyota is betting $6.4 billion a year on humanoid robots and factory automation appeared first on The Decoder .",
+      "url": "https://the-decoder.com/toyota-is-betting-6-4-billion-a-year-on-humanoid-robots-and-factory-automation/",
+      "publishedAt": "2026-10-26T09:18:15.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "5b844fecb260da22",
+      "topics": [
+        "People & work"
+      ],
+      "implication": "For workforce planning, consider how roles, skills and support would need to change alongside the technology.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "5b844fecb260da22",
+          "sourceId": "decoder",
+          "source": "The Decoder",
+          "title": "Toyota is betting $6.4 billion a year on humanoid robots and factory automation",
+          "url": "https://the-decoder.com/toyota-is-betting-6-4-billion-a-year-on-humanoid-robots-and-factory-automation/",
+          "publishedAt": "2026-10-26T09:18:15.000Z"
+        }
+      ]
+    },
+    {
+      "id": "9c6009b025f44314",
+      "sourceId": "interconnects",
+      "source": "Interconnects",
+      "lens": "Research & practice",
+      "title": "Podcast: Kimi K3.1 Pro, the new cyber reality, and Muse musings",
+      "excerpt": "#20",
+      "url": "https://www.interconnects.ai/p/podcast-kimi-k31-pro-the-new-cyber",
+      "publishedAt": "2026-10-25T11:49:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "9c6009b025f44314",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "9c6009b025f44314",
+          "sourceId": "interconnects",
+          "source": "Interconnects",
+          "title": "Podcast: Kimi K3.1 Pro, the new cyber reality, and Muse musings",
+          "url": "https://www.interconnects.ai/p/podcast-kimi-k31-pro-the-new-cyber",
+          "publishedAt": "2026-10-25T11:49:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "43ff7f893a77336b",
+      "sourceId": "decoder",
+      "source": "The Decoder",
+      "lens": "Independent reporting",
+      "title": "Nvidia open-sources Flora to make robot video labeling 125x cheaper than GPT-6 Astra",
+      "excerpt": "Nvidia's new data engine Flora labels one hour of robot video for 72 cents instead of $88 with GPT-6 Astra, while scoring slightly higher on quality. The open system, built on three fine-tuned Qwen3.5 models, catches errors in robot actions far more reliably than any competitor but sometimes falls short on descriptive accuracy. Nvidia is positionin",
+      "url": "https://the-decoder.com/nvidia-open-sources-flora-to-make-robot-video-labeling-125x-cheaper-than-gpt-6-astra/",
+      "publishedAt": "2026-10-25T10:08:49.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "43ff7f893a77336b",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "43ff7f893a77336b",
+          "sourceId": "decoder",
+          "source": "The Decoder",
+          "title": "Nvidia open-sources Flora to make robot video labeling 125x cheaper than GPT-6 Astra",
+          "url": "https://the-decoder.com/nvidia-open-sources-flora-to-make-robot-video-labeling-125x-cheaper-than-gpt-6-astra/",
+          "publishedAt": "2026-10-25T10:08:49.000Z"
+        }
+      ]
+    },
+    {
+      "id": "0b9ccb1bd3f5be5c",
+      "sourceId": "decoder",
+      "source": "The Decoder",
+      "lens": "Independent reporting",
+      "title": "Anthropic co-founder Jack Clark moves his prediction for self-improving AI forward to 2027",
+      "excerpt": "A new benchmark by P-Zero Research measures how well AI models design and evaluate experiments on their own. The results are improving so fast that Anthropic co-founder Jack Clark now thinks self-improving AI could arrive by 2027. The article Anthropic co-founder Jack Clark moves his prediction for self-improving AI forward to 2027 appeared first o",
+      "url": "https://the-decoder.com/anthropic-co-founder-jack-clark-moves-his-prediction-for-self-improving-ai-forward-to-2027/",
+      "publishedAt": "2026-10-25T09:37:46.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "0b9ccb1bd3f5be5c",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "0b9ccb1bd3f5be5c",
+          "sourceId": "decoder",
+          "source": "The Decoder",
+          "title": "Anthropic co-founder Jack Clark moves his prediction for self-improving AI forward to 2027",
+          "url": "https://the-decoder.com/anthropic-co-founder-jack-clark-moves-his-prediction-for-self-improving-ai-forward-to-2027/",
+          "publishedAt": "2026-10-25T09:37:46.000Z"
+        }
+      ]
+    },
+    {
+      "id": "d1879513a33727bd",
+      "sourceId": "simon",
+      "source": "Simon Willison",
+      "lens": "Practitioner perspective",
+      "title": "battledrones v14: Compass Rose, a four player map",
+      "excerpt": "Release: battledrones v14: Compass Rose, a four player map I added four player online mode to Battledrones - previous maps were limited to two. Here's the initial prompt I used: Add a new map for a four player battle - four way rotational symmetry, up to four AI players, works with the WebSocket non-audio based multiplayer mode so up to four human ",
+      "url": "https://simonwillison.net/2026/Oct/24/battledrones/",
+      "publishedAt": "2026-10-24T03:59:57.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "d1879513a33727bd",
+      "topics": [
+        "People & work"
+      ],
+      "implication": "For workforce planning, consider how roles, skills and support would need to change alongside the technology.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "d1879513a33727bd",
+          "sourceId": "simon",
+          "source": "Simon Willison",
+          "title": "battledrones v14: Compass Rose, a four player map",
+          "url": "https://simonwillison.net/2026/Oct/24/battledrones/",
+          "publishedAt": "2026-10-24T03:59:57.000Z"
+        }
+      ]
+    },
+    {
+      "id": "1560ea04dee0e58a",
+      "sourceId": "simon",
+      "source": "Simon Willison",
+      "lens": "Practitioner perspective",
+      "title": "Quick Study",
+      "excerpt": "Tool: Quick Study Prompt to Claude Opus 5.5 High : Build an artifact where you open a photo and it rapidly (in a few seconds) paints a version of that photo using a canvas element and simulated paintbrush See also my previous experiment getting Claude Fable to simulate a watercolor illustration with P5.js. Quick Study uses Sobel edge detection , wi",
+      "url": "https://simonwillison.net/2026/Oct/23/quick-study-painter/",
+      "publishedAt": "2026-10-23T21:35:13.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "1560ea04dee0e58a",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "1560ea04dee0e58a",
+          "sourceId": "simon",
+          "source": "Simon Willison",
+          "title": "Quick Study",
+          "url": "https://simonwillison.net/2026/Oct/23/quick-study-painter/",
+          "publishedAt": "2026-10-23T21:35:13.000Z"
+        }
+      ]
+    },
+    {
+      "id": "303db39c14fcfc30",
+      "sourceId": "mit",
+      "source": "MIT News",
+      "lens": "Research & society",
+      "title": "At MIT, Martha Minow speaks on sustaining democracy, both by using and overcoming AI",
+      "excerpt": "In Compton Lecture, the distinguished legal scholar warns of potential “loss of the Enlightenment” while suggesting ways innovations can meet our civic and cultural needs.",
+      "url": "https://news.mit.edu/2026/martha-minow-speaks-on-sustaining-democracy-using-overcoming-ai-1023",
+      "publishedAt": "2026-10-23T21:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "303db39c14fcfc30",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "303db39c14fcfc30",
+          "sourceId": "mit",
+          "source": "MIT News",
+          "title": "At MIT, Martha Minow speaks on sustaining democracy, both by using and overcoming AI",
+          "url": "https://news.mit.edu/2026/martha-minow-speaks-on-sustaining-democracy-using-overcoming-ai-1023",
+          "publishedAt": "2026-10-23T21:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "7be3008f9053e2be",
+      "sourceId": "arstechnica",
+      "source": "Ars Technica",
+      "lens": "Independent reporting",
+      "title": "Updated Google privacy policy says your Gmail might be used for advertising",
+      "excerpt": "Turning on Personal Intelligence gives the company more data for ad targeting.",
+      "url": "https://arstechnica.com/gadgets/2026/10/updated-google-privacy-policy-says-your-gmail-might-be-used-for-advertising/",
+      "publishedAt": "2026-10-23T20:19:55.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "7be3008f9053e2be",
+      "topics": [
+        "Governance"
+      ],
+      "implication": "For governance planning, review whether this changes your controls, evidence requirements or accountability.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "7be3008f9053e2be",
+          "sourceId": "arstechnica",
+          "source": "Ars Technica",
+          "title": "Updated Google privacy policy says your Gmail might be used for advertising",
+          "url": "https://arstechnica.com/gadgets/2026/10/updated-google-privacy-policy-says-your-gmail-might-be-used-for-advertising/",
+          "publishedAt": "2026-10-23T20:19:55.000Z"
+        }
+      ]
+    },
+    {
+      "id": "9e0308113d32ae3f",
+      "sourceId": "simon",
+      "source": "Simon Willison",
+      "lens": "Practitioner perspective",
+      "title": "Introducing Kimi K3.1 Pro",
+      "excerpt": "Introducing Kimi K3.1 Pro Kimi K3.1 Pro landed on the Kimi API today - it's not yet open weights, but Moonshot promise \"Full model weights will be released by Nov 4, 2026\". They're also offering a \"Highspeed\" version that's 2-3x faster, at twice the price (except for input token cache hits, which are priced the same). The US dollar pricing is $2.00",
+      "url": "https://simonwillison.net/2026/Oct/23/kimi-k31-pro/",
+      "publishedAt": "2026-10-23T19:40:54.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "9e0308113d32ae3f",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "9e0308113d32ae3f",
+          "sourceId": "simon",
+          "source": "Simon Willison",
+          "title": "Introducing Kimi K3.1 Pro",
+          "url": "https://simonwillison.net/2026/Oct/23/kimi-k31-pro/",
+          "publishedAt": "2026-10-23T19:40:54.000Z"
+        }
+      ]
+    },
+    {
+      "id": "6b7380afc5963ae9",
+      "sourceId": "mit",
+      "source": "MIT News",
+      "lens": "Research & society",
+      "title": "Reinforcing the value of human understanding at MIT",
+      "excerpt": "During the School of Humanities, Arts, and Social Sciences’ 75th Anniversary Symposium, President Sally Kornbluth said “MIT has never needed your particular insight and guidance more than we do now.”",
+      "url": "https://news.mit.edu/2026/reinforcing-value-of-human-understanding-at-mit-1023",
+      "publishedAt": "2026-10-23T19:35:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "6b7380afc5963ae9",
+      "topics": [
+        "People & work",
+        "Research"
+      ],
+      "implication": "For workforce planning, consider how roles, skills and support would need to change alongside the technology.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "6b7380afc5963ae9",
+          "sourceId": "mit",
+          "source": "MIT News",
+          "title": "Reinforcing the value of human understanding at MIT",
+          "url": "https://news.mit.edu/2026/reinforcing-value-of-human-understanding-at-mit-1023",
+          "publishedAt": "2026-10-23T19:35:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "c6dba218462cbd9b",
+      "sourceId": "aws",
+      "source": "AWS Machine Learning",
+      "lens": "AI engineering & deployment",
+      "title": "Multi-Turn Reinforcement Learning on Amazon SageMaker AI: A hands-on guide",
+      "excerpt": "Multi-Turn Reinforcement Learning (MTRL) on Amazon SageMaker AI trains models on the outcome of a whole multi-step task rather than labeled steps. This hands-on guide walks the full pipeline using Wordle: deploying the agent and reward on Amazon Bedrock AgentCore, preparing the dataset, training, and evaluating at serving settings.",
+      "url": "https://aws.amazon.com/blogs/machine-learning/multi-turn-reinforcement-learning-on-amazon-sagemaker-ai-a-hands-on-guide/",
+      "publishedAt": "2026-10-23T17:48:54.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "c6dba218462cbd9b",
+      "topics": [
+        "Agents",
+        "Enterprise adoption",
+        "Research"
+      ],
+      "implication": "For an agent rollout, check the permissions, human checkpoints and recovery path before expanding its scope.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "c6dba218462cbd9b",
+          "sourceId": "aws",
+          "source": "AWS Machine Learning",
+          "title": "Multi-Turn Reinforcement Learning on Amazon SageMaker AI: A hands-on guide",
+          "url": "https://aws.amazon.com/blogs/machine-learning/multi-turn-reinforcement-learning-on-amazon-sagemaker-ai-a-hands-on-guide/",
+          "publishedAt": "2026-10-23T17:48:54.000Z"
+        }
+      ]
+    },
+    {
+      "id": "1e9b03cbb67bfe99",
+      "sourceId": "arstechnica",
+      "source": "Ars Technica",
+      "lens": "Independent reporting",
+      "title": "Intel gets waiver after worries fuzzy US ban on foreign-made robots may hit fabs",
+      "excerpt": "Company says foreign-made robotic vehicles are crucial to US chip production.",
+      "url": "https://arstechnica.com/ai/2026/10/intel-gets-waiver-after-worries-fuzzy-us-ban-on-foreign-made-robots-may-hit-fabs/",
+      "publishedAt": "2026-10-23T17:18:31.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "1e9b03cbb67bfe99",
+      "topics": [
+        "Enterprise adoption"
+      ],
+      "implication": "For adoption planning, test the workflow fit, operating cost and ownership before scaling beyond a pilot.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "1e9b03cbb67bfe99",
+          "sourceId": "arstechnica",
+          "source": "Ars Technica",
+          "title": "Intel gets waiver after worries fuzzy US ban on foreign-made robots may hit fabs",
+          "url": "https://arstechnica.com/ai/2026/10/intel-gets-waiver-after-worries-fuzzy-us-ban-on-foreign-made-robots-may-hit-fabs/",
+          "publishedAt": "2026-10-23T17:18:31.000Z"
+        }
+      ]
+    },
     {
       "id": "ee4c22366ef7e7ab",
       "sourceId": "openai",
@@ -43,37 +488,107 @@
       "title": "Rapidly scaling online storage to serve over 1 billion ChatGPT users (Part II)",
       "excerpt": "Learn how OpenAI scaled Habitat with reliable multi-tenancy, global caching, and Azure Cosmos DB to deliver 12× faster reads for ChatGPT.",
       "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
-      "publishedAt": "2026-10-23T17:00:00.000Z"
+      "publishedAt": "2026-10-23T17:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "ee4c22366ef7e7ab",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "ee4c22366ef7e7ab",
+          "sourceId": "openai",
+          "source": "OpenAI",
+          "title": "Rapidly scaling online storage to serve over 1 billion ChatGPT users (Part II)",
+          "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
+          "publishedAt": "2026-10-23T17:00:00.000Z"
+        }
+      ]
     },
     {
-      "id": "301925b8adfcebab",
-      "sourceId": "deepmind",
-      "source": "Google DeepMind",
-      "lens": "Research & capability",
-      "title": "Beyond tree cover: mapping the world’s forest types",
-      "excerpt": "A global map categorizing every 10-meter patch of land on Earth into distinct forest types.",
-      "url": "https://deepmind.google/blog/beyond-tree-cover-mapping-the-worlds-forest-types/",
-      "publishedAt": "2026-10-22T14:30:24.000Z"
+      "id": "488b1661c30781ea",
+      "sourceId": "aws",
+      "source": "AWS Machine Learning",
+      "lens": "AI engineering & deployment",
+      "title": "Orchestrating SageMaker AI endpoint auto scaling with AWS CDK",
+      "excerpt": "Updating a SageMaker AI endpoint that has Application Auto Scaling registered makes AWS CloudFormation and AWS CDK deployments fail. This post shows how to build a reusable AWS CDK construct with CloudFormation custom resources that deregisters and re-registers auto scaling automatically, so you can update the endpoint and its scaling in a single d",
+      "url": "https://aws.amazon.com/blogs/machine-learning/orchestrating-sagemaker-ai-endpoint-auto-scaling-with-aws-cdk/",
+      "publishedAt": "2026-10-23T16:30:10.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "488b1661c30781ea",
+      "topics": [
+        "Enterprise adoption"
+      ],
+      "implication": "For adoption planning, test the workflow fit, operating cost and ownership before scaling beyond a pilot.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "488b1661c30781ea",
+          "sourceId": "aws",
+          "source": "AWS Machine Learning",
+          "title": "Orchestrating SageMaker AI endpoint auto scaling with AWS CDK",
+          "url": "https://aws.amazon.com/blogs/machine-learning/orchestrating-sagemaker-ai-endpoint-auto-scaling-with-aws-cdk/",
+          "publishedAt": "2026-10-23T16:30:10.000Z"
+        }
+      ]
     },
     {
-      "id": "2b3f616d26d343fe",
-      "sourceId": "huggingface",
-      "source": "Hugging Face",
-      "lens": "Open models & tools",
-      "title": "Does Your Model Run on AWS Trainium? Look It Up",
-      "excerpt": "",
-      "url": "https://huggingface.co/blog/torch-neuronx-model-support",
-      "publishedAt": "2026-10-23T00:00:00.000Z"
+      "id": "f04afccaacb0377a",
+      "sourceId": "aws",
+      "source": "AWS Machine Learning",
+      "lens": "AI engineering & deployment",
+      "title": "Visualize points and routes with GeoJSON in Amazon Quick Sight layer maps",
+      "excerpt": "Amazon Quick Sight layer maps now support Point and LineString geometry from the same GeoJSON workflow, so you can plot store locations and the routes between them. This post covers the dataset and GeoJSON structure layer maps require, when to choose points or lines, and techniques for viewport control, layering geometries, and dynamic GeoJSON upda",
+      "url": "https://aws.amazon.com/blogs/machine-learning/visualize-points-and-routes-with-geojson-in-amazon-quick-sight-layer-maps/",
+      "publishedAt": "2026-10-23T16:24:55.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "f04afccaacb0377a",
+      "topics": [
+        "Enterprise adoption"
+      ],
+      "implication": "For adoption planning, test the workflow fit, operating cost and ownership before scaling beyond a pilot.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "f04afccaacb0377a",
+          "sourceId": "aws",
+          "source": "AWS Machine Learning",
+          "title": "Visualize points and routes with GeoJSON in Amazon Quick Sight layer maps",
+          "url": "https://aws.amazon.com/blogs/machine-learning/visualize-points-and-routes-with-geojson-in-amazon-quick-sight-layer-maps/",
+          "publishedAt": "2026-10-23T16:24:55.000Z"
+        }
+      ]
     },
     {
-      "id": "2fdeae5b78b1a8a1",
-      "sourceId": "nist",
-      "source": "NIST",
-      "lens": "Trust & governance",
-      "title": "Comments on Software and Agentic AI Identity Concept Paper",
-      "excerpt": "The NIST National Cybersecurity Center of Excellence (NCCoE) has released a summary of comments received on the Software and Agentic Artificial Intelligence (AI) Identity and Authorization concept paper. This deliverable is available now on the",
-      "url": "https://www.nist.gov/news-events/news/2026/09/comments-software-and-agentic-ai-identity-concept-paper",
-      "publishedAt": "2026-09-29T12:00:00.000Z"
+      "id": "b535efb452866cdf",
+      "sourceId": "aws",
+      "source": "AWS Machine Learning",
+      "lens": "AI engineering & deployment",
+      "title": "How Bayer Crop Science built an agentic decision engine on Amazon Bedrock AgentCore with AWS Unified Operations",
+      "excerpt": "Bayer Crop Science built the Agentic Decision Engine (ADE), a multi-agent platform on Amazon Bedrock AgentCore that lets breeders, analysts, and researchers ask natural language questions about their analytics platform. This post covers the ADE architecture, five design decisions, and how the team prepared it for production with AWS Unified Operati",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-bayer-crop-science-built-an-agentic-decision-engine-on-amazon-bedrock-agentcore-with-aws-unified-operations/",
+      "publishedAt": "2026-10-23T16:21:36.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "b535efb452866cdf",
+      "topics": [
+        "Agents",
+        "Enterprise adoption",
+        "Research"
+      ],
+      "implication": "For an agent rollout, check the permissions, human checkpoints and recovery path before expanding its scope.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "b535efb452866cdf",
+          "sourceId": "aws",
+          "source": "AWS Machine Learning",
+          "title": "How Bayer Crop Science built an agentic decision engine on Amazon Bedrock AgentCore with AWS Unified Operations",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-bayer-crop-science-built-an-agentic-decision-engine-on-amazon-bedrock-agentcore-with-aws-unified-operations/",
+          "publishedAt": "2026-10-23T16:21:36.000Z"
+        }
+      ]
     },
     {
       "id": "f8c156dba7886826",
@@ -83,27 +598,53 @@
       "title": "Securing our frontier model training environment",
       "excerpt": "OpenAI explains how we strengthened containment for frontier model training and evaluation, including offline environments and high-compute red-teaming.",
       "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
-      "publishedAt": "2026-10-23T10:00:00.000Z"
+      "publishedAt": "2026-10-23T10:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "f8c156dba7886826",
+      "topics": [
+        "Governance",
+        "Research"
+      ],
+      "implication": "For governance planning, review whether this changes your controls, evidence requirements or accountability.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "f8c156dba7886826",
+          "sourceId": "openai",
+          "source": "OpenAI",
+          "title": "Securing our frontier model training environment",
+          "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+          "publishedAt": "2026-10-23T10:00:00.000Z"
+        }
+      ]
     },
     {
-      "id": "ad09b0946a60b7ff",
-      "sourceId": "deepmind",
-      "source": "Google DeepMind",
-      "lens": "Research & capability",
-      "title": "Accelerating the search for antimicrobial peptides with Google Antigravity",
-      "excerpt": "Accelerating the search for novel antimicrobial peptides using Google Antigravity for Science.",
-      "url": "https://deepmind.google/blog/accelerating-antimicrobial-discovery/",
-      "publishedAt": "2026-10-15T16:08:03.000Z"
-    },
-    {
-      "id": "39e60f901a735303",
-      "sourceId": "huggingface",
-      "source": "Hugging Face",
-      "lens": "Open models & tools",
-      "title": "Hugging Face ❤️ TorchTPU: TPUs, Natively",
-      "excerpt": "",
-      "url": "https://huggingface.co/blog/hf-torchtpu",
-      "publishedAt": "2026-10-20T00:00:00.000Z"
+      "id": "000b68dcd1349dc1",
+      "sourceId": "mit",
+      "source": "MIT News",
+      "lens": "Research & society",
+      "title": "Q&A: How AI came to model the “messy” human mind",
+      "excerpt": "Assistant Professor Benjamin Lindquist studies how engineers deliberately injected randomness into early AI, giving rise to deep-learning models that sometimes hallucinate.",
+      "url": "https://news.mit.edu/2026/qa-how-ai-came-to-model-messy-human-mind-1023",
+      "publishedAt": "2026-10-23T04:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "000b68dcd1349dc1",
+      "topics": [
+        "People & work",
+        "Research"
+      ],
+      "implication": "For workforce planning, consider how roles, skills and support would need to change alongside the technology.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "000b68dcd1349dc1",
+          "sourceId": "mit",
+          "source": "MIT News",
+          "title": "Q&A: How AI came to model the “messy” human mind",
+          "url": "https://news.mit.edu/2026/qa-how-ai-came-to-model-messy-human-mind-1023",
+          "publishedAt": "2026-10-23T04:00:00.000Z"
+        }
+      ]
     },
     {
       "id": "1a543055a02f9816",
@@ -113,27 +654,106 @@
       "title": "OpenAI and Poland’s NASK partner to advance AI safety and security",
       "excerpt": "OpenAI and Poland’s NASK are partnering on AI safety, security, and technical research to strengthen safeguards and support a more resilient digital ecosystem.",
       "url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
-      "publishedAt": "2026-10-23T00:00:00.000Z"
+      "publishedAt": "2026-10-23T00:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "1a543055a02f9816",
+      "topics": [
+        "Governance",
+        "Research"
+      ],
+      "implication": "For governance planning, review whether this changes your controls, evidence requirements or accountability.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "1a543055a02f9816",
+          "sourceId": "openai",
+          "source": "OpenAI",
+          "title": "OpenAI and Poland’s NASK partner to advance AI safety and security",
+          "url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
+          "publishedAt": "2026-10-23T00:00:00.000Z"
+        }
+      ]
     },
     {
-      "id": "36a7e1c23fbbe3b1",
-      "sourceId": "deepmind",
-      "source": "Google DeepMind",
-      "lens": "Research & capability",
-      "title": "Google DeepMind and Singapore Government collaborate to build fine-tuned AI model for scam detection",
-      "excerpt": "Learn how Google DeepMind and GovTech Singapore uses lightweight on-device Gemma models to intercept conversational scams in private chats with zero cloud data egress.",
-      "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
-      "publishedAt": "2026-10-14T02:00:14.000Z"
-    },
-    {
-      "id": "41fb25a47d12d204",
+      "id": "2b3f616d26d343fe",
       "sourceId": "huggingface",
       "source": "Hugging Face",
       "lens": "Open models & tools",
-      "title": "AnyLanguageModel 1.0: One Year of Local Models on Apple Platforms",
+      "title": "Does Your Model Run on AWS Trainium? Look It Up",
       "excerpt": "",
-      "url": "https://huggingface.co/blog/anylanguagemodel-1-0",
-      "publishedAt": "2026-10-20T00:00:00.000Z"
+      "url": "https://huggingface.co/blog/torch-neuronx-model-support",
+      "publishedAt": "2026-10-23T00:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "2b3f616d26d343fe",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "2b3f616d26d343fe",
+          "sourceId": "huggingface",
+          "source": "Hugging Face",
+          "title": "Does Your Model Run on AWS Trainium? Look It Up",
+          "url": "https://huggingface.co/blog/torch-neuronx-model-support",
+          "publishedAt": "2026-10-23T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "5f1dd60d45c3c1d2",
+      "sourceId": "mit",
+      "source": "MIT News",
+      "lens": "Research & society",
+      "title": "This design software reimagines everyday objects as self-aware devices",
+      "excerpt": "“X-Hinges” helps design and 3D print items like lamps and gloves with an interactive twist: automatically embedded sensors that perceive and adaptively respond to human contact.",
+      "url": "https://news.mit.edu/2026/design-software-reimagines-everyday-objects-as-self-aware-devices-1022",
+      "publishedAt": "2026-10-22T20:45:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "5f1dd60d45c3c1d2",
+      "topics": [
+        "People & work"
+      ],
+      "implication": "For workforce planning, consider how roles, skills and support would need to change alongside the technology.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "5f1dd60d45c3c1d2",
+          "sourceId": "mit",
+          "source": "MIT News",
+          "title": "This design software reimagines everyday objects as self-aware devices",
+          "url": "https://news.mit.edu/2026/design-software-reimagines-everyday-objects-as-self-aware-devices-1022",
+          "publishedAt": "2026-10-22T20:45:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "87e22db35085845a",
+      "sourceId": "simon",
+      "source": "Simon Willison",
+      "lens": "Practitioner perspective",
+      "title": "DE STAAT - FREEDOM (Official Music Video)",
+      "excerpt": "DE STAAT - FREEDOM (Official Music Video) OK well this is a first for me... at 00:44 in this new music video by Dutch alternative rock band De Staat : The visual effects are credited to Matties Grooten of Fake it or Leave it . Via flir on Hacker News Tags: music , ai , generative-ai , pelican-riding-a-bicycle",
+      "url": "https://simonwillison.net/2026/Oct/22/de-staat-freedom/",
+      "publishedAt": "2026-10-22T19:42:26.000Z",
+      "firstSeenAt": "2026-10-26T13:35:17.544Z",
+      "groupId": "87e22db35085845a",
+      "topics": [
+        "Research"
+      ],
+      "implication": "For a technology decision, compare this result with your own tasks, data and evaluation criteria.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "87e22db35085845a",
+          "sourceId": "simon",
+          "source": "Simon Willison",
+          "title": "DE STAAT - FREEDOM (Official Music Video)",
+          "url": "https://simonwillison.net/2026/Oct/22/de-staat-freedom/",
+          "publishedAt": "2026-10-22T19:42:26.000Z"
+        }
+      ]
     },
     {
       "id": "891b7e0bbf66f86d",
@@ -143,57 +763,41 @@
       "title": "Build more responsive apps with the Decisions API",
       "excerpt": "Fast, focused, low-cost decisions for any application.",
       "url": "https://openai.com/index/decisions-api",
-      "publishedAt": "2026-10-22T19:00:00.000Z"
-    },
-    {
-      "id": "8b1ab1df41ac00d8",
-      "sourceId": "deepmind",
-      "source": "Google DeepMind",
-      "lens": "Research & capability",
-      "title": "Developing Gemini 4 Argon responsibly and safely",
-      "excerpt": "",
-      "url": "https://deepmind.google/blog/developing-gemini-4-argon-responsibly-and-safely/",
-      "publishedAt": "2026-10-13T19:43:07.000Z"
-    },
-    {
-      "id": "c2b4b68d7e0027f0",
-      "sourceId": "huggingface",
-      "source": "Hugging Face",
-      "lens": "Open models & tools",
-      "title": "MPS in PyTorch 2.15",
-      "excerpt": "",
-      "url": "https://huggingface.co/blog/mps-pytorch-2-15",
-      "publishedAt": "2026-10-20T00:00:00.000Z"
-    },
-    {
-      "id": "6400feb681472530",
-      "sourceId": "openai",
-      "source": "OpenAI",
-      "lens": "Models & deployment",
-      "title": "What FDE means at OpenAI",
-      "excerpt": "What forward deployed engineering means at OpenAI",
-      "url": "https://openai.com/index/forward-deployed-engineering-means",
-      "publishedAt": "2026-10-22T06:00:00.000Z"
-    },
-    {
-      "id": "94cc08977f17740f",
-      "sourceId": "deepmind",
-      "source": "Google DeepMind",
-      "lens": "Research & capability",
-      "title": "Gemini 4 Argon for Robotics",
-      "excerpt": "",
-      "url": "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
-      "publishedAt": "2026-10-13T16:01:58.000Z"
-    },
-    {
-      "id": "5c52b7d34becd1cc",
-      "sourceId": "huggingface",
-      "source": "Hugging Face",
-      "lens": "Open models & tools",
-      "title": "TorchNeuron: running HF models on AWS Trainium is easier than ever",
-      "excerpt": "",
-      "url": "https://huggingface.co/blog/hf-torchneuron",
-      "publishedAt": "2026-10-19T00:00:00.000Z"
+      "publishedAt": "2026-10-22T19:00:00.000Z",
+      "firstSeenAt": "2026-10-26T13:35:16.407Z",
+      "groupId": "891b7e0bbf66f86d",
+      "topics": [
+        "Enterprise adoption"
+      ],
+      "implication": "For adoption planning, test the workflow fit, operating cost and ownership before scaling beyond a pilot.",
+      "contextKind": "Automatic topic-based prompt",
+      "reports": [
+        {
+          "id": "891b7e0bbf66f86d",
+          "sourceId": "openai",
+          "source": "OpenAI",
+          "title": "Build more responsive apps with the Decisions API",
+          "url": "https://openai.com/index/decisions-api",
+          "publishedAt": "2026-10-22T19:00:00.000Z"
+        }
+      ]
     }
-  ]
+  ],
+  "total": 221,
+  "storage": "local",
+  "perspective": {
+    "text": "no model is perfect, and anyone who claims theirs is shouldn't be trusted with public infrastructure",
+    "speaker": "Hantz Févry",
+    "date": "2026-10-25",
+    "context": "Févry discussed spatial AI and infrastructure risk in an interview with Tom’s Guide.",
+    "url": "https://aizeitgeist.tv/quotes/2026-10-25-no-model-is-perfect-and-anyone-who-claims-theirs-is-shouldnt",
+    "source": {
+      "url": "https://www.tomsguide.com/ai/will-your-neighborhood-flood-during-a-hurricane-an-expert-explains-how-ai-can-predict-vulnerable-areas-before-extreme-weather-strikes",
+      "publisher": "Tom’s Guide"
+    },
+    "credit": "AI Zeitgeist · Büro Bloock",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "contextAdapted": true,
+    "saved": true
+  }
 }

@@ -1,7 +1,10 @@
 (() => {
   'use strict';
   const rootURL = new URL('.', document.currentScript.src);
+  const core = window.YWM_SIGNALS;
+  const visit = window.YWM_SIGNALS_READER.visit;
   const endpoint = new URL('api/ai-signals', rootURL);
+  const refreshInterval = 5 * 60 * 1000;
   const make = (tag, cls, copy) => {
     const el = document.createElement(tag);
     if (cls) el.className = cls;
@@ -25,12 +28,9 @@
   let data = window.YWM_AI_SIGNALS_BOOTSTRAP;
   let mode = 'snapshot', busy = false, lastAttempt = 0, focused = null;
   let items = [], cursor = 0, hovered = false, touching = false, cycleTimer = null;
-  const trusted = {openai: ['openai.com', 'www.openai.com'], deepmind: ['deepmind.google', 'blog.google'], huggingface: ['huggingface.co'], nist: ['nist.gov', 'www.nist.gov']};
-  const initials = {openai: 'O', deepmind: 'G', huggingface: 'HF', nist: 'N'};
+  const initials = {openai:'O',deepmind:'G',huggingface:'HF',nist:'N',google:'G',mistral:'M',microsoft:'MS',mit:'MIT',aws:'AWS',nvidia:'NV',arstechnica:'A',decoder:'D',simon:'SW',usefulthing:'UT',snakeoil:'NT',interconnects:'IC',ukaisi:'UK'};
   const dateLabel = value => new Intl.DateTimeFormat('en', {day: 'numeric', month: 'short'}).format(new Date(value));
-  function safeURL(raw, id) {
-    try { const u = new URL(raw); return u.protocol === 'https:' && !u.username && !u.password && !u.port && trusted[id]?.includes(u.hostname) ? u.href : null; } catch { return null; }
-  }
+  const safeURL = core.safeURL;
   function eligible() {
     return (data?.items || []).filter(item => !dismissed.has(item.id) && safeURL(item.url, item.sourceId) && Number.isFinite(Date.parse(item.publishedAt)) && Date.parse(item.publishedAt) <= Date.now() + 300000 && Date.now() - Date.parse(item.publishedAt) < 30 * 86400000);
   }
@@ -48,7 +48,7 @@
   const edition = make('span', 'signals-edition');
   const count = make('span', 'signals-count');
   count.setAttribute('aria-hidden', 'true');
-  const dockPause = button('signals-dock-control', '', 'Pause AI Signals');
+  const dockPause = button('signals-dock-control', '', 'Pause headline rotation');
   const next = button('signals-dock-control signals-next', '↓', 'Next headline');
   dockBar.append(dockLabel, edition, count, dockPause, next);
   const stack = make('div', 'signals-stack');
@@ -66,7 +66,9 @@
   launch.setAttribute('aria-expanded', 'false');
   stack.append(launch);
   const dockHint = make('p', 'signals-dock-hint', 'A little perspective. Tap to explore.');
-  dock.append(dockBar, stack, dockHint);
+  const updates = button('signals-updates', '', 'Open newly discovered AI signals');
+  updates.hidden = true;
+  dock.append(dockBar, stack, dockHint, updates);
   const introduction = document.querySelector('.page .introduction');
   if (introduction) { introduction.append(dock); dock.classList.add('signals-dock-home'); }
   else { document.body.append(dock); document.body.classList.add('has-floating-signals'); }
@@ -76,7 +78,7 @@
   dialog.setAttribute('aria-labelledby', 'signals-title');
   const shell = make('div', 'signals-shell');
   const top = make('div', 'signals-top');
-  top.append(make('span', 'signals-kicker', 'AI Signals / Direct from the source'));
+  top.append(make('span', 'signals-kicker', 'AI Signals / Sources & perspectives'));
   const close = button('signals-icon', '×', 'Close AI Signals');
   top.append(close);
   const title = make('h2', 'signals-title');
@@ -87,11 +89,13 @@
   const status = make('p', 'signals-status');
   status.setAttribute('role', 'status');
   const pause = button('signals-pause', '');
-  tools.append(status, pause);
-  const cards = make('div', 'signals-cards');
+  const refreshButton = button('signals-pause', 'Refresh news', 'Check for new AI stories');
+  tools.append(status, refreshButton, pause);
+  const reader = window.YWM_SIGNALS_READER.createReader({rootURL, onChange: syncUpdates, onDismiss: item => { dismissed.add(item.id); storage.set('dismissed', [...dismissed].slice(-200)); render(); }});
+  const cards = reader.element;
   const footer = make('div', 'signals-footer');
   const sources = make('details', 'signals-sources');
-  sources.append(make('summary', '', 'The source standard'), make('p', '', 'Headlines loop from the current collection; the animation does not mean a new story has just been published. Feeds are checked every 15 minutes while you browse.'), make('p', '', 'Official publisher feeds only. Links are checked against an approved domain list. Hugging Face community posts are excluded. Dates and short publisher excerpts are attributed; inclusion is not an endorsement.'));
+  sources.append(make('summary', '', 'The source standard'), make('p', '', 'Publisher feeds are checked on arrival and every 5 minutes while you browse, even when motion is paused. New stories move to the front automatically. Headlines rotate between checks; another check may find no new publications.'), make('p', '', 'Company announcements, independent reporting, practitioners and policy institutions. Related reports are grouped conservatively. Dates and publisher excerpts are attributed; topic labels and business prompts are automatic, not Yassine’s commentary. Inclusion is not an endorsement.'));
   const sourceLinks = make('div', 'signals-source-links');
   sources.append(sourceLinks);
   const reset = button('signals-reset', 'Restore dismissed');
@@ -113,7 +117,9 @@
     const publisher = make('span', 'signal-bubble-publisher', item.source);
     const time = make('time', '', dateLabel(item.publishedAt));
     time.dateTime = item.publishedAt;
-    meta.append(badge, publisher, time);
+    meta.append(badge, publisher);
+    if (visit.isNew(item)) meta.append(make('span', 'signal-new', 'New'));
+    meta.append(time);
     fragment.append(meta, make('span', 'signal-bubble-headline', item.title));
     return fragment;
   }
@@ -156,91 +162,74 @@
     if (!held && items.length > 1) cycleTimer = setTimeout(() => { step(); schedule(); }, 5500);
   }
   function syncControls() {
-    pause.textContent = paused ? 'Resume stream' : 'Pause stream';
+    pause.textContent = paused ? 'Resume motion' : 'Pause motion';
     pause.setAttribute('aria-pressed', String(paused));
     dockPause.setAttribute('aria-pressed', String(paused));
-    dockPause.setAttribute('aria-label', paused ? 'Resume AI Signals' : 'Pause AI Signals');
+    dockPause.setAttribute('aria-label', paused ? 'Resume headline rotation' : 'Pause headline rotation');
     dockPause.replaceChildren();
     const icon = make('span', paused ? 'signals-play-glyph' : 'signals-pause-glyph');
     icon.setAttribute('aria-hidden', 'true');
     dockPause.append(icon);
     next.disabled = items.length < 2;
-    dockHint.textContent = !items.length ? 'Tap to explore the collection and sources.' : items.length === 1 ? 'One story to explore. Tap to read.' : paused ? 'Stream paused. Tap a bubble to explore.' : reducedMotion.matches ? 'Tap to explore. Use ↓ for the next headline.' : 'Headlines in rotation. Tap to explore.';
+    dockHint.textContent = !items.length ? 'Tap to explore the collection and sources.' : items.length === 1 ? 'One story to explore. Tap to read.' : paused ? 'Motion paused. News still updates.' : reducedMotion.matches ? 'Tap to explore. Use ↓ for the next headline.' : 'Headlines in rotation. Tap to explore.';
   }
-  function renderCards() {
-    const expanded = new Set([...cards.querySelectorAll('details[open]')].map(el => el.dataset.story));
-    const active = document.activeElement;
-    const activeStory = active?.closest('.signal-card')?.dataset.story;
-    const activePart = active?.tagName === 'SUMMARY' ? 'summary' : active?.classList.contains('signal-dismiss') ? '.signal-dismiss' : active?.classList.contains('signal-original') ? '.signal-original' : null;
+  function syncUpdates() {
+    const total = items.filter(item => visit.isNew(item)).length;
+    updates.hidden = !total;
+    updates.textContent = total + ' new since your last visit';
+  }
+  function renderCards(selectedID = null) {
     const stamp = data?.updatedAt && Number.isFinite(Date.parse(data.updatedAt)) ? dateLabel(data.updatedAt) : 'unavailable';
-    status.textContent = paused ? 'Stream paused' : !freshness() ? 'Saved edition · ' + stamp : data.status === 'partial' ? 'Some sources delayed' : 'Checked · ' + new Date(data.checkedAt).toLocaleTimeString('en', {hour: '2-digit', minute: '2-digit'});
-    status.title = !freshness() ? 'Showing the last saved collection.' : 'Checks every 15 minutes while this page is visible; publisher feeds can arrive later than the original announcement.';
+    const checked = Number.isFinite(Date.parse(data?.checkedAt)) ? new Date(data.checkedAt).toLocaleTimeString('en', {hour: '2-digit', minute: '2-digit'}) : 'unavailable';
+    status.textContent = !freshness() ? 'Saved edition · ' + stamp : 'Checked · ' + checked + (data.status === 'partial' ? ' · Some sources delayed' : '');
+    status.title = 'Checks every 5 minutes while this page is visible, including when motion is paused. The archive grows as visitors browse.';
     sourceLinks.replaceChildren();
     for (const source of data?.sources || []) {
-      const href = safeURL(source.home, source.id);
-      if (!href) continue;
+      const href = safeURL(source.home, source.id); if (!href) continue;
       const link = make('a', '', source.name + (source.status !== 'ok' ? ' · delayed' : ''));
       link.href = href; link.target = '_blank'; link.rel = 'noopener noreferrer'; sourceLinks.append(link);
     }
-    cards.replaceChildren();
-    if (!items.length) cards.append(make('p', 'signals-empty', dismissed.size ? 'You’re all caught up. Restore dismissed stories to read them again.' : 'No recent stories are available. Check the publishers below.'));
-    const readerItems = [...items.slice(cursor), ...items.slice(0, cursor)];
-    readerItems.forEach((item, index) => {
-      const card = make('article', 'signal-card'); card.dataset.story = item.id; card.style.setProperty('--signal-delay', Math.min(index, 4) * 45 + 'ms');
-      const meta = make('div', 'signal-meta');
-      const badge = make('span', 'signal-badge', initials[item.sourceId] || 'AI'); badge.setAttribute('aria-hidden', 'true');
-      meta.append(badge, make('span', 'signal-source', item.source + ((data.sources || []).find(source => source.id === item.sourceId)?.status !== 'ok' ? ' · delayed' : '')));
-      const time = make('time', '', new Intl.DateTimeFormat('en', {day: 'numeric', month: 'short', year: 'numeric'}).format(new Date(item.publishedAt))); time.dateTime = item.publishedAt; meta.append(time);
-      const dismiss = button('signal-dismiss', '×', 'Dismiss: ' + item.title);
-      dismiss.addEventListener('click', () => {
-        dismissed.add(item.id); storage.set('dismissed', [...dismissed].slice(-200)); render(); (cards.querySelector('summary') || reset).focus();
-      });
-      meta.append(dismiss);
-      const details = make('details', 'signal-story'); details.dataset.story = item.id; details.open = expanded.has(item.id);
-      const headline = make('summary'); headline.append(make('h3', '', item.title), make('span', 'signal-expand', '+')); details.append(headline);
-      const body = make('div', 'signal-body'); body.append(make('span', 'signal-lens', item.lens), make('p', '', item.excerpt || 'Read the original publisher’s article for the full details.'), make('small', '', 'Publisher excerpt'));
-      const link = make('a', 'signal-original', 'Read original article ↗'); link.href = safeURL(item.url, item.sourceId); link.target = '_blank'; link.rel = 'noopener noreferrer'; body.append(link);
-      details.append(body); card.append(meta, details); cards.append(card);
-    });
+    reader.setData({...data, items}, {selectedID});
     reset.hidden = !dismissed.size;
-    if (activeStory && activePart) {
-      const target = [...cards.children].find(el => el.dataset.story === activeStory)?.querySelector(activePart);
-      (target || pause).focus({preventScroll: true});
-    }
   }
   function render() {
     const currentID = items[cursor % (items.length || 1)]?.id;
     items = eligible();
     cursor = Math.max(0, items.findIndex(item => item.id === currentID));
-    drawStack(); syncControls();
+    drawStack(); syncControls(); syncUpdates();
     if (dialog.open) renderCards();
     schedule();
   }
   async function refresh() {
-    if (paused || document.hidden || busy || location.protocol === 'file:') return;
+    if (document.hidden || busy || location.protocol === 'file:') return;
     busy = true; lastAttempt = Date.now();
+    refreshButton.disabled = true;
+    refreshButton.textContent = 'Checking…';
     try {
-      const response = await fetch(endpoint, {headers: {Accept: 'application/json'}, signal: AbortSignal.timeout(12000)});
+      const response = await fetch(endpoint, {cache: 'no-cache', headers: {Accept: 'application/json'}, signal: AbortSignal.timeout(28000)});
       if (!response.ok) throw Error();
       const incoming = await response.json();
       if (incoming.version !== 1 || !Array.isArray(incoming.items) || !Array.isArray(incoming.sources)) throw Error();
-      if (!paused) { data = incoming; mode = 'network'; }
+      const known = new Set((data?.items || []).map(item => item.id));
+      const hasNew = incoming.items.some(item => !known.has(item.id) && !dismissed.has(item.id) && safeURL(item.url, item.sourceId));
+      if (incoming.status !== 'stale') visit.observe(incoming.items);
+      data = incoming; mode = 'network';
+      // Show a new arrival next instead of keeping the old rotation position.
+      if (hasNew) { items = []; cursor = 0; }
     } catch { mode = 'snapshot'; }
-    finally { busy = false; render(); }
+    finally { busy = false; refreshButton.disabled = false; refreshButton.textContent = 'Refresh news'; render(); }
   }
   function open() {
     focused = document.activeElement;
     const storyID = items[cursor]?.id;
-    renderCards();
-    // Match the bubble the visitor selected, even when it is later in the rotating collection.
-    const selected = storyID ? [...cards.children].find(card => card.dataset.story === storyID) : null;
-    if (selected) selected.querySelector('details').open = true;
+    renderCards(storyID);
     dialog.showModal(); document.body.classList.add('signals-open'); launch.setAttribute('aria-expanded', 'true'); schedule(); close.focus();
     dialog.scrollTop = 0;
-    if (Date.now() - lastAttempt >= 900000) refresh();
+    if (Date.now() - lastAttempt >= refreshInterval) refresh();
   }
   function togglePause() { paused = !paused; storage.set('paused', paused); syncControls(); if (dialog.open) renderCards(); schedule(); if (!paused) refresh(); }
   launch.addEventListener('click', open);
+  updates.addEventListener('click', open);
   close.addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
     if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); }
@@ -251,6 +240,7 @@
     schedule();
   });
   pause.addEventListener('click', togglePause); dockPause.addEventListener('click', togglePause);
+  refreshButton.addEventListener('click', refresh);
   next.addEventListener('click', () => { step(); schedule(); });
   reset.addEventListener('click', () => { dismissed.clear(); storage.set('dismissed', []); render(); pause.focus(); });
   dock.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') { hovered = true; schedule(); } });
@@ -260,11 +250,11 @@
   document.addEventListener('pointerup', endTouch); document.addEventListener('pointercancel', endTouch);
   dock.addEventListener('focusin', schedule); dock.addEventListener('focusout', () => queueMicrotask(schedule));
   reducedMotion.addEventListener('change', () => { syncControls(); schedule(); });
-  document.addEventListener('visibilitychange', () => { schedule(); if (!document.hidden && Date.now() - lastAttempt >= 900000) refresh(); });
+  document.addEventListener('visibilitychange', () => { schedule(); if (!document.hidden && Date.now() - lastAttempt >= refreshInterval) refresh(); });
   // Honor the site's existing motion control as well as the stream's own pause button.
   document.querySelector('.motion-control')?.addEventListener('click', () => {
     queueMicrotask(() => { const control = document.querySelector('.motion-control'); paused = control?.getAttribute('aria-pressed') === 'true'; storage.set('paused', paused); syncControls(); schedule(); });
   });
-  setInterval(refresh, 900000);
+  setInterval(refresh, refreshInterval);
   render(); refresh();
 })();

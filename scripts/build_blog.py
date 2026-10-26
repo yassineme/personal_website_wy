@@ -61,6 +61,8 @@ def head(title,description,url,prefix='',graph=None,article=False):
   <script src="{prefix}site-ui.js" defer></script>
   <link rel="stylesheet" href="{prefix}ai-signals.css">
   <script src="{prefix}data/ai-signals-snapshot.js" defer></script>
+  <script src="{prefix}signals-core.js" defer></script>
+  <script src="{prefix}signals-reader.js" defer></script>
   <script src="{prefix}ai-signals.js" defer></script>
   <link rel="stylesheet" href="{prefix}privacy.css">
   <script src="{prefix}site-config.js" defer></script>

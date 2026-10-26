@@ -1,48 +1,49 @@
 # AI Signals
 
-A continuously cycling glass notification stack on the seven public pages. The front bubble appears automatically, with two translucent cards receding behind it. A new headline drops into the stationary glass surface every 5.5 seconds, looping indefinitely through the current collection. The `01 / 16` counter and “Headlines in rotation” caption make clear that these are rotating stories, not claims of newly published alerts.
+The homepage retains its three-layer glass stack, 5.5-second headline rotation, pause control and expandable reader. The stack adds a small new-since-last-visit indicator only when there are unseen story groups. Motion settings never stop network refreshes.
 
-Click the front bubble to expand a glass reading view. The selected story is expanded first, followed by every other undismissed story in the collection. The expanded list is manually scrollable so the reading position stays still. Stories can be expanded, dismissed, restored, or opened at their original source. Dismissing every story leaves a bubble that still opens the restore control and source list.
+## Collection and selection
 
-The homepage stack sits below the introduction, with room for the main navigation, headline and contact action. On other pages it floats at the lower right, with reserved page-end space so footer links remain accessible. On phones the homepage stack follows the introduction naturally; other pages keep the compact floating stack. There is no browser notification permission or notification sound.
+Seventeen registered publisher feeds cover company announcements, independent reporting, practitioners and policy institutions. The registry in `lib/ai-signals.cjs` includes OpenAI, Google DeepMind, Hugging Face, NIST, Google AI, Mistral, Microsoft AI, MIT News, AWS Machine Learning, NVIDIA, Ars Technica, The Decoder, Simon Willison, One Useful Thing, AI as Normal Technology, Interconnects and the UK AI Security Institute. Mixed-topic feeds have an AI relevance filter. All article links must use HTTPS on the registry's approved domains; Hugging Face community paths are excluded.
 
-Autoplay pauses on hover, keyboard focus, touch-down, hidden tabs, and while the reader is open. A pause/resume control saves the preference in this browser; the down arrow advances manually and wraps around at the end. The website’s existing “Pause motion” button also pauses the stream. Reduced-motion preferences disable automatic cycling and transitions; the next-headline button remains available. Escape closes the reading view and returns focus to the bubble. Repeated headlines are not announced to screen readers (`aria-live="off"`), and decorative rear cards are hidden from accessibility APIs.
+Feeds are fetched concurrently with an eight-second timeout and a 5 MB size limit. XML with entity or doctype declarations is rejected. Publisher excerpts are converted to plain text, including HTML entity decoding, and displayed with DOM text nodes. Future-dated, undated and older-than-30-day incoming reports are excluded. Existing historical reports remain in the archive for up to 180 days, subject to a 1,500-report bound.
 
-## Sources and selection
+The visitor-triggered service checks shared collection timestamps and caches in memory for five minutes. CDN caching is limited to 60 seconds plus a 60-second revalidation window. Browser requests revalidate. There is **no scheduled collection**, paid search or LLM API. When nobody visits, collection stops. The API collects on arrival and when a visible page polls every five minutes. Partial publisher failures preserve previous reports; a complete outage keeps the last collection and its real successful-check timestamp.
 
-The fixed source registry is in `lib/ai-signals.cjs`: OpenAI News, Google DeepMind, Hugging Face’s official blog, and NIST’s information technology RSS feed. No X API, paid news service, LLM summaries, arbitrary user-provided feed URLs, or general web scraping are used. Hugging Face community URL paths are excluded; NIST entries must mention AI or related research. Company announcements reflect their publishers’ perspectives, not independent verification or an endorsement by Yassine.
+`lib/signals-archive.cjs` groups similar titles within a seven-day window, excluding conflicting version numbers. This is conservative matching rather than semantic AI grouping: different phrasing can remain separate. Groups retain stable IDs, original links and all their constituent reports. The homepage shows up to 24 recent groups, newest first and capped at four per primary publisher.
 
-Only HTTPS links on approved source domains are accepted. Feed XML is bounded to 5 MB, fetched with an 8-second timeout, rejects entity/doctype declarations, and is parsed using `fast-xml-parser`. Excerpts become plain text and are rendered using DOM text nodes. Undated, invalid, future-dated and older-than-30-day items are excluded; duplicate URLs are removed. A round-robin presentation shows a range of publishers rather than allowing a prolific source to dominate. Up to 16 items are collected; the expanded reader shows every undismissed story (up to 16).
+## Reader and archive
 
-## Vercel operation
+The reader provides search, the five topic filters, New and Saved filters, publisher dates, source links, related reports, bookmarks, copy-link and permanent-link controls. The selected homepage bubble opens expanded. Existing dismissal and restore controls remain available.
 
-`api/ai-signals.js` is a native Node function, automatically exposed at `/api/ai-signals` by Vercel. `vercel.json` bundles the saved JSON collection and sets a 15-second maximum duration. Existing static pages stay at their current paths. No environment secrets or additional accounts are required for the feed itself.
+`signals.html` provides the full retained history, publication-date filters, pagination and the same reader controls. A URL such as `signals.html?story=<group-id>` opens the selected story first. If it falls outside retention, the page says so. Saved browser copies remain available in the Saved filter.
 
-The endpoint refreshes **on demand**, coalesces concurrent requests within a function instance, and caches the collection for 15 minutes in memory. The response also uses Vercel CDN caching (`s-maxage=900`, `stale-while-revalidate=3600`). Pages check on load and every 15 minutes while visible; explicitly paused pages do not poll. Visual autoplay uses its own 5.5-second timer and does not trigger extra network requests. Publisher feed delays, CDN revalidation and outages mean this is near-real-time, not an instantaneous alert service. There is no paid cron schedule or guaranteed background scan when nobody is visiting.
+Business questions are fixed prompts chosen using topic rules. They are labelled **Automatic topic-based prompt**, not article summaries or Yassine's commentary. Publisher excerpts retain a separate label. There are no fabricated human endorsements or automated article summaries.
 
-The implementation uses public RSS and existing Vercel capacity; actual hosting cost depends on your Vercel plan and usage allowances. It does not enable upgrades, paid add-ons, or billing changes.
+An optional AI Zeitgeist JSON request selects a recent, short attributed quotation once per Berlin calendar day, including its speaker, source date, upstream context, original source, curator and declared CC BY 4.0 licence. A small independently inspected fallback is labelled Saved selection and expires after seven days. Context adaptations are labelled. Dataset failures do not block the news. During verification, direct connections to the upstream dataset were reset; the saved fallback was verified in the browser.
 
-If a source fails, its previous items and last-success timestamp are retained when available, and that source is marked delayed. A full outage shows a saved edition. The checked timestamp is distinct from the last successful update timestamp. Local `file://` pages use the bundled snapshot and display **Saved edition** rather than suggesting a live connection. Without Vercel hosting, the snapshot will not refresh automatically. Old items disappear after 30 days.
+## Browser state
 
-## Local development
+`signals-core.js` handles bookmarks, search filters and visit baselines. A first visit establishes a baseline without marking everything new. A visit continues for 30 minutes of inactivity; a later visit compares against previously encountered group/report IDs and discovery timestamps. Extra reporting on an encountered group does not count as a new announcement. New indicators persist during that browsing session until Mark as seen is chosen. Forget reading history resets the baseline.
+
+Saved stories (up to 200 copies), paused motion and dismissal preferences stay in this browser. They do not sync between devices. No visitor baseline or bookmark data is sent to the API. The privacy notice describes the local state.
+
+## Storage and deployment
+
+Local development persists history in the ignored `.signals/archive.json` directory, blocked from preview static serving. Writes use revision comparison, a lock and atomic rename. Production supports an Upstash Redis REST store with atomic compare-and-set and merge/retry on conflicting writes. A production function without storage credentials reports `storage: unconfigured` and continues serving current news without claiming durable shared history.
+
+Follow [SIGNALS-STORAGE-SETUP.md](SIGNALS-STORAGE-SETUP.md) to connect the server-only credentials in the existing Vercel project. No database is connected yet. The reviewed changes are prepared for the owner to commit and push manually from `Documents/personal_website`. Production publication remains pending. Scheduling stays disabled.
+
+The API accepts GET and HEAD only. `?view=archive` returns retained groups; the default endpoint returns the homepage collection. `vercel.json` bundles the fallback JSON assets and allows 30 seconds for collection and storage. The blog builder includes the shared scripts for future posts.
+
+## Verification
 
 ```sh
-npm ci
 npm run test:signals
 npm run refresh:signals
 npm run preview:signals
 ```
 
-Preview at `http://127.0.0.1:4173`. The preview server serves the same API handler as Vercel. `refresh:signals` replaces the JSON and browser-compatible JS snapshot only after verified articles have been collected. The snapshot is data, not an independently authored blog post, and the tray links readers to the publishers and to Yassine’s original blog.
+The regression suite covers source/XML/URL filtering, outages, entity handling, TTL, coalescing, grouping and version distinctions, history retention, stable identifiers, local persistence, stale-write rejection, shared-store request construction, conflicting-writer merging, visit baselines, extra-report handling, combined filters, attribution and paused-motion refreshes.
 
-The blog publisher (`scripts/build_blog.py`) includes all three signal assets with correct article-relative paths, so future posts retain this feature.
-
-## Deployment
-
-Deploy these changes to the **existing wyassine.com Vercel project**, using its current account/team and domain. Use the existing static/Other framework configuration; the `api/` directory provides the Node endpoint. Do not change the project’s domain or enable a paid schedule. Verify `/api/ai-signals` returns JSON with current `checkedAt`, correct source status and real article links, then verify the automatic stack on the homepage and a nested blog article, and open both reading views.
-
-The current session has no connected Vercel plugin or CLI login; the plugin connection has been suggested. Local implementation does not itself publish to wyassine.com.
-
-Validation: Node tests cover XML/date/URL filtering, community exclusion, NIST relevance, Atom feeds, malformed XML, feed failure retention, partial failure, concurrent cache requests/TTL/retry, and method rejection. The new production dependency audit reports no known vulnerabilities. Existing legacy Tailwind development dependencies have separate audit findings outside the news runtime.
-
-Design verification: checked the 5.5-second automatic advance, a complete 16-story wraparound, selected-story expansion, all-story dismissal and restoration, and phone/desktop layouts in the browser. The news collector and eight backend tests remain unchanged.
+Browser checks cover the unchanged homepage stack, reader controls, bookmarks across page navigation, combined search and topics, publication-date filtering, empty results, permanent links, labelled business prompts and the attributed fallback. Desktop and phone layouts are checked separately. Shared production storage still requires configuration and live verification.
