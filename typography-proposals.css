@@ -1,0 +1,97 @@
+/* Shared site hierarchy. Instrument Sans + Newsreader is the selected default. */
+:root[data-typography="manrope-newsreader"] { --type-sans:'Manrope',Arial,sans-serif; --type-serif:'Newsreader',Georgia,serif; }
+:root[data-typography="instrument-newsreader"] { --type-sans:'Instrument Sans',Arial,sans-serif; --type-serif:'Newsreader',Georgia,serif; }
+:root[data-typography="sora-source-serif"] { --type-sans:'Sora',Arial,sans-serif; --type-serif:'Source Serif 4',Georgia,serif; }
+:root[data-typography] { --type-heading-weight:600; }
+:root[data-typography] body { font-family:var(--type-sans); font-optical-sizing:auto; font-synthesis:none; }
+:root[data-typography] button,
+:root[data-typography] input { font-family:var(--type-sans); }
+:root[data-typography] .mono { font-family:var(--type-sans); font-size:10px; font-weight:600; line-height:1.5; letter-spacing:.09em; }
+:root[data-typography] h1 { font-family:var(--type-sans); font-weight:var(--type-heading-weight); font-size:clamp(50px,min(6.4vw,11.3svh),98px); line-height:1.08; letter-spacing:-.055em; }
+:root[data-typography] .serif { font-family:var(--type-serif); font-style:italic; font-weight:500; letter-spacing:-.035em; }
+:root[data-typography] .summary { font-family:var(--type-sans); font-size:16px; line-height:1.75; font-weight:400; max-width:470px; }
+:root[data-typography] .books-trigger { font-family:var(--type-sans); font-size:12px; font-weight:500; }
+:root[data-typography] .books-panel h2 { font-size:11px; font-weight:600; }
+:root[data-typography] .panel-list dt { font-family:var(--type-sans); font-size:17px; font-weight:600; letter-spacing:-.025em; }
+:root[data-typography] .panel-list dd,
+:root[data-typography] .panel-intro { font-family:var(--type-sans); font-size:12px; line-height:1.8; }
+:root[data-typography] .principle,
+:root[data-typography] .values-list dt { font-family:var(--type-serif); font-weight:500; }
+:root[data-typography] .glimpse dt { font-size:19px; font-weight:600; letter-spacing:-.035em; }
+:root[data-typography] .glimpse dd { font-size:10px; font-weight:500; line-height:1.6; }
+:root[data-typography] .closing { font-size:13px; line-height:1.8; }
+:root[data-typography] .subnav,
+:root[data-typography] .journal-nav { font-size:12px; font-weight:500; }
+:root[data-typography] .document-hero h1 { font-size:clamp(42px,5.8vw,82px); line-height:1.12; letter-spacing:-.05em; }
+:root[data-typography] .document-hero .summary { font-size:17px; max-width:650px; }
+:root[data-typography] .prose h2,
+:root[data-typography] .prose h3 { font-family:var(--type-sans); font-weight:600; line-height:1.3; }
+:root[data-typography] .prose p,
+:root[data-typography] .prose li { font-size:15px; line-height:1.9; }
+:root[data-typography] .journal-title-row h1 { font-family:var(--type-sans); font-size:clamp(64px,9vw,144px); font-weight:600; line-height:1.02; letter-spacing:-.065em; }
+:root[data-typography] .journal-title-row h1 em { font-family:var(--type-serif); font-weight:500; line-height:1; letter-spacing:-.045em; }
+:root[data-typography] .journal-intro-copy p { font-size:15px; line-height:1.8; }
+:root[data-typography] .featured-copy h2 { font-family:var(--type-sans); font-size:clamp(31px,3.5vw,53px); font-weight:600; line-height:1.14; letter-spacing:-.05em; }
+:root[data-typography] .featured-copy p { font-size:15px; line-height:1.8; }
+:root[data-typography] .row-story h3 { font-family:var(--type-sans); font-weight:600; font-size:clamp(24px,2.2vw,32px); line-height:1.25; }
+:root[data-typography] .row-story p { font-size:14px; line-height:1.8; }
+:root[data-typography] .row-number,
+:root[data-typography] .art-number,
+:root[data-typography] .reading-heading h2,
+:root[data-typography] .related-notes h2 { font-family:var(--type-serif); font-weight:500; }
+:root[data-typography] .journal-invitation h2 { font-family:var(--type-sans); font-weight:600; line-height:1.13; letter-spacing:-.055em; }
+:root[data-typography] .journal-invitation h2 em { font-family:var(--type-serif); font-weight:500; letter-spacing:-.035em; }
+:root[data-typography] .article-header h1 { font-family:var(--type-sans); font-weight:600; font-size:clamp(41px,5.7vw,84px); line-height:1.13; letter-spacing:-.05em; }
+:root[data-typography] .article-deck { font-size:18px; line-height:1.8; max-width:730px; }
+:root[data-typography] .article-byline { font-size:12px; font-weight:500; }
+:root[data-typography] .article-body { max-width:740px; }
+:root[data-typography] .article-body p,
+:root[data-typography] .article-body li { font-family:var(--type-serif); font-size:21px; line-height:1.7; font-weight:400; color:#c5c7bf; }
+:root[data-typography] .article-body .article-lede { font-family:var(--type-serif); font-size:30px; line-height:1.5; color:var(--ink); font-weight:400; }
+:root[data-typography] .article-body h2 { font-family:var(--type-sans); font-size:29px; line-height:1.3; font-weight:600; letter-spacing:-.04em; }
+:root[data-typography] .article-body h3 { font-family:var(--type-sans); font-size:23px; line-height:1.3; font-weight:600; }
+:root[data-typography] .article-callout p,
+:root[data-typography] .article-body blockquote { font-family:var(--type-serif); font-size:28px; font-style:italic; font-weight:500; line-height:1.55; }
+:root[data-typography] .article-toc a { font-size:12px; line-height:1.65; }
+:root[data-typography] .article-takeaway p,
+:root[data-typography] .article-example p { font-family:var(--type-sans); font-size:14px; line-height:1.85; }
+:root[data-typography] .article-sources p,
+:root[data-typography] .article-sources li,
+:root[data-typography] .author-note p { font-family:var(--type-sans); font-size:13px; line-height:1.85; }
+:root[data-typography] .related-link h3 { font-family:var(--type-sans); font-size:27px; font-weight:600; line-height:1.3; }
+:root[data-typography] .topic-button,
+:root[data-typography] .journal-search input { font-family:var(--type-sans); font-size:12px; }
+:root[data-typography] .text-link,
+:root[data-typography] .solid-link,
+:root[data-typography] .document-actions { font-weight:500; }
+@media (max-width:900px) and (min-width:601px) {
+  :root[data-typography] .page h1 { font-size:clamp(42px,6.6vw,64px); }
+}
+@media (max-width:700px) {
+  :root[data-typography] .journal-title-row h1 { font-size:clamp(59px,13.6vw,96px); }
+  :root[data-typography] .featured-copy h2 { font-size:34px; }
+  :root[data-typography] .journal-nav { font-size:11px; }
+  :root[data-typography] .journal-invitation h2 { font-size:36px; }
+  :root[data-typography] .article-header h1 { font-size:clamp(36px,8.8vw,58px); line-height:1.18; }
+  :root[data-typography] .article-deck { font-size:16px; }
+  :root[data-typography] .article-body p,
+  :root[data-typography] .article-body li { font-size:20px; line-height:1.65; }
+  :root[data-typography] .article-body .article-lede { font-size:27px; }
+  :root[data-typography] .article-body h2 { font-size:25px; }
+  :root[data-typography] .article-callout p { font-size:26px; }
+  :root[data-typography] .article-takeaway p,
+  :root[data-typography] .article-example p { font-size:14px; }
+  :root[data-typography] .article-sources p,
+  :root[data-typography] .article-sources li,
+  :root[data-typography] .author-note p { font-size:13px; }
+}
+@media (max-width:600px) {
+  :root[data-typography] .page h1 { font-size:clamp(31px,8.9vw,52px); line-height:1.16; letter-spacing:-.06em; }
+  :root[data-typography] .page .summary { font-size:14px; line-height:1.75; }
+  :root[data-typography] .side-menu .books-trigger { font-size:10px; }
+  :root[data-typography] .page .eyebrow { font-size:9px; }
+  :root[data-typography] .glimpse dt { font-size:15px; }
+  :root[data-typography] .glimpse dd { font-size:9px; }
+  :root[data-typography] .closing { font-size:12px; }
+  :root[data-typography] .document-hero h1 { font-size:clamp(36px,9vw,54px); }
+}

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /content/
 
 Sitemap: https://www.wyassine.com/sitemap.xml
 Host: www.wyassine.com

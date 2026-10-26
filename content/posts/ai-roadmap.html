@@ -1,0 +1,36 @@
+<p class="article-lede">An AI roadmap is a set of decisions about what the organisation will change, who will own the work and what evidence will justify the next step.</p>
+<p>When a roadmap starts as a list of technologies, it becomes difficult to explain why one initiative deserves attention before another. The useful starting point is an operating problem: a decision that takes too long, a handoff that repeatedly fails, or information that people cannot find when they need it.</p>
+<p>Here is the five-decision frame I would bring to an early roadmap conversation.</p>
+
+<h2 id="outcome">01. Name the outcome before the use case.</h2>
+<p>“Build a knowledge assistant” describes a solution. “Help quality engineers find the right approved guidance without searching several systems” describes a problem that can be investigated.</p>
+<p>Write down the person, the task and the friction. Establish what happens today, including the workarounds people use. Then decide what improvement would matter enough to change the workflow.</p>
+<div class="article-callout"><span class="mono">The question to ask</span><p>What will someone be able to do better if this initiative succeeds?</p></div>
+<p>Google’s People + AI Guidebook makes a useful distinction here: investigate user needs first, and assess whether AI offers a particular advantage over a simpler approach. That is a good discipline for a roadmap discussion, too.<sup><a href="#source-1" aria-label="Source 1">1</a></sup></p>
+
+<h2 id="readiness">02. Test readiness alongside attractiveness.</h2>
+<p>A compelling problem does not automatically make a delivery-ready use case. Ask whether the required information exists, whether the team can access it, and whether anyone is responsible for its quality.</p>
+<p>Consider the path into the real workflow. An impressive answer in a demonstration is different from an answer that arrives in the right tool, at the right moment, with a clear way to check it.</p>
+<p>A small portfolio can be sorted into three groups: ready to test, valuable but dependent on groundwork, and insufficiently understood. The middle group often contains worthwhile ideas. Its next step is to resolve a dependency, rather than build the model immediately.</p>
+
+<h2 id="ownership">03. Give the operating outcome an owner.</h2>
+<p>Separate responsibility for building the solution from responsibility for using it. A technical lead may be able to deliver the system while a process owner is needed to change the work around it.</p>
+<p>Before starting, name who can make decisions about the workflow, who can provide users’ time, and who will maintain the solution after the initial team moves on. Make room for the people who will need to review outputs or handle exceptions.</p>
+<p>The point is practical: if a pilot succeeds, the next conversation should already have an owner.</p>
+
+<h2 id="evidence">04. Agree what evidence will change the decision.</h2>
+<p>Choose an initial baseline and a few measures that connect to the intended improvement. Depending on the task, these might include time to complete a case, the amount of rework, the usefulness of retrieved information, or the effort required for human review.</p>
+<p>Agree on unacceptable failure conditions as well as desirable results. A faster process may be unhelpful if checking its output creates more work elsewhere.</p>
+<p>NIST’s voluntary AI Risk Management Framework provides a broader structure for considering trustworthiness across the design, use and evaluation of AI systems. The roadmap still needs to translate those considerations into decisions for the particular use case.<sup><a href="#source-2" aria-label="Source 2">2</a></sup></p>
+
+<h2 id="sequence">05. Make the next decision smaller.</h2>
+<p>A roadmap becomes easier to act on when each stage reduces a specific uncertainty. Start with a process observation if the problem is unclear. Run a bounded technical test if feasibility is the main question. Test a workflow with representative users if the solution appears promising but adoption is uncertain.</p>
+<p>For each stage, specify the question, the owner, the evidence and the next decision. The result is a sequence the organisation can discuss and revise as it learns.</p>
+<div class="article-example"><span class="mono">Illustrative example</span><h3>A document-search assistant</h3><p>First, observe how a small group of engineers searches for approved guidance. Next, test retrieval against a defined set of questions and sources. Then trial the workflow with human checking. Expand only after reviewing usefulness, errors, review effort and responsibility for keeping the information current.</p></div>
+
+<h2 id="working-sheet">Take this into your next roadmap meeting.</h2>
+<p>For each initiative, complete one sentence:</p>
+<blockquote>We are helping <em>[person]</em> improve <em>[task]</em>. Our next uncertainty is <em>[question]</em>. <em>[Owner]</em> will gather <em>[evidence]</em> so we can decide <em>[next step]</em>.</blockquote>
+<p>If that sentence is difficult to complete, the next useful activity may be clarification. That is progress: it prevents a vague ambition from becoming an expensive delivery commitment.</p>
+
+<div class="article-sources" id="sources"><h2>Further reading</h2><ol><li id="source-1"><a href="https://pair.withgoogle.com/chapter/user-needs/" target="_blank" rel="noopener noreferrer">Google PAIR — User Needs + Defining Success</a></li><li id="source-2"><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST — AI Risk Management Framework</a></li></ol><p>The five-decision frame above is my proposed working approach. These sources provide related guidance on user needs and AI risk management.</p></div>

@@ -1,16 +1,23 @@
 {
   "name": "Yassine W. Medjati",
   "short_name": "Yassine",
-  "description": "AI strategy, GenAI, and transformation advisory for high-stakes organizations.",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#030507",
-  "theme_color": "#030507",
+  "background_color": "#0b0c0c",
+  "theme_color": "#0b0c0c",
   "icons": [
     {
-      "src": "assets/favicon.png",
-      "sizes": "500x500",
-      "type": "image/png"
+      "src": "assets/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

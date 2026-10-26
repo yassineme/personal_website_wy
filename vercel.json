@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": { "api/ai-signals.js": { "maxDuration": 15, "includeFiles": "data/ai-signals.json" } }
+}
