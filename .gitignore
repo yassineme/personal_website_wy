@@ -1,3 +1,4 @@
 node_modules/
 .signals/
 .env*
+.vercel

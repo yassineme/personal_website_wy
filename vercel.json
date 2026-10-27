@@ -1,4 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": { "api/ai-signals.js": { "maxDuration": 30, "includeFiles": "data/*.json" } }
+  "functions": {
+    "api/ai-signals.js": { "maxDuration": 30, "includeFiles": "data/*.json" },
+    "api/ai-markets.js": { "maxDuration": 30 }
+  }
 }

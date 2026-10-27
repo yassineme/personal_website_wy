@@ -9,7 +9,8 @@
     "test:signals": "node --test tests/ai-signals*.test.cjs",
     "refresh:signals": "node scripts/refresh-signals.cjs",
     "preview:signals": "node scripts/preview-signals.cjs",
-    "test:privacy": "node --test tests/privacy.test.cjs"
+    "test:privacy": "node --test tests/privacy.test.cjs",
+    "test:markets": "node --test tests/ai-markets*.test.cjs"
   },
   "repository": {
     "type": "git",
