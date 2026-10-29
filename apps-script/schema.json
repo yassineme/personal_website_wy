@@ -1,0 +1,35 @@
+{
+  "sheetName": "Submissions",
+  "headers": [
+    "Received at",
+    "Request type",
+    "Name",
+    "Email",
+    "Message",
+    "Review status",
+    "Owner notes",
+    "Notification status",
+    "Notified at",
+    "Request ID",
+    "Source",
+    "Notification attempts",
+    "Last attempt at",
+    "Auto-reply status",
+    "Auto-replied at",
+    "Auto-reply attempts",
+    "Auto-reply last attempt at"
+  ],
+  "reviewStatuses": [
+    "New",
+    "Reviewing",
+    "Approved",
+    "Declined",
+    "Replied"
+  ],
+  "views": {
+    "Enquiries": "Enquiry",
+    "PIN requests": "PIN request",
+    "PDF requests": "PDF request"
+  },
+  "targetSpreadsheetId": "1xmwmDzMNpPYr8urnHLEWz0zPD0Qh-0bajSTsdP53hts"
+}

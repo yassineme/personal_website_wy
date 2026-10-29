@@ -1,7 +1,81 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/ai-signals.js": { "maxDuration": 30, "includeFiles": "data/*.json" },
-    "api/ai-markets.js": { "maxDuration": 30 }
-  }
+    "api/ai-signals.js": {
+      "maxDuration": 30,
+      "includeFiles": "data/*.json"
+    },
+    "api/ai-markets.js": {
+      "maxDuration": 30
+    },
+    "api/digital-cv.js": {
+      "maxDuration": 30,
+      "includeFiles": "lib/private-cv-content.json"
+    },
+    "api/contact.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/digital-cv",
+      "destination": "/api/digital-cv"
+    },
+    {
+      "source": "/digital-cv/",
+      "destination": "/api/digital-cv"
+    },
+    {
+      "source": "/contact",
+      "destination": "/api/contact"
+    },
+    {
+      "source": "/contact/",
+      "destination": "/api/contact"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/mydigital-resume.html",
+      "destination": "/digital-cv",
+      "permanent": false
+    },
+    {
+      "source": "/assets/Yassine-W-Medjati-Resume.pdf",
+      "destination": "/digital-cv?request=pdf",
+      "permanent": false
+    },
+    {
+      "source": "/assets/YassineW.Medjati_Resume.pdf",
+      "destination": "/digital-cv?request=pdf",
+      "permanent": false
+    },
+    {
+      "source": "/digital-cv/resume.pdf",
+      "destination": "/digital-cv?request=pdf",
+      "permanent": false
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "public": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
 }

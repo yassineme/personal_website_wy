@@ -10,7 +10,11 @@
     "refresh:signals": "node scripts/refresh-signals.cjs",
     "preview:signals": "node scripts/preview-signals.cjs",
     "test:privacy": "node --test tests/privacy.test.cjs",
-    "test:markets": "node --test tests/ai-markets*.test.cjs"
+    "test:markets": "node --test tests/ai-markets*.test.cjs",
+    "test:private-cv": "node --test tests/private-cv.test.cjs",
+    "test:forms": "node --test tests/website-submissions.test.cjs tests/private-cv.test.cjs",
+    "build": "node scripts/build-public.cjs",
+    "test:security": "node --test tests/public-build.test.cjs tests/request-hardening.test.cjs"
   },
   "repository": {
     "type": "git",

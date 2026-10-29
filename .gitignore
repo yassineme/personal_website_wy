@@ -2,3 +2,9 @@ node_modules/
 .signals/
 .env*
 .vercel
+public/
+.public-build-*/
+.secrets/
+*.pem
+*.p12
+*.pfx
