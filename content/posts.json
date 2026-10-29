@@ -1,7 +1,7 @@
 [
   {
     "slug": "ai-roadmap-prioritisation",
-    "url": "blog/ai-roadmap-prioritisation.html",
+    "url": "blog/ai-roadmap-prioritisation",
     "title": "An AI roadmap is a sequence of decisions.",
     "seo_title": "AI Roadmap Prioritisation: Five Decisions Before You Scale",
     "description": "A practical five-decision framework for prioritising AI use cases, clarifying ownership and choosing what evidence to gather before scaling.",
@@ -20,7 +20,7 @@
   },
   {
     "slug": "ai-adoption-beyond-pilots",
-    "url": "blog/ai-adoption-beyond-pilots.html",
+    "url": "blog/ai-adoption-beyond-pilots",
     "title": "The pilot works. Does the work change?",
     "seo_title": "AI Adoption Beyond the Pilot: A Practical Leadership Review",
     "description": "How to assess AI adoption through real workflows, clear expectations, user feedback and operating ownership, with questions for your next rollout review.",
@@ -38,7 +38,7 @@
   },
   {
     "slug": "genai-operating-model",
-    "url": "brief-genai-operating-model.html",
+    "url": "brief-genai-operating-model",
     "title": "From AI experiments to everyday value.",
     "seo_title": "From GenAI Pilots to an Operating Model",
     "description": "A practical discussion guide for connecting GenAI priorities, workflow choices, ownership and adoption into an operating model.",

@@ -2,13 +2,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Notes on change — Yassine W. Medjati</title>
-    <link>https://www.wyassine.com/blog.html</link>
+    <link>https://www.wyassine.com/blog</link>
     <description>Practical notes on AI strategy, transformation and leadership.</description>
     <language>en</language>
     <atom:link href="https://www.wyassine.com/blog/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>An AI roadmap is a sequence of decisions.</title>
-      <link>https://www.wyassine.com/blog/ai-roadmap-prioritisation.html</link>
+      <link>https://www.wyassine.com/blog/ai-roadmap-prioritisation</link>
       <guid>https://www.wyassine.com/blog/ai-roadmap-prioritisation.html</guid>
       <description>Five decisions that connect business priorities, delivery readiness and the people who will own the result.</description>
       <category>Strategy</category>
@@ -16,7 +16,7 @@
     </item>
     <item>
       <title>The pilot works. Does the work change?</title>
-      <link>https://www.wyassine.com/blog/ai-adoption-beyond-pilots.html</link>
+      <link>https://www.wyassine.com/blog/ai-adoption-beyond-pilots</link>
       <guid>https://www.wyassine.com/blog/ai-adoption-beyond-pilots.html</guid>
       <description>A practical look at the distance between a successful demonstration and a tool people can use in an ordinary working day.</description>
       <category>Leadership</category>
@@ -24,7 +24,7 @@
     </item>
     <item>
       <title>From AI experiments to everyday value.</title>
-      <link>https://www.wyassine.com/brief-genai-operating-model.html</link>
+      <link>https://www.wyassine.com/brief-genai-operating-model</link>
       <guid>https://www.wyassine.com/brief-genai-operating-model.html</guid>
       <description>The recurring decisions and responsibilities that connect a promising experiment to something an organisation can sustain.</description>
       <category>Operating models</category>

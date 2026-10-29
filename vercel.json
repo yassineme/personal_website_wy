@@ -36,6 +36,21 @@
   ],
   "redirects": [
     {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/mydigital-resume",
+      "destination": "/digital-cv",
+      "permanent": false
+    },
+    {
       "source": "/mydigital-resume.html",
       "destination": "/digital-cv",
       "permanent": false
@@ -76,5 +91,7 @@
         }
       ]
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

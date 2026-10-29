@@ -26,7 +26,7 @@
   const providerNames=[];if(config.vercelAnalyticsEnabled)providerNames.push('Vercel Web Analytics');if(core.gaID(config))providerNames.push('Google Analytics');
   const audienceTools=providerNames.length?providerNames.join(' and '):'audience analytics';
   copy.append(title,make('p','','Only essential storage is used by default. Optional '+audienceTools+' helps me understand which pages are useful, if you allow it. You can change or withdraw your choice anytime.'));
-  const policy=make('a','cookie-policy','Privacy information ↗');policy.href=new URL(config.privacyNoticeUrl||'privacy.html',rootURL);copy.append(policy);
+  const policy=make('a','cookie-policy','Privacy information ↗');policy.href=new URL(config.privacyNoticeUrl||'privacy',rootURL);copy.append(policy);
   const actions=make('div','cookie-actions');
   const essential=button('privacy-choice','Only essential'),allow=button('privacy-choice','Allow analytics'),manage=button('privacy-manage','Manage choices');actions.append(essential,allow,manage);
   banner.append(copy,actions);document.body.append(banner);

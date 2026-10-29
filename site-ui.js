@@ -8,7 +8,7 @@
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#') || /^[a-z][a-z\d+.-]*:/i.test(href) || href.startsWith('//')) return;
       const url = new URL(href,location.href);
-      if (!url.pathname.endsWith('.html') || url.pathname.endsWith('typography-preview.html')) return;
+      if (url.pathname.endsWith('/typography-preview') || /\.[^/]+$/.test(url.pathname)) return;
       url.searchParams.set('font',proposal);
       link.href = url.href;
     });

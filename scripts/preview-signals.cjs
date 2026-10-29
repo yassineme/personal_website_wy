@@ -25,7 +25,14 @@ http.createServer(async(req,res)=>{
  if(url.pathname==='/api/ai-signals')return handler(req,res);
  if(url.pathname==='/api/ai-markets'){currentMarketKey=await localMarketKey();return markets(req,res);}
  try{
-  const file=path.resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));
+  let pathname=decodeURIComponent(url.pathname);
+  if(pathname==='/index'||pathname==='/index.html'){res.writeHead(308,{Location:'/'+url.search});return res.end();}
+  if(pathname.endsWith('.html')){res.writeHead(308,{Location:pathname.slice(0,-5)+url.search});return res.end();}
+  if(pathname.length>1&&pathname.endsWith('/')){res.writeHead(308,{Location:pathname.slice(0,-1)+url.search});return res.end();}
+  if(pathname==='/mydigital-resume'){res.writeHead(307,{Location:'/digital-cv'+url.search});return res.end();}
+  if(pathname==='/')pathname='/index.html';
+  else if(!path.extname(pathname))pathname+='.html';
+  const file=path.resolve(root,'.'+pathname);
   if(!file.startsWith(root+path.sep)||file.split(path.sep).some(p=>p.startsWith('.'))||/\/(api|lib|tests|node_modules|scripts)\//.test(file))throw Error();
   const body=await fs.readFile(file);res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(body);
  }catch{res.statusCode=404;res.end('Not found');}

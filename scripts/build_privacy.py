@@ -34,12 +34,12 @@ source='''<!doctype html>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <div class="journal-shell">
 <header class="journal-header">
-<a class="brand-link" href="index.html" aria-label="Yassine W. Medjati — home">
+<a class="brand-link" href="/" aria-label="Yassine W. Medjati — home">
 <img class="brand-symbol" src="assets/brand/logo-ivory.png" width="36" height="36" alt="">
 </a>
 <nav class="journal-nav" aria-label="Main navigation">
-<a href="index.html">Home</a>
-<a href="blog.html">Blog</a>
+<a href="/">Home</a>
+<a href="blog">Blog</a>
 <a href="mailto:hello@wyassine.com">Contact ↗</a>
 </nav>
 </header>
@@ -87,7 +87,7 @@ source='''<!doctype html>
 </main>
 <footer class="journal-footer">
 <span>© 2026 Yassine W. Medjati</span>
-<a href="index.html">Back to the introduction ↗</a>
+<a href="/">Back to the introduction ↗</a>
 </footer>
 </div>
 </body>

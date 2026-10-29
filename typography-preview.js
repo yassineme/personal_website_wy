@@ -4,7 +4,7 @@
     'instrument-newsreader': {title:'Instrument Sans + Newsreader',sans:'Instrument Sans',serif:'Newsreader',description:'Your selected pairing. Instrument Sans keeps the headings and interface calm, clear and assured; Newsreader adds the warm editorial reading experience and expressive accents.'},
     'sora-source-serif': {title:'Sora + Source Serif 4',sans:'Sora',serif:'Source Serif 4',description:'The most architectural option. Sora creates a precise, technical headline voice, while Source Serif 4 gives articles a more grounded reading rhythm.'}
   };
-  const views = {home:{url:'index.html',name:'Homepage'},blog:{url:'blog.html',name:'Blog'},article:{url:'blog/ai-roadmap-prioritisation.html',name:'Article'}};
+  const views = {home:{url:'/',name:'Homepage'},blog:{url:'blog',name:'Blog'},article:{url:'blog/ai-roadmap-prioritisation',name:'Article'}};
   let selected = 'instrument-newsreader';
   let view = 'home';
   const frame = document.getElementById('type-frame');

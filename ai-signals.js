@@ -115,7 +115,7 @@
   const invitation = make('div', 'signals-invitation');
   invitation.append(make('p', '', 'What does this change for your business?'));
   const blog = make('a', '', 'Explore my perspectives ↗');
-  blog.href = new URL('blog.html', rootURL);
+  blog.href = new URL('blog', rootURL);
   invitation.append(blog);
   shell.append(top, title, intro, tools, cards, footer, invitation);
   dialog.append(shell);

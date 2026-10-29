@@ -34,7 +34,7 @@
   const notice=make('p','signals-result-count');notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');
   const cards=make('div','signals-cards');const more=button('Load more signals');const perspective=make('aside','signals-perspective');perspective.setAttribute('aria-label','AI perspective of the day');
   root.append(filters,modes,notice,cards,more,perspective);
-  if(!archive)root.append(link('Search the full signal archive ↗',new URL('signals.html',rootURL).href));
+  if(!archive)root.append(link('Search the full signal archive ↗',new URL('signals',rootURL).href));
   const controls=[search,topic,from,to].filter(Boolean);controls.forEach(el=>el.addEventListener(el===search?'input':'change',()=>{limit=30;render();}));
   let savedOnly=false,newOnly=false;
   saved.addEventListener('click',()=>{savedOnly=!savedOnly;saved.setAttribute('aria-pressed',String(savedOnly));limit=30;render();});
@@ -57,7 +57,7 @@
    if(reports.length>1){const coverage=make('details','signal-coverage');coverage.append(make('summary','',reports.length+' reports on this announcement'));for(const report of reports)coverage.append(link(report.source+' · '+report.title,core.safeURL(report.url,report.sourceId),true));body.append(coverage);}
    const actions=make('div','signal-actions');const isSaved=bookmarks.some(b=>b.id===item.id);const save=button(isSaved?'Saved ✓':'Save',isSaved?'Remove saved signal: '+item.title:'Save signal: '+item.title);save.setAttribute('aria-pressed',String(isSaved));
    save.addEventListener('click',()=>{if(bookmarks.some(b=>b.id===item.id))bookmarks=bookmarks.filter(b=>b.id!==item.id);else bookmarks=[...bookmarks,item].slice(-200);store.set('bookmarks',bookmarks);render();const replacement=[...cards.children].find(el=>el.dataset.story===item.id)?.querySelector('.signal-actions button');(replacement||saved).focus({preventScroll:true});});
-   const permalink=new URL('signals.html',rootURL);permalink.searchParams.set('story',item.id);
+   const permalink=new URL('signals',rootURL);permalink.searchParams.set('story',item.id);
    const copy=button('Copy link','Copy link to signal: '+item.title);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(permalink.href);copy.textContent='Copied ✓';}catch{setCopy(copy,'Use permanent link ↗');}});
    actions.append(save,copy,link('Permanent link ↗',permalink.href));body.append(actions);details.append(body);card.append(details);return card;
   }

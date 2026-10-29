@@ -7,7 +7,7 @@ window.YWM_SITE_CONFIG = Object.freeze({
   vercelAnalyticsScriptPath: '/_vercel/insights/script.js',
   // Notice review status is tracked separately from owner activation.
   privacyReviewed: false,
-  privacyNoticeUrl: 'privacy.html',
+  privacyNoticeUrl: 'privacy',
   // No public Impressum is generated without confirmed publisher details.
   legalNoticeUrl: '',
   consentVersion: '2026-10-26.1',
