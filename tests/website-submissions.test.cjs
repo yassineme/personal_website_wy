@@ -67,6 +67,24 @@ test('timer independently notifies the owner and acknowledges the visitor withou
   assert.equal(g.sent[1].to,submission.email);assert.equal(g.sent[1].replyTo,'owner@example.invalid');assert.equal(g.sent[1].attachments,undefined);assert.equal(g.rows[1][13],'Sent');
   g.rows[1][5]='Approved';g.context.sendPendingNotifications();assert.equal(g.sent.length,2);
 });
+test('owner notifications can target the primary inbox while visitor replies retain the public alias',async()=>{
+  for(const [index,kind] of ['pin','pdf','enquiry'].entries()){
+    const g=google();g.props.OWNER_NOTIFICATION_EMAIL='primary-inbox@example.invalid';
+    await createSubmissionClient(env,g.fetcher)({...submission,id:String(index+1).repeat(64),kind});
+    g.context.sendPendingNotifications();g.context.sendPendingNotifications();
+    assert.equal(g.sent.length,2);assert.equal(g.sent[0].to,'primary-inbox@example.invalid');
+    assert.equal(g.sent[0].replyTo,submission.email);assert.equal(g.sent[1].to,submission.email);
+    assert.equal(g.sent[1].replyTo,'owner@example.invalid');
+    assert.doesNotMatch(g.sent[1].body,/primary-inbox@example/);
+  }
+});
+test('invalid notification addresses stop sending without changing queued rows',async()=>{
+  const g=google();await createSubmissionClient(env,g.fetcher)(submission);
+  for(const address of ['not-an-address','owner@example.invalid\r\nBcc: third@example.invalid']){
+    g.props.OWNER_NOTIFICATION_EMAIL=address;assert.throws(()=>g.context.sendPendingNotifications(),/Invalid notification address/);
+    assert.equal(g.sent.length,0);assert.equal(g.rows[1][7],'Pending');assert.equal(g.rows[1][13],'Pending');
+  }
+});
 test('uncertain mail failures and stale Sending states require manual review instead of duplicate sends',async()=>{
   const g=google();await createSubmissionClient(env,g.fetcher)(submission);g.mailFailure=true;g.context.sendPendingNotifications();assert.equal(g.rows[1][7],'Needs review');g.mailFailure=false;g.context.sendPendingNotifications();assert.equal(g.sent.length,1);assert.equal(g.sent[0].to,submission.email);
   g.rows[1][7]='Sending';g.rows[1][12]=new Date(Date.now()-11*60*1000);g.context.sendPendingNotifications();assert.equal(g.rows[1][7],'Needs review');assert.equal(g.sent.length,1);

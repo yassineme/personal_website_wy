@@ -9,6 +9,7 @@ function settings_() {
   var p=PropertiesService.getScriptProperties().getProperties();
   p.SPREADSHEET_ID=p.SPREADSHEET_ID||TARGET_SPREADSHEET_ID;
   if(!p.SPREADSHEET_ID || !/^[a-f0-9]{64}$/.test(p.WEBSITE_FORMS_SECRET||'') || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(p.OWNER_EMAIL||''))throw Error('Setup is incomplete');
+  if(p.OWNER_NOTIFICATION_EMAIL && (p.OWNER_NOTIFICATION_EMAIL.length>254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(p.OWNER_NOTIFICATION_EMAIL)))throw Error('Invalid notification address');
   return p;
 }
 function json_(value) {return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);}
@@ -91,7 +92,7 @@ function autoReply_(values,config) {
     body:body+'\n\nYou can reply to this email if you would like to add anything.\n\nBest regards,\nYassine W. Medjati\n\nAutomatic acknowledgement · Reference: '+values[9]};
 }
 function ownerNotification_(values,config) {
-  return {to:config.OWNER_EMAIL,replyTo:String(values[3]),name:'Website requests',
+  return {to:config.OWNER_NOTIFICATION_EMAIL||config.OWNER_EMAIL,replyTo:String(values[3]),name:'Website requests',
     subject:String(values[1])+' — '+String(values[2]).replace(/[\r\n]/g,' ').slice(0,80),
     body:'A new '+values[1]+' was saved from your website.\n\nName: '+values[2]+'\nEmail: '+values[3]+'\n\nMessage:\n'+(values[4]||'(No message supplied)')+'\n\nReview it in your private spreadsheet:\nhttps://docs.google.com/spreadsheets/d/'+config.SPREADSHEET_ID+'/edit\n\nReply to this email to contact the visitor. Review status is manual; changing it does not email the visitor. The automatic acknowledgement contains no PIN, PDF or attachment.\n\nRequest ID: '+values[9]};
 }

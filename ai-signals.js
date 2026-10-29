@@ -236,7 +236,7 @@
     const storyID = items[cursor]?.id;
     renderCards(storyID);
     dialog.showModal(); document.body.classList.add('signals-open'); launch.setAttribute('aria-expanded', 'true'); schedule(); close.focus();
-    dialog.scrollTop = 0;
+    shell.scrollTop = 0;
     if (Date.now() - lastAttempt >= refreshInterval) refresh();
   }
   function togglePause() { paused = !paused; storage.set('paused', paused); syncControls(); if (dialog.open) renderCards(); schedule(); if (!paused) refresh(); }

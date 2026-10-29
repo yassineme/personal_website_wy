@@ -9,7 +9,7 @@
 - The blurred facade at `assets/cv-locked-preview.html` contains public identity/artwork and layout placeholders; the actual professional CV text remains encrypted until the server accepts the PIN.
 - The server accepts exactly eight digits, including a leading zero. Existing secure session-cookie, expiry, PIN-attempt throttle and same-origin form checks are retained.
 - “Request PDF résumé” opens a request form rather than downloading a file. The legacy `?download=pdf` endpoints redirect to that form, even after login. No PDF is bundled in the encrypted website payload.
-- PIN and PDF requests collect name, reply email and an optional message. Owner notifications go to `hello@wyassine.com` by default; visitors receive a separate automatic acknowledgement. The owner reviews and replies manually; no PIN or résumé is automatically sent to visitors.
+- PIN and PDF requests collect name, reply email and an optional message. Owner notifications use the private notification recipient when configured, otherwise `hello@wyassine.com`; visitors receive a separate automatic acknowledgement. The owner reviews and replies manually; no PIN or résumé is automatically sent to visitors.
 - The former public résumé page redirects to the PIN gate. The two public PDF copies have been moved out of this local deployable website into the private local archive. Their old URLs redirect to the PDF request form when the configuration is manually published.
 
 ## Local preview
@@ -39,7 +39,7 @@ All website forms post to their own website server. The server signs a minimal r
 
 An Apps Script timer sends owner notifications and visitor acknowledgements through separate delivery queues every five minutes. Rows stay queued if Google’s email quota is exhausted. Failed or uncertain deliveries are marked Needs review, with a manual retry option in the Sheet. The visitor’s email is used as reply-to. No visitor receives an automatic PIN, PDF or attachment; Review status changes do not send emails. No CV PIN, encryption key, cookies or visitor IP address is included in submissions.
 
-The Google account that authorizes Apps Script is the email sender. The owner notification recipient is set separately as `OWNER_EMAIL` in Script Properties. Keep the Sheet’s sharing Restricted. The supplied Sheet is configured in the active standalone Apps Script project. The receiver and email timer are installed; Google setup does not publish this website.
+The Google account that authorizes Apps Script is the email sender. Keep `OWNER_EMAIL=hello@wyassine.com` in Script Properties as the public visitor reply address. Set the optional `OWNER_NOTIFICATION_EMAIL=yassine.medjati@gmail.com` to deliver owner notifications directly to the primary inbox. If this property is absent, notifications fall back to `OWNER_EMAIL`. This avoids sending from the script owner to an alias that forwards back to the same Gmail account, which can leave notifications in Sent/All Mail instead of Inbox. Updating Apps Script source and Script Properties is separate from publishing the website; a Git push does not update that project. Keep the Sheet’s sharing Restricted. The supplied Sheet is configured in the active standalone Apps Script project. The receiver and email timer are installed; Google setup does not publish this website.
 
 See `apps-script/SETUP.md` for Google setup and maintenance. Apps Script source is retained in `apps-script/` for version history; a website push does not update its cloud deployment.
 

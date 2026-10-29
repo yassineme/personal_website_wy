@@ -35,12 +35,13 @@ body.has-floating-signals { padding-bottom:210px; }
 .has-floating-signals .signals-dock-bar { height:30px; border:1px solid #ffffff1b; border-radius:18px; background:#191a1db3; -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); }
 .has-floating-signals .signals-dock-hint { width:max-content; max-width:100%; margin:0 auto; padding:4px 9px; border-radius:12px; background:#191a1db3; color:#c3c4ca; -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); }
 body.signals-open { overflow:hidden; }
-.signals-dialog { --signal-glass:linear-gradient(125deg,#f6f6f614,#e5e5e806 54%,#ffffff10); position:fixed; inset:0; margin:auto; width:min(530px,calc(100% - 32px)); max-width:none; max-height:min(880px,calc(100dvh - 48px)); padding:0; border:1px solid #f3f3f330; border-radius:30px; color:#eeece7; background:linear-gradient(140deg,#eeeeff0e,transparent 65%),#20212480; -webkit-backdrop-filter:blur(18px) saturate(105%); backdrop-filter:blur(18px) saturate(105%); box-shadow:inset 0 1px 0 #ffffff14,0 32px 120px #0008; overflow:auto; overscroll-behavior:contain; font:400 15px/1.6 'Instrument Sans',sans-serif; color-scheme:dark; scrollbar-width:thin; scrollbar-color:#e3e3ea30 transparent; }
+.signals-dialog { --signals-max-height:min(880px,calc(100dvh - 48px)); --signal-glass:linear-gradient(125deg,#f6f6f614,#e5e5e806 54%,#ffffff10); position:fixed; inset:0; margin:auto; width:min(530px,calc(100% - 32px)); max-width:none; max-height:var(--signals-max-height); padding:0; border:1px solid #f3f3f330; border-radius:30px; color:#eeece7; background:linear-gradient(140deg,#eeeeff0e,transparent 65%),#20212480; -webkit-backdrop-filter:blur(18px) saturate(105%); backdrop-filter:blur(18px) saturate(105%); box-shadow:inset 0 1px 0 #ffffff14,0 32px 120px #0008; overflow:hidden; font:400 15px/1.6 'Instrument Sans',sans-serif; color-scheme:dark; }
 .signals-dialog::backdrop { background:#090a0d35; }
 .signals-dialog[open] { animation:signals-enter .32s ease-out backwards; }
-.signals-shell { padding:24px; }
+/* Inset the scrollport so native indicators stay inside the rounded frame. */
+.signals-shell { box-sizing:border-box; max-height:calc(var(--signals-max-height) - 26px); margin:12px 8px; padding:12px 16px; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#e3e3ea30 transparent; }
 .signals-top { position:sticky; top:0; z-index:4; padding:10px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:12px; }
-.signals-top::before { content:''; position:absolute; inset:-24px -24px 0; z-index:-1; background:#242529b8; -webkit-backdrop-filter:blur(30px); backdrop-filter:blur(30px); border-radius:29px 29px 0 0; }
+.signals-top::before { content:''; position:absolute; inset:-12px -16px 0; z-index:-1; background:#242529b8; -webkit-backdrop-filter:blur(30px); backdrop-filter:blur(30px); border-radius:29px 29px 0 0; }
 .signals-kicker { font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:#c2c2c9; }
 .signals-icon,.signal-dismiss { border:0; background:#ffffff07; color:#d1d1d9; cursor:pointer; font:400 22px/1 sans-serif; min-width:32px; min-height:32px; padding:0; border-radius:50%; }
 .signals-icon:hover,.signal-dismiss:hover { background:#ffffff12; color:#fff; }
@@ -113,14 +114,14 @@ body.signals-open { overflow:hidden; }
   .signals-dock-home { inset:auto; width:min(100%,366px); margin:28px 0 8px; }
   .signals-stack { height:116px; }
   .signal-bubble { padding:14px 16px 16px; border-radius:21px; }
-  .signals-dialog { width:calc(100% - 20px); max-height:calc(100dvh - 24px); border-radius:25px; }
-  .signals-shell { padding:20px; }
+  .signals-dialog { width:calc(100% - 20px); --signals-max-height:calc(100dvh - 24px); border-radius:25px; }
+  .signals-shell { padding:8px 12px; }
   .signals-title { font-size:37px !important; }
   .signals-title em { font-size:41px; }
   .signal-story h3 { font-size:17px !important; }
   .signal-meta { gap:5px; }
   .signal-meta time { font-size:8px; }
-  .signals-top::before { inset:-20px -20px 0; border-radius:24px 24px 0 0; }
+  .signals-top::before { inset:-8px -12px 0; border-radius:24px 24px 0 0; }
 }
 @media(max-width:359px) { .signal-bubble-headline { font-size:15px; } .signals-edition { font-size:7px; } .signals-dock-bar { gap:6px; padding:0 5px; } .signal-meta .signal-badge { display:none; } }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .signal-bubble { background:#242528; } .signals-dialog { background:#222326; } }

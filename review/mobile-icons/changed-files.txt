@@ -1,0 +1,17 @@
+blog.html
+index.html
+signals.html
+brief-genai-operating-model.html
+case-study-airbus-digitalization.html
+photospot-atlas.html
+typography-preview.html
+privacy.html
+blog/ai-roadmap-prioritisation.html
+blog/ai-adoption-beyond-pilots.html
+lib/cv-access-ui.cjs
+ai-signals.js
+signals-reader.js
+privacy.js
+booking.js
+styles.css
+assets/arrow-up-right.svg
