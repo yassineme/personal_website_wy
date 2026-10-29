@@ -97,8 +97,10 @@
     .contact-note { margin:13px 0 0; color:var(--muted); font-size:11px; line-height:1.6; }
     .contact-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px; padding:15px 0; border-top:1px solid var(--line); }
     .contact-row .contact-option { min-width:0; padding:0; border:0; grid-template-columns:minmax(0,1fr); }
-    .contact-row .contact-arrow { display:none; }
-    .contact-row strong::after { content:' ↗'; color:var(--muted); font-size:12px; }
+    /* SVG geometry keeps contact controls monochrome on mobile platforms. */
+    .contact-link-icon { display:inline-block; width:12px; height:12px; flex:none; vertical-align:-1px; }
+    .contact-row .contact-link-icon { margin-left:2px; color:var(--muted); }
+    .contact-close-icon { display:block; width:18px; height:18px; }
     .contact-row-chat { grid-template-columns:minmax(0,1fr); }
     .copy-contact { display:grid; place-items:center; width:32px; height:32px; padding:8px; border:0; background:transparent; color:var(--muted); opacity:.7; cursor:pointer; transition:color .15s,opacity .15s; }
     .copy-contact:hover, .copy-contact:focus-visible, .copy-contact[data-copied="true"] { color:var(--ink); opacity:1; }
