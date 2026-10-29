@@ -1,8 +1,20 @@
 (() => {
   'use strict';
+  const setCopy = (el, text) => {
+    el.replaceChildren();
+    String(text).split('\u2197').forEach((part, index) => {
+      if (index) {
+        const icon = document.createElement('span');
+        icon.innerHTML = '<svg class="ui-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em;flex:none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>';
+        el.append(icon.firstChild);
+      }
+      el.append(document.createTextNode(part));
+    });
+  };
+
   const rootURL=new URL('.',document.currentScript.src),config=window.YWM_SITE_CONFIG||{},core=window.YWMPrivacyCore;
   if(!core)return;
-  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el;};
+  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text)setCopy(el,text);return el;};
   const button=(cls,text)=>{const el=make('button',cls,text);el.type='button';return el;};
   let record=core.read(localStorageSafe(),config),choices=record?.choices||core.denied(),returnFocus=null,expiryTimer=null;
   const analytics=core.createAnalytics({win:window,doc:document,config,location});

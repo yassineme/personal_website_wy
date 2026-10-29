@@ -1,7 +1,19 @@
 (() => {
  'use strict';
+  const setCopy = (el, text) => {
+    el.replaceChildren();
+    String(text).split('\u2197').forEach((part, index) => {
+      if (index) {
+        const icon = document.createElement('span');
+        icon.innerHTML = '<svg class="ui-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em;flex:none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>';
+        el.append(icon.firstChild);
+      }
+      el.append(document.createTextNode(part));
+    });
+  };
+
  const core=window.YWM_SIGNALS;
- const make=(tag,cls,copy)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(copy)el.textContent=copy;return el;};
+ const make=(tag,cls,copy)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(copy)setCopy(el,copy);return el;};
  const button=(copy,label)=>{const el=make('button','signals-action',copy);el.type='button';if(label)el.setAttribute('aria-label',label);return el;};
  const link=(copy,url,external=false)=>{const el=make('a','signals-text-link',copy);el.href=url;if(external){el.target='_blank';el.rel='noopener noreferrer';}return el;};
  let adapter;try{adapter=localStorage;}catch{adapter={getItem(){return null;},setItem(){}};}
@@ -46,7 +58,7 @@
    const actions=make('div','signal-actions');const isSaved=bookmarks.some(b=>b.id===item.id);const save=button(isSaved?'Saved ✓':'Save',isSaved?'Remove saved signal: '+item.title:'Save signal: '+item.title);save.setAttribute('aria-pressed',String(isSaved));
    save.addEventListener('click',()=>{if(bookmarks.some(b=>b.id===item.id))bookmarks=bookmarks.filter(b=>b.id!==item.id);else bookmarks=[...bookmarks,item].slice(-200);store.set('bookmarks',bookmarks);render();const replacement=[...cards.children].find(el=>el.dataset.story===item.id)?.querySelector('.signal-actions button');(replacement||saved).focus({preventScroll:true});});
    const permalink=new URL('signals.html',rootURL);permalink.searchParams.set('story',item.id);
-   const copy=button('Copy link','Copy link to signal: '+item.title);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(permalink.href);copy.textContent='Copied ✓';}catch{copy.textContent='Use permanent link ↗';}});
+   const copy=button('Copy link','Copy link to signal: '+item.title);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(permalink.href);copy.textContent='Copied ✓';}catch{setCopy(copy,'Use permanent link ↗');}});
    actions.append(save,copy,link('Permanent link ↗',permalink.href));body.append(actions);details.append(body);card.append(details);return card;
   }
   function renderPerspective(){

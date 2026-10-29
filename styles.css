@@ -750,11 +750,13 @@ footer .container {
 
 .mobile-menu-nav .nav-link::after,
 #mobile-menu nav .nav-link::after {
-    content: '↗';
+    content: '';
     position: static;
-    width: auto;
-    height: auto;
-    background: none;
+    width: .85em;
+    height: .85em;
+    background: currentColor;
+    -webkit-mask: url('assets/arrow-up-right.svg') center / contain no-repeat;
+    mask: url('assets/arrow-up-right.svg') center / contain no-repeat;
     color: var(--color-text-subtle);
     font-family: var(--font-tech);
     font-size: 0.72rem;

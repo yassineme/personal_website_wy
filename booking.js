@@ -1,9 +1,21 @@
 (() => {
   'use strict';
+  const setCopy = (el, text) => {
+    el.replaceChildren();
+    String(text).split('\u2197').forEach((part, index) => {
+      if (index) {
+        const icon = document.createElement('span');
+        icon.innerHTML = '<svg class="ui-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em;flex:none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>';
+        el.append(icon.firstChild);
+      }
+      el.append(document.createTextNode(part));
+    });
+  };
+
   const config=window.YWM_SITE_CONFIG||{};
   const calLink=/^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/.test(config.calLink||'')?config.calLink:'yassine-m-zowgc4/15min';
   const bookingURL='https://cal.com/'+calLink;
-  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el;};
+  const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text)setCopy(el,text);return el;};
   const dialog=make('dialog','booking-dialog');dialog.setAttribute('aria-labelledby','booking-title');
   const header=make('div','booking-header');const copy=make('div');copy.append(make('span','privacy-eyebrow','A conversation / 15 minutes'));
   const title=make('h2','','Let’s discuss the role.');title.id='booking-title';copy.append(title,make('p','','Choose a time that works for you. The calendar is provided by Cal.com.'));
