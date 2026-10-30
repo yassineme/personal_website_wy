@@ -92,7 +92,7 @@ def footer(prefix=''):
 </div></body></html>'''
 
 def invitation(title,text,subject,eyebrow='From reading to doing'):
-    return f'''<section class="journal-invitation" aria-label="Work together"><div><span class="mono">{E(eyebrow)}</span><h2>{title}</h2></div><div class="invitation-copy"><p>{E(text)}</p><a class="solid-link" href="mailto:hello@wyassine.com?subject={quote(subject)}">Start a conversation <span aria-hidden="true">↗</span></a><div style="margin-top:18px"><a class="text-link" href="https://cal.com/yassine-m-zowgc4/15min" data-cal-popup target="_blank" rel="noopener noreferrer">Book a 15-minute call <span class="link-arrow" aria-hidden="true">↗</span></a></div></div></section>'''
+    return f'''<section class="journal-invitation" aria-label="Work together"><div><span class="mono">{E(eyebrow)}</span><h2>{title}</h2></div><div class="invitation-copy"><p>{E(text)}</p><a class="solid-link" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a><div style="margin-top:18px"><a class="text-link" href="https://cal.com/yassine-m-zowgc4/15min" data-cal-popup target="_blank" rel="noopener noreferrer">Book a 15-minute call <span class="link-arrow" aria-hidden="true">↗</span></a></div></div></section>'''
 
 def row(p):
     stamp='Updated ' if p['date_published']!=p['date_modified'] else ''
