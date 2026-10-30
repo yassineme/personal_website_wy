@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Build the privacy-information review draft with the current analytics configuration."""
+"""Build the privacy page with the current analytics configuration."""
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 source='''<!doctype html>
@@ -51,38 +51,33 @@ source='''<!doctype html>
 <p class="article-deck">What this website uses, what stays optional, and how to change your choice.</p>
 </header>
 <div class="article-body" style="max-width:760px;margin:0 auto 70px">
-<aside style="padding:20px;border:1px solid #eeece733;border-radius:14px;margin-bottom:35px">
-<strong>Owner-review draft · 26 October 2026</strong>
-<p>This page describes the prepared website setup. Google Analytics and Vercel Web Analytics are configured for production use after visitor opt-in. Controller contact details, provider agreements and the legal basis for the final deployment must be checked before this becomes the final privacy notice. A cookie banner alone does not complete the site’s legal requirements.</p>
-</aside>
+<p class="mono">Last updated: 30 October 2026</p>
 <h2>Who to contact</h2>
-<p>Website owner: Yassine W. Medjati. For privacy questions, contact <a href="mailto:hello@wyassine.com">hello@wyassine.com</a>. Complete controller contact information remains to be confirmed for the final notice.</p>
+<p>Website owner: Yassine W. Medjati. For privacy questions, contact <a href="mailto:hello@wyassine.com">hello@wyassine.com</a>.</p>
 <h2>Website delivery and AI Signals</h2>
-<p>The public website is hosted on Vercel. Delivering a page requires technical connection information such as the IP address, requested URL and browser information. Necessary hosting/security processing is separate from optional audience analytics. The final notice must confirm the hosting entity, processing agreement, log retention and any international-transfer safeguards.</p>
+<p>The public website is hosted on Vercel. Delivering a page requires technical connection information such as the IP address, requested URL and browser information. Necessary hosting/security processing is separate from optional audience analytics.</p>
 <p>AI Signals requests a feed from this website’s own endpoint. The server retrieves public publisher feeds; your browser is not sent to those publishers just to show the headline stack. Following an original article opens that publisher’s website under its own privacy rules.</p>
 <h2>Essential storage and preferences</h2>
 <p>Your cookie choice is stored locally in your browser as <code>ywm-privacy-consent-v2</code> for 180 days. It records the selected providers, decision date and notice version; it contains no random visitor identifier. The site also remembers preferences you request, including paused AI Signals, dismissed stories and up to 200 saved signals. AI Signals also stores story identifiers and the time of your recent browsing session locally to calculate “new since your last visit.” This history stays in your browser, is not sent to the archive server, and can be cleared on the Signals page. The shared archive contains public publisher material, not visitor reading histories. Local fonts are served by this website.</p>
 <h2>Optional Vercel Web Analytics</h2>
 <p>Configured for production use, only after your opt-in. Vercel Web Analytics can process page views and aggregate visit information. This website gates it behind your choice even though the service does not use analytics cookies. URL query strings and fragments are removed from the events sent by this integration.</p>
-<p>Read <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel’s Web Analytics privacy information ↗</a>. The final notice must confirm the contracted provider, relevant retention, transfers and safeguards.</p>
+<p>Read <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel’s Web Analytics privacy information ↗</a>.</p>
 <h2>Optional Google Analytics 4</h2>
 <p>Configured for the production website and activated only after your opt-in. Google Analytics 4 may measure page views, referrers and device/browser information and set first-party cookies such as <code>_ga</code> and <code>_ga_…</code>. This integration limits those cookies to 180 days, disables advertising personalization and Google Signals, and strips query strings and fragments from page URLs and referrers. It does not send contact forms, booking details, names or email addresses as analytics events.</p>
-<p>The setup uses basic consent mode: no Google Analytics script, measurement requests or consent pings are loaded before opt-in. Google may process data outside the EU. Before activation, confirm the data-processing terms, recipients, transfer mechanism, property-level data retention and required disclosures. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy ↗</a>.</p>
+<p>The setup uses basic consent mode: no Google Analytics script, measurement requests or consent pings are loaded before opt-in. Google may process data outside the EU. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy ↗</a>.</p>
 <h2>AI stock-market ticker</h2>
 <p>The AI markets ticker requests public-company quotes from this website’s own endpoint. The server retrieves the quotes from Finnhub and temporarily caches them to limit repeated requests. Your browser does not connect directly to Finnhub to display the ticker, and this integration does not forward visitor IP addresses, contact details or booking information to the quote provider. Market-data requests are separate from optional audience analytics.</p>
 <p>Finnhub receives the technical information needed for the server’s data requests. Read <a href="https://finnhub.io/terms-of-service" target="_blank" rel="noopener noreferrer">Finnhub’s terms and privacy information ↗</a>.</p>
 <h2>Booking via Cal.com</h2>
 <p>Cal.com loads only after you choose a booking link, such as “Discuss a role”. Opening the calendar connects your browser to Cal.com and shares technical connection information. If you proceed, Cal.com handles the availability, contact details and booking information you enter. The calendar may use storage needed to provide the requested booking service. This is separate from optional website analytics.</p>
-<p>You can close the calendar without booking or <a href="mailto:hello@wyassine.com">contact me by email</a>. See <a href="https://cal.com/privacy" target="_blank" rel="noopener noreferrer">Cal.com’s privacy information ↗</a>. The final notice must confirm the applicable booking-provider arrangement and retention.</p>
+<p>You can close the calendar without booking or <a href="mailto:hello@wyassine.com">contact me by email</a>. See <a href="https://cal.com/privacy" target="_blank" rel="noopener noreferrer">Cal.com’s privacy information ↗</a>.</p>
 <h2>Change or withdraw your choice</h2>
 <p>Use “Cookie settings” in the footer on any page. “Only essential” withdraws both analytics choices in one action. When analytics were running, the page refreshes to unload them; accessible Google Analytics cookies are removed. Previously transmitted data cannot be undone by changing this setting, but you may make a data-protection request. Changed provider configuration or a new notice version requires a fresh choice.</p>
 <p>
 <button class="privacy-choice" data-cookie-settings type="button">Open cookie settings</button>
 </p>
 <h2>Your rights</h2>
-<p>Where the GDPR applies, you may request access, rectification, erasure, restriction, portability and, where relevant, object to processing. You may withdraw consent prospectively without affecting processing lawfully carried out before withdrawal. You can complain to the competent supervisory authority. The final notice must confirm the controller’s establishment, applicable legal bases and supervisory contact.</p>
-<h2>Setup and review status</h2>
-<p>Google Analytics is enabled in the website configuration, with production-host restrictions and visitor opt-in required. The owner must still complete and review this notice, assess whether an Impressum is required, and confirm provider agreements, retention and transfer safeguards. This draft is not indexed as a finished legal notice.</p>
+<p>Where the GDPR applies, you may request access, rectification, erasure, restriction, portability and, where relevant, object to processing. You may withdraw consent prospectively without affecting processing lawfully carried out before withdrawal. You can complain to the competent supervisory authority.</p>
 </div>
 </main>
 <footer class="journal-footer">
@@ -93,4 +88,4 @@ source='''<!doctype html>
 </body>
 </html>'''
 (ROOT/'privacy.html').write_text(source,encoding='utf-8')
-print('Built privacy-information review draft; GA4 requires production hosting and visitor opt-in.')
+print('Built privacy page; GA4 requires production hosting and visitor opt-in.')
