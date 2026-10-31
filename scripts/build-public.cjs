@@ -4,6 +4,8 @@ const path=require('node:path');
 const {randomUUID}=require('node:crypto');
 const MARKER='.generated-by-website-build';
 const ROOT_FILES=[
+  'photography-portal.css','photography-portal.js',
+  'photography.html','photography.css','photography.js','photography-data.js',
   'index.html','about.html','ai-strategy.html','privacy.html','blog.html','signals.html','mydigital-resume.html',
   'photospot-atlas.html','brief-genai-operating-model.html',
   'site-intro.js','site-intro.css','script.js','site-config.js','site-ui.js','profile.js','booking.js','privacy.js','privacy-core.js',
