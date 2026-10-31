@@ -17,7 +17,7 @@ The new articles are original proposed editorial copy for this website. Illustra
 3. Run `python3 scripts/build_blog.py` from the website folder. It rebuilds the index, article pages, RSS feed and sitemap using the standard Python library. No package installation is required.
 4. Review the generated article and its links at desktop and mobile widths before publishing.
 
-New article URLs normally use `blog/descriptive-topic.html`. Set `featured` to true on one article. Reading times are calculated from article word counts. Topic buttons come from the categories in the build script; add a new category there when needed.
+New article metadata uses clean URLs such as `blog/descriptive-topic` (the generated file is `.html`). Set `featured` to true on one article. Reading times are calculated from article word counts. Topic buttons come from the categories in the build script; add a new category there when needed.
 
 ## Editorial approach
 
@@ -42,3 +42,7 @@ The approved symbol appears beside the name in the site headers. The website use
 Static checks cover local links and fragments, unique IDs, accessibility references, JSON-LD parsing, sitemap and RSS XML, favicon structure and app icon references. Browser checks cover desktop and phone layouts, search, topic filtering, the empty state, article navigation, share feedback and homepage access to the blog.
 
 Deployment remains separate from these local changes.
+
+## Public author and SEO metadata
+
+Article author links lead to the public `/about` profile; the full CV remains PIN-protected. `scripts/build-seo.cjs` owns shared metadata and the canonical sitemap and runs at the end of this generator and before the public build. See `SEO-AND-DISCOVERY.md` for the content map, validation and post-publication steps.

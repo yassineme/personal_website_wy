@@ -218,3 +218,12 @@
   .journal-header { flex-wrap:wrap; gap:17px; }
   .journal-nav { justify-content:flex-start; }
 }
+
+/* About-page portrait: reuse the digital résumé’s transparent monochrome treatment. */
+.about-hero{display:grid;grid-template-columns:minmax(0,1fr) 320px;align-items:center;gap:56px;max-width:none}
+.about-hero .public-page-heading{min-width:0}
+.about-portrait{width:300px;max-width:100%;margin:0;justify-self:end}
+.about-portrait img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;filter:grayscale(1);mask-image:linear-gradient(to bottom,#000 0%,#000 79%,transparent 100%)}
+@media(max-width:1000px){.about-hero{grid-template-columns:minmax(0,1fr) 230px;gap:30px}.about-portrait{width:230px}.about-hero h1{font-size:clamp(42px,5.5vw,68px)}}
+@media(max-width:700px){.about-hero{grid-template-columns:minmax(0,1fr) 110px;gap:16px}.about-portrait{width:110px}.about-hero h1{font-size:clamp(30px,6.9vw,46px)}}
+@media(max-width:380px){.about-hero{grid-template-columns:minmax(0,1fr) 90px;gap:12px}.about-portrait{width:90px}}

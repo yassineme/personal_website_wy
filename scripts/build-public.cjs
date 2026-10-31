@@ -4,9 +4,9 @@ const path=require('node:path');
 const {randomUUID}=require('node:crypto');
 const MARKER='.generated-by-website-build';
 const ROOT_FILES=[
-  'index.html','privacy.html','blog.html','signals.html','mydigital-resume.html',
-  'photospot-atlas.html','case-study-airbus-digitalization.html','brief-genai-operating-model.html',
-  'script.js','site-config.js','site-ui.js','profile.js','booking.js','privacy.js','privacy-core.js',
+  'index.html','about.html','ai-strategy.html','privacy.html','blog.html','signals.html','mydigital-resume.html',
+  'photospot-atlas.html','brief-genai-operating-model.html',
+  'site-intro.js','site-intro.css','script.js','site-config.js','site-ui.js','profile.js','booking.js','privacy.js','privacy-core.js',
   'ai-signals.js','ai-markets.js','signals-core.js','signals-archive.js','signals-reader.js',
   'journal.js','photospot-atlas.js','photospots-data.js',
   'styles.css','profile.css','typography-proposals.css','site-ui.css','privacy.css','ai-signals.css','ai-markets.css','signals-archive.css',
@@ -58,5 +58,5 @@ async function buildPublic(root=path.resolve(__dirname,'..')) {
     return {output,files:count};
   } catch(error) {await fs.rm(temporary,{recursive:true,force:true});throw error;}
 }
-if(require.main===module)buildPublic().then(result=>console.log('Public build: '+result.files+' files. Server code, credentials and private documents excluded.')).catch(error=>{console.error(error.message);process.exitCode=1;});
+if(require.main===module)require('./build-seo.cjs').buildSeo().then(()=>buildPublic()).then(result=>console.log('Public build: '+result.files+' files. Server code, credentials and private documents excluded.')).catch(error=>{console.error(error.message);process.exitCode=1;});
 module.exports={buildPublic,ROOT_FILES};

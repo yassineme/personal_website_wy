@@ -276,3 +276,11 @@
 }
 
 @media (max-width:600px) and (max-height:650px) { .page { gap:7px; } }
+
+/* More-menu links use the existing monochrome palette. */
+.profile-links{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+.profile-links a{text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--line)}
+.profile-links a:hover{color:var(--ink);text-decoration-color:var(--ink)}
+
+.more-menu{position:relative}
+.more-panel{width:min(320px,calc(100vw - 340px));background:var(--paper)}

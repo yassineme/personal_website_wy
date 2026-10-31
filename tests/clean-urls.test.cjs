@@ -26,7 +26,7 @@ test('hosting enables clean paths and keeps home and private CV aliases',()=>{
  assert.equal(config.rewrites.find(r=>r.source==='/digital-cv')?.destination,'/api/digital-cv');
 });
 test('clean homepage, pages and nested articles serve their original HTML files',async()=>{
- for(const route of ['/','/blog','/privacy','/signals','/blog/ai-roadmap-prioritisation']){
+ for(const route of ['/','/about','/ai-strategy','/blog','/privacy','/signals','/blog/ai-roadmap-prioritisation']){
   const response=await fetch(origin+route);assert.equal(response.status,200,route);
   const file=route==='/'?'index.html':route.slice(1)+'.html';
   assert.equal(await response.text(),fs.readFileSync(path.join(root,file),'utf8'),route);

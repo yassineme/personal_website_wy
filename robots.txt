@@ -1,6 +1,7 @@
+# Public pages are available to search engines and AI search crawlers.
+# The wildcard rule also applies to OAI-SearchBot; model-training policy is unchanged.
 User-agent: *
 Allow: /
 Disallow: /content/
 
 Sitemap: https://www.wyassine.com/sitemap.xml
-Host: www.wyassine.com

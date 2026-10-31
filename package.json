@@ -15,7 +15,10 @@
     "test:forms": "node --test tests/website-submissions.test.cjs tests/private-cv.test.cjs",
     "build": "node scripts/build-public.cjs",
     "test:security": "node --test tests/public-build.test.cjs tests/request-hardening.test.cjs",
-    "test:urls": "node --test tests/clean-urls.test.cjs"
+    "test:urls": "node --test tests/clean-urls.test.cjs",
+    "build:seo": "node scripts/build-seo.cjs",
+    "test:seo": "node --test tests/seo.test.cjs",
+    "test:intro": "node --test tests/site-intro.test.cjs"
   },
   "repository": {
     "type": "git",
