@@ -1,0 +1,591 @@
+{
+  "checked": "2026-10-31",
+  "events": [
+    {
+      "id": "web-summit",
+      "name": "Web Summit",
+      "topics": [
+        "AI",
+        "Startup"
+      ],
+      "city": "Lisbon",
+      "country": "Portugal",
+      "venue": "Lisbon · confirm hall on ticket",
+      "coordinates": [
+        -9.14,
+        38.72
+      ],
+      "start": "2026-11-09",
+      "end": "2026-11-12",
+      "url": "https://websummit.com/",
+      "price": "Check ticket portal",
+      "priceNote": "Live price was not available in the public page reviewed.",
+      "ticketUrl": "https://websummit.com/tickets/attendees/",
+      "note": "Broad technology, founders, investors and enterprise AI."
+    },
+    {
+      "id": "slush",
+      "name": "Slush",
+      "topics": [
+        "Startup"
+      ],
+      "city": "Helsinki",
+      "country": "Finland",
+      "venue": "Helsinki · confirm venue on ticket",
+      "coordinates": [
+        24.94,
+        60.17
+      ],
+      "start": "2026-11-18",
+      "end": "2026-11-19",
+      "url": "https://slush.org/",
+      "price": "€395 / €595 / €1,195",
+      "priceNote": "Startup €395 (eligibility applies); Thursday-only €595; investor €1,195; ecosystem €1,195 listed sold out. Includes 13.5% VAT. Availability and rates may change.",
+      "note": "Founder and investor meetings; passes depend on attendee profile."
+    },
+    {
+      "id": "enlit",
+      "name": "Enlit Europe",
+      "topics": [
+        "Commodity trading"
+      ],
+      "city": "Vienna",
+      "country": "Austria",
+      "venue": "Vienna · confirm venue with organiser",
+      "coordinates": [
+        16.37,
+        48.21
+      ],
+      "start": "2026-11-10",
+      "end": "2026-11-12",
+      "url": "https://www.enlit.world/events",
+      "ticketUrl": "https://www.enlit-europe.com/",
+      "price": "Check registration",
+      "priceNote": "Visitor and summit passes may differ; no current price verified.",
+      "note": "Energy markets, utilities, digitalisation and the energy transition."
+    },
+    {
+      "id": "ai-expo-global",
+      "name": "AI & Big Data Expo Global",
+      "topics": [
+        "AI"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "Olympia London",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-02-03",
+      "end": "2027-02-04",
+      "url": "https://www.ai-expo.net/global/",
+      "price": "Check pass options",
+      "priceNote": "Free-track sessions are advertised; confirm exhibition access and paid Gold-pass rates at registration.",
+      "note": "Enterprise AI, data infrastructure and practical applications."
+    },
+    {
+      "id": "e-world",
+      "name": "E-world energy & water",
+      "topics": [
+        "Commodity trading",
+        "Trading"
+      ],
+      "city": "Essen",
+      "country": "Germany",
+      "venue": "Messe Essen",
+      "coordinates": [
+        7.01,
+        51.46
+      ],
+      "start": "2027-02-16",
+      "end": "2027-02-18",
+      "url": "https://e-world-essen.com/en/visit/prices-opening-times/",
+      "price": "€85 day / €255 full",
+      "priceNote": "Regular prices incl. VAT. Reduced €42.50 / €127.50; eligibility applies. Professional visitor fair.",
+      "note": "European power and gas trading, energy services and trading technology."
+    },
+    {
+      "id": "mwc",
+      "name": "MWC Barcelona / 4YFN",
+      "topics": [
+        "AI",
+        "Startup"
+      ],
+      "city": "Barcelona",
+      "country": "Spain",
+      "venue": "Fira Barcelona Gran Via",
+      "coordinates": [
+        2.17,
+        41.39
+      ],
+      "start": "2027-03-01",
+      "end": "2027-03-04",
+      "url": "https://www.mwcbarcelona.com/",
+      "price": "Check pass options",
+      "priceNote": "MWC and 4YFN access varies by pass; no current rate verified.",
+      "note": "Connectivity, applied AI and a large startup and investor programme.",
+      "source": "https://www.firabarcelona.com/en/trade_show/"
+    },
+    {
+      "id": "dsei-germany",
+      "name": "DSEI Germany",
+      "topics": [
+        "Defence",
+        "AI"
+      ],
+      "city": "Hannover",
+      "country": "Germany",
+      "venue": "Messegelände Hannover",
+      "coordinates": [
+        9.73,
+        52.37
+      ],
+      "start": "2027-03-09",
+      "end": "2027-03-12",
+      "url": "https://www.dsei-germany.com/",
+      "price": "Check visitor pricing",
+      "priceNote": "Professional eligibility and organiser approval may apply; no current price verified.",
+      "note": "European defence capability, industrial cooperation and dual-use technology."
+    },
+    {
+      "id": "ft-commodities",
+      "name": "FT Commodities Global Summit",
+      "topics": [
+        "Commodity trading",
+        "Trading"
+      ],
+      "city": "Lausanne",
+      "country": "Switzerland",
+      "venue": "Beau-Rivage Palace",
+      "coordinates": [
+        6.63,
+        46.52
+      ],
+      "start": "2027-04-26",
+      "end": "2027-04-28",
+      "url": "https://live.ft.com/commodities-global/",
+      "price": "€4,699 + VAT",
+      "priceNote": "Advertised super early bird in-person pass. Digital pass €259; corporate packages from €3,994 + VAT, subject to conditions. Confirm current rate.",
+      "note": "Senior physical commodity traders, producers and financiers."
+    },
+    {
+      "id": "omr",
+      "name": "OMR Festival",
+      "topics": [
+        "AI",
+        "Startup"
+      ],
+      "city": "Hamburg",
+      "country": "Germany",
+      "venue": "Hamburg Messe",
+      "coordinates": [
+        9.99,
+        53.55
+      ],
+      "start": "2027-05-03",
+      "end": "2027-05-05",
+      "url": "https://omr.com/en/events/festival/ai-tech",
+      "price": "Check ticket portal",
+      "priceNote": "No current 2027 rate verified.",
+      "note": "A local option for AI, digital business and founder networking."
+    },
+    {
+      "id": "commodity-week",
+      "name": "Commodity Trading Week Europe",
+      "topics": [
+        "Commodity trading",
+        "Trading",
+        "AI"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "Stamford Bridge Stadium",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-05-19",
+      "end": "2027-05-20",
+      "url": "https://europe.commoditytradingweek.com/become-an-attendee",
+      "price": "Check registration",
+      "priceNote": "Pass categories and eligibility are determined in the organiser’s registration flow; no current rate verified.",
+      "note": "Energy, agriculture, metals, risk, digitalisation and trading intelligence."
+    },
+    {
+      "id": "south-summit",
+      "name": "South Summit Madrid",
+      "topics": [
+        "Startup",
+        "AI"
+      ],
+      "city": "Madrid",
+      "country": "Spain",
+      "venue": "Madrid · venue to be confirmed",
+      "coordinates": [
+        -3.7,
+        40.42
+      ],
+      "start": "2027-06-02",
+      "end": "2027-06-04",
+      "url": "https://www.southsummit.io/e/madrid",
+      "price": "Presale / waiting list",
+      "priceNote": "No current pass price verified.",
+      "note": "Southern European founders, corporate innovation and venture capital."
+    },
+    {
+      "id": "london-tech",
+      "name": "London Tech Week",
+      "topics": [
+        "AI",
+        "Startup"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "Olympia London & city venues",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-06-07",
+      "end": "2027-06-11",
+      "url": "https://londontechweek.com/",
+      "price": "Check pass options",
+      "priceNote": "Main event and fringe events may require separate tickets; confirm programme dates for your pass.",
+      "note": "Technology leadership, enterprise AI and startup networking."
+    },
+    {
+      "id": "money2020",
+      "name": "Money20/20 Europe",
+      "topics": [
+        "Trading",
+        "Startup"
+      ],
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "venue": "RAI Amsterdam",
+      "coordinates": [
+        4.9,
+        52.37
+      ],
+      "start": "2027-06-08",
+      "end": "2027-06-10",
+      "url": "https://europe.money2020.com/",
+      "price": "Check pass options",
+      "priceNote": "No current 2027 price verified.",
+      "note": "Adjacent to trading: fintech infrastructure, payments and financial services."
+    },
+    {
+      "id": "ai-summit-london",
+      "name": "The AI Summit London",
+      "topics": [
+        "AI"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "Tobacco Dock",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-06-09",
+      "end": "2027-06-10",
+      "url": "https://london.theaisummit.com/",
+      "price": "Register interest",
+      "priceNote": "2027 ticket prices were not available in the page reviewed.",
+      "note": "Commercial AI, enterprise deployment and senior technology leaders."
+    },
+    {
+      "id": "idx",
+      "name": "FIA International Derivatives Expo",
+      "topics": [
+        "Trading",
+        "Commodity trading"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "London · confirm 2027 venue",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-06-14",
+      "end": "2027-06-16",
+      "url": "https://www.fia.org/fia/events/international-derivatives-expo",
+      "price": "Check registration",
+      "priceNote": "Member and non-member rates may differ; no current 2027 rate verified.",
+      "note": "Cleared derivatives, exchanges, market infrastructure and regulation."
+    },
+    {
+      "id": "paris-air",
+      "name": "Paris Air Show",
+      "topics": [
+        "Defence",
+        "Startup"
+      ],
+      "city": "Paris",
+      "country": "France",
+      "venue": "Paris–Le Bourget Exhibition Centre",
+      "coordinates": [
+        2.35,
+        48.86
+      ],
+      "start": "2027-06-14",
+      "end": "2027-06-20",
+      "url": "https://www.siae.fr/en/",
+      "price": "Check trade / public passes",
+      "priceNote": "Professional and general-public access days differ; confirm the appropriate pass.",
+      "note": "Aerospace, defence industry, technology suppliers and startups."
+    },
+    {
+      "id": "vivatech",
+      "name": "VivaTech",
+      "topics": [
+        "AI",
+        "Startup"
+      ],
+      "city": "Paris",
+      "country": "France",
+      "venue": "Paris Expo Porte de Versailles",
+      "coordinates": [
+        2.35,
+        48.86
+      ],
+      "start": "2027-06-16",
+      "end": "2027-06-19",
+      "url": "https://vivatech.com/get-your-pass",
+      "price": "Check pass options",
+      "priceNote": "2027 dates are published; no current pass price verified.",
+      "note": "European enterprise innovation, AI demonstrations and startup partnerships."
+    },
+    {
+      "id": "mspo",
+      "name": "MSPO",
+      "topics": [
+        "Defence"
+      ],
+      "city": "Kielce",
+      "country": "Poland",
+      "venue": "Expo Kielce",
+      "coordinates": [
+        20.63,
+        50.87
+      ],
+      "start": "2027-08-31",
+      "end": "2027-09-03",
+      "url": "https://www.targikielce.pl/mspo",
+      "price": "Check visitor registration",
+      "priceNote": "Professional visitor rules apply; no current 2027 rate verified.",
+      "note": "Central and Eastern European defence procurement and industry."
+    },
+    {
+      "id": "dsei-uk",
+      "name": "DSEI UK",
+      "topics": [
+        "Defence",
+        "AI"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "Excel London",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-09-07",
+      "end": "2027-09-10",
+      "url": "https://www.dsei.co.uk/",
+      "price": "Register interest",
+      "priceNote": "Professional attendance subject to approval; no current 2027 ticket price verified.",
+      "note": "Multi-domain defence, procurement, industrial systems and security."
+    },
+    {
+      "id": "bits",
+      "name": "Bits & Pretzels",
+      "topics": [
+        "Startup",
+        "AI"
+      ],
+      "city": "Munich",
+      "country": "Germany",
+      "venue": "Munich · confirm 2027 programme venues",
+      "coordinates": [
+        11.58,
+        48.14
+      ],
+      "start": "2027-09-27",
+      "end": "2027-09-29",
+      "url": "https://www.bitsandpretzels.com/",
+      "price": "Check 2027 passes",
+      "priceNote": "Homepage announces 2027 dates; reviewed checkout still showed 2026. Do not book against the old checkout.",
+      "note": "DACH founders and investors, with Oktoberfest networking."
+    },
+    {
+      "id": "lme",
+      "name": "LME Metals Seminar & Dinner",
+      "topics": [
+        "Commodity trading",
+        "Trading"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "London · venues to be confirmed",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": "2027-10-18",
+      "end": "2027-10-19",
+      "url": "https://www.lme.com/en/Events/LME-Week",
+      "price": "Separate ticketed events",
+      "priceNote": "Seminar on 18 October and dinner on 19 October; no current 2027 rates verified. Wider LME Week side events are separate.",
+      "note": "Metals market outlook, physical trade and industry relationships."
+    },
+    {
+      "id": "milipol",
+      "name": "Milipol Paris",
+      "topics": [
+        "Defence",
+        "AI"
+      ],
+      "city": "Paris",
+      "country": "France",
+      "venue": "Paris Nord Villepinte",
+      "coordinates": [
+        2.35,
+        48.86
+      ],
+      "start": "2027-11-16",
+      "end": "2027-11-19",
+      "url": "https://milipol.com/en",
+      "price": "Check registration",
+      "priceNote": "Professional security-sector eligibility applies; no current 2027 rate verified.",
+      "note": "Homeland security, surveillance, cybersecurity and applied AI."
+    },
+    {
+      "id": "wsai",
+      "name": "World Summit AI",
+      "topics": [
+        "AI",
+        "Startup"
+      ],
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "venue": "Next edition / venue to be confirmed",
+      "coordinates": [
+        4.9,
+        52.37
+      ],
+      "start": null,
+      "end": null,
+      "url": "https://worldsummit.ai/",
+      "price": "Next-edition price unverified",
+      "priceNote": "The reviewed homepage still showed 7–8 October 2026; newer search results suggest 2027. Await a consistent official announcement.",
+      "note": "Major enterprise and research AI gathering. Watch for next-edition confirmation."
+    },
+    {
+      "id": "tradetech",
+      "name": "TradeTech Europe",
+      "topics": [
+        "Trading",
+        "AI"
+      ],
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "venue": "Next venue unverified",
+      "coordinates": [
+        4.9,
+        52.37
+      ],
+      "start": null,
+      "end": null,
+      "url": "https://tradetecheu.wbresearch.com/",
+      "price": "Check organiser",
+      "priceNote": "Official site blocked research access; next-edition dates and prices remain unverified.",
+      "note": "Institutional equity trading, execution, market structure and technology.",
+      "locationConfirmed": false
+    },
+    {
+      "id": "tradetech-fx",
+      "name": "TradeTech FX Europe",
+      "topics": [
+        "Trading"
+      ],
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "venue": "Next city / venue unverified",
+      "coordinates": [
+        4.9,
+        52.37
+      ],
+      "start": null,
+      "end": null,
+      "url": "https://tradetechfx.wbresearch.com/",
+      "price": "Check organiser",
+      "priceNote": "Official site blocked research access; confirm next edition, city and prices directly.",
+      "note": "Institutional FX, buy-side execution, liquidity and trading technology.",
+      "locationConfirmed": false
+    },
+    {
+      "id": "sifted",
+      "name": "Sifted Summit",
+      "topics": [
+        "Startup"
+      ],
+      "city": "London",
+      "country": "United Kingdom",
+      "venue": "Next venue to be confirmed",
+      "coordinates": [
+        -0.13,
+        51.51
+      ],
+      "start": null,
+      "end": null,
+      "url": "https://sifted.eu/summit",
+      "price": "Check next-edition passes",
+      "priceNote": "Official pages showed conflicting edition information; date and price held for verification.",
+      "note": "European scaleup founders, operators and investors."
+    },
+    {
+      "id": "ai-expo-europe",
+      "name": "AI & Big Data Expo Europe",
+      "topics": [
+        "AI"
+      ],
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "venue": "RAI Amsterdam · next edition to confirm",
+      "coordinates": [
+        4.9,
+        52.37
+      ],
+      "start": null,
+      "end": null,
+      "url": "https://www.ai-expo.net/europe/visitor-faqs/",
+      "price": "Check next-edition passes",
+      "priceNote": "Official search results show 19–20 October 2027 but reviewed page still showed 2026; date held until consistent.",
+      "note": "Enterprise AI, big data and technology suppliers."
+    },
+    {
+      "id": "eurosatory",
+      "name": "Eurosatory",
+      "topics": [
+        "Defence",
+        "AI"
+      ],
+      "city": "Paris",
+      "country": "France",
+      "venue": "Paris Nord Villepinte · next edition to confirm",
+      "coordinates": [
+        2.35,
+        48.86
+      ],
+      "start": null,
+      "end": null,
+      "url": "https://www.eurosatory.com/",
+      "price": "Next-edition price unverified",
+      "priceNote": "2028 edition advertised in an image; exact dates were not independently readable in the reviewed official page. No 2027 edition.",
+      "note": "Land and air-land defence, security and dual-use innovation."
+    }
+  ]
+}

@@ -18,7 +18,9 @@
     "test:urls": "node --test tests/clean-urls.test.cjs",
     "build:seo": "node scripts/build-seo.cjs",
     "test:seo": "node --test tests/seo.test.cjs",
-    "test:intro": "node --test tests/site-intro.test.cjs"
+    "test:intro": "node --test tests/site-intro.test.cjs",
+    "preview:events": "node scripts/preview-events.cjs",
+    "test:events": "node --test tests/owner-events.test.cjs"
   },
   "repository": {
     "type": "git",

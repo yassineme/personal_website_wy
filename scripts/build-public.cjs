@@ -10,7 +10,7 @@ const ROOT_FILES=[
   'photospot-atlas.html','brief-genai-operating-model.html',
   'site-intro.js','site-intro.css','script.js','site-config.js','site-ui.js','profile.js','booking.js','privacy.js','privacy-core.js',
   'ai-signals.js','ai-markets.js','signals-core.js','signals-archive.js','signals-reader.js',
-  'journal.js','photospot-atlas.js','photospots-data.js',
+  'journal.js','photospot-atlas.js','photospots-data.js','owner-entry.js','owner-events.js','owner-events.css',
   'styles.css','profile.css','typography-proposals.css','site-ui.css','privacy.css','ai-signals.css','ai-markets.css','signals-archive.css',
   'photospot-atlas.css','journal.css','tailwind.css','typography-fonts.css',
   'robots.txt','sitemap.xml','site.webmanifest','favicon.ico'
