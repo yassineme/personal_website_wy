@@ -42,7 +42,7 @@
   }
   function fitSize(asset) {
     const mobile = innerWidth <= 700;
-    const width = Math.max(1, mobile ? stage.clientWidth - 48 : stage.clientWidth * .66);
+    const width = Math.max(1, mobile ? stage.clientWidth - 64 : stage.clientWidth * .66);
     const height = Math.max(1, stage.clientHeight * (mobile ? 1 : .70));
     const scale = Math.min(width / asset.naturalWidth, height / asset.naturalHeight);
     return {width: asset.naturalWidth * scale, height: asset.naturalHeight * scale};
@@ -163,6 +163,20 @@
     context.drawImage(wingSurface, 0, 0, bufferWidth, bufferHeight, 0, 0, wingWidth, height);
     context.restore();
   }
+  // Phone previews are cropped flat cards, never stretched canvas wings.
+  function paintMobilePreview(asset, side, width, height, mainHeight, opacity = 1) {
+    if (!asset.complete || !asset.naturalWidth) return;
+    const cardWidth = width - 64;
+    const cardHeight = Math.min(height * .8, mainHeight * .88);
+    const scale = Math.max(cardWidth / asset.naturalWidth, cardHeight / asset.naturalHeight);
+    const sourceWidth = cardWidth / scale, sourceHeight = cardHeight / scale;
+    const x = side < 0 ? 20 - cardWidth : width - 20;
+    context.save();
+    context.globalAlpha = opacity * .55;
+    context.drawImage(asset, (asset.naturalWidth - sourceWidth) / 2, (asset.naturalHeight - sourceHeight) / 2,
+      sourceWidth, sourceHeight, x, (height - cardHeight) / 2, cardWidth, cardHeight);
+    context.restore();
+  }
   function drawWings(time = performance.now()) {
     cancelAnimationFrame(edgeFrame);
     if (!viewer.open || !context) return;
@@ -176,10 +190,17 @@
     context.clearRect(0, 0, width, height);
     const asset = load(current);
     const size = asset.naturalWidth ? fitSize(asset) : {width:width * .65};
-    const gap = width <= 700 ? 8 : Math.max(36, width * .055);
-    // On phones the wings continue behind the central image, so their curves
-    // remain visible above/below a landscape photo without shrinking that photo.
-    const targetWidth = width <= 700 ? width * .2 : Math.max(0, Math.min(width * .315, (width - size.width) / 2 - gap));
+    if (width <= 700) {
+      wingWidth = 20;
+      stage.style.setProperty('--wing-width', '20px');
+      if (photos.length > 1) {
+        paintMobilePreview(load(current - 1), -1, width, height, size.height || height);
+        paintMobilePreview(load(current + 1), 1, width, height, size.height || height);
+      }
+      return;
+    }
+    const gap = Math.max(36, width * .055);
+    const targetWidth = Math.max(0, Math.min(width * .315, (width - size.width) / 2 - gap));
     let pulse = drag ? Math.min(Math.abs(drag.dx) / 180, 1) : 0;
     let mix = 1;
     wingWidth = targetWidth;
@@ -213,6 +234,9 @@
       return;
     }
     if (token !== generation || !viewer.open) return;
+    const mobile = stage.clientWidth <= 700;
+    const dragOffset = parseFloat(image.style.translate) || 0;
+    const slideDistance = stage.clientWidth - 52;
     const animate = Boolean(image.getAttribute('src')) && !reducedMotion.matches && direction !== 0;
     // Cancelling prior animations makes quick keyboard or button inputs responsive.
     image.getAnimations().forEach(animation => animation.cancel());
@@ -226,9 +250,9 @@
       outgoing.style.translate = '';
       image.parentElement.append(outgoing);
       const leaving = outgoing.animate([
-        {opacity:1, transform:'translateX(0) rotateY(0deg) scale(1)'},
-        {opacity:0, transform:`translateX(${-direction * Math.min(stage.clientWidth * .3, 320)}px) rotateY(${-direction * 24}deg) scale(.78)`}
-      ], {duration:620, easing:'cubic-bezier(.22,.7,.18,1)', fill:'forwards'});
+        {opacity:1, transform:mobile ? `translateX(${dragOffset}px)` : 'translateX(0) rotateY(0deg) scale(1)'},
+        {opacity:mobile ? 1 : 0, transform:mobile ? `translateX(${-direction * slideDistance}px)` : `translateX(${-direction * Math.min(stage.clientWidth * .3, 320)}px) rotateY(${-direction * 24}deg) scale(.78)`}
+      ], {duration:mobile ? 360 : 620, easing:'cubic-bezier(.22,.7,.18,1)', fill:'forwards'});
       leaving.finished.then(() => outgoing.remove()).catch(() => outgoing.remove());
     }
     const previousIndex = displayed;
@@ -240,10 +264,10 @@
     counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}`;
     if (animate) {
       image.animate([
-        {opacity:0, transform:`translateX(${direction * Math.min(stage.clientWidth * .25, 260)}px) rotateY(${direction * 20}deg) scale(.86)`},
+        {opacity:mobile ? 1 : 0, transform:mobile ? `translateX(${direction * slideDistance + dragOffset}px)` : `translateX(${direction * Math.min(stage.clientWidth * .25, 260)}px) rotateY(${direction * 20}deg) scale(.86)`},
         {opacity:1, transform:'translateX(0) rotateY(0deg) scale(1)'}
-      ], {duration:720, easing:'cubic-bezier(.2,.75,.2,1)'});
-      transition = {start:performance.now(), duration:720, fromIndex:previousIndex, fromWidth:wingWidth};
+      ], {duration:mobile ? 360 : 720, easing:'cubic-bezier(.2,.75,.2,1)'});
+      transition = mobile ? null : {start:performance.now(), duration:720, fromIndex:previousIndex, fromWidth:wingWidth};
       if (!reducedMotion.matches) caption.animate([{opacity:0},{opacity:1}], {duration:500});
     }
     drawWings();
@@ -263,7 +287,23 @@
     if (index === 0) thumbnail.fetchPriority = 'high';
     const number = document.createElement('span');
     number.className = 'image-number';
-    number.textContent = `${String(index + 1).padStart(2, '0')} / View photograph ↗`;
+    number.textContent = `${String(index + 1).padStart(2, '0')} / View photograph `;
+    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    arrow.setAttribute('class', 'ui-arrow-icon');
+    arrow.setAttribute('viewBox', '0 0 24 24');
+    arrow.setAttribute('width', '1em');
+    arrow.setAttribute('height', '1em');
+    arrow.setAttribute('fill', 'none');
+    arrow.setAttribute('stroke', 'currentColor');
+    arrow.setAttribute('stroke-width', '1.5');
+    arrow.setAttribute('stroke-linecap', 'round');
+    arrow.setAttribute('stroke-linejoin', 'round');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.setAttribute('focusable', 'false');
+    const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    arrowPath.setAttribute('d', 'M7 17 17 7M7 7h10v10');
+    arrow.append(arrowPath);
+    number.append(arrow);
     number.setAttribute('aria-hidden', 'true');
     button.append(thumbnail, number);
     button.addEventListener('click', () => { viewer.showModal(); show(index); });
@@ -313,7 +353,11 @@
     drag.dx = event.clientX - drag.x;
     if (Math.abs(drag.dx) < 8 || Math.abs(drag.dx) < Math.abs(event.clientY - drag.y)) return;
     stage.classList.add('is-dragging');
-    if (!reducedMotion.matches) image.style.translate = `${Math.max(-100, Math.min(100, drag.dx * .25))}px 0`;
+    if (!reducedMotion.matches) {
+      const mobile = stage.clientWidth <= 700;
+      const limit = mobile ? stage.clientWidth * .85 : 100;
+      image.style.translate = `${Math.max(-limit, Math.min(limit, drag.dx * (mobile ? .85 : .25)))}px 0`;
+    }
     drawWings();
   });
   function finishDrag(event, cancel = false) {
@@ -322,10 +366,9 @@
     const horizontal = Math.abs(dx) > Math.abs(event.clientY - drag.y);
     drag = null;
     stage.classList.remove('is-dragging');
-    image.style.translate = '';
     if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
     if (!cancel && horizontal && Math.abs(dx) > Math.min(65, stage.clientWidth * .12)) navigate(dx < 0 ? 1 : -1);
-    else drawWings();
+    else { image.style.translate = ''; drawWings(); }
   }
   stage.addEventListener('pointerup', event => finishDrag(event));
   stage.addEventListener('pointercancel', event => finishDrag(event, true));
