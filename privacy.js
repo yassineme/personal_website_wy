@@ -21,15 +21,14 @@
   function localStorageSafe(){try{return localStorage;}catch{return{getItem(){return null;},setItem(){}};}}
   const storage=localStorageSafe();
   const banner=make('section','cookie-banner');banner.setAttribute('aria-labelledby','cookie-title');banner.setAttribute('aria-label','Cookie choices');
-  const copy=make('div','cookie-copy');copy.append(make('span','privacy-eyebrow','A considered choice'));
-  const title=make('h2','','Cookies & privacy.');title.id='cookie-title';
-  const providerNames=[];if(config.vercelAnalyticsEnabled)providerNames.push('Vercel Web Analytics');if(core.gaID(config))providerNames.push('Google Analytics');
-  const audienceTools=providerNames.length?providerNames.join(' and '):'audience analytics';
-  copy.append(title,make('p','','Only essential storage is used by default. Optional '+audienceTools+' helps me understand which pages are useful, if you allow it. You can change or withdraw your choice anytime.'));
-  const policy=make('a','cookie-policy','Privacy information ↗');policy.href=new URL(config.privacyNoticeUrl||'privacy',rootURL);copy.append(policy);
+  const copy=make('div','cookie-copy');copy.append(make('span','privacy-eyebrow','Privacy / Preferences'));
+  const title=make('h2');title.append(document.createTextNode('Cookies & '),make('em','','privacy.'));title.id='cookie-title';
+  copy.append(title,make('p','','Essential storage is on by default. With your permission, optional analytics help me understand how this site is used. Change your choice anytime.'));
+  const policy=make('a','cookie-policy','Privacy information ↗');policy.href=new URL(config.privacyNoticeUrl||'privacy',rootURL);
   const actions=make('div','cookie-actions');
-  const essential=button('privacy-choice','Only essential'),allow=button('privacy-choice','Allow analytics'),manage=button('privacy-manage','Manage choices');actions.append(essential,allow,manage);
-  banner.append(copy,actions);document.body.append(banner);
+  const essential=button('privacy-choice','Only essential'),allow=button('privacy-choice','Allow analytics'),manage=button('privacy-manage','Manage choices');actions.append(essential,allow);
+  const links=make('div','cookie-links');links.append(manage,policy);
+  banner.append(copy,actions,links);document.body.append(banner);
   const dialog=make('dialog','privacy-dialog');dialog.setAttribute('aria-labelledby','privacy-settings-title');
   const top=make('div','privacy-dialog-top');top.append(make('span','privacy-eyebrow','Your data / Your decision'));
   const close=button('privacy-close','×');close.setAttribute('aria-label','Close cookie settings');top.append(close);
