@@ -409,13 +409,39 @@
     image.removeAttribute('src');
     image.style.translate = '';
   });
-  aboutToggle.addEventListener('click', () => { about.showModal(); aboutToggle.setAttribute('aria-expanded', 'true'); });
-  about.addEventListener('close', () => aboutToggle.setAttribute('aria-expanded', 'false'));
+  let aboutClosing = false;
+  function closeAbout() {
+    if (!about.open || aboutClosing) return;
+    if (reducedMotion.matches) { about.close(); return; }
+    aboutClosing = true;
+    about.classList.add('is-closing');
+    about.animate([{opacity:1, transform:'translateY(0)'}, {opacity:0, transform:'translateY(8px)'}],
+      {duration:200, easing:'ease-out', fill:'forwards'}).finished.then(() => {
+        about.close();
+      }).catch(() => { if (about.open) about.close(); });
+  }
+  aboutToggle.addEventListener('click', () => {
+    if (about.open) return;
+    about.showModal();
+    about.scrollTop = 0;
+    aboutToggle.setAttribute('aria-expanded', 'true');
+  });
+  about.addEventListener('cancel', event => { event.preventDefault(); closeAbout(); });
+  about.addEventListener('close', () => {
+    aboutClosing = false;
+    about.classList.remove('is-closing');
+    about.getAnimations().forEach(animation => animation.cancel());
+    aboutToggle.setAttribute('aria-expanded', 'false');
+    aboutToggle.focus({preventScroll:true});
+  });
   document.querySelectorAll('[data-close]').forEach(button => {
-    button.addEventListener('click', () => document.getElementById(button.dataset.close).close());
+    button.addEventListener('click', () => {
+      if (button.dataset.close === 'about-photography') closeAbout();
+      else document.getElementById(button.dataset.close).close();
+    });
   });
   about.addEventListener('click', event => {
     const bounds = about.getBoundingClientRect();
-    if (event.target === about && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) about.close();
+    if (event.target === about && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) closeAbout();
   });
 })();
