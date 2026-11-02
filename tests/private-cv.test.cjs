@@ -3,8 +3,9 @@ const test=require('node:test'),assert=require('node:assert/strict'),crypto=requ
 const {createHandler}=require('../lib/private-cv.cjs');
 const env={CV_ACCESS_PIN:'08421653',CV_DATA_KEY:Buffer.alloc(32,17).toString('base64')};
 const expectedHtml='<h1>Protected detailed CV marker</h1><a href="/digital-cv?request=pdf">Request PDF résumé</a>';
+const expectedEmbed='<!doctype html><html><body>Private Google Sites resume source</body></html>';
 let seconds=100000;
-function encrypted(){const iv=crypto.randomBytes(12),cipher=crypto.createCipheriv('aes-256-gcm',Buffer.from(env.CV_DATA_KEY,'base64'),iv);cipher.setAAD(Buffer.from('wyassine-private-cv-v1'));const ciphertext=Buffer.concat([cipher.update(JSON.stringify({html:expectedHtml,csp:"default-src 'none'"})),cipher.final()]);return {version:1,iv:iv.toString('base64'),tag:cipher.getAuthTag().toString('base64'),ciphertext:ciphertext.toString('base64')};}
+function encrypted(embed=expectedEmbed){const iv=crypto.randomBytes(12),cipher=crypto.createCipheriv('aes-256-gcm',Buffer.from(env.CV_DATA_KEY,'base64'),iv);cipher.setAAD(Buffer.from('wyassine-private-cv-v1'));const ciphertext=Buffer.concat([cipher.update(JSON.stringify({html:expectedHtml,embed,csp:"default-src 'none'"})),cipher.final()]);return {version:1,iv:iv.toString('base64'),tag:cipher.getAuthTag().toString('base64'),ciphertext:ciphertext.toString('base64')};}
 function setup(extra={}){return createHandler({env:{...env},now:()=>seconds,readContent:encrypted,failureDelay:async()=>{},...extra});}
 async function request(handler,{method='GET',url='/digital-cv',fields,cookie,origin='https://www.wyassine.com',headers={}}={}){const response={headers:{},setHeader(k,v){this.headers[k.toLowerCase()]=v;},end(value){this.body=value;}};await handler({method,url,body:fields?new URLSearchParams(fields).toString():undefined,headers:{host:'www.wyassine.com',origin,'content-type':'application/x-www-form-urlencoded',cookie,...headers},socket:{remoteAddress:'127.0.0.1'}},response);return response;}
 async function unlock(handler){const r=await request(handler,{method:'POST',fields:{action:'unlock',pin:env.CV_ACCESS_PIN}});assert.equal(r.statusCode,303);return r.headers['set-cookie'].split(';')[0];}
@@ -47,4 +48,40 @@ test('Vercel pre-parsed digit arrays retain the eight PIN boxes',async()=>{
   const handler=setup(),response={headers:{},setHeader(name,value){this.headers[name.toLowerCase()]=value;},end(value){this.body=value;}};
   await handler({method:'POST',url:'/digital-cv',body:{action:'unlock',pin_digit:[...env.CV_ACCESS_PIN]},headers:{host:'www.wyassine.com',origin:'https://www.wyassine.com','content-type':'application/x-www-form-urlencoded'},socket:{remoteAddress:'test'}},response);
   assert.equal(response.statusCode,303);assert.ok(response.headers['set-cookie']);
+});
+
+
+test('Google Sites download requires a valid session before reading private content',async()=>{
+  let reads=0;
+  const handler=setup({readContent:()=>{reads++;return encrypted();}});
+  for(const url of ['/digital-cv?download=google-sites','/api/digital-cv?download=google-sites']){
+    for(const cookie of [undefined,'__Host-wy-cv=invalid']){
+      const response=await request(handler,{url,cookie});
+      assert.match(response.body,/Eight-digit PIN/);
+      assert.ok(!response.body.includes(expectedEmbed));
+      assert.equal(response.headers['content-disposition'],undefined);
+    }
+  }
+  assert.equal(reads,0);
+  const cookie=await unlock(handler);
+  for(const url of ['/digital-cv?download=google-sites','/api/digital-cv?download=google-sites']){
+    const response=await request(handler,{url,cookie});
+    assert.equal(response.statusCode,200);
+    assert.equal(response.body,expectedEmbed);
+    assert.equal(response.headers['content-type'],'text/plain; charset=utf-8');
+    assert.equal(response.headers['content-disposition'],'attachment; filename="Yassine-Medjati-Google-Sites-Embed.txt"');
+    for(const header of ['cache-control','cdn-cache-control','vercel-cdn-cache-control'])assert.match(response.headers[header],/no-store/);
+  }
+  const head=await request(handler,{method:'HEAD',url:'/digital-cv?download=google-sites',cookie});
+  assert.equal(head.statusCode,200);assert.equal(head.body,undefined);
+  seconds+=28801;
+  try{const expired=await request(handler,{url:'/digital-cv?download=google-sites',cookie});assert.match(expired.body,/Eight-digit PIN/);assert.equal(expired.headers['content-disposition'],undefined);}
+  finally{seconds-=28801;}
+});
+test('older encrypted payloads without embed source fail closed for downloads',async()=>{
+  const handler=setup({readContent:()=>encrypted(null)}),cookie=await unlock(handler);
+  const response=await request(handler,{url:'/digital-cv?download=google-sites',cookie});
+  assert.equal(response.statusCode,503);assert.equal(response.headers['content-disposition'],undefined);
+  assert.ok(!response.body.includes(expectedEmbed));
+  assert.equal((await request(handler,{cookie})).body,expectedHtml);
 });
