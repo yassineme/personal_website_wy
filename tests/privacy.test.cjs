@@ -58,3 +58,31 @@ test('actual owner activation preserves visitor consent without claiming a compl
  env.scripts[0].onload();assert.equal(env.win.dataLayer.find(args=>args[0]==='config')[1],'G-6J6ZX1XD2N');
  env.analytics.revoke();assert.equal(env.win['ga-disable-G-6J6ZX1XD2N'],true);
 });
+
+test('Speed Insights follows Vercel consent, sanitizes URLs and stops events on withdrawal',()=>{
+ const config={...base,vercelSpeedInsightsEnabled:true};
+ const env=environment(config);
+ env.analytics.apply(core.denied());assert.equal(env.scripts.length,0);
+ env.analytics.apply({google:true,vercel:false});assert.equal(env.scripts.some(s=>s.dataset.analyticsProvider==='vercel-speed'),false);
+ env.analytics.apply({google:false,vercel:true});env.analytics.apply({google:false,vercel:true});
+ const scripts=env.scripts.filter(s=>s.dataset.analyticsProvider==='vercel-speed');
+ assert.equal(scripts.length,1);assert.equal(scripts[0].src,'https://www.wyassine.com/_vercel/speed-insights/script.js');
+ const beforeSend=env.win.siq.find(args=>args[0]==='beforeSend')[1];
+ assert.equal(beforeSend({url:'https://www.wyassine.com/blog?token=secret#private'}).url,'https://www.wyassine.com/blog');
+ env.analytics.revoke();assert.equal(scripts[0].removed,true);assert.equal(beforeSend({url:'https://www.wyassine.com/'}),null);
+ const record=core.createRecord({vercel:true,google:false},base,now);
+ assert.equal(core.read(store(record),config,now),null);
+});
+
+test('Speed Insights stays off for local previews, private routes and a disabled owner switch',()=>{
+ for(const [config,href] of [
+  [{...base,vercelSpeedInsightsEnabled:true},'http://localhost:8790/'],
+  [{...base,vercelSpeedInsightsEnabled:true},'https://www.wyassine.com/private-desk'],
+  [{...base,vercelSpeedInsightsEnabled:true},'https://www.wyassine.com/digital-cv'],
+  [{...base,vercelSpeedInsightsEnabled:true},'https://www.wyassine.com/api/household'],
+  [{...base,vercelSpeedInsightsEnabled:false},undefined]
+ ]){
+  const env=environment(config,href);env.analytics.apply({vercel:true,google:false});
+  assert.equal(env.scripts.some(s=>s.dataset.analyticsProvider==='vercel-speed'),false);
+ }
+});

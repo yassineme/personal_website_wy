@@ -4,14 +4,14 @@
   const denied=()=>({vercel:false,google:false});
   const gaID=config=>/^G-[A-Z0-9]{6,15}$/.test(config.gaMeasurementId||'')&&!/X{5,}/.test(config.gaMeasurementId)?config.gaMeasurementId:null;
   function vercelPath(config){const value=config.vercelAnalyticsScriptPath||'';return /^\/(?!\/)[a-zA-Z0-9_/-]+\/script\.js$/.test(value)?value:null;}
-  function signature(config){return JSON.stringify([config.consentVersion,config.analyticsEnabled===true,config.privacyReviewed===true,config.vercelAnalyticsEnabled===true,vercelPath(config),gaID(config)]);}
+  function signature(config){return JSON.stringify([config.consentVersion,config.analyticsEnabled===true,config.privacyReviewed===true,config.vercelAnalyticsEnabled===true,config.vercelSpeedInsightsEnabled===true,vercelPath(config),gaID(config)]);}
   function read(storage,config,now=Date.now()){
     try{const entry=JSON.parse(storage.getItem(KEY));if(entry?.version!==2||entry.signature!==signature(config)||!Number.isFinite(entry.decidedAt)||!Number.isFinite(entry.expiresAt)||entry.decidedAt>now+300000||entry.expiresAt<=now||entry.expiresAt-entry.decidedAt>TTL||!entry.choices||typeof entry.choices.vercel!=='boolean'||typeof entry.choices.google!=='boolean')return null;return entry;}catch{return null;}
   }
   function createRecord(choices,config,now=Date.now()){return{version:2,signature:signature(config),decidedAt:now,expiresAt:now+TTL,choices:{vercel:choices.vercel===true,google:choices.google===true}};}
   function cleanURL(value,base){try{const url=new URL(value,base);return /^https?:$/.test(url.protocol)?url.origin+url.pathname:'';}catch{return '';}}
   function createAnalytics({win,doc,config,location}){
-    let choices=denied(),started={google:false,vercel:false},loaded=false;
+    let choices=denied(),started={google:false,vercel:false,speed:false},loaded=false;
     const live=()=>location.protocol==='https:'&&(config.productionHosts||[]).includes(location.hostname)&&config.analyticsEnabled===true;
     function appendScript(src,provider,onload){const el=doc.createElement('script');el.async=true;el.src=src;el.dataset.analyticsProvider=provider;if(onload)el.onload=onload;doc.head.appendChild(el);}
     function apply(next){
@@ -23,6 +23,12 @@
         win.va=win.va||function(){(win.vaq=win.vaq||[]).push(arguments);};
         win.va('beforeSend',event=>choices.vercel?{...event,url:cleanURL(event.url,location.href)}:null);
         appendScript(new URL(vercelPath(config),location.origin).href,'vercel');
+      }
+      if(choices.vercel&&config.vercelSpeedInsightsEnabled&&!started.speed&&!/^\/(?:private-desk|digital-cv|api)(?:\/|$)/.test(location.pathname)){
+        started.speed=true;loaded=true;
+        win.si=win.si||function(){(win.siq=win.siq||[]).push(arguments);};
+        win.si('beforeSend',event=>choices.vercel?{...event,url:cleanURL(event.url,location.href)}:null);
+        appendScript(new URL('/_vercel/speed-insights/script.js',location.origin).href,'vercel-speed');
       }
       if(choices.google&&id&&!started.google){
         started.google=true;loaded=true;

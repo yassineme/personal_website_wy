@@ -3,6 +3,7 @@ window.YWM_SITE_CONFIG = Object.freeze({
   analyticsEnabled: true,
   gaMeasurementId: 'G-6J6ZX1XD2N',
   vercelAnalyticsEnabled: true,
+  vercelSpeedInsightsEnabled: true,
   // Standard production endpoint, loaded only after visitor opt-in.
   vercelAnalyticsScriptPath: '/_vercel/insights/script.js',
   // Notice review status is tracked separately from owner activation.
@@ -10,7 +11,7 @@ window.YWM_SITE_CONFIG = Object.freeze({
   privacyNoticeUrl: 'privacy',
   // No public Impressum is generated without confirmed publisher details.
   legalNoticeUrl: '',
-  consentVersion: '2026-10-26.1',
+  consentVersion: '2026-11-04.1',
   productionHosts: ['wyassine.com', 'www.wyassine.com'],
   calLink: 'yassine-m-zowgc4/15min'
 });

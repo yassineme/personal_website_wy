@@ -36,9 +36,9 @@
   dialog.append(top,heading,make('p','privacy-intro','Choose each provider separately. Optional tools stay off until you opt in. Closing this window does not grant consent.'));
   const fields={};
   const essentialRow=make('div','privacy-provider');const essentialText=make('div');essentialText.append(make('h3','','Essential storage'),make('p','','Remembers this choice and preferences you request, such as pausing AI Signals. No advertising profile.'));essentialRow.append(essentialText,make('span','privacy-always','Always on'));dialog.append(essentialRow);
-  for(const [key,name,text] of [['vercel','Vercel Web Analytics','Page views and aggregated usage, without analytics cookies. Vercel processes technical visit data.'],['google','Google Analytics 4','Page views, referrer and device/browser information. Uses _ga cookies and may involve processing outside the EU. No advertising personalization.']]){
+  for(const [key,name,text] of [['vercel','Vercel Analytics & Speed Insights','Page views, aggregated usage and page performance metrics. Vercel processes technical visit data.'],['google','Google Analytics 4','Page views, referrer and device/browser information. Uses _ga cookies and may involve processing outside the EU. No advertising personalization.']]){
     const row=make('label','privacy-provider');const info=make('div');info.append(make('h3','',name),make('p','',text));
-    if((key==='vercel'&&!config.vercelAnalyticsEnabled)||(key==='google'&&!core.gaID(config)))info.append(make('small','privacy-provider-status','Not active'));
+    if((key==='vercel'&&!config.vercelAnalyticsEnabled&&!config.vercelSpeedInsightsEnabled)||(key==='google'&&!core.gaID(config)))info.append(make('small','privacy-provider-status','Not active'));
     const input=document.createElement('input');input.type='checkbox';input.name=key;input.setAttribute('aria-label','Allow '+name);fields[key]=input;row.append(info,input);dialog.append(row);
   }
   const note=make('p','privacy-retention','Your choice is saved on this device for 180 days. Analytics are currently inactive while the setup and privacy notice are being completed. Cal.com loads only when you request a booking.');
