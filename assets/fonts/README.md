@@ -15,3 +15,13 @@ Sources:
 - https://fonts.google.com/specimen/Source+Serif+4
 
 Original designers' information is linked from the credits in `typography-preview.html` and from `TYPOGRAPHY.md`.
+
+## Blog body font
+
+Geist Sans is self-hosted for the main paragraphs and lists in blog articles.
+The unmodified variable WOFF2 and SIL Open Font License were downloaded from
+Vercel's official `vercel/geist-font` repository, commit
+`ef2597cfc42f4797676df105517ccc0a1cfa6569`, on 10 November 2026.
+
+- Font: https://github.com/vercel/geist-font/blob/ef2597cfc42f4797676df105517ccc0a1cfa6569/packages/next/dist/fonts/geist-sans/Geist-Variable.woff2
+- License: `LICENSE-geist.txt`

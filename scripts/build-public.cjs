@@ -4,11 +4,12 @@ const path=require('node:path');
 const {randomUUID}=require('node:crypto');
 const MARKER='.generated-by-website-build';
 const ROOT_FILES=[
+  'blog-index.css','blog-index.js',
   'photography-portal.css','photography-portal.js',
   'photography.html','photography.css','photography.js','photography-data.js',
   'index.html','about.html','ai-strategy.html','privacy.html','blog.html','signals.html','mydigital-resume.html',
   'photospot-atlas.html','brief-genai-operating-model.html',
-  'site-intro.js','site-intro.css','script.js','site-config.js','site-ui.js','profile.js','booking.js','privacy.js','privacy-core.js',
+  'site-motion.js','site-motion.css','site-intro.js','site-intro.css','script.js','site-config.js','site-ui.js','profile.js','booking.js','privacy.js','privacy-core.js',
   'ai-signals.js','ai-markets.js','signals-core.js','signals-archive.js','signals-reader.js',
   'journal.js','photospot-atlas.js','photospots-data.js','owner-entry.js','owner-events.js','owner-events.css',
   'styles.css','profile.css','typography-proposals.css','site-ui.css','privacy.css','ai-signals.css','ai-markets.css','signals-archive.css',

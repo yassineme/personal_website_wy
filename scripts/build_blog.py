@@ -71,7 +71,7 @@ def head(title,description,url,prefix='',graph=None,article=False):
   <script src="{prefix}booking.js" defer></script>
 <meta name="referrer" content="strict-origin">
 </head>
-<body class="journal-page">
+<body class="journal-page{' journal-article' if article else ''}">
 <a class="skip-link" href="#main-content">Skip to content</a>
 <div class="journal-shell">
 '''
@@ -102,21 +102,26 @@ featured=next(p for p in POSTS if p.get('featured'))
 blogschema={'@type':'Blog','@id':SITE+'blog#blog','name':'Notes on change','description':'Practical perspectives on AI strategy, digital transformation and leadership.','url':SITE+'blog','author':{'@id':SITE+'#person'},'blogPost':[article_schema(p) for p in POSTS]}
 breadcrumb={'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':SITE},{'@type':'ListItem','position':2,'name':'Blog','item':SITE+'blog'}]}
 index=head('AI Strategy & Digital Transformation Blog | Yassine W. Medjati','Practical notes on AI roadmaps, digital transformation and leadership. Decision guides for teams turning ambition into everyday business value.','blog',graph=[PERSON,blogschema,breadcrumb])+header(blog_current=True)
+index=index.replace('<body class="journal-page">','<body class="journal-page journal-index">').replace('</head>','<link rel="stylesheet" href="/blog-index.css"><script src="/blog-index.js" defer></script>\n</head>')
 index+='''<main id="main-content">
 <section class="journal-intro" aria-labelledby="journal-title">
-  <div class="journal-edition mono"><span>Notes on change / The blog</span><span>AI · Transformation · People</span></div>
-  <div class="journal-title-row"><h1 id="journal-title">Ideas into <em>practice.</em></h1><div class="journal-intro-copy"><p>Perspectives for the decisions between a promising idea and a change that works.</p><a class="text-link" href="#reading-room">Explore the notes <span class="link-arrow" aria-hidden="true">↓</span></a></div></div>
+  <div class="journal-edition mono"><span>Independent perspectives / YWM</span><span>AI · Transformation · People</span></div>
+  <div class="journal-hero">
+    <div class="journal-heading"><p class="journal-eyebrow mono"><span aria-hidden="true">↳</span> Notes on change</p><h1 id="journal-title">Notes on<br><em>change.</em></h1><p class="journal-deck">AI is moving fast.<br>How we think, lead and work needs a closer look.</p><a class="journal-explore mono" href="#reading-room">Explore the notes <span aria-hidden="true">↓</span></a></div>
+    <div class="journal-field"><div class="field-coordinate mono" aria-hidden="true">Fig. 01 / A shifting perspective</div><canvas id="journal-orbit" aria-hidden="true"></canvas><div class="field-axis" aria-hidden="true"><span class="mono">Technology</span><span class="mono">People</span><span class="mono">Change</span></div><button class="field-motion mono" type="button" aria-pressed="false" hidden>Pause motion</button></div>
+  </div>
+  <div class="journal-baseline mono"><span>By Yassine W. Medjati</span><span>Essays / Frameworks / Questions</span><a href="blog/feed.xml">RSS ↗</a></div>
 </section>
 '''
-index+=f'''<a class="featured-story" href="{featured['url']}"><div class="featured-copy"><span class="story-kicker mono">Start here / {E(featured['category'])}</span><h2>{E(featured['title'])}</h2><p>{E(featured['excerpt'])}</p><div class="featured-bottom"><span class="mono">{featured['minutes']} min read · A practical decision frame</span><span aria-hidden="true">↗</span></div></div><div class="featured-art" aria-hidden="true"><img src="assets/editorial-orbits.svg" width="800" height="580" alt=""><div class="art-caption"><span class="mono">Clarity before scale.<br>Direction before momentum.</span><span class="art-number">01</span></div></div></a>'''
-index+='''<section class="reading-room" id="reading-room" aria-labelledby="reading-heading"><div class="reading-heading"><h2 id="reading-heading">The reading room.</h2><span class="mono">Useful questions.<br>Practical next steps.</span></div>
+index+=f'''<a class="featured-story" href="{featured['url']}"><span class="featured-index" aria-hidden="true">{featured['number']}</span><div class="featured-copy"><span class="story-kicker mono">In focus / {E(featured['category'])}</span><h2>{E(featured['title'])}</h2><p>{E(featured['excerpt'])}</p></div><div class="featured-bottom"><span class="mono">{featured['minutes']} min read</span><span class="featured-read">Read the note <span aria-hidden="true">↗</span></span></div></a>'''
+index+='''<section class="reading-room" id="reading-room" aria-labelledby="reading-heading"><div class="reading-heading"><h2 id="reading-heading">The index<span aria-hidden="true"> /</span></h2><span class="mono">Open a line of thought.</span></div>
 <div class="journal-controls" hidden><div class="topic-filters" role="group" aria-label="Filter notes by topic">'''
 for category in ['All','Strategy','Leadership','Operating models']:
     index+=f'<button class="topic-button" type="button" data-topic="{category}" aria-pressed="{str(category=="All").lower()}">{category}</button>'
 index+='''</div><label class="journal-search"><span>Search</span><input id="journal-search" type="search" placeholder="Find a note…" autocomplete="off"></label></div>
 <div class="journal-list">'''+''.join(row(p) for p in POSTS)+'''</div><div class="empty-state" hidden><p>No notes match that search.</p><button class="clear-filters" type="button">Show all notes</button></div>
 <div class="reading-end"><span class="mono" id="reading-count" role="status" aria-live="polite">3 notes to explore</span><a href="blog/feed.xml">Follow via RSS ↗</a></div></section>'''
-index+=invitation('A useful idea deserves<br>a <em>next step.</em>','If a note connects with a challenge in your organisation, let’s discuss what it could mean for your priorities, your people and your next decision.','Discuss a business challenge')+'</main>'+footer()
+index+='''<section class="journal-outro" aria-label="Work together"><span class="mono">Continue the conversation</span><a href="mailto:hello@wyassine.com">What are you thinking about? <span aria-hidden="true">↗</span></a></section></main>'''+footer()
 (ROOT/'blog.html').write_text(index)
 
 for p in POSTS:

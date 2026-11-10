@@ -10,7 +10,7 @@ const pages=inventory(posts);
 async function fixture(t){
  const target=await fs.mkdtemp(path.join(os.tmpdir(),'wyassine-seo-test-'));
  t.after(()=>fs.rm(target,{recursive:true,force:true}));
- for(const item of ['scripts','content',...pages.filter(p=>!['about.html','ai-strategy.html'].includes(p.file)).map(p=>p.file),'sitemap.xml']){
+ for(const item of ['scripts','content','blog-index.css','blog-index.js',...pages.filter(p=>!['about.html','ai-strategy.html'].includes(p.file)).map(p=>p.file),'sitemap.xml']){
   await fs.mkdir(path.dirname(path.join(target,item)),{recursive:true});
   await fs.cp(path.join(root,item),path.join(target,item),{recursive:true});
  }
@@ -71,6 +71,13 @@ test('SEO generation is repeatable and the public build includes both landing pa
 test('blog generator retains public authors, valid metadata and a sitemap without the CV gate',async t=>{
  const target=await fixture(t);
  execFileSync('python3',[path.join(target,'scripts/build_blog.py')],{cwd:target,stdio:'pipe'});
+ const index=await fs.readFile(path.join(target,'blog.html'),'utf8');
+ assert.match(index,/class="journal-page journal-index"/);
+ assert.match(index,/id="journal-orbit"/);
+ assert.match(index,/href="\/blog-index.css"/);
+ assert.match(index,/src="\/blog-index.js"/);
+ await buildPublic(target);
+ for(const name of ['blog-index.css','blog-index.js'])assert.equal(await fs.readFile(path.join(target,'public',name),'utf8'),await fs.readFile(path.join(target,name),'utf8'));
  for(const post of posts){
   const html=await fs.readFile(path.join(target,post.url+'.html'),'utf8');
   assert.match(html,/href="\/about" rel="author"/);

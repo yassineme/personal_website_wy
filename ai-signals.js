@@ -82,8 +82,40 @@
   updates.hidden = true;
   dock.append(dockBar, stack, dockHint, updates);
   const introduction = document.querySelector('.page .introduction');
+  let dockCollapsed = !introduction;
+  let dockToggle, dockSummary, dockContent;
   if (introduction) { introduction.append(dock); dock.classList.add('signals-dock-home'); }
-  else { document.body.append(dock); document.body.classList.add('has-floating-signals'); }
+  else {
+    dock.dataset.collapsed = 'true';
+    dockContent = make('div', 'signals-dock-content');
+    dockContent.id = 'signals-dock-content';
+    dockContent.hidden = true;
+    dockContent.append(dockBar, stack, dockHint, updates);
+    dockToggle = button('signals-dock-toggle', '', 'Expand AI Signals');
+    dockToggle.setAttribute('aria-controls', dockContent.id);
+    dockToggle.setAttribute('aria-expanded', 'false');
+    dockSummary = make('span', 'signals-dock-summary');
+    const chevron = make('span', 'signals-dock-chevron', '+');
+    chevron.setAttribute('aria-hidden', 'true');
+    dockToggle.append(make('span', 'signals-dot'), make('span', 'signals-dock-label', 'AI Signals'), dockSummary, chevron);
+    dock.replaceChildren(dockContent, dockToggle);
+    document.body.append(dock);
+    document.body.classList.add('has-floating-signals', 'signals-compact');
+    function toggleDock() {
+      dockCollapsed = !dockCollapsed;
+      dock.dataset.collapsed = String(dockCollapsed);
+      dockContent.hidden = dockCollapsed;
+      dockToggle.setAttribute('aria-expanded', String(!dockCollapsed));
+      dockToggle.setAttribute('aria-label', dockCollapsed ? 'Expand AI Signals' : 'Collapse AI Signals');
+      schedule();
+    }
+    dockToggle.addEventListener('click', toggleDock);
+    dock.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !dockCollapsed && !dialog.open) {
+        toggleDock(); dockToggle.focus(); event.preventDefault();
+      }
+    });
+  }
 
   const dialog = make('dialog', 'signals-dialog');
   dialog.id = 'signals-dialog';
@@ -169,7 +201,7 @@
   function step() { if (items.length > 1) { cursor++; drawStack(true); } }
   function schedule() {
     clearTimeout(cycleTimer);
-    const held = paused || reducedMotion.matches || hovered || touching || (dock.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) || document.hidden || dialog.open;
+    const held = dockCollapsed || paused || reducedMotion.matches || hovered || touching || (dock.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) || document.hidden || dialog.open;
     dock.dataset.paused = String(held);
     if (!held && items.length > 1) cycleTimer = setTimeout(() => { step(); schedule(); }, 5500);
   }
@@ -189,6 +221,7 @@
     const total = items.filter(item => visit.isNew(item)).length;
     updates.hidden = !total;
     updates.textContent = total + ' new since your last visit';
+    if (dockSummary) dockSummary.textContent = total ? total + ' new' : items.length + ' stories';
   }
   function renderCards(selectedID = null) {
     const stamp = data?.updatedAt && Number.isFinite(Date.parse(data.updatedAt)) ? dateLabel(data.updatedAt) : 'unavailable';
