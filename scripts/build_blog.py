@@ -121,7 +121,7 @@ for category in ['All','Strategy','Leadership','Operating models']:
 index+='''</div><label class="journal-search"><span>Search</span><input id="journal-search" type="search" placeholder="Find a note…" autocomplete="off"></label></div>
 <div class="journal-list">'''+''.join(row(p) for p in POSTS)+'''</div><div class="empty-state" hidden><p>No notes match that search.</p><button class="clear-filters" type="button">Show all notes</button></div>
 <div class="reading-end"><span class="mono" id="reading-count" role="status" aria-live="polite">3 notes to explore</span><a href="blog/feed.xml">Follow via RSS ↗</a></div></section>'''
-index+='''<section class="journal-outro" aria-label="Work together"><span class="mono">Continue the conversation</span><a href="mailto:hello@wyassine.com">What are you thinking about? <span aria-hidden="true">↗</span></a></section></main>'''+footer()
+index+='''<section class="journal-outro" aria-label="Work together"><span class="mono">Continue the conversation</span><a href="/contact">What are you thinking about? <span aria-hidden="true">↗</span></a></section></main>'''+footer()
 (ROOT/'blog.html').write_text(index)
 
 for p in POSTS:

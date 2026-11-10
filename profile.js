@@ -1,19 +1,58 @@
 
 (() => {
       const explorers = [];
+      const panelMotion = matchMedia('(prefers-reduced-motion: reduce)');
       document.querySelectorAll('.explore-item').forEach(item => {
         const trigger = item.querySelector('.books-trigger');
         const panel = item.querySelector('.books-panel');
+        const smoothPanel = Boolean(item.closest('.side-menu'));
         let pinned = false, hovered = false, focused = false, dismissed = false;
-        let leaveTimer;
+        let leaveTimer, enterTimer, motionTimer, motion = null, presented = !panel.hidden;
+        function finishMotion() {
+          clearTimeout(motionTimer);
+          panel.hidden = !presented;
+          motion?.cancel();
+          motion = null;
+        }
+        function present(open) {
+          if (open === presented) return;
+          presented = open;
+          if (!smoothPanel) { panel.hidden = !open; return; }
+          const offset = matchMedia('(max-width:600px)').matches ? '0 12px' : '14px 0';
+          // Start from the current visual position when hover reverses mid-animation.
+          const style = panel.hidden ? null : getComputedStyle(panel);
+          const from = {
+            opacity: style?.opacity ?? '0',
+            translate: style?.translate ?? offset,
+            scale: style?.scale ?? '.985'
+          };
+          clearTimeout(motionTimer);
+          motion?.cancel();
+          motion = null;
+          panel.hidden = false;
+          panel.inert = !open;
+          panel.setAttribute('aria-hidden', String(!open));
+          if (panelMotion.matches || !panel.animate) return finishMotion();
+          const duration = open ? 540 : 260;
+          const to = open ? {opacity:'1',translate:'0 0',scale:'1'} : {opacity:'0',translate:offset,scale:'.985'};
+          const animation = panel.animate([from, to], {
+            duration, easing:open ? 'cubic-bezier(.16,1,.3,1)' : 'cubic-bezier(.4,0,.2,1)', fill:'both'
+          });
+          motion = animation;
+          animation.onfinish = () => { if (motion === animation) finishMotion(); };
+          // Recovery also handles suspended tabs and missed animation events.
+          motionTimer = setTimeout(() => { if (motion === animation) finishMotion(); }, duration + 100);
+        }
+        if (smoothPanel) panelMotion.addEventListener('change', () => { if (panelMotion.matches) finishMotion(); });
         const update = () => {
           const open = !dismissed && (pinned || hovered || focused);
           if (open) explorers.forEach(other => { if (other.item !== item) other.dismiss(); });
-          panel.hidden = !open;
+          present(open);
           trigger.setAttribute('aria-expanded', String(open));
         };
         const dismiss = (restoreFocus = false) => {
           clearTimeout(leaveTimer);
+          clearTimeout(enterTimer);
           if (restoreFocus) trigger.focus();
           pinned = false; hovered = false; focused = false; dismissed = true;
           update();
@@ -22,22 +61,27 @@
         item.addEventListener('pointerenter', event => {
           if (event.pointerType === 'touch') return;
           clearTimeout(leaveTimer);
-          hovered = true; dismissed = false; update();
+          clearTimeout(enterTimer);
+          const reveal = () => { hovered = true; dismissed = false; update(); };
+          if (smoothPanel) enterTimer = setTimeout(reveal, 80);
+          else reveal();
         });
         item.addEventListener('pointerleave', () => {
-          leaveTimer = setTimeout(() => { hovered = false; update(); }, 160);
+          clearTimeout(enterTimer);
+          leaveTimer = setTimeout(() => { hovered = false; update(); }, smoothPanel ? 220 : 160);
         });
         item.addEventListener('focusin', () => { focused = true; dismissed = false; update(); });
         item.addEventListener('focusout', event => {
           if (!item.contains(event.relatedTarget)) { focused = false; update(); }
         });
         trigger.addEventListener('click', () => {
+          clearTimeout(enterTimer);
           if (pinned) dismiss();
           else { pinned = true; dismissed = false; update(); }
         });
         panel.querySelector('.books-close').addEventListener('click', () => dismiss(true));
         document.addEventListener('keydown', event => {
-          if (event.key === 'Escape' && !panel.hidden) { event.preventDefault(); dismiss(item.contains(document.activeElement)); }
+          if (event.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') { event.preventDefault(); dismiss(item.contains(document.activeElement)); }
         });
         document.addEventListener('pointerdown', event => {
           if (!item.contains(event.target)) dismiss();
@@ -191,4 +235,3 @@
       new ResizeObserver(resize).observe(canvas);
       resize(); synchronize();
     })();
-    

@@ -2,6 +2,14 @@
 const http=require('node:http');
 const fs=require('node:fs/promises');
 const path=require('node:path');
+const {randomBytes}=require('node:crypto');
+const {createContactHandler}=require('../lib/contact.cjs');
+// Local contact previews stay in memory for this server session and never send email.
+const contactOutbox=[];
+const contact=createContactHandler({
+ env:{WEBSITE_FORMS_SECRET:randomBytes(32).toString('hex')},secure:false,
+ notify:async message=>{contactOutbox.push(message);if(contactOutbox.length>100)contactOutbox.shift();return {preview:true};}
+});
 const handler=require('../api/ai-signals.js');
 const {createHandler}=require('../api/ai-markets.js');
 const {createQuoteService}=require('../lib/ai-markets.cjs');
@@ -22,6 +30,7 @@ if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid preview p
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.woff2':'font/woff2','.ico':'image/x-icon','.pdf':'application/pdf'};
 http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://localhost');
+ if(['/contact','/contact/','/api/contact'].includes(url.pathname))return contact(req,res);
  if(url.pathname==='/api/ai-signals')return handler(req,res);
  if(url.pathname==='/api/ai-markets'){currentMarketKey=await localMarketKey();return markets(req,res);}
  try{

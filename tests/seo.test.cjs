@@ -76,6 +76,7 @@ test('blog generator retains public authors, valid metadata and a sitemap withou
  assert.match(index,/id="journal-orbit"/);
  assert.match(index,/href="\/blog-index.css"/);
  assert.match(index,/src="\/blog-index.js"/);
+ assert.match(index,/href="\/contact">What are you thinking about\?/);
  await buildPublic(target);
  for(const name of ['blog-index.css','blog-index.js'])assert.equal(await fs.readFile(path.join(target,'public',name),'utf8'),await fs.readFile(path.join(target,name),'utf8'));
  for(const post of posts){
