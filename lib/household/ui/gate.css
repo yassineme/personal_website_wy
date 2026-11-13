@@ -1,0 +1,35 @@
+@font-face{font-family:Instrument;src:url('/assets/fonts/instrument-sans-normal.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}:root{color-scheme:dark;--paper:#0b0c0c;--ink:#eeece7;--muted:#aaa9a5;--line:#30302f}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:var(--paper);color:var(--ink);font:15px/1.6 Instrument,Arial,sans-serif;display:grid;place-items:center}.home{position:absolute;top:30px;left:34px;text-decoration:none;color:var(--muted);font-size:25px;padding:12px}main{width:min(100% - 48px,400px);padding:64px 0}.mark{font-size:35px;margin-bottom:38px}.eyebrow{font-size:14px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}h1{font-weight:400;font-size:56px;letter-spacing:-.055em;line-height:1.05;margin:19px 0}h1 em{font-family:inherit;font-style:normal;font-weight:650}.intro{color:var(--muted);margin-bottom:35px}label{display:block;font-size:14px;color:var(--muted);margin-bottom:10px}input{width:100%;padding:14px;background:#121212;border:1px solid #4d4d4d;color:var(--ink);font:20px Instrument,Arial;letter-spacing:.25em;border-radius:0}button{width:100%;margin-top:16px;border:0;padding:15px 17px;background:var(--ink);color:var(--paper);font:500 14px Instrument,Arial;display:flex;justify-content:space-between;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.footnote{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;margin-top:40px}#error{min-height:24px;font-size:13px}a:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:5px}
+/* The same segmented entry treatment as the digital résumé, grouped six–six. */
+main{width:min(100% - 48px,600px)}
+.pin-entry{border:0;padding:0;margin:0;min-width:0}
+.pin-entry legend{padding:0;margin-bottom:11px;font-size:14px;color:var(--muted)}
+.pin-boxes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr)) 12px repeat(6,minmax(0,1fr));gap:5px;align-items:center}
+.pin-separator{color:var(--muted);text-align:center;font-size:22px;line-height:1;user-select:none}
+.pin-digit{width:100%;min-width:0;height:58px;padding:0;text-align:center;font-size:23px;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;border-radius:4px;background:#0a0a0a;border-color:#4b4b4b;caret-color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.pin-digit:not(:placeholder-shown){border-color:#787878}
+.pin-digit:focus{outline:0;border-color:var(--ink);box-shadow:0 0 0 3px #eeece714}
+.pin-help{font-size:14px;color:var(--muted);margin:12px 0 0}
+.pin-digit:disabled{opacity:.55}
+@media(max-width:520px){main{width:calc(100% - 36px)}.pin-boxes{gap:3px;grid-template-columns:repeat(6,minmax(0,1fr)) 8px repeat(6,minmax(0,1fr))}.pin-digit{height:46px;font-size:18px}.pin-separator{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.pin-digit{transition:none}}
+
+main{animation:gate-enter 350ms ease both}button{transition:background-color 180ms ease,transform 180ms ease}button:hover{background:#fff}button:active{transform:translateY(1px)}@keyframes gate-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* The existing personal Y mark, framed by fine orbital registration lines. */
+.household-brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.household-mark{position:relative;display:block;width:46px;height:46px;flex:0 0 46px;color:var(--ink)}
+.household-mark>svg{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible}
+.household-mark>img{position:absolute;inset:16%;display:block;width:68%;height:68%;object-fit:contain}
+.household-orbit{opacity:.48}.household-meridian{opacity:.2}.household-register{opacity:.55}
+.household-brand .brand-name{display:flex;flex-direction:column;gap:0;min-width:0;line-height:1.1;text-transform:none;white-space:nowrap}
+.household-brand .household-kicker{font:400 9px/1.4 Instrument,Arial,sans-serif;letter-spacing:.21em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.household-brand .brand-name strong{display:block;font:italic 400 23px/1.08 Georgia,'Times New Roman',serif;letter-spacing:-.045em;color:var(--ink)}
+.household-brand .household-descriptor{font:400 8.5px/1.5 Instrument,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+.gate-brand{margin:0 0 40px;gap:16px}
+.gate-brand .household-mark{width:68px;height:68px;flex-basis:68px}
+.gate-brand .household-kicker{font-size:10px;letter-spacing:.24em;margin-bottom:4px}
+.gate-brand .brand-name strong{font-size:34px}
+.gate-brand .household-descriptor{font-size:8px;letter-spacing:.16em;margin-top:7px}
+/* Keep the back control clear of the larger signature on short screens. */
+.home{top:12px;left:16px;width:40px;height:40px;padding:0;display:grid;place-items:center;font-size:22px;line-height:1}

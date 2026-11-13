@@ -20,7 +20,11 @@
     "test:seo": "node --test tests/seo.test.cjs",
     "test:intro": "node --test tests/site-intro.test.cjs",
     "preview:events": "node scripts/preview-events.cjs",
-    "test:events": "node --test tests/owner-events.test.cjs"
+    "test:events": "node --test tests/owner-events.test.cjs",
+    "preview:household": "node scripts/preview-household.cjs",
+    "setup:household": "node scripts/setup-household.cjs",
+    "connect:household": "node scripts/connect-household-google.cjs",
+    "test:household": "node --test tests/household*.test.cjs"
   },
   "repository": {
     "type": "git",
@@ -39,6 +43,7 @@
   },
   "dependencies": {
     "fast-xml-parser": "^5.11.2",
+    "google-auth-library": "^11.3.2",
     "simple-icons": "^16.11.0"
   }
 }

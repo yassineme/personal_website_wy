@@ -70,6 +70,7 @@ def head(title,description,url,prefix='',graph=None,article=False):
   <script src="{prefix}privacy.js" defer></script>
   <script src="{prefix}booking.js" defer></script>
 <meta name="referrer" content="strict-origin">
+<link rel="stylesheet" href="/site-foundation.css">
 </head>
 <body class="journal-page{' journal-article' if article else ''}">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -102,7 +103,7 @@ featured=next(p for p in POSTS if p.get('featured'))
 blogschema={'@type':'Blog','@id':SITE+'blog#blog','name':'Notes on change','description':'Practical perspectives on AI strategy, digital transformation and leadership.','url':SITE+'blog','author':{'@id':SITE+'#person'},'blogPost':[article_schema(p) for p in POSTS]}
 breadcrumb={'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':SITE},{'@type':'ListItem','position':2,'name':'Blog','item':SITE+'blog'}]}
 index=head('AI Strategy & Digital Transformation Blog | Yassine W. Medjati','Practical notes on AI roadmaps, digital transformation and leadership. Decision guides for teams turning ambition into everyday business value.','blog',graph=[PERSON,blogschema,breadcrumb])+header(blog_current=True)
-index=index.replace('<body class="journal-page">','<body class="journal-page journal-index">').replace('</head>','<link rel="stylesheet" href="/blog-index.css"><script src="/blog-index.js" defer></script>\n</head>')
+index=index.replace('<body class="journal-page">','<body class="journal-page journal-index">').replace('<link rel="stylesheet" href="/site-foundation.css">', '<link rel="stylesheet" href="/blog-index.css"><script src="/blog-index.js" defer></script>\n<link rel="stylesheet" href="/site-foundation.css">')
 index+='''<main id="main-content">
 <section class="journal-intro" aria-labelledby="journal-title">
   <div class="journal-edition mono"><span>Independent perspectives / YWM</span><span>AI · Transformation · People</span></div>

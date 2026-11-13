@@ -14,7 +14,11 @@
   backdrop-filter:blur(12px);
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000d 24%,#0007 54%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 0%,#000d 24%,#0007 54%,transparent 100%);
-  transition:opacity .16s linear;
+  /* Prepare this one backdrop layer before the first scroll. Opacity already
+     follows the scroll position, so a second CSS easing makes it lag the glide. */
+  will-change:opacity;
+  transform:translateZ(0);
+  transition:none;
 }
 body:has(.books-panel:not([hidden])) .scroll-veil { opacity:0; }
 .article-progress { z-index:70; }

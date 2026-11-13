@@ -5,6 +5,13 @@ node_modules/
 public/
 .public-build-*/
 .secrets/
+.household/
+/household-dashboard-*.json
 *.pem
 *.p12
 *.pfx
+
+# Private property source document
+/00_Hamburg_property_first_financial_assessment.pdf
+
+/Am_Dobben_145_Wealth_Assessment_2026-11-11.pdf

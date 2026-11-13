@@ -10,7 +10,7 @@ const pages=inventory(posts);
 async function fixture(t){
  const target=await fs.mkdtemp(path.join(os.tmpdir(),'wyassine-seo-test-'));
  t.after(()=>fs.rm(target,{recursive:true,force:true}));
- for(const item of ['scripts','content','blog-index.css','blog-index.js',...pages.filter(p=>!['about.html','ai-strategy.html'].includes(p.file)).map(p=>p.file),'sitemap.xml']){
+ for(const item of ['scripts','content','blog-index.css','blog-index.js','site-foundation.css',...pages.filter(p=>!['about.html','ai-strategy.html'].includes(p.file)).map(p=>p.file),'sitemap.xml']){
   await fs.mkdir(path.dirname(path.join(target,item)),{recursive:true});
   await fs.cp(path.join(root,item),path.join(target,item),{recursive:true});
  }
@@ -64,7 +64,9 @@ test('SEO generation is repeatable and the public build includes both landing pa
  await buildSeo(target);
  const after=await Promise.all(pages.map(p=>fs.readFile(path.join(target,p.file),'utf8')));
  for(let i=0;i<pages.length;i++)assert.ok(after[i]===before[i],pages[i].file+' generation must be repeatable');
+ for(let i=0;i<pages.length;i++)assert.equal((after[i].match(/href="\/site-foundation\.css"/g)||[]).length,1,pages[i].file+' must retain the shared design after regeneration');
  await buildPublic(target);
+ assert.equal(await fs.readFile(path.join(target,'public/site-foundation.css'),'utf8'),await fs.readFile(path.join(target,'site-foundation.css'),'utf8'));
  for(const name of ['about.html','ai-strategy.html'])assert.equal(await fs.readFile(path.join(target,'public',name),'utf8'),await fs.readFile(path.join(target,name),'utf8'));
  await assert.rejects(fs.stat(path.join(target,'public/scripts/build-seo.cjs')),{code:'ENOENT'});
 });
@@ -81,6 +83,7 @@ test('blog generator retains public authors, valid metadata and a sitemap withou
  for(const name of ['blog-index.css','blog-index.js'])assert.equal(await fs.readFile(path.join(target,'public',name),'utf8'),await fs.readFile(path.join(target,name),'utf8'));
  for(const post of posts){
   const html=await fs.readFile(path.join(target,post.url+'.html'),'utf8');
+  assert.match(html,/href="\/site-foundation\.css"/);
   assert.match(html,/href="\/about" rel="author"/);
   assert.match(html,/href="\/contact">Start a conversation/);
   assert.equal(jsonld(html)['@graph'].find(n=>n['@type']==='Person').url,SITE+'/about');

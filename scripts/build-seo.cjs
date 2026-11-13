@@ -50,7 +50,7 @@ function publicPage({title,heading,deck,body,portrait=false}) {
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escape(title)}</title>
 <link rel="icon" href="/favicon.ico"><link rel="preload" href="/assets/fonts/instrument-sans-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/profile.css"><link rel="stylesheet" href="/journal.css"><link rel="stylesheet" href="/site-ui.css"><link rel="stylesheet" href="/typography-fonts.css"><link rel="stylesheet" href="/typography-proposals.css"><link rel="stylesheet" href="/privacy.css">
+<link rel="stylesheet" href="/profile.css"><link rel="stylesheet" href="/journal.css"><link rel="stylesheet" href="/site-ui.css"><link rel="stylesheet" href="/typography-fonts.css"><link rel="stylesheet" href="/typography-proposals.css"><link rel="stylesheet" href="/privacy.css"><link rel="stylesheet" href="/site-foundation.css">
 <script src="/site-ui.js" defer></script><script src="/site-config.js" defer></script><script src="/privacy-core.js" defer></script><script src="/privacy.js" defer></script><script src="/booking.js" defer></script>
 </head><body class="journal-page${portrait?' about-page':''}"><a class="skip-link" href="#main-content">Skip to content</a><div class="journal-shell">
 <header class="journal-header"><a class="brand-link" href="/" aria-label="${AUTHOR} — home"><img class="brand-symbol" src="/assets/brand/logo-ivory.png" width="36" height="36" alt=""></a><nav class="journal-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/about">About</a><a href="/ai-strategy">AI strategy</a><a href="/blog">Blog</a><a href="/contact">Contact</a></nav></header>
