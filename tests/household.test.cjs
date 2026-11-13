@@ -125,7 +125,7 @@ test('water history and script require authentication; local water saves never c
  assert.equal((await request(handler,'/api/household?asset=water.js',{headers})).status,200);
 });
 
-// The private app reuses the public glide only behind its existing session boundary.
+// The private app preserves its glide behind the existing session boundary.
 test('shared scroll asset requires authentication and the workspace opts out of page curtains',async t=>{
  const store=await storeFixture(t),handler=createHandler({store,failureDelay:async()=>{}});
  assert.equal((await request(handler,'/api/household?asset=site-motion.js')).status,401);
@@ -133,7 +133,7 @@ test('shared scroll asset requires authentication and the workspace opts out of 
  const {cookie}=await login(handler),headers={cookie};
  const script=await request(handler,'/api/household?asset=site-motion.js',{headers});
  assert.equal(script.status,200);assert.match(script.headers['content-type'],/javascript/);
- assert.equal(script.text,await fs.readFile(path.join(__dirname,'../site-motion.js'),'utf8'));
+ assert.equal(script.text,await fs.readFile(path.join(__dirname,'../lib/household/ui/site-motion.js'),'utf8'));
  const app=await request(handler,'/private-desk',{headers});
  assert.match(app.text,/<script src="\/api\/household\?asset=site-motion\.js" data-scroll-only defer>/);
  assert.equal((await request(handler,'/api/household?asset=../../site-motion.js',{headers})).status,404);

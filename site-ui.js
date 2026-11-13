@@ -3,11 +3,6 @@
   const proposal = new URLSearchParams(location.search).get('font');
   const proposals = ['manrope-newsreader','instrument-newsreader','sora-source-serif'];
   document.documentElement.dataset.typography = proposals.includes(proposal) ? proposal : 'instrument-newsreader';
-  const currentPath = location.pathname.replace(/\/$/, '') || '/';
-  document.querySelectorAll('.journal-nav a,.subnav a').forEach(link => {
-    const path = new URL(link.href, location.href).pathname.replace(/\/$/, '') || '/';
-    if (path === currentPath) link.setAttribute('aria-current', 'page');
-  });
   if (proposals.includes(proposal)) {
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
@@ -22,17 +17,11 @@
   veil.className = 'scroll-veil';
   veil.setAttribute('aria-hidden','true');
   document.body.prepend(veil);
-  let pending = false, previousOpacity;
+  let pending = false;
   const update = () => {
     const offset = Math.max(0,window.scrollY);
     const opacity = Math.min(offset / 80,1);
-    // Keep scroll-driven paint local to this overlay. An inherited variable on
-    // the root invalidates styles throughout the page on every scroll frame.
-    const nextOpacity = opacity.toFixed(3);
-    if (nextOpacity !== previousOpacity) {
-      veil.style.opacity = nextOpacity;
-      previousOpacity = nextOpacity;
-    }
+    document.documentElement.style.setProperty('--scroll-veil-opacity',opacity.toFixed(3));
     pending = false;
   };
   const requestUpdate = () => {

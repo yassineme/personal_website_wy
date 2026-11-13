@@ -1,6 +1,5 @@
 
     :root { color-scheme: dark; --ink:#eeece7; --muted:#aaa9a5; --line:#30302f; --paper:#0b0c0c; }
-    .closing-row { position:relative; }
     *, *::before, *::after { box-sizing:border-box; }
     html, body { margin:0; background:var(--paper); color:var(--ink); }
     body { font-family:Arial,Helvetica,sans-serif; -webkit-font-smoothing:antialiased; }
