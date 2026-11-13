@@ -10,8 +10,9 @@
   pointer-events:none;
   opacity:var(--scroll-veil-opacity,0);
   background:linear-gradient(to bottom,#0b0c0c70,transparent);
-  -webkit-backdrop-filter:blur(12px);
-  backdrop-filter:blur(12px);
+  /* Keep the header fade without filtering the moving page behind it. */
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000d 24%,#0007 54%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 0%,#000d 24%,#0007 54%,transparent 100%);
   transition:opacity .16s linear;
@@ -20,7 +21,7 @@ body:has(.books-panel:not([hidden])) .scroll-veil { opacity:0; }
 .article-progress { z-index:70; }
 @media (max-width:700px) {
   .brand-symbol { width:34px; height:27px; }
-  .scroll-veil { height:calc(76px + env(safe-area-inset-top,0px)); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+  .scroll-veil { height:calc(76px + env(safe-area-inset-top,0px)); }
 }
 @media (prefers-reduced-motion:reduce) { .scroll-veil { transition:none; } }
 @media print { .scroll-veil { display:none; } }

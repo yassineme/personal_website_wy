@@ -5,7 +5,7 @@
   "scripts": {
     "build:css": "tailwindcss -i ./tailwind.input.css -o ./tailwind.css --minify",
     "watch:css": "tailwindcss -i ./tailwind.input.css -o ./tailwind.css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test tests/*.test.cjs",
     "test:signals": "node --test tests/ai-signals*.test.cjs",
     "refresh:signals": "node scripts/refresh-signals.cjs",
     "preview:signals": "node scripts/preview-signals.cjs",
@@ -19,6 +19,7 @@
     "build:seo": "node scripts/build-seo.cjs",
     "test:seo": "node --test tests/seo.test.cjs",
     "test:intro": "node --test tests/site-intro.test.cjs",
+    "test:scroll": "node --test tests/site-motion.test.cjs tests/site-ui.test.cjs tests/journal-scroll.test.cjs tests/household-motion.test.cjs",
     "preview:events": "node scripts/preview-events.cjs",
     "test:events": "node --test tests/owner-events.test.cjs",
     "preview:household": "node scripts/preview-household.cjs",

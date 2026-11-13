@@ -67,7 +67,7 @@
 .journal-footer-links { display:flex; flex-wrap:wrap; gap:22px; }
 .journal-footer a { text-decoration:none; }
 .journal-footer a:hover { text-decoration:underline; text-underline-offset:5px; }
-.article-progress { position:fixed; z-index:20; height:2px; width:0; top:0; left:0; background:var(--ink); pointer-events:none; }
+.article-progress { position:fixed; z-index:20; height:2px; width:100%; top:0; left:0; background:var(--ink); pointer-events:none; transform:scaleX(0); transform-origin:left center; }
 .article-breadcrumb { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin:27px 0 0; color:var(--journal-muted); }
 .article-breadcrumb a { text-decoration:none; }
 .article-breadcrumb a:hover { color:var(--ink); }

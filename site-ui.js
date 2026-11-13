@@ -17,11 +17,14 @@
   veil.className = 'scroll-veil';
   veil.setAttribute('aria-hidden','true');
   document.body.prepend(veil);
-  let pending = false;
+  let pending = false, lastOpacity;
   const update = () => {
     const offset = Math.max(0,window.scrollY);
-    const opacity = Math.min(offset / 80,1);
-    document.documentElement.style.setProperty('--scroll-veil-opacity',opacity.toFixed(3));
+    const opacity = Math.min(offset / 80,1).toFixed(3);
+    if (opacity !== lastOpacity) {
+      veil.style.setProperty('--scroll-veil-opacity',opacity);
+      lastOpacity = opacity;
+    }
     pending = false;
   };
   const requestUpdate = () => {

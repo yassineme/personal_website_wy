@@ -38,17 +38,32 @@
   const body = document.querySelector('.article-body');
   const progress = document.querySelector('.article-progress');
   if (body && progress) {
-    let scheduled = false;
+    let scheduled = false, measure = true, start = 0, distance = 1, lastRatio;
     const update = () => {
-      const start = body.getBoundingClientRect().top + window.scrollY;
-      const distance = Math.max(1, body.offsetHeight - innerHeight * .65);
+      if (measure) {
+        start = body.getBoundingClientRect().top + window.scrollY;
+        distance = Math.max(1, body.offsetHeight - innerHeight * .65);
+        measure = false;
+      }
       const ratio = Math.max(0, Math.min(1, (scrollY - start + innerHeight * .25) / distance));
-      progress.style.width = `${ratio * 100}%`;
+      if (ratio !== lastRatio) {
+        progress.style.transform = `scaleX(${ratio})`;
+        lastRatio = ratio;
+      }
       scheduled = false;
     };
     const requestUpdate = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } };
+    const refreshBounds = () => { measure = true; requestUpdate(); };
     window.addEventListener('scroll', requestUpdate, {passive:true});
-    window.addEventListener('resize', requestUpdate);
+    window.addEventListener('resize', refreshBounds);
+    window.addEventListener('load', refreshBounds);
+    window.addEventListener('pageshow', refreshBounds);
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver(refreshBounds);
+      observer.observe(body);
+      observer.observe(document.body);
+    }
+    document.fonts?.ready.then(refreshBounds);
     update();
     const links = [...document.querySelectorAll('.article-toc a')];
     const headings = links.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean);

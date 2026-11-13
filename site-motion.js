@@ -4,6 +4,8 @@
   // CSS failure must never delay navigation or change native scrolling.
   if (getComputedStyle(root).getPropertyValue('--site-motion-ready').trim() !== '1') return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const motionControl = document.querySelector('.motion-control');
+  const motionPaused = () => motionControl?.getAttribute('aria-pressed') === 'true';
   const nativeTransitions = 'onpagereveal' in window && 'CSSViewTransitionRule' in window;
   let curtain, navigationTimer, destination;
   const KEY = 'ywm-page-arrival';
@@ -64,8 +66,23 @@
   function locked() {
     return [root, document.body].some(element => /hidden|clip/.test(getComputedStyle(element).overflowY));
   }
+  let scrollStep = 1, scrollPixelRatio = 0;
+  function pixelStep() {
+    const ratio = Math.max(1, window.devicePixelRatio || 1);
+    if (ratio !== scrollPixelRatio) { scrollPixelRatio = ratio; scrollStep = 1 / ratio; }
+    return scrollStep;
+  }
+  function writeScroll(value, step) {
+    const next = clamp(Math.round(value / step) * step);
+    // Do not keep writing fractional offsets that render as the same device pixel.
+    if (Math.abs(next - written) < step / 2) return;
+    window.scrollTo({top:next, behavior:'instant'});
+    written = window.scrollY;
+    // Some Chrome configurations round to CSS pixels even on Retina displays.
+    if (step < 1 && Math.abs(written - next) > step / 2 + .001) scrollStep = 1;
+  }
   function tick(now) {
-    if (reduced.matches || document.hidden || locked()) return stopScroll();
+    if (reduced.matches || motionPaused() || document.hidden || locked()) return stopScroll();
     const dt = Math.min((now - previousTime) / 1000, .05);
     previousTime = now;
     target = clamp(target);
@@ -75,16 +92,29 @@
     const decay = Math.exp(-omega * dt);
     position = target + (displacement + coefficient * dt) * decay;
     velocity = (velocity - omega * coefficient * dt) * decay;
-    if (Math.abs(position - target) < .1 && Math.abs(velocity) < 1) {
-      window.scrollTo({top:target, behavior:'instant'});
+    const step = pixelStep();
+    if (Math.abs(position - target) <= step && Math.abs(velocity) <= 8 * step) {
+      writeScroll(target, step);
       return stopScroll();
     }
-    window.scrollTo({top:clamp(position), behavior:'instant'});
-    written = window.scrollY;
+    writeScroll(position, step);
     frame = requestAnimationFrame(tick);
   }
+  let nativeWheelUntil = 0;
   window.addEventListener('wheel', event => {
-    if (event.defaultPrevented || !event.cancelable || reduced.matches || destination || event.ctrlKey || event.metaKey || event.shiftKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY) || locked()) return;
+    if (!event.deltaX && !event.deltaY) return;
+    const now = performance.now();
+    // Keep a mixed-cancelability burst under native ownership until input is idle.
+    if (!event.cancelable || now < nativeWheelUntil) {
+      nativeWheelUntil = now + 180;
+      stopScroll();
+      return;
+    }
+    if (event.defaultPrevented || reduced.matches || motionPaused() || destination || event.ctrlKey || event.metaKey || event.shiftKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY) || locked()) {
+      // Release the spring before the browser or another control moves the page.
+      stopScroll();
+      return;
+    }
     // Scrollable panels, dialogs, form controls and galleries own their input.
     for (let node = event.target; node instanceof Element && node !== document.body && node !== root; node = node.parentElement) {
       if (node.matches('input,textarea,select,[contenteditable]:not([contenteditable="false"]),dialog[open],[data-native-scroll]') || (/auto|scroll|overlay/.test(getComputedStyle(node).overflowY) && node.scrollHeight > node.clientHeight + 1)) {
@@ -95,7 +125,11 @@
     const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
     if (!frame) position = target = written = window.scrollY;
     const next = clamp(target + delta);
-    if (next === target) return;
+    if (next === target) {
+      // The target may be at the boundary before the visible glide reaches it.
+      if (frame) event.preventDefault();
+      return;
+    }
     event.preventDefault();
     target = next;
     if (!frame) {
@@ -104,6 +138,7 @@
       frame = requestAnimationFrame(tick);
     }
   }, {passive:false});
+  motionControl?.addEventListener('click', stopScroll);
   // Explicit input and native/programmatic jumps immediately take control from the spring.
   window.addEventListener('scroll', () => {
     if (frame && Math.abs(window.scrollY - written) > 2) stopScroll();

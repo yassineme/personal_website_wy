@@ -1,8 +1,8 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const source=fs.readFileSync(require('node:path').join(__dirname,'../site-motion.js'),'utf8');
-function environment({reduced=false,native=false,css=true}={}) {
-  let time=0,id=0;const frames=new Map(),timers=new Map(),events=new Map(),assigned=[];
+function environment({reduced=false,native=false,css=true,quantized=false,pixelRatio=1,renderPixelRatio=pixelRatio,paused=false,controllerSource=source}={}) {
+  let time=0,id=0;const frames=new Map(),timers=new Map(),events=new Map(),assigned=[],scrollWrites=[];
   class Element {
     constructor(){this.classes=new Set();this.style={overflowY:'visible'};this.scrollHeight=0;this.clientHeight=0;this.parentElement=null;}
     classList={add:(...xs)=>xs.forEach(x=>this.classes.add(x)),remove:(...xs)=>xs.forEach(x=>this.classes.delete(x)),contains:x=>this.classes.has(x)};
@@ -13,19 +13,20 @@ function environment({reduced=false,native=false,css=true}={}) {
   }
   const root=new Element(),body=new Element();root.scrollHeight=4000;
   const motion={matches:reduced,addEventListener(_,fn){this.change=fn;}};
+  const control={paused,handlers:new Map(),getAttribute(){return String(this.paused);},addEventListener(name,fn){this.handlers.set(name,fn);}};
   const listen=(name,fn)=>{const list=events.get(name)||[];list.push(fn);events.set(name,list);};
-  const document={documentElement:root,body,hidden:false,createElement:()=>new Element(),addEventListener:listen};
+  const document={documentElement:root,body,hidden:false,querySelector:()=>control,createElement:()=>new Element(),addEventListener:listen};
   const location={href:'https://example.com/blog',origin:'https://example.com',pathname:'/blog',search:'',assign:url=>assigned.push(url)};
   const storage=new Map();
-  const window={scrollY:100,innerHeight:800,addEventListener:listen,scrollTo({top}){this.scrollY=top;}};
+  const window={scrollY:100,innerHeight:800,devicePixelRatio:pixelRatio,addEventListener:listen,scrollTo({top}){this.scrollY=quantized?Math.round(top*renderPixelRatio)/renderPixelRatio:top;scrollWrites.push(this.scrollY);}};
   if(native){window.onpagereveal=null;window.CSSViewTransitionRule=class {};}
   const ctx={window,document,location,Element,URL,Date,JSON,Math,matchMedia:()=>motion,getComputedStyle:element=>({...element.style,getPropertyValue:()=>css?'1':''}),performance:{now:()=>time},sessionStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},setTimeout(fn,delay){const key=++id;timers.set(key,{fn,at:time+delay});return key;},clearTimeout:key=>timers.delete(key),requestAnimationFrame(fn){const key=++id;frames.set(key,fn);return key;},cancelAnimationFrame:key=>frames.delete(key)};
-  vm.runInNewContext(source,ctx);
+  vm.runInNewContext(controllerSource,ctx);
   function emit(name,event={}){for(const fn of events.get(name)||[])fn(event);}
   function advance(ms){time+=ms;const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn(time));for(const [key,timer]of [...timers])if(timer.at<=time){timers.delete(key);timer.fn();}}
   function wheel(deltaY,options={}){const event={deltaY,deltaX:0,deltaMode:0,cancelable:true,target:body,preventDefault(){this.defaultPrevented=true;},...options};emit('wheel',event);return event;}
   function click(href,options={}){const link={href,target:'',hasAttribute:()=>false,relList:{contains:()=>false}};const event={button:0,target:{closest:()=>link},preventDefault(){this.defaultPrevented=true;},...options};emit('click',event);return event;}
-  return {window,root,body,motion,document,frames,timers,assigned,storage,emit,advance,wheel,click,Element};
+  return {window,root,body,motion,document,frames,timers,assigned,storage,scrollWrites,emit,advance,wheel,click,Element,pause(value=true){control.paused=value;control.handlers.get('click')?.();}};
 }
 test('spring converges without overshooting at 60 and 120 Hz and stops scheduling frames',()=>{
   const positions=[];
@@ -51,7 +52,8 @@ test('scrolling retains a gentle tail after release and slows progressively into
   assert.ok(remaining>20&&remaining<70,'the glide should still be visibly settling at 600ms');
   assert.ok(e.frames.size>0);
   const steps=[];
-  for(let i=0;i<5;i++){const before=e.window.scrollY;e.advance(1000/60);steps.push(e.window.scrollY-before);}
+  // Compare visible intervals; adjacent frames can share one device pixel.
+  for(let i=0;i<4;i++){const before=e.window.scrollY;for(let j=0;j<6;j++)e.advance(1000/60);steps.push(e.window.scrollY-before);}
   for(let i=1;i<steps.length;i++)assert.ok(steps[i]>0&&steps[i]<steps[i-1]);
   for(let i=0;i<120;i++)e.advance(1000/60);
   assert.equal(e.window.scrollY,700);assert.equal(e.frames.size,0);
@@ -77,4 +79,75 @@ test('fallback only delays ordinary internal page navigation and restores a canc
   e.advance(360);assert.equal(e.assigned[0],'https://example.com/about');assert.ok(e.storage.has('ywm-page-arrival'));
   e.advance(1500);assert.ok(e.body.child.removed);
   const native=environment({native:true});assert.ok(!native.click('https://example.com/about').defaultPrevented);
+});
+
+test('pixel-rounded browsers settle without repeatedly writing the same final offsets',()=>{
+  for(const pixelRatio of [1,2,3])for(const dt of [1000/60,1000/120])for(const delta of [600.25,-35.7,1.2,-1.2]){
+    const e=environment({quantized:true,pixelRatio});e.wheel(delta);
+    for(let i=0;i<240&&e.frames.size;i++)e.advance(dt);
+    assert.equal(e.frames.size,0,'the subpixel tail must finish');
+    assert.equal(e.window.scrollY,Math.round((100+delta)*pixelRatio)/pixelRatio);
+    for(let i=1;i<e.scrollWrites.length;i++){
+      assert.notEqual(e.scrollWrites[i],e.scrollWrites[i-1],'do not rewrite a pixel-rounded scroll position');
+      assert.ok(delta>0?e.scrollWrites[i]>=e.scrollWrites[i-1]:e.scrollWrites[i]<=e.scrollWrites[i-1],'settling must not reverse direction');
+    }
+  }
+});
+test('repeated wheel input cannot natively jump ahead of a glide toward a page boundary',()=>{
+  const e=environment();e.wheel(10000);e.advance(16);
+  assert.ok(e.window.scrollY<3200);
+  assert.ok(e.wheel(100).defaultPrevented,'the active spring still owns the clamped gesture');
+  for(let i=0;i<150&&e.frames.size;i++)e.advance(16);
+  assert.equal(e.window.scrollY,3200);
+  assert.ok(!e.wheel(100).defaultPrevented,'after settling native boundary handling is restored');
+});
+test('native or already-handled wheel input cancels the spring before the browser takes over',()=>{
+  for(const options of [{cancelable:false},{defaultPrevented:true},{ctrlKey:true},{deltaX:200}]){
+    const e=environment();e.wheel(500);e.advance(16);
+    assert.ok(e.frames.size>0);
+    e.wheel(100,options);
+    assert.equal(e.frames.size,0,'native input must not race an active animation');
+    const nativePosition=e.window.scrollY+80;e.window.scrollY=nativePosition;
+    e.advance(16);assert.equal(e.window.scrollY,nativePosition);
+  }
+});
+test('mixed trackpad bursts stay native until idle, then regain the original glide',()=>{
+  const e=environment();e.wheel(500);e.advance(16);
+  e.wheel(60,{cancelable:false});
+  e.window.scrollY+=60;e.emit('scroll');
+  for(let i=0;i<4;i++){
+    e.advance(30);
+    assert.ok(!e.wheel(15).defaultPrevented);
+    assert.equal(e.frames.size,0);
+  }
+  e.advance(181);
+  assert.ok(e.wheel(100).defaultPrevented);
+  assert.ok(e.frames.size>0);
+});
+
+test('empty wheel events preserve the settling glide',()=>{
+  const e=environment();e.wheel(300);e.advance(16);
+  const previous=e.window.scrollY;e.wheel(0);e.advance(16);
+  assert.ok(e.frames.size>0);assert.ok(e.window.scrollY>previous);
+});
+test('the site motion control cancels a glide and leaves wheel input native until resumed',()=>{
+  const e=environment();e.wheel(500);e.advance(16);e.pause();
+  const position=e.window.scrollY;e.advance(1000);
+  assert.equal(e.frames.size,0);assert.equal(e.window.scrollY,position);
+  assert.ok(!e.wheel(100).defaultPrevented);e.pause(false);
+  assert.ok(e.wheel(100).defaultPrevented);assert.ok(e.frames.size>0);
+  assert.ok(!environment({paused:true}).wheel(100).defaultPrevented);
+});
+test('public and private glides adapt when Chrome scroll precision differs from display pixel ratio',()=>{
+  const privateSource=fs.readFileSync(require('node:path').join(__dirname,'../lib/household/ui/site-motion.js'),'utf8');
+  for(const controllerSource of [source,privateSource])for(const pixelRatio of [2,3])for(const delta of [20.5,-35.7]){
+    const e=environment({controllerSource,quantized:true,pixelRatio,renderPixelRatio:1});e.wheel(delta);
+    for(let i=0;i<240&&e.frames.size;i++)e.advance(1000/60);
+    assert.equal(e.frames.size,0);assert.equal(e.window.scrollY,Math.round(100+delta));
+    const duplicates=e.scrollWrites.filter((y,i)=>y===(i?e.scrollWrites[i-1]:100)).length;
+    assert.ok(duplicates<=1,'only the first precision-discovery write may round to an unchanged offset');
+    const count=e.scrollWrites.length;e.wheel(-delta);
+    for(let i=0;i<240&&e.frames.size;i++)e.advance(1000/60);
+    for(let i=count;i<e.scrollWrites.length;i++)assert.notEqual(e.scrollWrites[i],e.scrollWrites[i-1],'known CSS-pixel precision must not produce duplicate writes');
+  }
 });
