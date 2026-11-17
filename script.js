@@ -1072,7 +1072,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!this.elements.backToTopButton) return;
             this.elements.backToTopButton.addEventListener("click", (event) => {
                 event.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                if (window.siteScroll) window.siteScroll.scrollTo(0);
+                else window.scrollTo({ top: 0, behavior: this.prefersReducedMotion.matches ? "instant" : "smooth" });
             });
         },
 
@@ -1181,10 +1182,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.getBoundingClientRect().top + window.scrollY - this.getHeaderOffset()
             );
 
-            window.scrollTo({
-                top,
-                behavior: "smooth",
-            });
+            if (window.siteScroll) window.siteScroll.scrollTo(top);
+            else window.scrollTo({top, behavior:this.prefersReducedMotion.matches ? "instant" : "smooth"});
         },
 
         updateActiveLink() {

@@ -1,7 +1,12 @@
 /* Shared document motion; the browser keeps real pages, history and scroll positions. */
 @view-transition { navigation:auto; }
 html { --site-motion-ready:1; }
-html.physics-scrolling { scroll-behavior:auto !important; }
+/* Companion rules from leon-blakk-web; Lenis owns desktop wheel smoothing. */
+html.lenis, html.lenis body { height:auto; }
+.lenis.lenis-smooth { scroll-behavior:auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior:contain; }
+.lenis.lenis-stopped { overflow:hidden; }
+.lenis.lenis-scrolling iframe { pointer-events:none; }
 ::view-transition { background:var(--paper,#0b0c0c); }
 ::view-transition-group(root) { animation-duration:850ms; }
 ::view-transition-old(root) {

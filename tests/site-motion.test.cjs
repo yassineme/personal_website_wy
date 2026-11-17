@@ -1,153 +1,101 @@
 'use strict';
-const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const source=fs.readFileSync(require('node:path').join(__dirname,'../site-motion.js'),'utf8');
-function environment({reduced=false,native=false,css=true,quantized=false,pixelRatio=1,renderPixelRatio=pixelRatio,paused=false,controllerSource=source}={}) {
-  let time=0,id=0;const frames=new Map(),timers=new Map(),events=new Map(),assigned=[],scrollWrites=[];
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../site-motion.js'),'utf8');
+function environment({reduced=false,coarse=false,compact=false,paused=false,css=true,native=false,missing=false}={}) {
+  let id=0;const frames=new Map(),timers=new Map(),events=new Map(),instances=[],assigned=[],queries=new Map();
   class Element {
-    constructor(){this.classes=new Set();this.style={overflowY:'visible'};this.scrollHeight=0;this.clientHeight=0;this.parentElement=null;}
-    classList={add:(...xs)=>xs.forEach(x=>this.classes.add(x)),remove:(...xs)=>xs.forEach(x=>this.classes.delete(x)),contains:x=>this.classes.has(x)};
+    constructor(){this.style={overflowY:'visible',scrollMarginTop:'24px'};this.scrollHeight=0;this.clientHeight=0;}
     matches(){return !!this.control;}
-    setAttribute(){}
-    append(node){this.child=node;}
-    remove(){this.removed=true;}
+    setAttribute(){} append(node){this.child=node;} remove(){this.removed=true;}
+    getBoundingClientRect(){return {top:400};}
   }
-  const root=new Element(),body=new Element();root.scrollHeight=4000;
-  const motion={matches:reduced,addEventListener(_,fn){this.change=fn;}};
-  const control={paused,handlers:new Map(),getAttribute(){return String(this.paused);},addEventListener(name,fn){this.handlers.set(name,fn);}};
+  const root=new Element(),body=new Element(),target=new Element();
+  const control={getAttribute:()=>String(paused)};
   const listen=(name,fn)=>{const list=events.get(name)||[];list.push(fn);events.set(name,list);};
-  const document={documentElement:root,body,hidden:false,querySelector:()=>control,createElement:()=>new Element(),addEventListener:listen};
-  const location={href:'https://example.com/blog',origin:'https://example.com',pathname:'/blog',search:'',assign:url=>assigned.push(url)};
-  const storage=new Map();
-  const window={scrollY:100,innerHeight:800,devicePixelRatio:pixelRatio,addEventListener:listen,scrollTo({top}){this.scrollY=quantized?Math.round(top*renderPixelRatio)/renderPixelRatio:top;scrollWrites.push(this.scrollY);}};
+  const document={documentElement:root,body,hidden:false,querySelector:()=>control,getElementById:id=>id==='note'?target:null,createElement:()=>new Element(),addEventListener:listen};
+  const location={href:'https://example.com/blog',origin:'https://example.com',pathname:'/blog',search:'',hash:'',assign:url=>assigned.push(url)};
+  const window={scrollY:100,innerHeight:800,addEventListener:listen,scrollTo(options){this.lastScroll=options;}};
+  class Lenis {
+    constructor(options){this.options=options;this.calls=[];instances.push(this);}
+    raf(time){this.lastTime=time;}
+    scrollTo(...args){this.calls.push(args);}
+    destroy(){this.destroyed=true;}
+  }
+  if(!missing)window.Lenis=Lenis;
   if(native){window.onpagereveal=null;window.CSSViewTransitionRule=class {};}
-  const ctx={window,document,location,Element,URL,Date,JSON,Math,matchMedia:()=>motion,getComputedStyle:element=>({...element.style,getPropertyValue:()=>css?'1':''}),performance:{now:()=>time},sessionStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},setTimeout(fn,delay){const key=++id;timers.set(key,{fn,at:time+delay});return key;},clearTimeout:key=>timers.delete(key),requestAnimationFrame(fn){const key=++id;frames.set(key,fn);return key;},cancelAnimationFrame:key=>frames.delete(key)};
-  vm.runInNewContext(controllerSource,ctx);
-  function emit(name,event={}){for(const fn of events.get(name)||[])fn(event);}
-  function advance(ms){time+=ms;const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn(time));for(const [key,timer]of [...timers])if(timer.at<=time){timers.delete(key);timer.fn();}}
-  function wheel(deltaY,options={}){const event={deltaY,deltaX:0,deltaMode:0,cancelable:true,target:body,preventDefault(){this.defaultPrevented=true;},...options};emit('wheel',event);return event;}
-  function click(href,options={}){const link={href,target:'',hasAttribute:()=>false,relList:{contains:()=>false}};const event={button:0,target:{closest:()=>link},preventDefault(){this.defaultPrevented=true;},...options};emit('click',event);return event;}
-  return {window,root,body,motion,document,frames,timers,assigned,storage,scrollWrites,emit,advance,wheel,click,Element,pause(value=true){control.paused=value;control.handlers.get('click')?.();}};
+  let mutation;
+  const context={window,document,location,Element,URL,Date,JSON,Math,parseFloat,
+    history:{pushState(_,__,hash){location.hash=hash;}},
+    matchMedia(query){const q={matches:query.includes('reduced-motion')?reduced:query.includes('coarse')?coarse:compact,addEventListener(_,fn){(this.listeners??=[]).push(fn);}};queries.set(query,q);return q;},
+    getComputedStyle:element=>({...element.style,getPropertyValue:()=>css?'1':''}),
+    MutationObserver:class {constructor(fn){mutation=fn;}observe(){}},
+    sessionStorage:{getItem:()=>null,setItem(){},removeItem(){}},
+    setTimeout(fn){const key=++id;timers.set(key,fn);return key;},clearTimeout:key=>timers.delete(key),
+    requestAnimationFrame(fn){const key=++id;frames.set(key,fn);return key;},cancelAnimationFrame:key=>frames.delete(key)};
+  vm.runInNewContext(source,context);
+  return {window,root,body,document,target,instances,frames,assigned,queries,mutation:()=>mutation?.(),
+    emit(name,event={}){for(const fn of events.get(name)||[])fn(event);},
+    advance(){const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn(16));},
+    pause(value){paused=value;mutation();},
+    click(href,options={}){const link={href,target:'',hasAttribute:()=>false,relList:{contains:()=>false}};const event={button:0,target:{closest:()=>link},preventDefault(){this.defaultPrevented=true;},...options};this.emit('click',event);return event;},
+    timer(){const [key,fn]=timers.entries().next().value;timers.delete(key);fn();},Element};
 }
-test('spring converges without overshooting at 60 and 120 Hz and stops scheduling frames',()=>{
-  const positions=[];
-  for(const dt of [1000/60,1000/120]){
-    const e=environment();assert.ok(e.wheel(600).defaultPrevented);
-    e.advance(dt);assert.ok(e.window.scrollY>100&&e.window.scrollY<700);
-    for(let t=dt;t<2000;t+=dt){e.advance(dt);assert.ok(e.window.scrollY<=700);}
-    assert.equal(e.window.scrollY,700);assert.equal(e.frames.size,0);assert.ok(!e.root.classes.has('physics-scrolling'));positions.push(e.window.scrollY);
-  }
-  assert.equal(positions[0],positions[1]);
+test('uses the photography site’s exact Lenis settings and exponential easing',()=>{
+  const e=environment(),o=e.instances[0].options;
+  assert.equal(o.duration,1.5);assert.equal(o.orientation,'vertical');assert.equal(o.gestureOrientation,'vertical');
+  assert.equal(o.smoothWheel,true);assert.equal(o.wheelMultiplier,1);assert.equal(o.smoothTouch,false);assert.equal(o.touchMultiplier,2);
+  for(const t of [0,.1,.5,1])assert.equal(o.easing(t),Math.min(1,1.001-Math.pow(2,-10*t)));
+  assert.equal(e.frames.size,1);e.advance();assert.equal(e.instances[0].lastTime,16);assert.equal(e.frames.size,1);
 });
-test('reversals and document boundaries settle within the native scroll range',()=>{
-  const e=environment();e.wheel(500);e.advance(50);e.wheel(-1000);
-  for(let i=0;i<100;i++){e.advance(16);assert.ok(e.window.scrollY>=0&&e.window.scrollY<=3200);}
-  assert.equal(e.window.scrollY,0);e.wheel(100000);
-  for(let i=0;i<130;i++)e.advance(16);
-  assert.equal(e.window.scrollY,3200);
+test('reduced motion, paused motion, compact touch, missing CSS or library retain native scrolling',()=>{
+  for(const options of [{reduced:true},{paused:true},{compact:true,coarse:true},{css:false},{missing:true}])assert.equal(environment(options).instances.length,0);
+  assert.equal(environment({compact:true}).instances.length,1);
+  assert.equal(environment({coarse:true}).instances.length,1);
 });
-test('scrolling retains a gentle tail after release and slows progressively into rest',()=>{
-  const e=environment();e.wheel(600);
-  for(let i=0;i<36;i++)e.advance(1000/60);
-  const remaining=700-e.window.scrollY;
-  assert.ok(remaining>20&&remaining<70,'the glide should still be visibly settling at 600ms');
-  assert.ok(e.frames.size>0);
-  const steps=[];
-  // Compare visible intervals; adjacent frames can share one device pixel.
-  for(let i=0;i<4;i++){const before=e.window.scrollY;for(let j=0;j<6;j++)e.advance(1000/60);steps.push(e.window.scrollY-before);}
-  for(let i=1;i<steps.length;i++)assert.ok(steps[i]>0&&steps[i]<steps[i-1]);
-  for(let i=0;i<120;i++)e.advance(1000/60);
-  assert.equal(e.window.scrollY,700);assert.equal(e.frames.size,0);
+test('nested panels, native regions, inputs and dialogs keep their own wheel input',()=>{
+  const e=environment(),prevent=e.instances[0].options.prevent;
+  const panel=new e.Element();panel.style.overflowY='auto';panel.scrollHeight=900;panel.clientHeight=300;
+  assert.equal(prevent(panel),true);assert.equal(prevent(e.body),false);
+  const control=new e.Element();control.control=true;assert.equal(prevent(control),true);
 });
-test('reduced motion, zoom, nested scrolling, controls, handled wheel and locked pages retain native input',()=>{
-  const e=environment();const panel=new e.Element();panel.style.overflowY='auto';panel.scrollHeight=900;panel.clientHeight=300;
-  const control=new e.Element();control.control=true;
-  for(const options of [{ctrlKey:true},{shiftKey:true},{deltaX:500},{defaultPrevented:true},{target:panel},{target:control}])assert.equal(e.wheel(100,options).defaultPrevented,options.defaultPrevented);
-  e.body.style.overflowY='hidden';assert.ok(!e.wheel(100).defaultPrevented);
-  assert.ok(!environment({reduced:true}).wheel(100).defaultPrevented);
-  assert.ok(!environment({css:false}).wheel(100).defaultPrevented);
+test('pause, page locks, visibility, media changes and restored history cleanly restart one instance',()=>{
+  const e=environment();e.pause(true);assert.ok(e.instances[0].destroyed);assert.equal(e.frames.size,0);
+  e.pause(false);assert.equal(e.instances.length,2);e.mutation();assert.equal(e.instances.length,2);
+  e.body.style.overflowY='hidden';e.mutation();assert.ok(e.instances[1].destroyed);assert.equal(e.frames.size,0);
+  e.body.style.overflowY='visible';e.mutation();assert.equal(e.instances.length,3);
+  e.document.hidden=true;e.emit('visibilitychange');assert.equal(e.frames.size,0);
+  e.document.hidden=false;e.emit('visibilitychange');assert.equal(e.instances.length,4);
+  const q=e.queries.get('(prefers-reduced-motion: reduce)');q.matches=true;q.listeners.forEach(fn=>fn());assert.equal(e.frames.size,0);
+  q.matches=false;q.listeners.forEach(fn=>fn());assert.equal(e.instances.length,5);
+  e.emit('pagehide');assert.equal(e.frames.size,0);e.emit('pageshow',{persisted:true});assert.equal(e.frames.size,1);
 });
-test('keyboard, pointer, external scroll, motion preference and restored history stop momentum',()=>{
-  for(const action of [e=>e.emit('keydown',{key:'PageDown'}),e=>e.emit('pointerdown'),e=>{e.window.scrollY=900;e.emit('scroll');},e=>{e.motion.matches=true;e.motion.change();},e=>e.emit('pageshow',{persisted:true})]){
-    const e=environment();e.wheel(500);e.advance(16);action(e);const position=e.window.scrollY;e.advance(1000);assert.equal(e.frames.size,0);assert.equal(e.window.scrollY,position);
+test('anchors share the same easing, preserve sticky-header offset and update the URL',()=>{
+  const e=environment({native:true});assert.ok(e.click('https://example.com/blog#note').defaultPrevented);
+  const [target,options]=e.instances[0].calls.at(-1);assert.equal(target,e.target);assert.equal(options.offset,-24);assert.equal(options.duration,1.5);assert.equal(e.window.lastScroll,undefined);
+  e.window.siteScroll.scrollTo(0);assert.equal(e.instances[0].calls.at(-1)[0],0);
+  const mobile=environment({compact:true});mobile.window.siteScroll.scrollTo(0);assert.equal(mobile.instances[0].calls.at(-1)[1].duration,.65);
+  const reduced=environment({reduced:true});reduced.window.siteScroll.scrollTo(0);assert.equal(reduced.window.lastScroll.behavior,'instant');
+});
+test('explicit native input interrupts a running anchor glide',()=>{
+  for(const action of [e=>e.emit('keydown',{key:'PageDown'}),e=>e.emit('pointerdown'),e=>e.emit('touchstart'),e=>e.emit('popstate')]){
+    const e=environment();action(e);const [target,options]=e.instances[0].calls.at(-1);assert.equal(target,100);assert.equal(options.immediate,true);
   }
 });
-test('fallback only delays ordinary internal page navigation and restores a cancelled departure',()=>{
+test('page transitions leave external links, anchors and modified clicks native',()=>{
   const e=environment();
-  for(const href of ['https://external.com/about','https://example.com/blog#note','https://example.com/assets/file.pdf','https://example.com/api/contact'])assert.ok(!e.click(href).defaultPrevented);
+  for(const href of ['https://external.com/about','https://example.com/blog#missing','https://example.com/assets/file.pdf','https://example.com/api/contact'])assert.ok(!e.click(href).defaultPrevented);
   assert.ok(!e.click('https://example.com/about',{metaKey:true}).defaultPrevented);
-  assert.ok(e.click('https://example.com/about').defaultPrevented);assert.equal(e.assigned.length,0);
-  e.advance(360);assert.equal(e.assigned[0],'https://example.com/about');assert.ok(e.storage.has('ywm-page-arrival'));
-  e.advance(1500);assert.ok(e.body.child.removed);
-  const native=environment({native:true});assert.ok(!native.click('https://example.com/about').defaultPrevented);
+  assert.ok(e.click('https://example.com/about').defaultPrevented);assert.equal(e.frames.size,0);e.timer();assert.equal(e.assigned[0],'https://example.com/about');
+  e.timer();assert.ok(e.body.child.removed);assert.equal(e.frames.size,1);
+  assert.ok(!environment({native:true}).click('https://example.com/about').defaultPrevented);
 });
-
-test('pixel-rounded browsers settle without repeatedly writing the same final offsets',()=>{
-  for(const pixelRatio of [1,2,3])for(const dt of [1000/60,1000/120])for(const delta of [600.25,-35.7,1.2,-1.2]){
-    const e=environment({quantized:true,pixelRatio});e.wheel(delta);
-    for(let i=0;i<240&&e.frames.size;i++)e.advance(dt);
-    assert.equal(e.frames.size,0,'the subpixel tail must finish');
-    assert.equal(e.window.scrollY,Math.round((100+delta)*pixelRatio)/pixelRatio);
-    for(let i=1;i<e.scrollWrites.length;i++){
-      assert.notEqual(e.scrollWrites[i],e.scrollWrites[i-1],'do not rewrite a pixel-rounded scroll position');
-      assert.ok(delta>0?e.scrollWrites[i]>=e.scrollWrites[i-1]:e.scrollWrites[i]<=e.scrollWrites[i-1],'settling must not reverse direction');
-    }
+test('every shared-motion page loads the pinned local library before its controller',()=>{
+  const root=path.join(__dirname,'..');
+  for(const file of [...fs.readdirSync(root).filter(f=>f.endsWith('.html')), ...fs.readdirSync(path.join(root,'blog')).filter(f=>f.endsWith('.html')).map(f=>'blog/'+f)]){
+    const html=fs.readFileSync(path.join(root,file),'utf8'),controller=html.indexOf('<script src="/site-motion.js"');
+    if(controller<0)continue;
+    const vendor=html.indexOf('<script src="/assets/vendor/lenis-1.1.18.min.js"');assert.ok(vendor>=0&&vendor<controller,file);
   }
-});
-test('repeated wheel input cannot natively jump ahead of a glide toward a page boundary',()=>{
-  const e=environment();e.wheel(10000);e.advance(16);
-  assert.ok(e.window.scrollY<3200);
-  assert.ok(e.wheel(100).defaultPrevented,'the active spring still owns the clamped gesture');
-  for(let i=0;i<150&&e.frames.size;i++)e.advance(16);
-  assert.equal(e.window.scrollY,3200);
-  assert.ok(!e.wheel(100).defaultPrevented,'after settling native boundary handling is restored');
-});
-test('native or already-handled wheel input cancels the spring before the browser takes over',()=>{
-  for(const options of [{cancelable:false},{defaultPrevented:true},{ctrlKey:true},{deltaX:200}]){
-    const e=environment();e.wheel(500);e.advance(16);
-    assert.ok(e.frames.size>0);
-    e.wheel(100,options);
-    assert.equal(e.frames.size,0,'native input must not race an active animation');
-    const nativePosition=e.window.scrollY+80;e.window.scrollY=nativePosition;
-    e.advance(16);assert.equal(e.window.scrollY,nativePosition);
-  }
-});
-test('mixed trackpad bursts stay native until idle, then regain the original glide',()=>{
-  const e=environment();e.wheel(500);e.advance(16);
-  e.wheel(60,{cancelable:false});
-  e.window.scrollY+=60;e.emit('scroll');
-  for(let i=0;i<4;i++){
-    e.advance(30);
-    assert.ok(!e.wheel(15).defaultPrevented);
-    assert.equal(e.frames.size,0);
-  }
-  e.advance(181);
-  assert.ok(e.wheel(100).defaultPrevented);
-  assert.ok(e.frames.size>0);
-});
-
-test('empty wheel events preserve the settling glide',()=>{
-  const e=environment();e.wheel(300);e.advance(16);
-  const previous=e.window.scrollY;e.wheel(0);e.advance(16);
-  assert.ok(e.frames.size>0);assert.ok(e.window.scrollY>previous);
-});
-test('the site motion control cancels a glide and leaves wheel input native until resumed',()=>{
-  const e=environment();e.wheel(500);e.advance(16);e.pause();
-  const position=e.window.scrollY;e.advance(1000);
-  assert.equal(e.frames.size,0);assert.equal(e.window.scrollY,position);
-  assert.ok(!e.wheel(100).defaultPrevented);e.pause(false);
-  assert.ok(e.wheel(100).defaultPrevented);assert.ok(e.frames.size>0);
-  assert.ok(!environment({paused:true}).wheel(100).defaultPrevented);
-});
-test('public and private glides adapt when Chrome scroll precision differs from display pixel ratio',()=>{
-  const privateSource=fs.readFileSync(require('node:path').join(__dirname,'../lib/household/ui/site-motion.js'),'utf8');
-  for(const controllerSource of [source,privateSource])for(const pixelRatio of [2,3])for(const delta of [20.5,-35.7]){
-    const e=environment({controllerSource,quantized:true,pixelRatio,renderPixelRatio:1});e.wheel(delta);
-    for(let i=0;i<240&&e.frames.size;i++)e.advance(1000/60);
-    assert.equal(e.frames.size,0);assert.equal(e.window.scrollY,Math.round(100+delta));
-    const duplicates=e.scrollWrites.filter((y,i)=>y===(i?e.scrollWrites[i-1]:100)).length;
-    assert.ok(duplicates<=1,'only the first precision-discovery write may round to an unchanged offset');
-    const count=e.scrollWrites.length;e.wheel(-delta);
-    for(let i=0;i<240&&e.frames.size;i++)e.advance(1000/60);
-    for(let i=count;i<e.scrollWrites.length;i++)assert.notEqual(e.scrollWrites[i],e.scrollWrites[i-1],'known CSS-pixel precision must not produce duplicate writes');
-  }
+  const {ROOT_FILES}=require('../scripts/build-public.cjs');assert.ok(ROOT_FILES.includes('site-motion.js'));
+  assert.match(fs.readFileSync(path.join(root,'assets/vendor/lenis-1.1.18.min.js'),'utf8'),/1\.1\.18/);
 });

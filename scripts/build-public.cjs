@@ -53,7 +53,7 @@ async function buildPublic(root=path.resolve(__dirname,'..')) {
   try {
     for(const name of ROOT_FILES)await copy(name,name==='index.html');
     for(const name of DATA_FILES)await copy('data/'+name);
-    await walk('assets',name=>ASSET_EXTENSIONS.has(path.extname(name).toLowerCase()) || name==='assets/cv-locked-preview.html' || ['assets/vendor/d3.v7.min.js','assets/vendor/topojson-client.min.js','assets/vendor/d3.LICENSE','assets/vendor/topojson-client.LICENSE','assets/map-data/world-atlas.LICENSE'].includes(name) || name.startsWith('assets/fonts/LICENSE-')&&name.endsWith('.txt'));
+    await walk('assets',name=>ASSET_EXTENSIONS.has(path.extname(name).toLowerCase()) || name==='assets/cv-locked-preview.html' || ['assets/vendor/lenis-1.1.18.min.js','assets/vendor/lenis.LICENSE','assets/vendor/d3.v7.min.js','assets/vendor/topojson-client.min.js','assets/vendor/d3.LICENSE','assets/vendor/topojson-client.LICENSE','assets/map-data/world-atlas.LICENSE'].includes(name) || name.startsWith('assets/fonts/LICENSE-')&&name.endsWith('.txt'));
     await walk('blog',name=>['.html','.xml'].includes(path.extname(name).toLowerCase()));
     await copy('content/posts.json');
     await walk('content/posts',name=>path.extname(name).toLowerCase()==='.html');

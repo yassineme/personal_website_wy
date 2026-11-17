@@ -41,123 +41,108 @@
     event.preventDefault();
     if (destination) return;
     destination = url.href;
-    stopScroll();
+    destroyScroll();
     makeCurtain('is-closing');
     navigationTimer = setTimeout(() => {
       const next = destination;
       try { sessionStorage.setItem(KEY, JSON.stringify({url:next, time:Date.now()})); } catch (_) { /* Navigate without a remembered arrival. */ }
       location.assign(next);
       // Recover if a browser extension or cancelled beforeunload keeps this page open.
-      navigationTimer = setTimeout(resetCurtain, 1500);
+      navigationTimer = setTimeout(() => { resetCurtain(); synchronizeScroll(); }, 1500);
     }, 360);
   });
 
-  // Exact solution of a critically damped spring: stable across refresh rates.
-  let frame = 0, previousTime = 0, position = window.scrollY, target = position, velocity = 0, written = position;
-  const limit = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  const clamp = value => Math.max(0, Math.min(limit(), value));
+  // Match leon-blakk-web: Lenis 1.1.18, identical duration, easing and input settings.
+  const coarse = matchMedia('(pointer: coarse)');
+  const compact = matchMedia('(max-width: 1099px)');
+  const easing = t => Math.min(1, 1.001 - Math.pow(2, -10 * t));
+  let lenis = null, frame = 0, pageActive = true;
+  const locked = () => [root, document.body].some(element =>
+    /hidden|clip/.test(getComputedStyle(element).overflowY));
   function stopScroll() {
+    if (lenis) lenis.scrollTo(window.scrollY, {immediate:true, force:true});
+  }
+  function destroyScroll() {
     cancelAnimationFrame(frame);
     frame = 0;
-    velocity = 0;
-    position = target = written = window.scrollY;
-    root.classList.remove('physics-scrolling');
+    lenis?.destroy();
+    lenis = null;
   }
-  function locked() {
-    return [root, document.body].some(element => /hidden|clip/.test(getComputedStyle(element).overflowY));
-  }
-  let scrollStep = 1, scrollPixelRatio = 0;
-  function pixelStep() {
-    const ratio = Math.max(1, window.devicePixelRatio || 1);
-    if (ratio !== scrollPixelRatio) { scrollPixelRatio = ratio; scrollStep = 1 / ratio; }
-    return scrollStep;
-  }
-  function writeScroll(value, step) {
-    const next = clamp(Math.round(value / step) * step);
-    // Do not keep writing fractional offsets that render as the same device pixel.
-    if (Math.abs(next - written) < step / 2) return;
-    window.scrollTo({top:next, behavior:'instant'});
-    written = window.scrollY;
-    // Some Chrome configurations round to CSS pixels even on Retina displays.
-    if (step < 1 && Math.abs(written - next) > step / 2 + .001) scrollStep = 1;
-  }
-  function tick(now) {
-    if (reduced.matches || motionPaused() || document.hidden || locked()) return stopScroll();
-    const dt = Math.min((now - previousTime) / 1000, .05);
-    previousTime = now;
-    target = clamp(target);
-    // A lower spring frequency gives the glide a long, gentle settling tail.
-    const omega = 8, displacement = position - target;
-    const coefficient = velocity + omega * displacement;
-    const decay = Math.exp(-omega * dt);
-    position = target + (displacement + coefficient * dt) * decay;
-    velocity = (velocity - omega * coefficient * dt) * decay;
-    const step = pixelStep();
-    if (Math.abs(position - target) <= step && Math.abs(velocity) <= 8 * step) {
-      writeScroll(target, step);
-      return stopScroll();
-    }
-    writeScroll(position, step);
-    frame = requestAnimationFrame(tick);
-  }
-  let nativeWheelUntil = 0;
-  window.addEventListener('wheel', event => {
-    if (!event.deltaX && !event.deltaY) return;
-    const now = performance.now();
-    // Keep a mixed-cancelability burst under native ownership until input is idle.
-    if (!event.cancelable || now < nativeWheelUntil) {
-      nativeWheelUntil = now + 180;
-      stopScroll();
+  function synchronizeScroll() {
+    if (!pageActive || reduced.matches || motionPaused() || document.hidden || destination || locked() ||
+        (compact.matches && coarse.matches) || typeof window.Lenis !== 'function') {
+      destroyScroll();
       return;
     }
-    if (event.defaultPrevented || reduced.matches || motionPaused() || destination || event.ctrlKey || event.metaKey || event.shiftKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY) || locked()) {
-      // Release the spring before the browser or another control moves the page.
-      stopScroll();
-      return;
+    if (lenis) return;
+    lenis = new window.Lenis({
+      duration: 1.5,
+      easing,
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      // Preserve the personal site's independently scrollable panels and controls.
+      prevent: node => node instanceof Element && (
+        node.matches('input,textarea,select,[contenteditable]:not([contenteditable="false"]),dialog[open],[data-native-scroll]') ||
+        (/auto|scroll|overlay/.test(getComputedStyle(node).overflowY) && node.scrollHeight > node.clientHeight + 1)
+      ),
+    });
+    function raf(time) {
+      if (!lenis) return;
+      lenis.raf(time);
+      frame = requestAnimationFrame(raf);
     }
-    // Scrollable panels, dialogs, form controls and galleries own their input.
-    for (let node = event.target; node instanceof Element && node !== document.body && node !== root; node = node.parentElement) {
-      if (node.matches('input,textarea,select,[contenteditable]:not([contenteditable="false"]),dialog[open],[data-native-scroll]') || (/auto|scroll|overlay/.test(getComputedStyle(node).overflowY) && node.scrollHeight > node.clientHeight + 1)) {
-        stopScroll();
-        return;
-      }
+    frame = requestAnimationFrame(raf);
+  }
+  function scrollTo(target, options = {}) {
+    if (lenis) {
+      lenis.scrollTo(target, {duration:compact.matches ? 0.65 : 1.5, easing, ...options});
+    } else if (typeof target === 'number') {
+      window.scrollTo({top:target + (options.offset || 0), behavior:reduced.matches || motionPaused() ? 'instant' : 'smooth'});
+    } else {
+      const top = target.getBoundingClientRect().top + window.scrollY + (options.offset || 0);
+      window.scrollTo({top, behavior:reduced.matches || motionPaused() ? 'instant' : 'smooth'});
     }
-    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
-    if (!frame) position = target = written = window.scrollY;
-    const next = clamp(target + delta);
-    if (next === target) {
-      // The target may be at the boundary before the visible glide reaches it.
-      if (frame) event.preventDefault();
-      return;
-    }
+  }
+  window.siteScroll = {scrollTo};
+  document.addEventListener('click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest?.('a[href]');
+    if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+    const url = new URL(link.href, location.href);
+    if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search || !url.hash) return;
+    let target;
+    try { target = document.getElementById(decodeURIComponent(url.hash.slice(1))); } catch (_) { return; }
+    if (!target) return;
     event.preventDefault();
-    target = next;
-    if (!frame) {
-      root.classList.add('physics-scrolling');
-      previousTime = performance.now();
-      frame = requestAnimationFrame(tick);
-    }
-  }, {passive:false});
-  motionControl?.addEventListener('click', stopScroll);
-  // Explicit input and native/programmatic jumps immediately take control from the spring.
-  window.addEventListener('scroll', () => {
-    if (frame && Math.abs(window.scrollY - written) > 2) stopScroll();
-  }, {passive:true});
+    scrollTo(target, {offset:-(parseFloat(getComputedStyle(target).scrollMarginTop) || 0)});
+    if (location.hash !== url.hash) history.pushState(null, '', url.hash);
+  });
+  // Explicit input interrupts an anchor glide; ordinary wheel gestures stay with Lenis.
   window.addEventListener('pointerdown', stopScroll, {passive:true});
   window.addEventListener('touchstart', stopScroll, {passive:true});
   window.addEventListener('keydown', event => {
     if (['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Tab','Escape'].includes(event.key)) stopScroll();
   });
-  window.addEventListener('resize', stopScroll);
-  window.addEventListener('pagehide', () => { stopScroll(); resetCurtain(); });
-  window.addEventListener('pageshow', event => { if (event.persisted) { stopScroll(); resetCurtain(); } });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stopScroll(); });
+  const observer = new MutationObserver(synchronizeScroll);
+  observer.observe(root, {attributes:true, attributeFilter:['class','style']});
+  observer.observe(document.body, {attributes:true, attributeFilter:['class','style']});
+  if (motionControl) observer.observe(motionControl, {attributes:true, attributeFilter:['aria-pressed']});
+  window.addEventListener('pagehide', () => { pageActive = false; destroyScroll(); resetCurtain(); });
+  window.addEventListener('pageshow', () => { pageActive = true; resetCurtain(); synchronizeScroll(); });
+  window.addEventListener('resize', synchronizeScroll);
+  window.addEventListener('popstate', stopScroll);
+  document.addEventListener('visibilitychange', synchronizeScroll);
+  for (const query of [reduced, coarse, compact]) query.addEventListener('change', synchronizeScroll);
   reduced.addEventListener('change', () => {
-    stopScroll();
     if (reduced.matches) {
       const next = destination;
       resetCurtain();
       if (next) location.assign(next);
     }
   });
+  synchronizeScroll();
 })();

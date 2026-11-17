@@ -100,8 +100,9 @@ function metadata(html,page,posts) {
 <meta name="twitter:card" content="${page.post||page.route==='/blog'?'summary_large_image':'summary'}"><meta name="twitter:title" content="${title}"><meta name="twitter:description" content="${description}"><meta name="twitter:image" content="${image}">
 <script type="application/ld+json">${JSON.stringify(graphFor(page,posts)).replace(/</g,'\\u003c')}</script>\n`;
   html=html.replace(/<link rel="stylesheet" href="\/site-intro\.css">\s*<script src="\/site-intro\.js"><\/script>\s*/g,'');
+  html=html.replace(/<script src="\/assets\/vendor\/lenis-1\.1\.18\.min\.js" defer><\/script>\s*/g,'');
   html=html.replace(/<link rel="stylesheet" href="\/site-motion\.css">\s*<script src="\/site-motion\.js" defer><\/script>\s*/g,'');
-  return html.replace(/\s*<\/head>/,tags+'<link rel="stylesheet" href="/site-motion.css"><script src="/site-motion.js" defer></script>'+'<link rel="stylesheet" href="/site-intro.css"><script src="/site-intro.js"></script>\n</head>');
+  return html.replace(/\s*<\/head>/,tags+'<link rel="stylesheet" href="/site-motion.css"><script src="/assets/vendor/lenis-1.1.18.min.js" defer></script><script src="/site-motion.js" defer></script>'+'<link rel="stylesheet" href="/site-intro.css"><script src="/site-intro.js"></script>\n</head>');
 }
 async function buildSeo(root=path.resolve(__dirname,'..')) {
   const posts=JSON.parse(await fs.readFile(path.join(root,'content/posts.json'),'utf8'));
