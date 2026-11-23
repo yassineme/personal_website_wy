@@ -1,5 +1,72 @@
 [
   {
+    "slug": "jensen-huang-nvidia-return-trump-markets-ai",
+    "url": "blog/jensen-huang-nvidia-return-trump-markets-ai",
+    "title": "Jensen Huang is back. What did the market just price in?",
+    "seo_title": "Jensen Huang Returns to NVIDIA: Trump, Markets and AI’s Future",
+    "description": "An evidence-led analysis of Jensen Huang’s NVIDIA return, Trump’s influence, the market reaction and the implications for AI investment and corporate governance.",
+    "excerpt": "Why the comeback became compelling, what Washington’s role shows, and how to separate market relief from the long-term AI investment case.",
+    "category": "Strategy",
+    "research_checked": "2026-11-23",
+    "research_cutoff_utc": "2026-11-23T15:16:00Z",
+    "takeaway": "Separate confirmed events, reported market moves and future scenarios when assessing a leadership decision with consequences across the AI economy.",
+    "cta_title": "Connect the AI headlines to your next decision.",
+    "cta_text": "Let’s discuss what changes in the AI ecosystem mean for your organisation’s priorities, dependencies and operating model.",
+    "toc": [
+      [
+        "tldr",
+        "TL;DR"
+      ],
+      [
+        "timeline",
+        "The verified timeline"
+      ],
+      [
+        "unavoidable",
+        "Was the return unavoidable?"
+      ],
+      [
+        "washington",
+        "Trump and the administration"
+      ],
+      [
+        "market-reaction",
+        "The reported market reaction"
+      ],
+      [
+        "short-term",
+        "Short-term implications"
+      ],
+      [
+        "long-term",
+        "Longer-term scenarios"
+      ],
+      [
+        "ai-development",
+        "Why AI development is affected"
+      ],
+      [
+        "governance",
+        "The governance test"
+      ],
+      [
+        "historical",
+        "The historical significance"
+      ],
+      [
+        "watch-next",
+        "What to watch next"
+      ]
+    ],
+    "date_published": "2026-11-23",
+    "date_modified": "2026-11-23",
+    "body": "jensen-huang-nvidia-return-trump-markets-ai.html",
+    "number": "06",
+    "share_actions": true,
+    "featured": true,
+    "cta_subject": "Discuss AI ecosystem dependencies"
+  },
+  {
     "slug": "ai-transformation-agentic-ai-industrial-work",
     "url": "blog/ai-transformation-agentic-ai-industrial-work",
     "title": "AI is changing hiring. Transformation has to change work.",
@@ -54,7 +121,7 @@
     "body": "ai-transformation-agentic-ai-industrial-work.html",
     "number": "05",
     "share_actions": true,
-    "featured": true,
+    "featured": false,
     "cta_subject": "Discuss AI transformation"
   },
   {
@@ -116,7 +183,8 @@
     "share_actions": true,
     "cta_title": "Choose a useful first AI connection.",
     "cta_text": "Let’s discuss the workflow, access and evidence your next AI experiment needs.",
-    "cta_subject": "Discuss MCP and AI workflows"
+    "cta_subject": "Discuss MCP and AI workflows",
+    "featured": false
   },
   {
     "slug": "ai-roadmap-prioritisation",
@@ -159,7 +227,8 @@
         "working-sheet",
         "Use the working frame"
       ]
-    ]
+    ],
+    "featured": false
   },
   {
     "slug": "ai-adoption-beyond-pilots",
@@ -202,7 +271,8 @@
         "review",
         "Run an adoption review"
       ]
-    ]
+    ],
+    "featured": false
   },
   {
     "slug": "genai-operating-model",
@@ -241,6 +311,7 @@
         "next-meeting",
         "Your next leadership meeting"
       ]
-    ]
+    ],
+    "featured": false
   }
 ]
