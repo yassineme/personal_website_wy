@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = 'https://www.wyassine.com/'
 AUTHOR = 'Yassine W. Medjati'
 E = escape
+ARROW = '<svg class="ui-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" style="display:inline-block;vertical-align:-.125em;flex:none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>'
 POSTS = json.loads((ROOT/'content/posts.json').read_text())
 for p in POSTS:
     p['body_html'] = (ROOT/'content/posts'/p['body']).read_text()
@@ -62,13 +63,13 @@ def head(title,description,url,prefix='',graph=None,article=False):
   <link rel="stylesheet" href="{prefix}ai-signals.css">
   <script src="{prefix}data/ai-signals-snapshot.js" defer></script>
   <script src="{prefix}signals-core.js" defer></script>
-  <script src="{prefix}signals-reader.js" defer></script>
-  <script src="{prefix}ai-signals.js" defer></script>
+  <script src="{prefix}signals-reader.js?v=20261029-icons-2" defer></script>
+  <script src="{prefix}ai-signals.js?v=20261029-icons-2" defer></script>
   <link rel="stylesheet" href="{prefix}privacy.css">
   <script src="{prefix}site-config.js" defer></script>
   <script src="{prefix}privacy-core.js" defer></script>
-  <script src="{prefix}privacy.js" defer></script>
-  <script src="{prefix}booking.js" defer></script>
+  <script src="{prefix}privacy.js?v=20261029-icons-2" defer></script>
+  <script src="{prefix}booking.js?v=20261029-icons-2" defer></script>
 <meta name="referrer" content="strict-origin">
 </head>
 <body class="journal-page{' journal-article' if article else ''}">
@@ -120,14 +121,16 @@ for category in ['All','Strategy','Leadership','Operating models']:
     index+=f'<button class="topic-button" type="button" data-topic="{category}" aria-pressed="{str(category=="All").lower()}">{category}</button>'
 index+='''</div><label class="journal-search"><span>Search</span><input id="journal-search" type="search" placeholder="Find a note…" autocomplete="off"></label></div>
 <div class="journal-list">'''+''.join(row(p) for p in POSTS)+'''</div><div class="empty-state" hidden><p>No notes match that search.</p><button class="clear-filters" type="button">Show all notes</button></div>
-<div class="reading-end"><span class="mono" id="reading-count" role="status" aria-live="polite">3 notes to explore</span><a href="blog/feed.xml">Follow via RSS ↗</a></div></section>'''
+<div class="reading-end"><span class="mono" id="reading-count" role="status" aria-live="polite">'''+str(len(POSTS))+''' notes to explore</span><a href="blog/feed.xml">Follow via RSS ↗</a></div></section>'''
 index+='''<section class="journal-outro" aria-label="Work together"><span class="mono">Continue the conversation</span><a href="/contact">What are you thinking about? <span aria-hidden="true">↗</span></a></section></main>'''+footer()
-(ROOT/'blog.html').write_text(index)
+(ROOT/'blog.html').write_text(index.replace('↗', ARROW))
 
 for p in POSTS:
     prefix=p['prefix']
     graph=[PERSON,{'@type':'Blog','@id':SITE+'blog#blog','url':SITE+'blog','name':'Notes on change'},article_schema(p),{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':SITE},{'@type':'ListItem','position':2,'name':'Blog','item':SITE+'blog'},{'@type':'ListItem','position':3,'name':p['title'],'item':SITE+p['url']}]}]
     s=head(p['seo_title']+' | '+AUTHOR,p['description'],p['url'],prefix,graph,True)
+    if p.get('share_actions'):
+        s=s.replace('</head>',f'<link rel="stylesheet" href="{prefix}article-actions.css"><script src="{prefix}article-actions.js" defer></script>\n</head>')
     s=s.replace('  <meta property="og:type" content="article">',f'  <meta property="og:type" content="article">\n  <meta property="article:published_time" content="{p["date_published"]}">\n  <meta property="article:modified_time" content="{p["date_modified"]}">')
     s+='<div class="article-progress" aria-hidden="true"></div>'+header(prefix)
     s+=f'''<main id="main-content"><nav class="article-breadcrumb mono" aria-label="Breadcrumb"><a href="{prefix}blog">The blog</a><span aria-hidden="true">/</span><span>{E(p['category'])}</span></nav>
@@ -143,8 +146,11 @@ for p in POSTS:
         if related is p:continue
         s+=f'<a class="related-link" href="{prefix}{related["url"]}"><span class="mono">{E(related["category"])} / {related["minutes"]} min read</span><h3>{E(related["title"])}</h3><p>{E(related["excerpt"])}</p><span aria-hidden="true">↗</span></a>'
     s+='</div></section></main>'+footer(prefix)
+    if p.get('share_actions'):
+        actions=(ROOT/'content/article-actions.html').read_text()
+        s=s.replace(' min read</span></div></header>', ' min read</span></div>'+actions+'</header>', 1)
     (ROOT/(p['url']+'.html')).parent.mkdir(parents=True,exist_ok=True)
-    (ROOT/(p['url']+'.html')).write_text(s)
+    (ROOT/(p['url']+'.html')).write_text(s.replace('↗', ARROW))
 
 # RSS and sitemap contain only complete public pages, with stable canonical URLs.
 ET.register_namespace('atom','http://www.w3.org/2005/Atom')
@@ -158,4 +164,4 @@ ET.indent(rss,space='  ');ET.ElementTree(rss).write(ROOT/'blog/feed.xml',encodin
 for p in POSTS:print(p['url'],p['words'],'words,',p['minutes'],'min read')
 import subprocess
 subprocess.run(['node', str(ROOT/'scripts/build-seo.cjs')], check=True)
-print('Built blog index, three articles, RSS and sitemap.')
+print(f'Built blog index, {len(POSTS)} articles, RSS and sitemap.')

@@ -6,6 +6,7 @@ const MARKER='.generated-by-website-build';
 const ROOT_FILES=[
   'contact-page.css',
   'blog-index.css','blog-index.js',
+  'article-actions.css','article-actions.js',
   'photography-portal.css','photography-portal.js',
   'photography.html','photography.css','photography.js','photography-data.js',
   'index.html','about.html','ai-strategy.html','privacy.html','blog.html','signals.html','mydigital-resume.html',

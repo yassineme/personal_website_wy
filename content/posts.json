@@ -1,5 +1,124 @@
 [
   {
+    "slug": "ai-transformation-agentic-ai-industrial-work",
+    "url": "blog/ai-transformation-agentic-ai-industrial-work",
+    "title": "AI is changing hiring. Transformation has to change work.",
+    "seo_title": "AI Transformation, Agentic AI and the Future of Industrial Work",
+    "description": "What AI hiring data shows, how agentic AI changes work, and how large organisations and heavy industry can adapt their workflows, skills and operating models.",
+    "excerpt": "Hiring pressures, industrial change and the decisions large organisations need to make before treating AI as a staffing plan.",
+    "category": "Strategy",
+    "research_checked": "2026-11-23",
+    "takeaway": "Separate the evidence on jobs from the expectations, then redesign a bounded workflow with clear ownership and a credible skills plan.",
+    "cta_title": "Give your AI transformation a clearer next decision.",
+    "cta_text": "Let’s discuss the workflow, ownership and evidence your organisation needs before it scales a new way of working.",
+    "toc": [
+      [
+        "labour-market",
+        "What the hiring evidence shows"
+      ],
+      [
+        "counterevidence",
+        "Where the evidence differs"
+      ],
+      [
+        "hiring-freezes",
+        "Hiring pauses and expectations"
+      ],
+      [
+        "agents",
+        "What agentic AI changes"
+      ],
+      [
+        "heavy-industry",
+        "How heavy industry is shifting"
+      ],
+      [
+        "industrial-example",
+        "A bounded industrial example"
+      ],
+      [
+        "adaptation",
+        "Five organisational changes"
+      ],
+      [
+        "first-90-days",
+        "The first 90 days"
+      ],
+      [
+        "questions",
+        "Questions for leaders"
+      ]
+    ],
+    "date_published": "2026-11-23",
+    "date_modified": "2026-11-23",
+    "body": "ai-transformation-agentic-ai-industrial-work.html",
+    "number": "05",
+    "share_actions": true,
+    "featured": true,
+    "cta_subject": "Discuss AI transformation"
+  },
+  {
+    "slug": "mcp-explained",
+    "url": "blog/mcp-explained",
+    "title": "MCP explained: tools, tokens and where to start.",
+    "seo_title": "MCP Explained: What It Is, Token Costs & Best Servers",
+    "description": "MCP explained: compatible AI products including Codex and Claude, an ELI5 guide, practical uses, token costs, security and five servers to evaluate.",
+    "excerpt": "What Model Context Protocol connects, what access you grant, and how to choose a useful first server.",
+    "category": "Strategy",
+    "research_checked": "2026-11-23",
+    "takeaway": "Choose a first MCP connection around a real task, a clear permission boundary and a result you can check.",
+    "toc": [
+      [
+        "eli5",
+        "ELI5: the simple explanation"
+      ],
+      [
+        "how-it-works",
+        "How MCP works"
+      ],
+      [
+        "compatible-products",
+        "Products that support MCP"
+      ],
+      [
+        "uses",
+        "Practical uses"
+      ],
+      [
+        "comparisons",
+        "MCP, APIs, RAG and agents"
+      ],
+      [
+        "tokens",
+        "Tokens and costs"
+      ],
+      [
+        "implications",
+        "Access and security"
+      ],
+      [
+        "best-servers",
+        "Five servers to evaluate"
+      ],
+      [
+        "start",
+        "Start with one task"
+      ],
+      [
+        "faq",
+        "Frequently asked questions"
+      ]
+    ],
+    "date_published": "2026-11-23",
+    "date_modified": "2026-11-23",
+    "body": "mcp-explained.html",
+    "number": "04",
+    "share_actions": true,
+    "cta_title": "Choose a useful first AI connection.",
+    "cta_text": "Let’s discuss the workflow, access and evidence your next AI experiment needs.",
+    "cta_subject": "Discuss MCP and AI workflows"
+  },
+  {
     "slug": "ai-roadmap-prioritisation",
     "url": "blog/ai-roadmap-prioritisation",
     "title": "An AI roadmap is a sequence of decisions.",
@@ -10,13 +129,37 @@
     "date_published": "2026-10-25",
     "date_modified": "2026-10-25",
     "body": "ai-roadmap.html",
-    "featured": true,
     "number": "01",
     "takeaway": "Leave with a five-decision frame you can use in your next roadmap meeting.",
     "cta_title": "Bring your roadmap into the conversation.",
     "cta_text": "If the priorities are hard to sequence or the ownership is unclear, let’s explore the next decision your team needs to make.",
     "cta_subject": "Discuss our AI roadmap",
-    "toc": [["outcome", "Start with the outcome"], ["readiness", "Test readiness"], ["ownership", "Name the owner"], ["evidence", "Agree the evidence"], ["sequence", "Sequence the decisions"], ["working-sheet", "Use the working frame"]]
+    "toc": [
+      [
+        "outcome",
+        "Start with the outcome"
+      ],
+      [
+        "readiness",
+        "Test readiness"
+      ],
+      [
+        "ownership",
+        "Name the owner"
+      ],
+      [
+        "evidence",
+        "Agree the evidence"
+      ],
+      [
+        "sequence",
+        "Sequence the decisions"
+      ],
+      [
+        "working-sheet",
+        "Use the working frame"
+      ]
+    ]
   },
   {
     "slug": "ai-adoption-beyond-pilots",
@@ -34,7 +177,32 @@
     "cta_title": "Make the next rollout easier to carry.",
     "cta_text": "Let’s discuss where your team’s workflow, product and change approach need to come together.",
     "cta_subject": "Discuss AI adoption with our team",
-    "toc": [["workflow", "Look at the whole task"], ["expectations", "Set useful expectations"], ["feedback", "Close the feedback loop"], ["support", "Make support explicit"], ["evidence", "Measure usefulness"], ["review", "Run an adoption review"]]
+    "toc": [
+      [
+        "workflow",
+        "Look at the whole task"
+      ],
+      [
+        "expectations",
+        "Set useful expectations"
+      ],
+      [
+        "feedback",
+        "Close the feedback loop"
+      ],
+      [
+        "support",
+        "Make support explicit"
+      ],
+      [
+        "evidence",
+        "Measure usefulness"
+      ],
+      [
+        "review",
+        "Run an adoption review"
+      ]
+    ]
   },
   {
     "slug": "genai-operating-model",
@@ -52,6 +220,27 @@
     "cta_title": "Give your AI agenda a clearer operating shape.",
     "cta_text": "For a conversation about priorities, ownership and the next stage of your AI work, reach out directly.",
     "cta_subject": "Discuss a GenAI operating model",
-    "toc": [["priorities", "A common decision frame"], ["workflow", "Choose around the workflow"], ["ownership", "Name ongoing responsibilities"], ["review", "Create a review rhythm"], ["next-meeting", "Your next leadership meeting"]]
+    "toc": [
+      [
+        "priorities",
+        "A common decision frame"
+      ],
+      [
+        "workflow",
+        "Choose around the workflow"
+      ],
+      [
+        "ownership",
+        "Name ongoing responsibilities"
+      ],
+      [
+        "review",
+        "Create a review rhythm"
+      ],
+      [
+        "next-meeting",
+        "Your next leadership meeting"
+      ]
+    ]
   }
 ]

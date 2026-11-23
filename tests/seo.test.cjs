@@ -10,7 +10,7 @@ const pages=inventory(posts);
 async function fixture(t){
  const target=await fs.mkdtemp(path.join(os.tmpdir(),'wyassine-seo-test-'));
  t.after(()=>fs.rm(target,{recursive:true,force:true}));
- for(const item of ['scripts','content','blog-index.css','blog-index.js',...pages.filter(p=>!['about.html','ai-strategy.html'].includes(p.file)).map(p=>p.file),'sitemap.xml']){
+ for(const item of ['scripts','content','blog-index.css','blog-index.js','article-actions.css','article-actions.js',...pages.filter(p=>!['about.html','ai-strategy.html'].includes(p.file)).map(p=>p.file),'sitemap.xml']){
   await fs.mkdir(path.dirname(path.join(target,item)),{recursive:true});
   await fs.cp(path.join(root,item),path.join(target,item),{recursive:true});
  }
@@ -93,4 +93,31 @@ test('public build contains no employer case study or work disclosures',async t=
  const files=[];async function walk(dir){for(const entry of await fs.readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())await walk(file);else files.push(file);}}
  await walk(path.join(target,'public'));
  for(const file of files){assert.ok(!/case-study-airbus/i.test(file),'employer case-study file must not be published');if(/\.(html|xml|json|js|svg|txt)$/.test(file)){const text=await fs.readFile(file,'utf8');assert.ok(!/airbus|20\+ use cases|digital ambassadors|young voices|quality-improvement projects/i.test(text),path.relative(target,file)+' contains employer content');}}
+});
+
+test('approved articles ship public URLs, sharing assets and discovery entries without draft dependencies',async t=>{
+ const target=await fixture(t);
+ execFileSync('python3',[path.join(target,'scripts/build_blog.py')],{cwd:target,stdio:'pipe'});
+ await buildPublic(target);
+ const index=await fs.readFile(path.join(target,'public/blog.html'),'utf8');
+ const feed=await fs.readFile(path.join(target,'public/blog/feed.xml'),'utf8');
+ const sitemap=await fs.readFile(path.join(target,'public/sitemap.xml'),'utf8');
+ for(const slug of ['mcp-explained','ai-transformation-agentic-ai-industrial-work']){
+  const html=await fs.readFile(path.join(target,'public/blog',slug+'.html'),'utf8');
+  assert.ok(html.includes('href="'+SITE+'/blog/'+slug+'"'));
+  assert.ok(!html.includes('/review/'));
+  assert.ok(!html.includes('noindex'));
+  assert.ok(html.includes('href="../article-actions.css"'));
+  assert.ok(html.includes('src="../article-actions.js"'));
+  assert.ok(html.includes('class="article-actions"'));
+  assert.ok(html.includes('https://www.google.com/preferences/source?q=wyassine.com'));
+  const article=jsonld(html)['@graph'].find(node=>node['@type']==='BlogPosting');
+  assert.equal(article.datePublished,'2026-11-23');
+  assert.ok(index.includes('href="blog/'+slug+'"'));
+  assert.ok(feed.includes(SITE+'/blog/'+slug));
+  assert.ok(sitemap.includes('<loc>'+SITE+'/blog/'+slug+'</loc>'));
+ }
+ assert.match(index,new RegExp('>'+posts.length+' notes to explore<'));
+ for(const asset of ['article-actions.css','article-actions.js'])assert.equal(await fs.readFile(path.join(target,'public',asset),'utf8'),await fs.readFile(path.join(root,asset),'utf8'));
+ await assert.rejects(fs.stat(path.join(target,'public/review')),{code:'ENOENT'});
 });

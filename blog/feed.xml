@@ -7,6 +7,22 @@
     <language>en</language>
     <atom:link href="https://www.wyassine.com/blog/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>AI is changing hiring. Transformation has to change work.</title>
+      <link>https://www.wyassine.com/blog/ai-transformation-agentic-ai-industrial-work</link>
+      <guid>https://www.wyassine.com/blog/ai-transformation-agentic-ai-industrial-work.html</guid>
+      <description>Hiring pressures, industrial change and the decisions large organisations need to make before treating AI as a staffing plan.</description>
+      <category>Strategy</category>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>MCP explained: tools, tokens and where to start.</title>
+      <link>https://www.wyassine.com/blog/mcp-explained</link>
+      <guid>https://www.wyassine.com/blog/mcp-explained.html</guid>
+      <description>What Model Context Protocol connects, what access you grant, and how to choose a useful first server.</description>
+      <category>Strategy</category>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>An AI roadmap is a sequence of decisions.</title>
       <link>https://www.wyassine.com/blog/ai-roadmap-prioritisation</link>
       <guid>https://www.wyassine.com/blog/ai-roadmap-prioritisation.html</guid>
