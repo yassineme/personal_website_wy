@@ -1,0 +1,84 @@
+.article-actions {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:24px;
+}
+.article-actions .article-action {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:44px;
+  box-sizing:border-box;
+  padding:10px 15px;
+  border:1px solid var(--muted);
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:inherit;
+  font-size:13px;
+  line-height:1.5;
+  text-decoration:none;
+  cursor:pointer;
+  list-style:none;
+  touch-action:manipulation;
+}
+.article-action::-webkit-details-marker { display:none; }
+.article-action svg { flex:none; }
+.article-actions .article-action:hover,
+.article-share[open] > summary { border-color:var(--ink); background:var(--ink); color:var(--paper); }
+.article-actions :is(a,summary,button,input):focus-visible { outline:2px solid var(--ink); outline-offset:4px; }
+.article-share { position:relative; }
+.article-share-options {
+  position:absolute;
+  z-index:5;
+  top:calc(100% + 8px);
+  left:0;
+  width:min(290px,calc(100vw - 44px));
+  box-sizing:border-box;
+  padding:8px;
+  border:1px solid var(--muted);
+  background:var(--paper);
+  color:var(--ink);
+}
+.article-share-options button {
+  display:block;
+  width:100%;
+  min-height:44px;
+  padding:10px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--ink);
+  font:inherit;
+  font-size:13px;
+  line-height:1.5;
+  text-align:left;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.article-share-options button:hover { background:var(--ink); color:var(--paper); }
+.article-share-status:empty { display:none; }
+.article-share-status,
+.article-share-fallback { display:block; margin:8px 10px; color:var(--muted); font-size:12px; line-height:1.5; }
+.article-share-fallback input {
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  margin-top:8px;
+  padding:8px;
+  border:1px solid var(--muted);
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:inherit;
+}
+.article-share [hidden] { display:none; }
+@media (max-width:480px) {
+  .article-actions { align-items:stretch; }
+  .article-actions > * { flex:1 0 auto; }
+  .article-actions summary { width:100%; }
+}
+@media print { .article-actions { display:none; } }

@@ -1,0 +1,24 @@
+{
+  "status": "local-draft",
+  "slug": "mcp-explained",
+  "url": "blog/mcp-explained",
+  "title": "MCP explained: tools, tokens and where to start.",
+  "seo_title": "MCP Explained: What It Is, Token Costs & Best Servers",
+  "description": "MCP explained: compatible AI products including Codex and Claude, an ELI5 guide, practical uses, token costs, security and five servers to evaluate.",
+  "excerpt": "What Model Context Protocol connects, what access you grant, and how to choose a useful first server.",
+  "category": "Strategy",
+  "research_checked": "2026-11-23",
+  "takeaway": "Choose a first MCP connection around a real task, a clear permission boundary and a result you can check.",
+  "toc": [
+    ["eli5", "ELI5: the simple explanation"],
+    ["how-it-works", "How MCP works"],
+    ["compatible-products", "Products that support MCP"],
+    ["uses", "Practical uses"],
+    ["comparisons", "MCP, APIs, RAG and agents"],
+    ["tokens", "Tokens and costs"],
+    ["implications", "Access and security"],
+    ["best-servers", "Five servers to evaluate"],
+    ["start", "Start with one task"],
+    ["faq", "Frequently asked questions"]
+  ]
+}
