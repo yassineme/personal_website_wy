@@ -76,6 +76,9 @@
 .article-deck { max-width:720px; margin:0; color:var(--journal-muted); font-size:17px; line-height:1.75; }
 .article-byline { display:flex; flex-wrap:wrap; align-items:center; gap:12px 25px; margin-top:27px; color:var(--journal-muted); font-size:11px; }
 .article-byline a { color:var(--ink); text-decoration:none; }
+.article-author { display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
+.article-author-portrait { display:block; width:32px; height:32px; flex:none; overflow:hidden; border:1px solid var(--line); border-radius:50%; }
+.article-author-portrait img { display:block; width:100%; height:100%; object-fit:cover; transform:scale(1.7); transform-origin:50% 27%; }
 .article-layout { display:grid; grid-template-columns:minmax(155px,1fr) minmax(0,3fr); gap:55px; border-top:1px solid var(--journal-rule); padding-top:32px; }
 .article-aside { position:sticky; align-self:start; top:28px; }
 .article-aside h2 { margin:0 0 20px; color:var(--journal-muted); font-size:9px; font-weight:400; }
