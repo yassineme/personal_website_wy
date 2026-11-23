@@ -33,6 +33,7 @@
 .featured-index { font-size:100px; font-weight:400; letter-spacing:-.085em; line-height:1; color:transparent; -webkit-text-stroke:1px var(--muted); align-self:center; }
 .journal-index .featured-copy { padding:0; }
 .journal-index .story-kicker { font-size:9px; }
+.journal-index .row-category { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
 :root[data-typography] .journal-index .featured-copy h2 { font-size:clamp(27px,3.2vw,46px); font-weight:500; line-height:1.1; max-width:670px; margin:18px 0 16px; }
 :root[data-typography] .journal-index .featured-copy p { font-size:13px; line-height:1.7; max-width:510px; margin:0; }
 .journal-index .featured-bottom { flex-direction:column; align-items:flex-end; justify-content:space-between; align-self:stretch; margin:0; font-size:10px; }

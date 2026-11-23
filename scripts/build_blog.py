@@ -95,15 +95,18 @@ def footer(prefix=''):
 def invitation(title,text,subject,eyebrow='From reading to doing'):
     return f'''<section class="journal-invitation" aria-label="Work together"><div><span class="mono">{E(eyebrow)}</span><h2>{title}</h2></div><div class="invitation-copy"><p>{E(text)}</p><a class="solid-link" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a><div style="margin-top:18px"><a class="text-link" href="https://cal.com/yassine-m-zowgc4/15min" data-cal-popup target="_blank" rel="noopener noreferrer">Book a 15-minute call <span class="link-arrow" aria-hidden="true">↗</span></a></div></div></section>'''
 
+def new_label(p):
+    return f'<span class="journal-new" data-published="{E(p["date_published"])}" hidden>New</span>'
+
 def row(p):
     stamp='Updated ' if p['date_published']!=p['date_modified'] else ''
-    return f'''<a class="journal-row" data-category="{E(p['category'])}" data-search="{E(p['seo_title']+' '+p['description'])}" href="{p['url']}"><span class="row-number" aria-hidden="true">{p['number']}</span><span class="row-category mono">{E(p['category'])}</span><div class="row-story"><h3>{E(p['title'])}</h3><p>{E(p['excerpt'])}</p></div><span class="row-meta mono">{stamp}<time datetime="{p['date_modified']}">{p['date_label']}</time><br><span class="meta-time">{p['minutes']} min read</span></span><span class="row-arrow" aria-hidden="true">↗</span></a>'''
+    return f'''<a class="journal-row" data-category="{E(p['category'])}" data-search="{E(p['seo_title']+' '+p['description'])}" href="{p['url']}"><span class="row-number" aria-hidden="true">{p['number']}</span><span class="row-category mono">{E(p['category'])} {new_label(p)}</span><div class="row-story"><h3>{E(p['title'])}</h3><p>{E(p['excerpt'])}</p></div><span class="row-meta mono">{stamp}<time datetime="{p['date_modified']}">{p['date_label']}</time><br><span class="meta-time">{p['minutes']} min read</span></span><span class="row-arrow" aria-hidden="true">↗</span></a>'''
 
 featured=next(p for p in POSTS if p.get('featured'))
 blogschema={'@type':'Blog','@id':SITE+'blog#blog','name':'Notes on change','description':'Practical perspectives on AI strategy, digital transformation and leadership.','url':SITE+'blog','author':{'@id':SITE+'#person'},'blogPost':[article_schema(p) for p in POSTS]}
 breadcrumb={'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':SITE},{'@type':'ListItem','position':2,'name':'Blog','item':SITE+'blog'}]}
 index=head('AI Strategy & Digital Transformation Blog | Yassine W. Medjati','Practical notes on AI roadmaps, digital transformation and leadership. Decision guides for teams turning ambition into everyday business value.','blog',graph=[PERSON,blogschema,breadcrumb])+header(blog_current=True)
-index=index.replace('<body class="journal-page">','<body class="journal-page journal-index">').replace('</head>','<link rel="stylesheet" href="/blog-index.css"><script src="/blog-index.js" defer></script>\n</head>')
+index=index.replace('<body class="journal-page">','<body class="journal-page journal-index">').replace('</head>','<link rel="stylesheet" href="/blog-index.css"><script src="/blog-index.js" defer></script><script src="/blog-new-labels.js" defer></script>\n</head>')
 index+='''<main id="main-content">
 <section class="journal-intro" aria-labelledby="journal-title">
   <div class="journal-edition mono"><span>Independent perspectives / YWM</span><span>AI · Transformation · People</span></div>
@@ -114,7 +117,7 @@ index+='''<main id="main-content">
   <div class="journal-baseline mono"><span>By Yassine W. Medjati</span><span>Essays / Frameworks / Questions</span><a href="blog/feed.xml">RSS ↗</a></div>
 </section>
 '''
-index+=f'''<a class="featured-story" href="{featured['url']}"><span class="featured-index" aria-hidden="true">{featured['number']}</span><div class="featured-copy"><span class="story-kicker mono">In focus / {E(featured['category'])}</span><h2>{E(featured['title'])}</h2><p>{E(featured['excerpt'])}</p></div><div class="featured-bottom"><span class="mono">{featured['minutes']} min read</span><span class="featured-read">Read the note <span aria-hidden="true">↗</span></span></div></a>'''
+index+=f'''<a class="featured-story" href="{featured['url']}"><span class="featured-index" aria-hidden="true">{featured['number']}</span><div class="featured-copy"><span class="story-kicker mono">In focus / {E(featured['category'])} {new_label(featured)}</span><h2>{E(featured['title'])}</h2><p>{E(featured['excerpt'])}</p></div><div class="featured-bottom"><span class="mono">{featured['minutes']} min read</span><span class="featured-read">Read the note <span aria-hidden="true">↗</span></span></div></a>'''
 index+='''<section class="reading-room" id="reading-room" aria-labelledby="reading-heading"><div class="reading-heading"><h2 id="reading-heading">The index<span aria-hidden="true"> /</span></h2><span class="mono">Open a line of thought.</span></div>
 <div class="journal-controls" hidden><div class="topic-filters" role="group" aria-label="Filter notes by topic">'''
 for category in ['All','Strategy','Leadership','Operating models']:
@@ -124,6 +127,15 @@ index+='''</div><label class="journal-search"><span>Search</span><input id="jour
 <div class="reading-end"><span class="mono" id="reading-count" role="status" aria-live="polite">'''+str(len(POSTS))+''' notes to explore</span><a href="blog/feed.xml">Follow via RSS ↗</a></div></section>'''
 index+='''<section class="journal-outro" aria-label="Work together"><span class="mono">Continue the conversation</span><a href="/contact">What are you thinking about? <span aria-hidden="true">↗</span></a></section></main>'''+footer()
 (ROOT/'blog.html').write_text(index.replace('↗', ARROW))
+
+# Keep the homepage entry in sync whenever articles are published.
+home_path = ROOT/'index.html'
+home = home_path.read_text()
+latest_publication = max(p['date_published'] for p in POSTS)
+home = re.sub(r'(class="journal-new mono" data-published=")[^"]+(" hidden>New</span>)',
+              lambda match: match[1] + latest_publication + match[2], home)
+home_path.write_text(home)
+
 
 for p in POSTS:
     prefix=p['prefix']
