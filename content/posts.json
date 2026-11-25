@@ -1,5 +1,67 @@
 [
   {
+    "slug": "customer-data-breaches-ai-fraud-europe",
+    "url": "blog/customer-data-breaches-ai-fraud-europe",
+    "title": "Another breach email. Another lifetime of risk.",
+    "seo_title": "Customer Data Breaches, AI Fraud and EU Enforcement",
+    "description": "Official breach figures, AI-enabled fraud, security failures and EU enforcement: an investigation into stolen customer data and how to protect yourself.",
+    "excerpt": "What official breach figures reveal, how AI helps criminals exploit stolen data, and what businesses, Europe and customers need to do.",
+    "category": "Strategy",
+    "research_checked": "2026-11-25",
+    "date_published": "2026-11-25",
+    "date_modified": "2026-11-25",
+    "body": "customer-data-breaches-ai-fraud-europe.html",
+    "number": "07",
+    "featured": true,
+    "share_actions": true,
+    "takeaway": "Understand what breach statistics measure, how stolen data enables fraud, and which steps can reduce your exposure.",
+    "cta_title": "Make data protection part of your AI decisions.",
+    "cta_text": "Let’s discuss the access, ownership and safeguards your organisation needs as it adopts AI and connects more systems.",
+    "cta_subject": "Discuss AI and data protection",
+    "toc": [
+      [
+        "tldr",
+        "TL;DR"
+      ],
+      [
+        "two-emails",
+        "Two emails in a week"
+      ],
+      [
+        "breach-figures",
+        "What the figures show"
+      ],
+      [
+        "ai-role",
+        "The role of AI"
+      ],
+      [
+        "business-security",
+        "Business security failures"
+      ],
+      [
+        "stolen-data",
+        "How stolen data is used"
+      ],
+      [
+        "recent-attacks",
+        "Recent attack techniques"
+      ],
+      [
+        "eu-enforcement",
+        "EU enforcement"
+      ],
+      [
+        "protect-yourself",
+        "How to protect yourself"
+      ],
+      [
+        "sources",
+        "Sources and scope"
+      ]
+    ]
+  },
+  {
     "slug": "jensen-huang-nvidia-return-trump-markets-ai",
     "url": "blog/jensen-huang-nvidia-return-trump-markets-ai",
     "title": "Jensen Huang is back. What did the market just price in?",
@@ -63,7 +125,7 @@
     "body": "jensen-huang-nvidia-return-trump-markets-ai.html",
     "number": "06",
     "share_actions": true,
-    "featured": true,
+    "featured": false,
     "cta_subject": "Discuss AI ecosystem dependencies"
   },
   {
