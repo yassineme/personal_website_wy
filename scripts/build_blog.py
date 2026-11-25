@@ -84,7 +84,7 @@ def header(prefix='',blog_current=False):
     <a href="/">Home</a>
     <a href="{prefix}blog"{' aria-current="page"' if blog_current else ''}>Blog</a>
     <a class="nav-experience" href="/about">Experience</a>
-    <a class="nav-contact" href="mailto:hello@wyassine.com">Let’s talk ↗</a>
+    <a class="nav-contact" href="https://cal.com/yassine-m-zowgc4/15min" data-cal-popup target="_blank" rel="noopener noreferrer">Let’s talk ↗</a>
   </nav>
 </header>'''
 
