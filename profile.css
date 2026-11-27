@@ -1,3 +1,4 @@
+@font-face{font-family:"Unica One";src:url('/assets/fonts/unica-one-normal.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
 
     :root { color-scheme: dark; --ink:#eeece7; --muted:#aaa9a5; --line:#30302f; --paper:#0b0c0c; }
     *, *::before, *::after { box-sizing:border-box; }
@@ -12,7 +13,7 @@
     .hero-art { position:absolute; z-index:-1; pointer-events:none; width:62%; height:100%; right:-8%; top:0; opacity:.65; mask-image:linear-gradient(to right,transparent,#000 30%); }
     #particles { width:100%; height:100%; display:block; }
     .masthead { display:flex; justify-content:space-between; align-items:center; gap:20px; }
-    .identity { font-family:Georgia,"Times New Roman",serif; font-size:23px; font-weight:400; font-style:italic; line-height:1.15; letter-spacing:-.035em; }
+    .identity { font-family:"Unica One",Arial,sans-serif; font-size:23px; font-weight:400; font-style:normal; line-height:1.15; letter-spacing:.08em; }
     .header-right { display:flex; gap:32px; align-items:center; color:var(--muted); }
     .motion-control { color:var(--muted); border:0; background:none; cursor:pointer; padding:6px 0; font-size:10px; }
     .motion-control:hover { color:var(--ink); }
@@ -24,7 +25,7 @@
     .eyebrow::before { content:""; width:4px; height:4px; background:var(--ink); }
     h1 { margin:0; font-size:clamp(54px,min(6.8vw,12svh),104px); font-weight:400; line-height:1.02; letter-spacing:-.065em; }
     h1 span { display:block; }
-    .serif { font-family:Georgia,"Times New Roman",serif; font-style:italic; font-weight:400; letter-spacing:-.06em; }
+    .serif { font-family:"Unica One",Arial,sans-serif; font-style:normal; font-weight:400; letter-spacing:.08em; }
     .summary { color:var(--muted); font-size:15px; line-height:1.6; max-width:390px; margin:clamp(18px,3svh,28px) 0 0; }
     .glimpses { display:grid; grid-template-columns:repeat(3,1fr); gap:35px; border-top:1px solid var(--line); padding-top:22px; margin:0; }
     .glimpse { margin:0; }
@@ -61,10 +62,10 @@
     .country .flag-swiss { width:28px; }
     .languages { margin:22px 0 0; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; line-height:1.7; }
     .languages-label { display:block; margin-bottom:4px; font-size:9px; }
-    .principle { margin:0; color:var(--ink); font:30px/1.4 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
+    .principle { margin:0; color:var(--ink); font:30px/1.4 "Unica One",Arial,sans-serif; letter-spacing:.08em; font-style:normal;}
     .principle span { display:block; }
     .values-list { display:grid; gap:16px; margin:0; }
-    .values-list dt { font:italic 25px/1.2 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
+    .values-list dt { font:normal 25px/1.2 "Unica One",Arial,sans-serif; letter-spacing:.08em; font-style:normal;}
     .values-list dd { margin:5px 0 0; color:var(--muted); font-size:12px; line-height:1.5; }
     .aircraft-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
     .aircraft-panel { width:min(560px,calc(100vw - 340px)); }
@@ -74,7 +75,7 @@
     .aircraft-spec .word-spec { font-size:25px; }
     .aircraft-card h3 { margin:14px 0 11px; font-size:18px; line-height:1.2; font-weight:400; letter-spacing:-.025em; }
     .aircraft-spec { margin:0; font-size:12px; line-height:1.5; }
-    .aircraft-spec strong { display:block; margin-bottom:3px; font:italic 32px/1.1 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
+    .aircraft-spec strong { display:block; margin-bottom:3px; font:normal 32px/1.1 "Unica One",Arial,sans-serif; letter-spacing:.08em; font-style:normal;}
     .aircraft-detail { margin:7px 0 10px; color:var(--muted); font-size:11px; line-height:1.5; }
     .aircraft-source { color:var(--muted); font-size:10px; text-underline-offset:3px; }
     .aircraft-credit { margin:17px 0 0; padding-top:12px; border-top:1px solid var(--line); color:var(--muted); font-size:9px; line-height:1.5; }
@@ -87,6 +88,14 @@
       .page:has(.identity:hover) .contact-trigger { background:#fff; border-color:#fff; box-shadow:0 0 0 5px #eeece722,0 0 30px #eeece733; transform:translateY(-2px); }
     }
     .contact-panel { right:0; top:auto; bottom:calc(100% + 16px); transform:none; width:min(390px,89.6vw); }
+    .contact-panel:not([hidden]) { animation:contact-panel-enter .5s cubic-bezier(.25,.1,.25,1) both; }
+    @keyframes contact-panel-enter {
+      from { opacity:0; translate:0 10px; }
+      to { opacity:1; translate:0 0; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .contact-panel:not([hidden]) { animation:none; }
+    }
     .contact-panel::after { left:0; top:100%; width:100%; height:17px; }
     .contact-options { display:grid; }
     .contact-option { display:grid; grid-template-columns:1fr auto; gap:5px 15px; padding:15px 0; border-top:1px solid var(--line); color:var(--ink); text-decoration:none; }
@@ -259,7 +268,7 @@
 /* Shared personal identity and the direct blog entry. */
 .brand-link { display:inline-flex; align-items:center; gap:12px; color:var(--ink); text-decoration:none; flex-shrink:0; }
 .brand-symbol { display:block; width:36px; height:36px; object-fit:contain; flex:none; }
-.brand-name { font:italic 400 23px/1.15 Georgia,"Times New Roman",serif; letter-spacing:-.035em; white-space:nowrap; }
+.brand-name { font:normal 400 23px/1.15 "Unica One",Arial,sans-serif; letter-spacing:.08em; white-space:nowrap; font-style:normal;}
 .blog-entry { color:var(--ink); text-decoration:none; }
 .blog-entry:hover { background:linear-gradient(90deg,#ffffff08,transparent); }
 .blog-entry .menu-symbol { font-size:16px; }
